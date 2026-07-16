@@ -190,6 +190,38 @@ h1 .accent{color:var(--jinsa);}
   padding:.5rem .9rem; font-family:'Gowun Batang',serif; font-size:.88rem; font-weight:700; cursor:pointer; white-space:nowrap;
 }
 .install .x{background:transparent; color:#B0A896; padding:.3rem .4rem; font-size:1rem;}
+/* ── 설치 안내 모달 ── */
+.ins-modal{
+  display:none; position:fixed; inset:0; z-index:100;
+  background:rgba(30,26,20,.62); backdrop-filter:blur(3px);
+  align-items:center; justify-content:center; padding:1.2rem;
+}
+.ins-modal.on{display:flex;}
+.ins-card{
+  background:#FFFDF7; border:2px solid var(--gold-line); border-radius:20px;
+  padding:1.6rem 1.4rem 1.3rem; max-width:380px; width:100%; text-align:center;
+  box-shadow:0 18px 44px rgba(0,0,0,.3);
+}
+.ins-card .ic-big{width:64px; height:64px; border-radius:14px; margin-bottom:.7rem;}
+.ins-card h3{font-family:'Song Myung',serif; font-size:1.25rem; color:var(--meok); margin-bottom:.3rem;}
+.ins-card > p{font-family:'Noto Sans KR',sans-serif; font-size:.82rem; color:#8A8171; margin-bottom:1.1rem;}
+.mstep{
+  display:flex; align-items:center; gap:.7rem; text-align:left;
+  background:#F6F0E3; border-radius:12px; padding:.7rem .8rem; margin-bottom:.55rem;
+}
+.mstep .num{
+  flex:0 0 22px; height:22px; border-radius:50%; background:var(--jinsa); color:#FFF7EA;
+  font-family:'Noto Sans KR',sans-serif; font-size:.72rem; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+}
+.mstep .ic{flex:0 0 26px; display:flex; align-items:center; justify-content:center;}
+.mstep .tx{font-family:'Noto Sans KR',sans-serif; font-size:.85rem; line-height:1.55; color:#3E382E;}
+.mstep .tx b{color:var(--jinsa); font-weight:700;}
+.ins-card #mClose{
+  margin-top:.7rem; width:100%; border:1.5px solid #D8CCAE; background:#FFFDF7;
+  border-radius:11px; padding:.7rem; font-family:'Gowun Batang',serif; font-size:.95rem;
+  color:#6E6656; cursor:pointer;
+}
 /* ── 토스트 ── */
 .toast{
   position:fixed; left:50%; bottom:90px;
@@ -248,6 +280,11 @@ footer p{
   .menu-btn .desc{ color:#A99F8C !important; }
   .install{background:#2A251E !important; border-color:#8A7A4E !important;}
   .install .t1{color:#F0E7D4 !important;} .install .t2{color:#A99F8C !important;}
+  .ins-card{background:#2A251E !important; border-color:#8A7A4E !important;}
+  .ins-card h3{color:#F0E7D4 !important;} .ins-card > p{color:#A99F8C !important;}
+  .mstep{background:#332D25 !important;} .mstep .tx{color:#D8CFBB !important;}
+  .mstep .tx b{color:#E8785E !important;}
+  .ins-card #mClose{background:#332D25 !important; border-color:#5A4F3E !important; color:#C9BFA9 !important;}
   .sec p, .month-table td, .radiorow label{ color:#D8CFBB !important; }
   .field > label{ color:#C9B48A !important; }
   .field input, .field select, .field textarea{
@@ -507,6 +544,16 @@ footer p{
   </div>
 </main>
 
+<div class="ins-modal" id="insModal">
+  <div class="ins-card">
+    <img class="ic-big" src="icon-192.png" alt="">
+    <h3 id="mTitle"></h3>
+    <p id="mSub"></p>
+    <div id="mSteps"></div>
+    <button id="mClose"></button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <footer>
@@ -533,8 +580,19 @@ const I18N = {
     m6:"그 꿈은 무슨 뜻일까?", m6d:"꿈해몽 · 한국 전통 해몽",
     footer:"K-Fortune Story · 한국 전통 운세 이야기",
     toastSoon:"2단계에서 입력 화면이 연결됩니다 🙂",
-    insT1:"홈 화면에 추가하기", insT2:"앱처럼 한 번에 열 수 있습니다", insBtn:"추가",
-    iosT1:"아이폰에 추가하기", iosT2:"아래 공유 버튼 → '홈 화면에 추가'를 누르세요", iosBtn:"확인"
+    insT1:"홈 화면에 추가하기",
+    insT2auto:"버튼 한 번이면 앱처럼 열립니다", insT2man:"몇 번만 누르면 앱처럼 열립니다",
+    insBtn:"추가", insBtnMan:"방법 보기",
+    mTitle:"홈 화면에 추가하기", mSub:"아래 순서대로 누르시면 됩니다",
+    mSubSafari:"사파리에서만 추가할 수 있습니다", mClose:"닫기",
+    s_ios1:"화면 <b>맨 아래 가운데</b> 공유 버튼을 누릅니다",
+    s_ios2:"목록을 <b>아래로 넘겨</b> <b>‘홈 화면에 추가’</b>를 누릅니다",
+    s_ios3:"오른쪽 위 <b>‘추가’</b>를 누르면 끝납니다",
+    s_iosx1:"이 주소를 <b>사파리</b>로 다시 엽니다 (크롬에서는 추가할 수 없습니다)",
+    s_mac1:"주소창 옆 <b>공유 버튼</b>을 누릅니다",
+    s_mac2:"<b>‘Dock에 추가’</b>를 선택합니다",
+    s_gen1:"브라우저 <b>메뉴(⋮)</b>를 엽니다",
+    s_gen2:"<b>‘홈 화면에 추가’</b> 또는 <b>‘앱 설치’</b>를 누릅니다"
   },
   en: {
     eyebrow: "Korean Traditional Fortune",
@@ -551,8 +609,19 @@ const I18N = {
     m6:"What did my dream mean?", m6d:"Traditional Korean dream reading",
     footer:"K-Fortune Story · Korean Traditional Fortune Telling",
     toastSoon:"Input screen coming in Step 2 🙂",
-    insT1:"Add to Home Screen", insT2:"Open it like an app, in one tap", insBtn:"Add",
-    iosT1:"Add to your iPhone", iosT2:"Tap the Share button below, then 'Add to Home Screen'", iosBtn:"Got it"
+    insT1:"Add to Home Screen",
+    insT2auto:"One tap and it opens like an app", insT2man:"A few taps and it opens like an app",
+    insBtn:"Add", insBtnMan:"Show me how",
+    mTitle:"Add to Home Screen", mSub:"Just follow these steps",
+    mSubSafari:"Only Safari can add it", mClose:"Close",
+    s_ios1:"Tap the <b>Share</b> button at the <b>bottom centre</b>",
+    s_ios2:"<b>Scroll down</b> and tap <b>‘Add to Home Screen’</b>",
+    s_ios3:"Tap <b>‘Add’</b> at the top right — done",
+    s_iosx1:"Reopen this address in <b>Safari</b> (Chrome cannot add it)",
+    s_mac1:"Click the <b>Share</b> button next to the address bar",
+    s_mac2:"Choose <b>‘Add to Dock’</b>",
+    s_gen1:"Open the browser <b>menu (⋮)</b>",
+    s_gen2:"Tap <b>‘Add to Home screen’</b> or <b>‘Install app’</b>"
   }
 };
 
@@ -618,42 +687,80 @@ function showToast(msg){
 setLang(currentLang);
 updateVisitor();
 
-/* ══ 홈 화면 추가 ══ */
+/* ══ 홈 화면 추가 — 플랫폼 자동 감지 ══ */
 (function(){
   const bar = document.getElementById("installBar");
   const btn = document.getElementById("insBtn");
+  const modal = document.getElementById("insModal");
   const standalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
-  if(standalone || localStorage.getItem("kf_ins_off") === "1") return;
+  if(standalone){ return; }
 
   const ua = navigator.userAgent || "";
-  const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-  const isSafari = /Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS/.test(ua);
-  let deferred = null;
+  const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const iosSafari = isIOS && !/CriOS|FxiOS|EdgiOS|OPiOS|Whale/.test(ua);
+  const isMac = /Macintosh/.test(ua) && !isIOS;
+  const macSafari = isMac && /Safari/.test(ua) && !/Chrome|Chromium|Edg/.test(ua);
+  let deferred = null, mode = "manual";
 
-  function show(kind){
-    const T = I18N[currentLang];
-    document.getElementById("insT1").textContent = (kind === "ios") ? T.iosT1 : T.insT1;
-    document.getElementById("insT2").textContent = (kind === "ios") ? T.iosT2 : T.insT2;
-    btn.textContent = (kind === "ios") ? T.iosBtn : T.insBtn;
-    bar.dataset.kind = kind;
-    bar.classList.add("on");
+  function T(){ return I18N[currentLang]; }
+  function setBar(){
+    document.getElementById("insT1").textContent = T().insT1;
+    document.getElementById("insT2").textContent = (mode === "auto") ? T().insT2auto : T().insT2man;
+    btn.textContent = (mode === "auto") ? T().insBtn : T().insBtnMan;
   }
-  window.addEventListener("beforeinstallprompt", e => {
-    e.preventDefault(); deferred = e; show("std");
-  });
-  if(isIOS && isSafari) setTimeout(()=>show("ios"), 1200);
+  function showBar(){ setBar(); bar.classList.add("on"); }
 
+  /* 안드로이드·PC 크롬/엣지 → 원클릭 설치 */
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault(); deferred = e; mode = "auto"; showBar();
+  });
+  /* 그 외(아이폰 등) → 안내 모드 */
+  setTimeout(()=>{ if(!deferred){ mode = "manual"; showBar(); } }, 1500);
+
+  /* ── 안내 모달 ── */
+  const ICON_SHARE = '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#2C6FE0" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>';
+  const ICON_PLUS = '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#2B2620" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>';
+  const ICON_SAFARI = '<svg viewBox="0 0 24 24" width="26" height="26"><circle cx="12" cy="12" r="10" fill="#1A8CFF"/><circle cx="12" cy="12" r="8" fill="#F2F6FA"/><path d="M16 8l-2.2 5.8L8 16l2.2-5.8z" fill="#FF4B4B"/><circle cx="12" cy="12" r="1.2" fill="#FFF"/></svg>';
+
+  function steps(){
+    const t = T();
+    if(isIOS && iosSafari) return [
+      {i:ICON_SHARE, s:t.s_ios1},
+      {i:ICON_PLUS,  s:t.s_ios2},
+      {i:"", s:t.s_ios3}
+    ];
+    if(isIOS) return [
+      {i:ICON_SAFARI, s:t.s_iosx1},
+      {i:ICON_SHARE,  s:t.s_ios1},
+      {i:ICON_PLUS,   s:t.s_ios2}
+    ];
+    if(macSafari) return [{i:ICON_SHARE, s:t.s_mac1},{i:ICON_PLUS, s:t.s_mac2}];
+    return [{i:"", s:t.s_gen1},{i:"", s:t.s_gen2}];
+  }
+  function openModal(){
+    const t = T();
+    document.getElementById("mTitle").textContent = t.mTitle;
+    document.getElementById("mSub").textContent = (isIOS && !iosSafari) ? t.mSubSafari : t.mSub;
+    document.getElementById("mSteps").innerHTML = steps().map((x,i)=>
+      '<div class="mstep"><span class="num">' + (i+1) + '</span>'
+      + (x.i ? '<span class="ic">' + x.i + '</span>' : '')
+      + '<span class="tx">' + x.s + '</span></div>').join("");
+    document.getElementById("mClose").textContent = t.mClose;
+    modal.classList.add("on");
+  }
   btn.addEventListener("click", async ()=>{
-    if(bar.dataset.kind === "ios"){ bar.classList.remove("on"); localStorage.setItem("kf_ins_off","1"); return; }
-    if(!deferred) return;
-    deferred.prompt();
-    await deferred.userChoice;
-    deferred = null; bar.classList.remove("on");
+    if(mode === "auto" && deferred){
+      deferred.prompt();
+      await deferred.userChoice;
+      deferred = null; bar.classList.remove("on");
+    }else{
+      openModal();
+    }
   });
-  document.getElementById("insX").addEventListener("click", ()=>{
-    bar.classList.remove("on"); localStorage.setItem("kf_ins_off","1");
-  });
-  window.addEventListener("appinstalled", ()=>{ bar.classList.remove("on"); localStorage.setItem("kf_ins_off","1"); });
+  document.getElementById("insX").addEventListener("click", ()=> bar.classList.remove("on"));
+  document.getElementById("mClose").addEventListener("click", ()=> modal.classList.remove("on"));
+  modal.addEventListener("click", e => { if(e.target === modal) modal.classList.remove("on"); });
+  window.addEventListener("appinstalled", ()=> bar.classList.remove("on"));
 })();
 </script>
 <script>
