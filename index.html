@@ -8,6 +8,13 @@
 <title>K-Fortune Story | 한국 전통 운세</title>
 <meta name="description" content="토정비결, 사주, 궁합, 꿈해몽 — 한국 전통 운세를 온라인으로. Korean traditional fortune telling online.">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2795871274635118" crossorigin="anonymous"></script>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="K-Fortune">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
@@ -167,6 +174,22 @@ h1 .accent{color:var(--jinsa);}
   font-size:.82rem; color:#6E6656; line-height:1.45;
 }
 
+/* ── 설치 배너 ── */
+.install{
+  display:none; max-width:540px; margin:1.6rem auto 0;
+  background:#FFFDF7; border:1.5px solid var(--gold-line); border-radius:14px;
+  padding:.85rem 1rem; align-items:center; gap:.8rem; text-align:left;
+}
+.install.on{display:flex;}
+.install img{width:42px; height:42px; border-radius:9px; flex:0 0 42px;}
+.install .txt{flex:1; min-width:0;}
+.install .t1{font-family:'Gowun Batang',serif; font-size:.95rem; font-weight:700; color:var(--meok);}
+.install .t2{font-family:'Noto Sans KR',sans-serif; font-size:.74rem; color:#8A8171; line-height:1.5; margin-top:.15rem;}
+.install button{
+  border:none; background:var(--jinsa); color:#FFF7EA; border-radius:9px;
+  padding:.5rem .9rem; font-family:'Gowun Batang',serif; font-size:.88rem; font-weight:700; cursor:pointer; white-space:nowrap;
+}
+.install .x{background:transparent; color:#B0A896; padding:.3rem .4rem; font-size:1rem;}
 /* ── 토스트 ── */
 .toast{
   position:fixed; left:50%; bottom:90px;
@@ -223,6 +246,8 @@ footer p{
     background:#2A251E !important; border-color:#4A4336 !important;
   }
   .menu-btn .desc{ color:#A99F8C !important; }
+  .install{background:#2A251E !important; border-color:#8A7A4E !important;}
+  .install .t1{color:#F0E7D4 !important;} .install .t2{color:#A99F8C !important;}
   .sec p, .month-table td, .radiorow label{ color:#D8CFBB !important; }
   .field > label{ color:#C9B48A !important; }
   .field input, .field select, .field textarea{
@@ -473,6 +498,13 @@ footer p{
       </svg>
     </button>
   </div>
+
+  <div class="install" id="installBar">
+    <img src="icon-192.png" alt="">
+    <div class="txt"><div class="t1" id="insT1"></div><div class="t2" id="insT2"></div></div>
+    <button id="insBtn"></button>
+    <button class="x" id="insX">✕</button>
+  </div>
 </main>
 
 <div class="toast" id="toast"></div>
@@ -500,7 +532,9 @@ const I18N = {
     m5:"두 사람은 잘 맞을까?", m5d:"궁합 · 띠와 오행으로 보는 인연",
     m6:"그 꿈은 무슨 뜻일까?", m6d:"꿈해몽 · 한국 전통 해몽",
     footer:"K-Fortune Story · 한국 전통 운세 이야기",
-    toastSoon:"2단계에서 입력 화면이 연결됩니다 🙂"
+    toastSoon:"2단계에서 입력 화면이 연결됩니다 🙂",
+    insT1:"홈 화면에 추가하기", insT2:"앱처럼 한 번에 열 수 있습니다", insBtn:"추가",
+    iosT1:"아이폰에 추가하기", iosT2:"아래 공유 버튼 → '홈 화면에 추가'를 누르세요", iosBtn:"확인"
   },
   en: {
     eyebrow: "Korean Traditional Fortune",
@@ -516,7 +550,9 @@ const I18N = {
     m5:"Do we match?", m5d:"Korean synastry · zodiac & five elements",
     m6:"What did my dream mean?", m6d:"Traditional Korean dream reading",
     footer:"K-Fortune Story · Korean Traditional Fortune Telling",
-    toastSoon:"Input screen coming in Step 2 🙂"
+    toastSoon:"Input screen coming in Step 2 🙂",
+    insT1:"Add to Home Screen", insT2:"Open it like an app, in one tap", insBtn:"Add",
+    iosT1:"Add to your iPhone", iosT2:"Tap the Share button below, then 'Add to Home Screen'", iosBtn:"Got it"
   }
 };
 
@@ -581,6 +617,44 @@ function showToast(msg){
 
 setLang(currentLang);
 updateVisitor();
+
+/* ══ 홈 화면 추가 ══ */
+(function(){
+  const bar = document.getElementById("installBar");
+  const btn = document.getElementById("insBtn");
+  const standalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  if(standalone || localStorage.getItem("kf_ins_off") === "1") return;
+
+  const ua = navigator.userAgent || "";
+  const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  const isSafari = /Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS/.test(ua);
+  let deferred = null;
+
+  function show(kind){
+    const T = I18N[currentLang];
+    document.getElementById("insT1").textContent = (kind === "ios") ? T.iosT1 : T.insT1;
+    document.getElementById("insT2").textContent = (kind === "ios") ? T.iosT2 : T.insT2;
+    btn.textContent = (kind === "ios") ? T.iosBtn : T.insBtn;
+    bar.dataset.kind = kind;
+    bar.classList.add("on");
+  }
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault(); deferred = e; show("std");
+  });
+  if(isIOS && isSafari) setTimeout(()=>show("ios"), 1200);
+
+  btn.addEventListener("click", async ()=>{
+    if(bar.dataset.kind === "ios"){ bar.classList.remove("on"); localStorage.setItem("kf_ins_off","1"); return; }
+    if(!deferred) return;
+    deferred.prompt();
+    await deferred.userChoice;
+    deferred = null; bar.classList.remove("on");
+  });
+  document.getElementById("insX").addEventListener("click", ()=>{
+    bar.classList.remove("on"); localStorage.setItem("kf_ins_off","1");
+  });
+  window.addEventListener("appinstalled", ()=>{ bar.classList.remove("on"); localStorage.setItem("kf_ins_off","1"); });
+})();
 </script>
 <script>
 (function(){
@@ -590,6 +664,11 @@ updateVisitor();
   const t = k ? ["서비스 소개","개인정보처리방침","이용약관"] : ["About","Privacy Policy","Terms"];
   ["fA","fP","fT"].forEach((id,i)=>{ const e = document.getElementById(id); if(e) e.textContent = t[i]; });
 })();
+</script>
+<script>
+if("serviceWorker" in navigator){
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
 </script>
 </body>
 </html>
