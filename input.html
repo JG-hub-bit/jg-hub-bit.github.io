@@ -248,6 +248,7 @@ footer p{
   outline:none; border-color:var(--hwang);
 }
 .radiorow{display:flex; gap:.6rem;}
+.radiorow.col{flex-direction:column;}
 .radiorow label{
   flex:1; border:1.5px solid #D8CCAE; border-radius:10px;
   padding:.62rem .4rem; text-align:center; cursor:pointer;
@@ -462,14 +463,16 @@ footer p{
 
 <script>
 /* ══════════ 다국어 사전 ══════════ */
-const L = (localStorage.getItem("kf_lang") || "kr");
+
 const T = {
   kr: {
     home:"⌂ 처음으로",
-    types:{tojeong:"토정비결", newyear:"신년운세", today:"오늘의 운세", saju:"사주팔자", gunghap:"궁합", dream:"꿈해몽"},
+    types:{tojeong:"토정비결", newyear:"2026년 운세", nextyear:"2027년 운세", today:"오늘의 운세", saju:"사주팔자", gunghap:"궁합", dream:"꿈해몽"},
     sub:"아래 정보를 입력해 주세요",
     me:"나의 정보", partner:"상대방 정보",
     name:"이름", namePh:"이름 (선택)",
+    tdate:"어느 날짜의 운세를 보시겠어요?", trange:"보기 방식",
+    rDay:"그 날 하루만", rWeek:"그 날이 속한 한 주 (월~일)",
     gender:"성별", male:"남성", female:"여성",
     bdate:"생년월일", cal:"양력/음력", solar:"양력", lunar:"음력",
     btime:"태어난 시간", region:"태어난 지역", regionPh:"예: 서울 (선택)",
@@ -481,10 +484,12 @@ const T = {
   },
   en: {
     home:"⌂ Home",
-    types:{tojeong:"Tojeong Bigyeol", newyear:"New Year Fortune", today:"Today's Fortune", saju:"Saju (Four Pillars)", gunghap:"Compatibility", dream:"Dream Reading"},
+    types:{tojeong:"Tojeong Bigyeol", newyear:"2026 Fortune", nextyear:"2027 Fortune", today:"Today's Fortune", saju:"Saju (Four Pillars)", gunghap:"Compatibility", dream:"Dream Reading"},
     sub:"Please enter your details below",
     me:"Your Details", partner:"Partner's Details",
     name:"Name", namePh:"Name (optional)",
+    tdate:"Which day would you like to read?", trange:"Reading scope",
+    rDay:"That single day", rWeek:"The whole week (Mon–Sun)",
     gender:"Gender", male:"Male", female:"Female",
     bdate:"Date of Birth", cal:"Calendar", solar:"Solar", lunar:"Lunar",
     btime:"Time of Birth", region:"Birthplace", regionPh:"e.g. Seoul (optional)",
@@ -494,7 +499,12 @@ const T = {
     saved:"Saved! Result screen comes in Step 3 🙂",
     times:["Unknown","Ja-si (11pm~1am)","Chuk-si (1~3am)","In-si (3~5am)","Myo-si (5~7am)","Jin-si (7~9am)","Sa-si (9~11am)","O-si (11am~1pm)","Mi-si (1~3pm)","Sin-si (3~5pm)","Yu-si (5~7pm)","Sul-si (7~9pm)","Hae-si (9~11pm)"]
   }
-}[ ["kr","en"].includes(localStorage.getItem("kf_lang")) ? localStorage.getItem("kf_lang") : "kr" ];
+}[ (function(){
+  const s = localStorage.getItem("kf_lang");
+  if(s === "kr" || s === "en") return s;
+  const ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "en"];
+  return ls.some(l => (l||"").toLowerCase().startsWith("ko")) ? "kr" : "en";
+})() ];
 
 /* ══════════ 운세종류별 입력 구성 ══════════ */
 const params = new URLSearchParams(location.search);
@@ -502,7 +512,8 @@ const type = params.get("type") || localStorage.getItem("kf_selected") || "tojeo
 const CFG = {
   tojeong: {persons:[ {key:"main", fields:["name","gender","bdate","cal","btime"]} ]},
   newyear: {persons:[ {key:"main", fields:["name","gender","bdate","cal","btime"]} ]},
-  today:   {persons:[ {key:"main", fields:["name","gender","bdate","cal","btime"]} ]},
+  nextyear:{persons:[ {key:"main", fields:["name","gender","bdate","cal","btime"]} ]},
+  today:   {persons:[ {key:"main", fields:["tdate","trange","name","gender","bdate","cal","btime"]} ]},
   saju:    {persons:[ {key:"main", fields:["name","gender","bdate","cal","btime","region"]} ]},
   gunghap: {persons:[ {key:"main", fields:["name","gender","bdate","cal","btime"]},
                       {key:"sub",  fields:["name","gender","bdate","cal","btime"]} ]},
@@ -535,6 +546,12 @@ function fieldHTML(p, f){
     let opts = T.times.map((t,i)=>'<option value="'+i+'">'+t+'</option>').join("");
     return '<div class="field"><label for="'+id+'">'+T.btime+'</label><select id="'+id+'">'+opts+'</select></div>';
   }
+  if(f === "tdate")
+    return '<div class="field"><label for="'+id+'">'+T.tdate+'</label><input type="date" id="'+id+'"></div>';
+  if(f === "trange")
+    return '<div class="field"><label>'+T.trange+'</label><div class="radiorow" data-group="'+id+'">'
+      +'<label><input type="radio" name="'+id+'" value="day" checked><span>'+T.rDay+'</span></label>'
+      +'<label><input type="radio" name="'+id+'" value="week"><span>'+T.rWeek+'</span></label></div></div>';
   if(f === "region")
     return '<div class="field"><label for="'+id+'">'+T.region+'</label><input type="text" id="'+id+'" placeholder="'+T.regionPh+'"></div>';
   return "";
@@ -555,6 +572,7 @@ if(cfg.dream){
 document.getElementById("formArea").innerHTML = formHTML;
 
 /* 라디오 선택 표시 */
+document.querySelectorAll('.radiorow[data-group="main_trange"]').forEach(r=>r.classList.add("col"));
 document.querySelectorAll(".radiorow").forEach(row=>{
   row.querySelectorAll("input").forEach(inp=>{
     if(inp.checked) inp.closest("label").classList.add("sel");
@@ -583,6 +601,21 @@ function loadProfile(pkey){
 }
 if(!cfg.dream) cfg.persons.forEach(p=>loadProfile(p.key));
 
+/* 오늘의 운세: 날짜 기본값 = 오늘 */
+if(type === "today"){
+  const td = document.getElementById("main_tdate");
+  if(td){
+    const now = new Date();
+    const local = new Date(now.getTime() - now.getTimezoneOffset()*60000);
+    td.value = local.toISOString().slice(0,10);
+  }
+  const savedRange = localStorage.getItem("kf_today_range");
+  if(savedRange){
+    const inp = document.querySelector('input[name="main_trange"][value="'+savedRange+'"]');
+    if(inp){ inp.checked = true; inp.dispatchEvent(new Event("change")); }
+  }
+}
+
 /* ══════════ 실행 / 초기화 ══════════ */
 function run(){
   if(cfg.dream){
@@ -601,6 +634,12 @@ function run(){
         btime:get(p.key+"_btime"), region:get(p.key+"_region")
       }));
     }
+  }
+  if(type === "today"){
+    const td = document.getElementById("main_tdate");
+    const rg = document.querySelector('input[name="main_trange"]:checked');
+    localStorage.setItem("kf_today_date", (td && td.value) ? td.value : "");
+    localStorage.setItem("kf_today_range", rg ? rg.value : "day");
   }
   localStorage.setItem("kf_selected", type);
   location.href = "ad.html?type=" + type;

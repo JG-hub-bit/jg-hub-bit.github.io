@@ -413,7 +413,12 @@ const T = {
        count:"잠시 후 결과를 볼 수 있어요:", go:"운세 결과 보기 →"},
   en: {tt:"Preparing your fortune…", ad:"Advertisement", adDesc:"(A video ad will appear here at launch)",
        count:"Your result will be ready in:", go:"See My Fortune →"}
-}[ ["kr","en"].includes(localStorage.getItem("kf_lang")) ? localStorage.getItem("kf_lang") : "kr" ];
+}[ (function(){
+  const s = localStorage.getItem("kf_lang");
+  if(s === "kr" || s === "en") return s;
+  const ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "en"];
+  return ls.some(l => (l||"").toLowerCase().startsWith("ko")) ? "kr" : "en";
+})() ];
 
 document.getElementById("tt").textContent = T.tt;
 document.getElementById("adLabel").textContent = T.ad;

@@ -201,8 +201,7 @@ footer p{
 @media (prefers-reduced-motion: reduce){
   *{transition:none !important;}
 }
-</style>
-<style>
+</style><style>
 .navrow{display:flex; gap:.6rem; justify-content:flex-start; max-width:620px; margin:0 auto 1.2rem; font-family:'Noto Sans KR',sans-serif;}
 .homelink{display:inline-flex; align-items:center; gap:.4rem; color:var(--seokganju); text-decoration:none; font-weight:700; font-size:.88rem; border:1.5px solid var(--gold-line); border-radius:999px; padding:.4rem 1rem; background:#FFFDF7;}
 .homelink:hover{border-color:var(--hwang);}
@@ -233,10 +232,39 @@ footer p{
 .btnrow{display:flex; gap:12px; max-width:620px; margin:1.4rem auto 0;}
 .btn-run{flex:1; background:var(--jinsa); color:#FFF7EA; border:2px solid var(--gold-line); border-radius:12px; padding:.9rem; font-size:1.05rem; font-weight:700; font-family:'Gowun Batang',serif; cursor:pointer; text-align:center; text-decoration:none;}
 .btn-reset{flex:1; background:#FFFDF7; color:#6E6656; border:1.5px solid #D8CCAE; border-radius:12px; padding:.9rem; font-size:1rem; font-family:'Gowun Batang',serif; cursor:pointer; text-align:center; text-decoration:none;}
-</style>
 
-
-<style>
+.luck-card{background:#FFFDF7; border:1.5px solid var(--gold-line); border-radius:16px; padding:1.1rem 1.2rem; margin-bottom:.95rem;}
+.luck-card h3{font-family:'Song Myung',serif; font-size:1.05rem; color:var(--jinsa); border-bottom:1.5px solid var(--gold-line); padding-bottom:.45rem; margin-bottom:.8rem;}
+.luck-grid{display:grid; grid-template-columns:1fr 1fr; gap:.7rem;}
+.luck-item{background:#F6F0E3; border-radius:10px; padding:.6rem .7rem;}
+.luck-item .k{font-family:'Noto Sans KR',sans-serif; font-size:.72rem; font-weight:700; color:#8A7A4E; display:block; margin-bottom:.2rem;}
+.luck-item .v{font-family:'Gowun Batang',serif; font-size:.95rem; color:var(--meok); line-height:1.45;}
+.luck-full{grid-column:1 / -1;}
+.sec p + p{margin-top:.75rem;}
+.age-row{display:flex; gap:.8rem; padding:.75rem 0; border-bottom:1px solid #EFE8D6;}
+.age-row:last-child{border-bottom:none;}
+.age-row .ag{font-family:'Song Myung',serif; color:var(--jinsa); font-size:.92rem; white-space:nowrap; flex:0 0 5.6em; padding-top:.1rem;}
+.age-row .at{font-size:.94rem; line-height:1.7; color:#3E382E;}
+.poem{font-family:'Song Myung',serif; font-size:1.05rem; color:var(--samcheong); letter-spacing:.12em;}
+.poem-r{font-family:'Noto Sans KR',sans-serif; font-size:.76rem; color:#8A8171; margin-left:.5rem;}
+.dayrow{border:1.5px solid #E4D9BF; background:#FFFDF7; border-radius:12px; padding:.75rem .85rem; margin-bottom:.6rem;}
+.dayrow.sel{border-color:var(--jinsa); border-width:2px; background:#FDF6F0;}
+.dayrow .dh{display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; margin-bottom:.4rem;}
+.dayrow .dd{font-family:'Song Myung',serif; font-size:1rem; color:var(--meok);}
+.dayrow .dj{font-family:'Song Myung',serif; font-size:.9rem; color:var(--samcheong); letter-spacing:.08em;}
+.dayrow .dl{font-family:'Noto Sans KR',sans-serif; font-size:.68rem; font-weight:700; color:#FFF7EA; background:var(--jinsa); border-radius:999px; padding:.16rem .6rem;}
+.dayrow .dt{font-size:.9rem; line-height:1.6; color:#3E382E; margin-bottom:.45rem;}
+.dayrow .chips{display:flex; flex-wrap:wrap; gap:.32rem;}
+.dayrow .chip{font-family:'Noto Sans KR',sans-serif; font-size:.72rem; background:#F0E7CF; color:#6B5B3E; border-radius:6px; padding:.22rem .5rem;}
+.dayrow .chip b{color:#8A6A2E; font-weight:700;}
+.dayrow .chip.warn{background:#FBEFE9; color:#A2402A;}
+.tj-note{background:#F0E7CF; border-radius:10px; padding:.8rem 1rem; font-family:'Noto Sans KR',sans-serif; font-size:.8rem; line-height:1.65; color:#6B5B3E; margin-bottom:.95rem;}
+@media (max-width:560px){
+  .luck-grid{grid-template-columns:1fr;}
+  .age-row{flex-direction:column; gap:.25rem;}
+  .age-row .ag{flex:none;}
+}
+</style><style>
 /* ══ 다크모드 대응: 강제/자동 다크모드 기기에서 자동 적용 ══ */
 @media (prefers-color-scheme: dark){
   :root{ color-scheme:light dark; }
@@ -271,6 +299,30 @@ footer p{
   .ad-slot b{ color:#D8C9A4 !important; }
   .ftitle p, #fsub, .res-head .who{ color:#C9BFA9 !important; }
   .dream-sym{ background:#3A332A !important; color:#D8C9A4 !important; }
+}
+@media (prefers-color-scheme: dark){
+  .luck-card{background:#2A251E !important; border-color:#8A7A4E !important;}
+  .luck-card h3{color:#E8785E !important; border-color:#8A7A4E !important;}
+  .luck-item{background:#332D25 !important;}
+  .luck-item .k{color:#C9B48A !important;}
+  .luck-item .v{color:#EFE6D0 !important;}
+  .age-row{border-color:#3A332A !important;}
+  .age-row .ag{color:#E8785E !important;}
+  .age-row .at{color:#D8CFBB !important;}
+  .poem{color:#8FB3E8 !important;}
+  .poem-r{color:#A99F8C !important;}
+  .dayrow{border:1.5px solid #E4D9BF; background:#FFFDF7; border-radius:12px; padding:.75rem .85rem; margin-bottom:.6rem;}
+.dayrow.sel{border-color:var(--jinsa); border-width:2px; background:#FDF6F0;}
+.dayrow .dh{display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; margin-bottom:.4rem;}
+.dayrow .dd{font-family:'Song Myung',serif; font-size:1rem; color:var(--meok);}
+.dayrow .dj{font-family:'Song Myung',serif; font-size:.9rem; color:var(--samcheong); letter-spacing:.08em;}
+.dayrow .dl{font-family:'Noto Sans KR',sans-serif; font-size:.68rem; font-weight:700; color:#FFF7EA; background:var(--jinsa); border-radius:999px; padding:.16rem .6rem;}
+.dayrow .dt{font-size:.9rem; line-height:1.6; color:#3E382E; margin-bottom:.45rem;}
+.dayrow .chips{display:flex; flex-wrap:wrap; gap:.32rem;}
+.dayrow .chip{font-family:'Noto Sans KR',sans-serif; font-size:.72rem; background:#F0E7CF; color:#6B5B3E; border-radius:6px; padding:.22rem .5rem;}
+.dayrow .chip b{color:#8A6A2E; font-weight:700;}
+.dayrow .chip.warn{background:#FBEFE9; color:#A2402A;}
+.tj-note{background:#3A332A !important; color:#D8C9A4 !important;}
 }
 </style>
 </head>
@@ -418,22 +470,47 @@ footer p{
 </footer>
 <script>
 /* ════════ 공용 ════════ */
-const LANG = ["kr","en"].includes(localStorage.getItem("kf_lang")) ? localStorage.getItem("kf_lang") : "kr";
+const LANG = (function(){
+  const s = localStorage.getItem("kf_lang");
+  if(s === "kr" || s === "en") return s;
+  const ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "en"];
+  return ls.some(l => (l||"").toLowerCase().startsWith("ko")) ? "kr" : "en";
+})();
 const K = LANG === "kr";
 const type = new URLSearchParams(location.search).get("type") || localStorage.getItem("kf_selected") || "tojeong";
 const P  = JSON.parse(localStorage.getItem("kf_p_main") || "null");
 const P2 = JSON.parse(localStorage.getItem("kf_p_sub") || "null");
+const YEAR = new Date().getFullYear();
+const TYPE_YEAR = type === "nextyear" ? YEAR + 1 : YEAR;
 
 function hashStr(s){ let h=1779033703; for(let i=0;i<s.length;i++){ h=Math.imul(h^s.charCodeAt(i),3432918353); h=(h<<13)|(h>>>19);} return h>>>0; }
 function rng(seed){ return function(){ seed|=0; seed=(seed+0x6D2B79F5)|0; let t=Math.imul(seed^(seed>>>15),1|seed); t=(t+Math.imul(t^(t>>>7),61|t))^t; return ((t^(t>>>14))>>>0)/4294967296; }; }
 function pick(r, arr){ return arr[Math.floor(r()*arr.length)]; }
+function tx(o){ return K ? o.kr : o.en; }
 
-const TYPES = {kr:{tojeong:"토정비결", newyear:"신년운세", today:"오늘의 운세", saju:"사주팔자", gunghap:"궁합", dream:"꿈해몽"},
-               en:{tojeong:"Tojeong Bigyeol", newyear:"New Year Fortune", today:"Today's Fortune", saju:"Saju (Four Pillars)", gunghap:"Compatibility", dream:"Dream Reading"}};
+const DAYDB = {"REL": [{"name": {"kr": "비화(比和) · 나와 같은 기운의 날", "en": "Bihwa · a day of your own element"}, "lvl": 2, "line": {"kr": "무리 없이 흘러가는 평온한 하루", "en": "A calm day that flows without strain"}, "txt": {"kr": "오늘은 나와 같은 기운이 하늘에 뜬 날입니다. 익숙한 방식이 그대로 통하는 날이라 새로운 시도보다 늘 하던 일을 마무리하는 데 유리합니다. 비슷한 성향의 사람과 뜻이 잘 맞아 협업이 수월하지만, 같은 기운끼리는 경쟁이 되기도 하니 공을 다투는 자리는 피하는 편이 좋습니다. 큰 사건 없이 지나가는 날이니 이런 날에 밀린 일을 정리해 두면 다음 날이 가벼워집니다.", "en": "Today the sky carries your own element. Familiar methods work exactly as they always have, so finishing what you already started beats attempting something new. People of similar temperament align with you and collaboration runs easy, yet like energies also compete — avoid arenas where credit is contested. Nothing dramatic happens, so clearing your backlog today makes tomorrow light."}, "avoid": {"kr": "공을 다투는 자리, 비슷한 사람과의 자존심 싸움", "en": "Contests over credit; pride battles with people like you"}}, {"name": {"kr": "식상(食傷) · 내 기운이 뻗어나가는 날", "en": "Siksang · a day your energy expresses"}, "lvl": 1, "line": {"kr": "표현하고 움직일수록 풀리는 하루", "en": "A day that opens the more you express and move"}, "txt": {"kr": "오늘은 내 기운이 밖으로 뻗어나가는 날입니다. 말과 글, 발표와 제안처럼 나를 드러내는 일에서 평소보다 훨씬 좋은 반응을 얻습니다. 미뤄둔 연락을 하거나 아이디어를 꺼내 놓기에 좋은 날이며, 창작이나 기획 업무라면 오늘 나온 결과물이 오래갑니다. 다만 기운이 밖으로 나가는 날이라 말이 앞서기 쉬우니, 하지 못할 약속까지 해버리지 않도록 한 박자만 늦추십시오.", "en": "Today your energy reaches outward. Speaking, writing, presenting, proposing — anything that reveals you draws a far better response than usual. A fine day to make the call you postponed or put an idea on the table; if you create or plan for a living, what you produce today endures. But with energy flowing out, words run ahead of you — slow by one beat so you do not promise what you cannot keep."}, "avoid": {"kr": "지키기 어려운 약속, 즉흥적인 큰소리", "en": "Promises you cannot keep; impulsive big talk"}}, {"name": {"kr": "재성(財星) · 재물의 기운이 도는 날", "en": "Jaeseong · a day wealth energy circulates"}, "lvl": 1, "line": {"kr": "실속을 챙기기 좋은 하루", "en": "A good day to secure real gains"}, "txt": {"kr": "오늘은 내가 다스릴 수 있는 재물의 기운이 도는 날입니다. 돈과 관련된 협상, 정산, 청구, 계약 같은 실무를 처리하기에 유리하며 평소보다 유리한 조건을 얻어낼 수 있습니다. 물건을 사고팔거나 조건을 조율하는 일에서 감이 잘 맞는 날이니 미뤄둔 금전 업무가 있다면 오늘 처리하십시오. 다만 재물의 기운이 강한 날은 씀씀이도 함께 커지니, 벌어들이는 것과 나가는 것을 같은 무게로 살피는 것이 좋습니다.", "en": "Today circulates the wealth energy you are able to govern. Negotiations, settlements, invoices, contracts — money matters go your way and you can secure better terms than usual. Your instincts land well when buying, selling, or adjusting conditions, so handle postponed financial tasks today. Yet on days when wealth energy runs strong, spending swells too — weigh what comes in and what goes out on the same scale."}, "avoid": {"kr": "충동적인 큰 지출, 확인하지 않은 투자 권유", "en": "Impulsive large spending; unverified investment pitches"}}, {"name": {"kr": "관성(官星) · 나를 누르는 기운의 날", "en": "Gwanseong · a day that presses on you"}, "lvl": 4, "line": {"kr": "한 박자 늦추면 무사히 지나가는 하루", "en": "Slow by one beat and the day passes safely"}, "txt": {"kr": "오늘은 나를 누르는 기운이 하늘에 뜬 날입니다. 윗사람이나 규칙, 마감처럼 나를 제어하는 것들이 유난히 무겁게 느껴지고, 하려던 일이 한 번씩 막히는 흐름입니다. 그러나 이 기운은 나쁘기만 한 것이 아니라 나를 다듬는 힘이기도 하니, 오늘 받은 지적이나 제동은 훗날 도움이 되는 경우가 많습니다. 무리하게 밀어붙이거나 정면으로 부딪히지 말고, 서류와 말을 한 번 더 확인하며 하루를 낮게 지나가면 아무 일도 일어나지 않습니다.", "en": "Today the sky carries the energy that presses on you. Superiors, rules, deadlines — whatever governs you feels unusually heavy, and your plans meet resistance at every turn. Yet this force is not merely bad; it is what shapes you, and the correction you receive today often helps you later. Do not push hard or collide head-on: check your documents and your words once more, pass the day low, and nothing happens at all."}, "avoid": {"kr": "윗사람과의 정면 충돌, 서둘러 하는 서명, 과속·과로", "en": "Head-on clashes with superiors; hurried signatures; speeding and overwork"}}, {"name": {"kr": "인성(印星) · 나를 돕는 기운의 날", "en": "Inseong · a day that supports you"}, "lvl": 0, "line": {"kr": "도움과 배움이 들어오는 하루", "en": "A day help and learning arrive"}, "txt": {"kr": "오늘은 나를 살려주는 기운이 하늘에 뜬 날, 하루 중 가장 든든한 날입니다. 어른이나 선배, 혹은 오래 알던 사람에게서 도움이 오며 부탁을 꺼내기에 이보다 좋은 날이 없습니다. 배우고 익히는 일에서 평소의 두 배로 흡수되니 공부·자격·면접·상담처럼 머리를 쓰는 일을 오늘로 잡으십시오. 서류나 계약처럼 도장이 오가는 일도 순조롭게 통과되는 흐름이며, 마음이 안정되어 판단이 흐려지지 않는 날입니다.", "en": "Today the sky carries the energy that revives you — the sturdiest day of the cycle. Help arrives from an elder, a senior, or someone you have long known, and no day is better for making an ask. You absorb at twice your usual rate, so schedule study, certification, interviews, or consultations for today. Matters involving documents and seals pass smoothly, and your mind stays settled enough that judgment does not blur."}, "avoid": {"kr": "혼자 끙끙 앓기, 도움을 청하지 않고 미루기", "en": "Suffering alone; postponing rather than asking for help"}}], "WEEK": [{"kr": "이번 주는 전체적으로 기운이 크게 열리는 한 주입니다. 도움을 주는 사람이 여럿 등장하고 미뤄둔 일들이 하나씩 풀려나가니, 이런 주에는 평소 망설이던 일을 꺼내 놓는 것이 좋습니다. 주 초반부터 흐름을 타면 주말까지 그 기세가 이어지므로, 중요한 일정을 앞쪽에 배치하십시오.", "en": "The week opens wide overall. Several helpers appear and postponed matters resolve one by one — a week to raise the thing you kept hesitating over. Catch the current early and it carries to the weekend, so place your important appointments toward the front."}, {"kr": "이번 주는 대체로 순조로운 한 주입니다. 크게 애쓰지 않아도 일이 제 속도로 굴러가고, 사람과의 관계에서도 마찰이 적습니다. 다만 좋은 날과 조심할 날이 섞여 있으니 아래 일자별 흐름을 참고해 중요한 일정을 좋은 날에 배치하면 효율이 크게 올라갑니다.", "en": "A largely smooth week. Things roll at their own pace without much forcing, and friction with people stays low. Good days and careful days do mix, so check the daily flow below and place key appointments on the strong days — your efficiency rises sharply."}, {"kr": "이번 주는 오르내림이 함께 있는 한 주입니다. 잘 풀리는 날과 막히는 날이 번갈아 오지만 전체적으로는 손해 없이 지나갑니다. 막히는 날에 억지로 밀어붙이기보다 그날은 정리와 준비에 쓰고, 기운이 좋은 날에 실행하면 같은 노력으로 훨씬 나은 결과를 얻습니다.", "en": "A week of ups and downs together. Days that flow and days that block alternate, yet on the whole you pass without loss. Rather than forcing on blocked days, use them for sorting and preparing, then execute on the strong days — the same effort yields far more."}, {"kr": "이번 방식은 조용히 흘러가는 한 주입니다. 특별한 사건도 큰 성과도 없이 지나가지만, 이런 주에 기초를 다져두면 다음 주가 가벼워집니다. 새로 벌이기보다 밀린 것을 정리하고 몸을 회복하는 데 시간을 쓰십시오.", "en": "A quietly passing week. No special event and no great achievement, yet groundwork laid now makes next week light. Rather than starting anew, clear your backlog and let your body recover."}, {"kr": "이번 주는 전반적으로 조심이 필요한 한 주입니다. 나를 누르는 기운이 여러 날에 걸쳐 있어 일이 한 번씩 막히고 사람과의 마찰도 생기기 쉽습니다. 그러나 이런 주는 무사히 지나가는 것 자체가 성공이니, 새 일을 벌이지 말고 서류와 말을 한 번 더 확인하며 낮게 지나가십시오. 아래 일자별 흐름에서 기운이 좋은 날을 골라 중요한 일을 몰아두면 훨씬 수월합니다.", "en": "A week that asks for care overall. The pressing energy spans several days, so plans stall and friction with people comes easily. Yet passing such a week without incident is itself success: start nothing new, check documents and words twice, and travel low. Pick the strong days from the daily flow below and cluster what matters there — it goes far easier."}]};
+const TJM = [{"h": "東風解凍", "r": "동풍해동", "kr": "봄바람에 얼음이 녹으니, 막혔던 일이 스스로 풀린다", "en": "Spring wind melts the ice — what was blocked unbinds itself"}, {"h": "枯木逢春", "r": "고목봉춘", "kr": "마른 나무가 봄을 만나니, 끝난 줄 알았던 일에 다시 싹이 튼다", "en": "A withered tree meets spring — what seemed finished sprouts again"}, {"h": "雲開見月", "r": "운개견월", "kr": "구름이 걷혀 달을 보니, 오해가 풀리고 진심이 드러난다", "en": "Clouds part to reveal the moon — misunderstanding clears, the heart shows"}, {"h": "錦上添花", "r": "금상첨화", "kr": "비단 위에 꽃을 더하니, 좋은 일에 좋은 일이 겹친다", "en": "Flowers upon silk — good fortune layers on good fortune"}, {"h": "龍得雲雨", "r": "용득운우", "kr": "용이 구름과 비를 얻으니, 때를 만나 크게 형통한다", "en": "The dragon gains cloud and rain — meeting its hour, all prospers"}, {"h": "順風行舟", "r": "순풍행주", "kr": "순풍에 배를 띄우니, 애쓰지 않아도 앞으로 나아간다", "en": "A boat on a fair wind — you advance without straining"}, {"h": "貴人自來", "r": "귀인자래", "kr": "귀인이 스스로 찾아오니, 먼저 손 내밀면 문이 열린다", "en": "A benefactor comes of their own — offer your hand first and the door opens"}, {"h": "積小成大", "r": "적소성대", "kr": "작은 것이 쌓여 크게 되니, 오늘의 한 걸음을 가벼이 말라", "en": "Small things pile into great — do not make light of today's single step"}, {"h": "花落結實", "r": "화락결실", "kr": "꽃이 지고 열매가 맺히니, 화려함이 지나야 실속이 온다", "en": "Blossoms fall, fruit sets — substance arrives only after splendor passes"}, {"h": "雨後地固", "r": "우후지고", "kr": "비 온 뒤에 땅이 굳으니, 시련이 도리어 기반이 된다", "en": "Ground hardens after rain — the trial becomes your foundation"}, {"h": "石中藏玉", "r": "석중장옥", "kr": "돌 속에 옥이 숨었으니, 알아보는 눈이 필요하다", "en": "Jade hides within stone — what is needed is the eye that knows"}, {"h": "暗中有光", "r": "암중유광", "kr": "어둠 가운데 빛이 있으니, 끝이라 여긴 곳에서 길이 보인다", "en": "Light within the dark — a road appears where you thought it ended"}, {"h": "靜中有得", "r": "정중유득", "kr": "고요한 가운데 얻음이 있으니, 서두르는 마음을 내려놓아라", "en": "Gain lies in stillness — set down the hurrying heart"}, {"h": "深根固枝", "r": "심근고지", "kr": "뿌리가 깊어야 가지가 굳으니, 겉보다 안을 다져라", "en": "Deep roots make firm branches — build within, not without"}, {"h": "待時而動", "r": "대시이동", "kr": "때를 기다려 움직이니, 서두른 걸음이 길을 잃는다", "en": "Move when the hour comes — the hurried step loses the road"}, {"h": "守分安命", "r": "수분안명", "kr": "분수를 지키면 편안하니, 넘치는 자리를 탐하지 말라", "en": "Keep your measure and rest easy — do not covet the seat that overflows"}, {"h": "月滿則虧", "r": "월만즉휴", "kr": "달도 차면 기우니, 가장 높을 때 고개를 숙여라", "en": "Even the full moon wanes — bow your head at your highest"}, {"h": "一葉知秋", "r": "일엽지추", "kr": "잎 하나로 가을을 아니, 작은 신호를 놓치지 말라", "en": "One leaf tells the autumn — do not miss the small sign"}, {"h": "家和萬事", "r": "가화만사", "kr": "집안이 화목하면 만사가 이루어지니, 가까운 곳부터 살펴라", "en": "A harmonious home accomplishes all — tend what is nearest first"}, {"h": "財來財去", "r": "재래재거", "kr": "재물이 오고 또 가니, 들어올 때 묶어두어야 남는다", "en": "Wealth comes and goes — bind it as it arrives or nothing remains"}, {"h": "遠行有利", "r": "원행유리", "kr": "멀리 나감이 이로우니, 움직이면 기회가 따라온다", "en": "Distance favors you — move, and opportunity follows"}, {"h": "春氷履行", "r": "춘빙이행", "kr": "봄 얼음을 밟듯 하니, 조심하면 화가 복으로 바뀐다", "en": "Tread as on spring ice — caution turns misfortune to blessing"}, {"h": "口是禍門", "r": "구시화문", "kr": "입이 화의 문이니, 말을 아끼면 구설이 스스로 물러난다", "en": "The mouth is trouble's gate — spare your words and gossip retreats"}, {"h": "忍中有福", "r": "인중유복", "kr": "참는 가운데 복이 있으니, 다툼을 피하면 길하다", "en": "Blessing hides in patience — avoid the quarrel and stay fortunate"}];
+const STEM_K = ["갑","을","병","정","무","기","경","신","임","계"];
+const BR_K   = ["자","축","인","묘","진","사","오","미","신","유","술","해"];
+const DOW = {kr:["월","화","수","목","금","토","일"], en:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]};
+/* 일진 계산 (JDN 기준, 2000-01-01 무오 / 1901-01-01 기묘로 검증) */
+function jdnOf(y,m,d){ const a=Math.floor((14-m)/12), yy=y+4800-a, mm=m+12*a-3;
+  return d + Math.floor((153*mm+2)/5) + 365*yy + Math.floor(yy/4) - Math.floor(yy/100) + Math.floor(yy/400) - 32045; }
+function iljin(dt){
+  const i = ((jdnOf(dt.getFullYear(), dt.getMonth()+1, dt.getDate()) + 49) % 60 + 60) % 60;
+  return { i:i, si:i%10, bi:i%12, elem:Math.floor((i%10)/2) };
+}
+function fmtDate(dt){
+  const m = dt.getMonth()+1, d = dt.getDate();
+  return K ? (m + "월 " + d + "일") : (["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][m-1] + " " + d);
+}
+const DB = {"NATURE": [{"kr": "당신은 곧게 자라는 나무의 기운을 타고났습니다. 무엇이든 시작하면 뿌리부터 내리려 하고, 단번에 결과를 보기보다 차근차근 키워 올리는 방식을 택합니다. 남의 부탁을 쉽게 거절하지 못하는 인정 많은 성품이라 주변에 사람이 모이지만, 그만큼 속으로 삭이는 일도 많습니다. 새로운 것을 배우고 만들어내는 데서 살아 있음을 느끼며, 명분 없는 일에는 좀처럼 마음이 움직이지 않습니다.", "en": "You were born with the energy of a growing tree. Whatever you begin, you want to root it deeply — you would rather raise something steadily than seize a quick result. Your warm-heartedness makes it hard to refuse a request, so people gather around you, though you swallow much in silence. You feel most alive when learning and creating, and your heart rarely moves for anything without a cause you believe in."}, {"kr": "당신은 타오르는 불의 기운을 타고났습니다. 감정이 얼굴에 드러나고 표현이 솔직해서 함께 있으면 자리가 환해지는 사람입니다. 좋고 싫음이 분명하고 결정이 빠른데, 그 속도가 기회를 잡게도 하고 가끔은 후회를 남기기도 합니다. 사람을 끌어당기는 힘이 강해 어디서든 중심에 서게 되며, 인정받을 때 가장 크게 타오르는 성품입니다.", "en": "You were born with the energy of blazing fire. Your feelings show on your face and your words are honest — a room brightens when you enter it. Your likes and dislikes are clear and your decisions swift; that speed catches opportunities, though it sometimes leaves regret. You draw people in naturally and end up at the center of any circle, burning brightest when your worth is recognized."}, {"kr": "당신은 만물을 품는 흙의 기운을 타고났습니다. 말보다 행동으로 증명하는 사람이라 한번 맡은 일은 끝을 보고, 그래서 주변의 신뢰가 두텁습니다. 겉으로는 무던해 보여도 속으로는 옳고 그름을 정확히 재고 있으며, 한번 마음을 닫으면 좀처럼 다시 열지 않습니다. 급하게 오르는 운보다 오래 지켜내는 운을 타고나 시간이 지날수록 자리가 단단해집니다.", "en": "You were born with the energy of embracing earth. You prove yourself by doing rather than speaking — once you take something on, you see it through, and trust follows you. You may look easygoing, yet inside you weigh right and wrong precisely, and once you close your heart it rarely reopens. Yours is not the luck of a quick rise but of long endurance; your ground grows firmer with every passing year."}, {"kr": "당신은 단단하게 벼려진 쇠의 기운을 타고났습니다. 원칙이 분명하고 판단이 냉정해서 어수선한 상황에서도 핵심을 정확히 짚어냅니다. 한번 한 약속은 손해를 보더라도 지키는 사람이라 신뢰가 곧 당신의 재산입니다. 다만 자신에게 엄격한 만큼 남에게도 기준이 높아, 그 단호함이 때로 차갑게 비칠 수 있습니다. 결정적인 순간에 흔들리지 않는 것이 당신의 가장 큰 무기입니다.", "en": "You were born with the energy of tempered metal. Your principles are clear and your judgment cool, so you find the core of a matter even amid chaos. You keep a promise even at a loss — trust is your true fortune. Yet you hold others to the same high standard you hold yourself, and that firmness can read as coldness. Not wavering at the decisive moment is your greatest weapon."}, {"kr": "당신은 흐르는 물의 기운을 타고났습니다. 상황을 읽는 눈이 빠르고 사람의 속내를 잘 알아채서, 굳이 부딪히지 않고 돌아가는 지혜가 있습니다. 겉으로는 유연해 보이지만 목표를 향해서는 결국 스며들어 도달하는 끈질김이 있습니다. 혼자 생각하는 시간이 반드시 필요한 사람이며, 그 시간에서 남들이 못 보는 답을 길어 올립니다. 감정의 깊이가 남달라 한번 맺은 인연은 오래 갑니다.", "en": "You were born with the energy of flowing water. You read situations quickly and sense what people leave unsaid, so you have the wisdom to go around rather than collide. You appear yielding, yet toward your goal you possess the persistence of water that seeps through and arrives. You need solitude to think, and from that quiet you draw answers others cannot see. Your emotional depth is unusual — a bond once made lasts long."}], "ZT": [{"kr": "쥐띠의 기질이 더해져 눈치가 빠르고 위기 감각이 뛰어납니다. 없는 살림에서도 방법을 찾아내는 생활력이 있어, 어려운 시기일수록 오히려 진가가 드러나는 사람입니다.", "en": "The Rat's temperament adds quick instincts and a sharp sense for danger. You find a way even from little, so your true worth shows most in hard seasons."}, {"kr": "소띠의 기질이 더해져 우직하고 끈기가 있습니다. 남들이 지쳐 포기할 때 묵묵히 한 걸음 더 가는 사람이라, 결국 끝에 웃는 쪽은 당신입니다.", "en": "The Ox's temperament adds steadfast endurance. You take one more step when others quit, so it is you who smiles at the finish."}, {"kr": "호랑이띠의 기질이 더해져 기개가 있고 불의를 참지 못합니다. 앞장서는 자리가 어울리며, 결단이 필요한 순간에 사람들이 당신을 봅니다.", "en": "The Tiger's temperament adds courage and intolerance of injustice. Leading suits you, and when decisions must be made, people look to you."}, {"kr": "토끼띠의 기질이 더해져 섬세하고 온화합니다. 분위기를 부드럽게 만드는 재주가 있어 어디서든 환영받지만, 정작 자신의 상처는 혼자 감당하는 편입니다.", "en": "The Rabbit's temperament adds delicacy and gentleness. You soften any room and are welcomed everywhere, though you tend to bear your own wounds alone."}, {"kr": "용띠의 기질이 더해져 스케일이 크고 자존심이 강합니다. 작은 자리에 머물기 어려운 사람이라, 꿈을 크게 잡을수록 오히려 운이 따라붙습니다.", "en": "The Dragon's temperament adds grand scale and strong pride. You cannot stay small for long — the larger your dream, the more fortune follows."}, {"kr": "뱀띠의 기질이 더해져 통찰이 깊고 신중합니다. 말수는 적어도 한번 내놓는 판단은 정확해서, 시간이 지나면 사람들이 당신 말이 옳았음을 압니다.", "en": "The Snake's temperament adds deep insight and caution. You speak little, but your judgment lands true — in time, people realize you were right."}, {"kr": "말띠의 기질이 더해져 활동적이고 자유롭습니다. 갇힌 환경을 견디기 어려워하며, 움직일수록 기회가 생기는 사람입니다.", "en": "The Horse's temperament adds energy and freedom. Confinement wears on you — opportunity appears the more you move."}, {"kr": "양띠의 기질이 더해져 정이 많고 배려가 깊습니다. 남을 먼저 챙기다 자신이 뒷전이 되기 쉬우니, 스스로를 아끼는 연습이 곧 개운법입니다.", "en": "The Sheep's temperament adds warmth and deep consideration. You put others first until you fall behind — learning to cherish yourself is itself your luck ritual."}, {"kr": "원숭이띠의 기질이 더해져 재주가 많고 상황 적응이 빠릅니다. 어떤 판에 놓여도 살아남는 영리함이 있지만, 한 우물을 팔 때 가장 크게 됩니다.", "en": "The Monkey's temperament adds many talents and swift adaptation. You survive any board you are placed on, yet you rise highest when you dig one well deep."}, {"kr": "닭띠의 기질이 더해져 부지런하고 꼼꼼합니다. 남들이 놓치는 디테일을 잡아내는 눈이 있어, 그 정확함이 당신의 신용이 됩니다.", "en": "The Rooster's temperament adds diligence and precision. You catch details others miss, and that accuracy becomes your credit."}, {"kr": "개띠의 기질이 더해져 의리가 있고 정직합니다. 한번 내 사람이라 여기면 끝까지 지키는 성품이라, 사람이 곧 당신의 가장 큰 재산입니다.", "en": "The Dog's temperament adds loyalty and honesty. Once you claim someone as yours, you guard them to the end — people are your greatest asset."}, {"kr": "돼지띠의 기질이 더해져 순박하고 복이 많습니다. 욕심을 부리지 않아도 들어올 것은 들어오는 사람이라, 조급함만 버리면 재물이 따릅니다.", "en": "The Pig's temperament adds simplicity and inherent blessing. What is meant for you arrives without grasping — let go of haste and wealth follows."}], "FLOW": [{"kr": "올해 당신의 운은 구름이 걷히고 해가 드러나는 형국입니다. 지난 몇 해 동안 준비하고 참아온 것들이 드디어 형태를 갖추어 세상에 드러나며, 특히 상반기에 문서·계약·발탁과 관련한 좋은 소식이 찾아옵니다. 뜻밖의 자리에서 귀인을 만나 길이 열리는 흐름이니, 초대와 모임을 마다하지 마십시오. 재물과 명예가 함께 따르는 드문 해이므로 큰 결정을 미루지 말고 과감히 움직이는 것이 좋습니다. 다만 그릇이 커지는 만큼 책임도 커지니, 공을 나누고 약속을 지키면 이 운이 내년까지 이어집니다.", "en": "This year your fortune is that of clouds parting to reveal the sun. What you prepared and endured through recent years finally takes shape in the open, and the first half brings good news around documents, contracts, and being chosen. A benefactor appears in an unexpected place, so do not decline invitations and gatherings. Wealth and honor arrive together in this rare year — do not postpone major decisions. Yet as your vessel grows, so does your duty: share the credit and keep your promises, and this fortune carries into next year."}, {"kr": "올해는 순풍에 돛을 단 듯 일이 순조롭게 풀리는 해입니다. 억지로 힘을 쓰지 않아도 흐름이 당신을 밀어주며, 특히 협력과 팀워크에서 좋은 결실이 나옵니다. 그동안의 노력이 하나둘 인정받기 시작하고, 도와주려는 사람이 눈에 띄게 늘어납니다. 큰 횡재보다는 꾸준히 쌓이는 성취의 해이니, 작은 승리를 차곡차곡 모으면 연말에 제법 큰 그림이 완성됩니다. 갑작스러운 투자나 지출 제안에는 하루 이상 생각할 시간을 두면 손해 볼 일이 없습니다.", "en": "This year your sails catch a favorable wind. You need not force anything — the current pushes you, and cooperation especially bears fruit. Past efforts begin to earn recognition one by one, and helpers noticeably multiply. This is a year of accumulation rather than windfall: stack small wins and a sizable picture completes itself by year's end. Give yourself at least a day before agreeing to sudden investments or expenses, and you will lose nothing."}, {"kr": "올해는 먼저는 더디고 뒤에는 빠른, 선곤후태(先困後泰)의 해입니다. 상반기에는 기대만큼 속도가 나지 않아 답답함을 느낄 수 있으나, 이 시기는 실패가 아니라 기초를 다지는 과정입니다. 하반기부터 흐름이 바뀌기 시작하며, 그때 승부수를 던지면 상반기의 더딤이 오히려 밑거름이 됩니다. 오르막과 내리막이 번갈아 오지만 전체 방향은 분명히 위를 향하고 있으니, 중간의 굴곡에 마음을 뺏기지 마십시오. 잘 풀릴 때 저축하고 어려울 때 배우면, 어느 쪽 계절도 손해가 아닙니다.", "en": "This year follows the pattern of hardship first, ease after. The first half may move slower than you hope and frustration may creep in, yet this season is not failure — it is foundation-laying. From the second half the current shifts; make your move then and the earlier slowness becomes fertile soil. Ups and downs alternate, but the overall direction clearly climbs — do not let mid-course dips claim your heart. Save when things go well and learn when they do not, and neither season is a loss."}, {"kr": "올해는 크게 얻는 것도 잃는 것도 없는, 잔잔한 물결 같은 해입니다. 이런 해를 심심하다 여기고 억지로 판을 흔들면 오히려 없던 손실이 생기니, 현상을 지키는 것이 곧 성공임을 기억하십시오. 새 일을 벌이기보다 지금 가진 것을 정돈하고 다듬는 데 시간을 쓰면, 그 정리 속에서 뜻밖의 기회가 눈에 들어옵니다. 건강과 가족, 그리고 배움에 투자하기에 이보다 좋은 해가 없으며, 지금 심어둔 씨앗이 다음 운의 계절에 거두어집니다. 조용한 해라고 해서 아무 일도 일어나지 않는 것이 아니라, 뿌리가 자라는 소리는 원래 들리지 않는 법입니다.", "en": "This year is a calm ripple — neither great gain nor great loss. Do not call it dull and shake the board on purpose, or you invent losses that were never there: maintaining is itself winning. Spend the time organizing and refining what you already hold, and within that tidying an unexpected opportunity comes into view. No year is better for investing in health, family, and learning; the seed planted now is harvested in your next season of fortune. A quiet year is not an empty one — roots simply grow without a sound."}, {"kr": "올해는 돌다리도 두드려 건너야 하는, 신중함이 곧 개운법인 해입니다. 문서·계약·보증·동업에 특히 조심해야 하며, 달콤하게 들리는 제안일수록 반드시 두 번 세 번 확인하십시오. 구설과 시비가 붙기 쉬운 흐름이니 말을 줄이고 듣기를 늘리면, 다가올 화의 절반은 저절로 비켜갑니다. 그러나 이 해가 나쁘기만 한 것은 아닙니다 — 조심하는 사람에게는 아무 일도 일어나지 않고 지나가며, 오히려 이 시기에 걸러낸 사람과 일이 훗날 당신을 지켜줍니다. 무리한 확장을 멈추고 내실을 다지면, 내년의 운이 훨씬 가볍게 열립니다.", "en": "This year asks you to tap even the stone bridge before crossing — caution itself is your luck ritual. Be especially careful with documents, contracts, guarantees, and partnerships, and check the sweetest offers twice, then a third time. Gossip and disputes spark easily, so speak less and listen more; half the trouble heading your way will simply pass by. Yet this is not a year of only misfortune — to the careful, nothing happens at all, and the people and deals you filter out now are what protect you later. Halt overreach and build inner strength, and next year's fortune opens far more lightly."}], "FADV": [{"kr": "이 좋은 흐름을 오래 붙잡는 방법은 단 하나, 겸손입니다. 달도 차면 기우는 법이니 가장 높이 올랐을 때 가장 낮게 고개를 숙이면, 이 운은 한 해로 끝나지 않고 다음 대운까지 이어집니다.", "en": "There is one way to hold this good current long: humility. The full moon must wane, so bow lowest at your highest point, and this fortune will not end with the year but carry into your next great cycle."}, {"kr": "지금의 순조로움에 익숙해져 방심하지만 않으면 됩니다. 오늘 잘 되는 이유를 스스로 알고 있어야 내일도 잘 되니, 잘 풀린 일일수록 왜 잘 풀렸는지 한 번 되짚어 보십시오.", "en": "Simply do not let this smoothness lull you. To succeed tomorrow you must know why you succeed today — the better something goes, the more worth retracing why."}, {"kr": "조급함 하나만 다스리면 결과는 기대 이상입니다. 지금 더디게 느껴지는 것은 길이 막혀서가 아니라 당신이 가려는 곳이 그만큼 멀기 때문이니, 방향이 맞다면 속도는 걱정하지 않아도 됩니다.", "en": "Master impatience alone and the result exceeds expectation. What feels slow now is not a blocked road but a distant destination — if the direction is right, do not worry about the speed."}, {"kr": "고요함을 견디는 힘이 이 해의 과제입니다. 남과 비교하며 조바심 내는 마음만 내려놓으면, 올해 쌓은 것이 몇 해 뒤 당신을 다른 자리에 데려다 놓습니다.", "en": "Enduring the stillness is this year's task. Set down the urge to compare, and what you build this year will place you somewhere else entirely a few years on."}, {"kr": "조심한다는 것은 두려워한다는 뜻이 아닙니다. 한 박자 늦게 결정하고 한 마디 덜 말하는 것만으로 이 해는 무사히 지나가며, 그렇게 지킨 것들이 다음 해의 밑천이 됩니다.", "en": "To be careful is not to be afraid. Decide one beat later, speak one line less, and this year passes without incident — and what you preserved becomes next year's capital."}], "LUCK": [{"dir": {"kr": "동쪽", "en": "East"}, "col": {"kr": "초록 · 청색", "en": "Green · Blue"}, "num": {"kr": "3, 8", "en": "3, 8"}, "item": {"kr": "원목 소품, 나무 팔찌, 만년필", "en": "Wooden objects, a wood-bead bracelet, a fountain pen"}, "inte": {"kr": "동쪽 창가에 화분이나 작은 나무를 두고, 책상은 원목 재질로. 아침 햇빛이 드는 방향에 앉으면 집중력이 올라갑니다.", "en": "Place a plant or small tree by an east window and choose a wooden desk. Sitting where morning light enters sharpens your focus."}, "avoid": {"kr": "서쪽 방향의 과감한 확장, 금속성 소음이 많은 환경", "en": "Bold expansion toward the west; environments full of metallic noise"}}, {"dir": {"kr": "남쪽", "en": "South"}, "col": {"kr": "빨강 · 자주", "en": "Red · Magenta"}, "num": {"kr": "2, 7", "en": "2, 7"}, "item": {"kr": "붉은 계열 지갑, 향초, 가죽 다이어리", "en": "A red wallet, scented candles, a leather diary"}, "inte": {"kr": "남쪽 벽에 따뜻한 조명이나 그림을 걸고, 어두운 구석에는 스탠드를 하나 두십시오. 밝은 빛이 곧 당신의 기운입니다.", "en": "Hang warm lighting or art on a south wall and add a lamp to every dark corner. Bright light is your energy itself."}, "avoid": {"kr": "북쪽의 습하고 어두운 공간에서 오래 머무는 것", "en": "Lingering long in damp, dark spaces to the north"}}, {"dir": {"kr": "남서쪽 · 중앙", "en": "Southwest · Center"}, "col": {"kr": "황토색 · 베이지 · 노랑", "en": "Ochre · Beige · Yellow"}, "num": {"kr": "5, 10", "en": "5, 10"}, "item": {"kr": "도자기 컵, 흙 화분, 가죽 지갑", "en": "A ceramic cup, an earthen pot, a leather wallet"}, "inte": {"kr": "집 한가운데를 비워 어수선하지 않게 하고, 흙·도자 재질의 소품을 두십시오. 중심이 정돈되면 재물이 머뭅니다.", "en": "Keep the center of your home clear and uncluttered, and place earthen or ceramic pieces there. When the center is ordered, wealth stays."}, "avoid": {"kr": "동쪽으로의 잦은 이동, 정리되지 않은 물건 쌓아두기", "en": "Frequent moves eastward; letting unsorted things pile up"}}, {"dir": {"kr": "서쪽", "en": "West"}, "col": {"kr": "흰색 · 금색", "en": "White · Gold"}, "num": {"kr": "4, 9", "en": "4, 9"}, "item": {"kr": "금속 시계, 은반지, 잘 드는 만년필", "en": "A metal watch, a silver ring, a well-cut pen"}, "inte": {"kr": "서쪽 공간을 밝고 깔끔하게 비우고, 금속 재질의 소품 하나를 두십시오. 군더더기 없는 공간이 당신의 판단을 날카롭게 합니다.", "en": "Keep the western space bright and bare, with one metal object placed there. An uncluttered room sharpens your judgment."}, "avoid": {"kr": "남쪽의 과열된 경쟁, 감정적인 언쟁", "en": "Overheated competition to the south; emotional arguments"}}, {"dir": {"kr": "북쪽", "en": "North"}, "col": {"kr": "검정 · 남색", "en": "Black · Navy"}, "num": {"kr": "1, 6", "en": "1, 6"}, "item": {"kr": "유리병, 수정 · 흑요석, 만년필", "en": "A glass bottle, crystal or obsidian, a fountain pen"}, "inte": {"kr": "북쪽에 작은 어항이나 유리 소품을 두고, 창가에 거울을 하나 걸어 두십시오. 물과 빛이 흐르면 생각도 함께 흐릅니다.", "en": "Set a small aquarium or glass piece to the north and hang a mirror near a window. When water and light flow, so do your thoughts."}, "avoid": {"kr": "중앙의 답답한 공간, 흙먼지 많은 환경", "en": "Stuffy central spaces; dusty environments"}}], "LOVE": [{"kr": "애정운이 한 해 중 가장 크게 열립니다. 미혼이라면 소개나 모임, 혹은 이미 알고 지내던 사람 중에서 인연이 드러나며, 특히 상반기에 만난 사람과의 흐름이 깊습니다. 기혼이라면 부부의 정이 새로워지고, 그동안 미뤄둔 대화가 자연스럽게 풀리는 시기입니다. 이 흐름에서 중요한 것은 표현입니다 — 마음속에 담아만 두면 인연은 스쳐 지나가고, 한마디 먼저 건네면 복이 됩니다. 상대의 조건을 재기보다 함께 있을 때의 편안함을 기준으로 삼으면 후회 없는 선택을 하게 됩니다.", "en": "Your love fortune opens widest this year. If unattached, a bond reveals itself through an introduction, a gathering, or someone already in your circle — a connection made in the first half runs especially deep. If married, affection renews and long-postponed conversations untangle naturally. What matters in this current is expression: kept inside, the bond passes by; offered first, it becomes a blessing. Judge by how at ease you feel together rather than by their conditions, and you will choose without regret."}, {"kr": "애정운이 따뜻하게 흐르는 해입니다. 급격한 변화보다 서서히 데워지는 온기 같은 인연이 찾아오며, 사람을 통해 사람을 만나는 흐름이 좋습니다. 연인이나 부부 사이에는 신뢰가 한 겹 더 쌓이고, 사소한 기념일을 챙기는 정성이 예상 밖의 감동으로 돌아옵니다. 다만 상대에게 기대하는 만큼 표현하고 있는지 한번 돌아보십시오 — 당신이 당연하게 여기는 배려가 상대에게는 확인받고 싶은 마음일 수 있습니다. 서두르지 않으면 이 인연은 오래갑니다.", "en": "Warm currents run through your love life this year. The bond that arrives warms gradually rather than bursting in, and connections made through people you trust are especially good. Trust layers another fold between partners, and small remembrances return as unexpected emotion. Ask yourself whether you express as much as you expect — the care you take for granted may be what they long to hear confirmed. Do not rush, and this bond will last."}, {"kr": "서두르면 어긋나고 기다리면 맺어지는 애정운입니다. 상반기에는 마음만 앞서 오해가 생기기 쉬우니, 결론을 내리기 전에 상대의 속도를 한 번 확인하십시오. 하반기부터는 흐름이 부드러워지며, 그때 나눈 대화가 관계를 한 단계 깊은 곳으로 데려갑니다. 이미 인연이 있다면 권태로움을 위기로 오해하지 마십시오 — 익숙함은 관계가 식은 증거가 아니라 자리를 잡았다는 증거입니다. 혼자만의 시간과 함께하는 시간의 균형을 맞추면 올해 애정운은 무난히 지켜집니다.", "en": "Rushing breaks the thread; waiting ties the knot. In the first half your heart runs ahead and misunderstandings arise — check their pace before you reach conclusions. From the second half the current softens, and the conversations you have then carry the relationship a level deeper. If already bonded, do not mistake familiarity for crisis — it is not proof that love cooled but that it settled. Balance solitude with togetherness and your love fortune holds steady."}, {"kr": "큰 변화 없이 잔잔하게 흐르는 애정운입니다. 새로운 인연을 찾아 나서기보다 지금 곁에 있는 사람과의 관계를 다듬는 데 마음을 쓰는 것이 이 해에는 훨씬 이롭습니다. 미혼이라면 조급하게 찾아 나선 인연보다 자연스럽게 스며든 인연이 좋으니, 취미나 배움의 자리에 나가는 것이 좋습니다. 기혼이라면 익숙함을 지루함으로 착각하지 마십시오 — 함께 보낸 시간 자체가 이미 귀한 인연의 증거입니다. 큰 사건이 없는 것이 곧 평온이며, 이 평온이 다음 해의 기반이 됩니다.", "en": "Calm waters, little change. It serves you far better this year to refine the bond already beside you than to hunt for a new one. If unattached, a connection that seeps in naturally beats one you chase — show up at hobbies and classes. If married, do not mistake the familiar for the tedious: the time already shared is itself proof of a precious bond. The absence of drama is peace, and this peace becomes next year's foundation."}, {"kr": "오해가 생기기 쉬운 애정운이니 소통의 방식부터 바꾸십시오. 문자보다 목소리로, 목소리보다 얼굴을 보고 이야기하면 벌어질 갈등의 절반은 애초에 생기지 않습니다. 제3자를 통해 전해 듣는 말은 절반만 믿는 것이 좋으며, 특히 남의 연애에 끼어드는 일은 올해 반드시 피하십시오. 미혼이라면 급하게 맺는 인연에 주의하고, 기혼이라면 사소한 서운함을 쌓아두지 말고 그때그때 가볍게 풀어내십시오. 이 시기를 조심히 넘기면 관계는 오히려 더 단단해집니다.", "en": "Misunderstandings spark easily — change how you communicate first. Choose voice over text and face over voice, and half the coming conflict never forms. Believe only half of what reaches you through third parties, and above all stay out of other people's romances this year. If unattached, beware bonds formed in haste; if married, do not stockpile small hurts — air them lightly as they come. Pass this season carefully and the relationship emerges sturdier."}], "WORK": [{"kr": "직업운이 크게 트이는 해입니다. 승진·합격·이직·계약 성사 등 기다리던 소식이 실제로 도착하며, 특히 사람들 앞에 서는 자리에서 이름을 알릴 기회가 생깁니다. 새 프로젝트나 새 역할이 주어진다면 망설이지 말고 받으십시오 — 지금의 부담은 내년의 자산이 됩니다. 윗사람의 눈에 드는 흐름이니 성과는 반드시 기록으로 남기고, 공은 팀과 나누면 이 운이 훨씬 오래갑니다. 다만 갑자기 늘어난 제안 중에는 급을 낮추는 것도 섞여 있으니, 이름값보다 실속을 따져보십시오.", "en": "Career fortune opens wide. The news you awaited — promotion, acceptance, a new post, a signed deal — actually arrives, and chances to make your name before an audience appear. If a new project or role is offered, take it without hesitation: today's burden becomes next year's asset. You are in a superior's line of sight, so record every achievement in writing and share credit with your team to make this fortune last. Among the sudden offers, some lower your standing — weigh substance over prestige."}, {"kr": "노력한 만큼 정직하게 돌아오는 직업운입니다. 극적인 도약은 없어도 하는 일마다 결과가 남고, 그 결과가 쌓여 연말에 뚜렷한 평가로 나타납니다. 윗사람의 신임이 두터워지는 시기이니 맡은 일에 책임을 다하면 자연스럽게 자리가 올라갑니다. 협업에서 특히 좋은 성과가 나오니 혼자 끌어안기보다 함께할 사람을 찾으십시오. 다만 남의 몫까지 떠맡다 지치는 흐름도 있으니, 거절해야 할 일은 초반에 분명히 선을 그으면 후반이 편합니다.", "en": "Your work returns honestly what you invest. There may be no dramatic leap, yet every task leaves a result, and those results become a clear evaluation by year's end. Superiors' trust deepens — fulfill your duties and your position rises of itself. Collaboration bears the best fruit, so seek partners rather than carrying it alone. Watch for the pattern of taking on others' loads until you are drained: draw the line early on what you must decline, and the latter half runs easy."}, {"kr": "경쟁은 있으나 결국 실력으로 이기는 직업운입니다. 상반기에는 인정받지 못하는 듯한 답답함이 있고, 나보다 못하다 여겼던 사람이 앞서 나가는 것을 볼 수도 있습니다. 그러나 화려한 말은 오래가지 못하고, 하반기부터는 꾸준한 결과물이 당신을 대신 증명하기 시작합니다. 이직이나 전업을 고민 중이라면 상반기에는 준비만 하고 하반기에 실행하는 것이 훨씬 유리합니다. 지금 자리에서 배울 것을 다 배워두면, 다음 자리에서 당신의 몸값이 달라집니다.", "en": "Competition exists, yet skill prevails in the end. The first half brings the frustration of going unrecognized, and you may watch someone you rated lower move ahead. But eloquence does not endure; from the second half, steady output begins to speak for you. If weighing a job change, prepare in the first half and execute in the second — far more favorable. Learn everything your current seat can teach, and your value differs in the next one."}, {"kr": "직업운에 큰 변동이 없는 해입니다. 이직·창업·전업 같은 큰 결정은 시기상조이니, 마음이 들썩여도 올해는 자리를 지키는 편이 훨씬 이롭습니다. 대신 지금 하는 일의 빈틈을 메우고 부족한 기술을 채우는 데 시간을 쓰면, 그 준비가 다음 기회에 그대로 힘이 됩니다. 조직 안에서는 튀지 않으면서도 필요한 사람이 되는 것이 이 해의 전략입니다. 눈에 띄는 성과가 없어도 조용히 신뢰를 쌓아두면, 결정적인 순간에 당신의 이름이 불립니다.", "en": "Little shifts in your career this year. Big decisions — changing jobs, founding, switching fields — are premature; however restless you feel, holding your seat serves you better. Spend the time closing gaps in your current work and filling in missing skills; that preparation becomes force at the next opening. Your strategy this year is to be indispensable without standing out. Even without visible wins, quietly banked trust means your name is the one called at the decisive moment."}, {"kr": "직장 내 구설과 문서 실수를 각별히 조심해야 하는 해입니다. 중요한 결재·서명·보고서는 반드시 한 번 더 검토하고, 확인하지 않은 정보를 옮기는 일은 절대 하지 마십시오. 남의 뒷말이 오가는 자리에는 아예 앉지 않는 것이 상책이며, 당신이 하지 않은 말도 당신의 말로 전해질 수 있는 흐름입니다. 이직 제안이 와도 조건을 문서로 확인하기 전에는 마음을 정하지 마십시오. 이 해를 무사히 넘기는 것 자체가 성공이며, 조심한 사람에게는 아무 일도 일어나지 않습니다.", "en": "Guard hard against workplace gossip and paperwork errors. Review every important approval, signature, and report once more, and never pass along information you have not verified. Best not to sit where talk-behind-backs circulates — in this current, words you never said may be attributed to you. If a job offer comes, do not decide until the terms are in writing. Passing this year without incident is itself success; to the careful, nothing happens at all."}], "MONEY": [{"kr": "재물이 사방에서 들어오는 해입니다. 본업 외의 수입이 생기거나, 받지 못할 거라 여겼던 묵은 돈을 되찾을 수도 있습니다. 부동산·계약·투자와 관련해 좋은 소식이 있는 흐름이며, 특히 오래 들고 있던 것을 정리할 때 제값을 받습니다. 다만 들어오는 문이 넓어지면 나가는 문도 함께 넓어지니, 수입이 생길 때마다 일정 비율을 먼저 떼어 묶어두는 습관이 이 운을 지킵니다. 씀씀이가 커지는 것을 성공으로 착각하지만 않으면, 올해 모은 것이 앞으로 몇 년의 기반이 됩니다.", "en": "Wealth flows in from all directions. Income beyond your main work appears, or old money you had written off returns. Good news arrives around property, contracts, and investments — and what you have held a long time fetches its true price when you let it go. Yet as the inflow widens so does the outflow: set aside a fixed share the moment money arrives, and this fortune is preserved. Simply do not mistake rising spending for success, and what you gather this year becomes the base of several to come."}, {"kr": "금전운이 안정적으로 상승하는 해입니다. 벼락 같은 횡재는 없지만 들어오는 돈이 나가는 돈보다 꾸준히 많아지는 흐름이라, 저축과 장기 계획에 유리합니다. 급하게 굴리기보다 원금을 지키며 시간을 태우는 방식이 이 해에는 훨씬 유리합니다. 작은 부수입의 기회가 눈에 들어오는데, 본업에 지장이 없는 선이라면 시도해볼 만합니다. 다만 지인의 소개로 들어오는 투자 제안은 관계와 돈을 함께 잃을 수 있으니 반드시 문서로 확인하십시오.", "en": "Your money fortune rises steadily. No thunderclap windfall, but income consistently outpaces outgo — favorable for saving and long plans. Preserving principal and letting time work beats churning capital this year. Chances for small side income come into view; worth trying if they do not disturb your main work. But investment offers arriving through acquaintances can cost you both the money and the relationship — insist on documents."}, {"kr": "들어오는 돈과 나가는 돈이 비슷해 통장이 늘 제자리처럼 느껴지는 해입니다. 상반기에는 예상치 못한 지출이 겹쳐 답답할 수 있으나, 하반기부터 숨통이 트이기 시작합니다. 이 해에 가장 확실한 재테크는 새는 구멍을 찾는 것입니다 — 가계부를 한 달만 써도 어디서 돈이 빠져나가는지 눈에 보이고, 그것만으로 운이 달라집니다. 큰 수익을 좇다 원금을 다치는 일만 피하면 손해 없이 지나갑니다. 목돈이 필요한 일이 있다면 하반기로 미루는 것이 유리합니다.", "en": "Income and outgo run even, and your balance feels stuck in place. The first half may stack unexpected expenses and frustration, but the second half opens breathing room. The surest investment this year is finding the leaks — one month of keeping a ledger reveals where money escapes, and that alone shifts your luck. Simply avoid wounding your principal while chasing high returns, and you pass through without loss. If a large expense is coming, postpone it to the second half."}, {"kr": "재물운에 큰 파도가 없는 해입니다. 버는 것보다 지키는 것이 곧 버는 것이라는 말이 올해만큼 맞는 해가 없으니, 원금 보장이 없는 제안은 이번 시기에는 흘려보내십시오. 무리한 확장이나 대출을 끼는 결정은 미루고, 대신 고정 지출을 점검해 줄일 수 있는 것을 줄이면 그것이 그대로 수익입니다. 큰 돈이 들어오지 않는 대신 큰 돈이 나갈 일도 없으니, 이 평온함을 지루해하지 마십시오. 지금 지켜낸 종잣돈이 다음 기회의 열쇠가 됩니다.", "en": "No great waves in your wealth this year. Never is it truer that protecting is earning — let offers without guaranteed principal pass you by. Postpone aggressive expansion and leveraged decisions; instead audit fixed costs and cut what you can, which is profit itself. No large sum enters, but none leaves either — do not find this calm boring. The seed money you preserve now is the key to your next opportunity."}, {"kr": "금전 문제에 각별한 주의가 필요한 해입니다. 보증·대여·동업 세 가지는 올해 반드시 피하십시오 — 특히 가까운 사이일수록 돈이 오가면 관계까지 함께 잃습니다. 큰 수익을 약속하는 제안일수록 위험하며, 급하게 결정하라고 재촉하는 자리에서는 일단 일어나는 것이 상책입니다. 지출은 계획한 것만 하고, 충동구매는 밤보다 아침에 다시 생각해 보십시오. 이 해에 돈을 못 버는 것은 손해가 아니지만 돈을 잃는 것은 회복에 몇 해가 걸리니, 지키는 것을 목표로 삼으십시오.", "en": "Money demands special vigilance this year. Avoid three things absolutely: guarantees, lending, and partnerships — the closer the tie, the more money costs you the relationship too. The higher the promised return, the higher the danger, and when someone presses you to decide fast, the wise move is to stand up and leave. Spend only what you planned, and reconsider impulse purchases in the morning rather than at night. Failing to earn costs you nothing this year, but losing takes years to recover — make preservation your goal."}], "HEALTH": [{"kr": "기력이 가장 충만한 해입니다. 몸이 가벼우니 마음도 밝아지고, 새 운동이나 습관을 시작하기에 이보다 좋은 시기가 없습니다. 지금 만든 습관은 몇 해를 갈 만큼 자리를 잘 잡으니, 미뤄왔던 운동을 이 해에 시작하십시오. 다만 컨디션이 좋다고 무리한 일정을 몰아 넣으면 연말에 한꺼번에 탈이 날 수 있습니다. 잘 될 때 쉬어두는 것이 진짜 고수의 건강관리이며, 좋은 기운일수록 규칙적으로 써야 오래갑니다.", "en": "Your vitality runs fullest this year. A light body brightens the mind, and no season is better for starting new exercise or habits. What you build now sets deeply enough to last years — begin the training you kept postponing. Yet do not pack an overloaded schedule just because you feel strong, or it all catches up at year's end. Resting while things go well is the mark of real mastery; good energy lasts only when spent on a rhythm."}, {"kr": "건강운이 대체로 양호한 해입니다. 큰 병치레는 없으나 좋은 기운을 유지하는 열쇠는 수면에 있습니다 — 자정 전에 잠드는 습관 하나가 어떤 보약보다 낫습니다. 환절기의 호흡기와 소화기를 챙기고, 규칙적인 식사만 지켜도 올해는 무탈합니다. 가벼운 운동을 꾸준히 하면 체력이 눈에 띄게 붙는 시기이니, 하루 30분 걷기부터 시작해 보십시오. 몸이 보내는 작은 신호를 무시하지 않는 것, 그것이 올해의 건강 비결입니다.", "en": "Health holds well this year. No serious illness, but the key to keeping this energy is sleep — one habit of lights-out before midnight beats any tonic. Mind your lungs and stomach at the change of seasons, and regular meals alone carry you through unharmed. Light, consistent exercise builds noticeable stamina now — start with thirty minutes of walking. Not ignoring the body's small signals is this year's whole secret."}, {"kr": "피로가 쌓이기 쉬운 흐름이니 관리가 필요한 해입니다. 상반기에는 바쁜 일정에 밀려 몸을 돌보지 못하다가 하반기에 한꺼번에 신호가 올 수 있습니다. 미뤄둔 건강검진이 있다면 올해 안에 받으십시오 — 미리 확인하는 것만으로 큰 걱정을 덜게 됩니다. 특히 어깨·목·허리 같은 자세에서 오는 통증과 만성적인 소화 문제를 조심하고, 스트레스를 몸으로 받는 편이라면 운동으로 풀어내는 것이 약보다 낫습니다. 무리한 다이어트나 극단적인 식단은 올해 특히 몸을 상하게 하니 피하십시오.", "en": "Fatigue accumulates easily — this year asks for management. In the first half a busy schedule crowds out self-care, and the signals arrive all at once in the second. Take that postponed check-up before the year ends; simply knowing lifts a large worry. Beware posture-related pain in shoulders, neck, and back, and chronic digestive trouble; if you carry stress in the body, movement heals better than medicine. Avoid crash diets and extreme regimens — they injure you especially this year."}, {"kr": "건강에 큰 이상은 없으나 활력이 떨어지기 쉬운 해입니다. 아프지는 않은데 자꾸 처지는 느낌이 든다면 몸보다 마음이 지친 경우가 많으니, 쉬는 것도 일처럼 계획에 넣으십시오. 햇빛을 보는 시간과 몸을 움직이는 시간이 부족하면 기운이 가라앉으니, 점심시간 산책 같은 작은 습관이 큰 차이를 만듭니다. 술자리와 야식을 줄이는 것만으로 컨디션이 눈에 띄게 달라지는 시기입니다. 큰 병은 없는 해이니 오히려 지금 몸의 기초 체력을 쌓아두면 다음 해가 가볍습니다.", "en": "No major trouble, but vitality dips easily. If you are not ill yet keep sagging, it is usually the heart tired rather than the body — schedule rest as deliberately as work. Too little sunlight and too little movement sink your energy; a small habit like a lunchtime walk makes a large difference. Cutting back on drinking and late-night meals alone visibly changes how you feel. With no serious illness this year, building baseline fitness now makes next year light."}, {"kr": "과로와 밤샘이 화근이 되기 쉬운 해이니 몸을 아끼십시오. 특히 술자리와 불규칙한 식사가 겹치면 위장과 간에 무리가 가는 흐름이며, 스트레스가 몸으로 바로 나타나는 시기입니다. 작은 증상이라도 미루지 말고 초기에 확인하는 것이 이 해의 원칙입니다 — 큰 병은 대부분 작은 신호를 무시한 데서 옵니다. 운전이나 기계 다루는 일에서 부주의로 인한 사고를 조심하고, 무리한 운동이나 갑작스러운 격한 활동도 피하십시오. 몸을 지키는 것이 재물을 지키는 것이며, 이 둘은 늘 함께 움직입니다.", "en": "Overwork and sleepless nights breed trouble — spare your body. Drinking layered on irregular meals strains the stomach and liver, and stress surfaces physically in this season. The rule this year: check even small symptoms early rather than postponing — most serious illness begins with an ignored signal. Guard against careless accidents while driving or handling machinery, and avoid sudden strenuous activity. Protecting the body is protecting your wealth; the two always move together."}], "MONTHS": [{"kr": "새 계획을 세우기에 더없이 좋은 달입니다. 머릿속에만 있던 목표를 글로 적어 눈에 보이는 곳에 붙여두면 실제로 이루어질 확률이 크게 올라갑니다. 이 달에 시작한 일은 연말까지 흐름이 이어지니 첫 단추를 신중히 끼우십시오.", "en": "An excellent month for new plans. Write down the goals living only in your head and post them where you see them — the odds of achieving them rise sharply. What you begin now carries its current to year's end, so fasten the first button carefully."}, {"kr": "귀인이 나타나는 달입니다. 모임과 초대를 마다하지 말고, 오래 연락하지 않은 사람에게 먼저 안부를 전해 보십시오. 뜻밖의 자리에서 앞으로 몇 해를 함께할 사람을 만나게 됩니다.", "en": "A benefactor appears. Do not decline gatherings and invitations, and reach out first to someone you have long neglected. In an unexpected place you meet a person who will walk with you for years."}, {"kr": "재물이 들어오지만 나가는 구멍도 함께 열리는 달입니다. 수입이 생기기 전에 먼저 지출 계획을 세워두면 손에 남는 것이 달라집니다. 충동적인 큰 구매는 이 달만큼은 미루십시오.", "en": "Money comes in, but an outflow opens with it. Plan your spending before the income arrives and what remains in hand changes entirely. Postpone impulsive large purchases this month."}, {"kr": "문서운이 좋은 달입니다. 계약·시험·신청·면접 등 종이가 오가는 일에서 좋은 결과가 나오니, 미뤄둔 서류가 있다면 이 달에 처리하십시오. 다만 서명 전 조건을 두 번 확인하는 습관은 잊지 마십시오.", "en": "A month of document luck. Contracts, exams, applications, interviews — anything on paper goes well, so handle postponed paperwork now. Just never skip reading the terms twice before signing."}, {"kr": "말조심이 필요한 달입니다. 가볍게 던진 농담이 오해가 되고, 좋은 뜻으로 한 조언이 참견으로 받아들여지기 쉽습니다. 이 달에는 듣는 사람이 되면 구설이 저절로 비켜갑니다.", "en": "A month to watch your words. A casual joke turns into a misunderstanding and well-meant advice reads as meddling. Become the listener this month and gossip passes you by on its own."}, {"kr": "이동수가 있는 달입니다. 여행이나 출장, 혹은 평소 가지 않던 장소에서 좋은 기회를 물어옵니다. 몸을 움직이면 운도 함께 움직이니 초대가 오면 응하는 편이 좋습니다.", "en": "A month of movement. Travel, a business trip, or simply a place you never visit brings opportunity. Move the body and fortune moves too — accept the invitations that come."}, {"kr": "건강을 먼저 챙겨야 하는 달입니다. 무리한 일정을 몰아 넣으면 반드시 탈이 나니, 이 달만큼은 쉬는 시간을 일정표에 먼저 적어두십시오. 미뤄둔 검진이 있다면 지금이 적기입니다.", "en": "Put health first this month. Packing the schedule tight guarantees trouble — write your rest into the calendar before anything else. If a check-up is overdue, now is the time."}, {"kr": "오랜 노력의 결실이 드러나기 시작하는 달입니다. 그동안 눈에 띄지 않던 성과가 인정받고, 포기하지 않은 자신에게 스스로 박수를 보내도 좋습니다. 이 흐름은 다음 달까지 이어집니다.", "en": "The fruit of long effort begins to show. Work that went unnoticed earns recognition — you may applaud yourself for not quitting. This current carries into next month."}, {"kr": "가족과의 시간이 복을 부르는 달입니다. 집안의 대소사에 정성을 다하고, 부모님이나 오래된 가족에게 연락 한 통 드리십시오. 뿌리가 튼튼해야 가지가 뻗는 법입니다.", "en": "Family time invites blessing. Give your best to household matters and make a call to a parent or long-distant relative. Branches reach only as far as roots hold."}, {"kr": "금전 거래를 조심해야 하는 달입니다. 특히 빌려주는 돈은 처음부터 없다고 생각하는 편이 마음도 관계도 지킵니다. 보증이나 동업 제안은 이 달에 결정하지 마십시오.", "en": "A month to guard money exchanges. Assume lent money will not return — it protects both your peace and the relationship. Do not decide on guarantees or partnerships this month."}, {"kr": "배움에 투자하면 몇 배로 돌아오는 달입니다. 책 한 권, 강의 하나가 앞으로의 길을 바꿀 수 있으니 관심 있던 분야에 발을 담가 보십시오. 지금 배운 것은 반년 안에 쓰이게 됩니다.", "en": "Investment in learning returns manyfold. One book, one course may change your path — dip into the field you were curious about. What you learn now is used within half a year."}, {"kr": "주변 정리가 운을 부르는 달입니다. 오래 쓰지 않은 물건과 끝난 관계를 정리하면 새것이 들어올 자리가 생깁니다. 특히 집안의 묵은 짐을 비우면 마음까지 가벼워집니다.", "en": "Tidying invites luck. Clear out long-unused things and finished relationships, and room opens for the new. Emptying old clutter at home lightens the mind as well."}, {"kr": "경쟁에서 유리한 위치에 서는 달입니다. 준비해둔 것을 보여줄 기회가 오니 망설이지 말고 손을 드십시오. 이 달의 한 걸음이 올해의 자리를 결정합니다.", "en": "You stand advantaged in competition. A chance to show what you prepared arrives — raise your hand without hesitating. One step this month decides your standing for the year."}, {"kr": "뜻밖의 소식이 찾아오는 달입니다. 놀랄 만한 연락이나 변화가 있으나 차분히 대응하면 길하게 풀립니다. 첫 반응을 하루만 미루면 훨씬 나은 결정을 하게 됩니다.", "en": "Unexpected news arrives. A startling call or change comes, yet a calm response resolves it favorably. Delay your first reaction by a single day and you decide far better."}, {"kr": "인간관계의 매듭을 푸는 달입니다. 마음에 걸리던 사람에게 먼저 건네는 한마디가 예상보다 큰 복이 되어 돌아옵니다. 자존심보다 관계가 남는 것이 결국 이득입니다.", "en": "A month to untie knots in relationships. The first word you offer to someone who weighed on you returns as a larger blessing than expected. Keeping the bond over pride pays in the end."}, {"kr": "작은 행운이 이어지는 달입니다. 대단한 사건은 없어도 사소한 일들이 술술 풀리니, 이 흐름에 감사를 표현할수록 행운이 오래 머뭅니다. 주변에 베푸는 작은 호의가 배로 돌아옵니다.", "en": "Small lucks follow one another. Nothing grand, yet little things go smoothly — the more gratitude you voice, the longer the luck lingers. Small kindnesses you extend return doubled."}], "AGES": [["10대 · 청소년기", "Teens"], ["20대 · 청년기", "Twenties"], ["30대 · 성장기", "Thirties"], ["40대 · 절정기", "Forties"], ["50대 · 완숙기", "Fifties"], ["60대 이후 · 결실기", "Sixties and Beyond"]], "AGE_TXT": [[{"kr": "배움의 기운이 강해 공부나 예체능 중 하나에서 재능이 일찍 드러납니다. 다만 부모의 기대와 본인의 성향이 어긋나 속앓이를 하는 시기이기도 하니, 이때 하고 싶었던 일이 훗날 다시 찾아옵니다.", "en": "The energy of learning runs strong, and talent surfaces early in study or the arts. Yet parental expectation and your own nature may not align, causing quiet suffering — what you wanted then returns to you later in life."}, {"kr": "또래보다 생각이 깊고 어른스러워 일찍 자기 세계를 만듭니다. 친구 관계에서 상처를 받기도 하지만, 그 경험이 사람 보는 눈을 길러 평생의 자산이 됩니다.", "en": "You think deeper than your peers and build your own world early. Friendships may wound you, yet that experience trains your eye for people — an asset for life."}, {"kr": "활동적이고 호기심이 많아 여러 가지에 손을 대는 시기입니다. 한 가지에 집중하지 못해 아쉬움이 남을 수 있으나, 이때 넓혀둔 경험이 훗날 남들에게 없는 무기가 됩니다.", "en": "Active and curious, you try many things. You may regret not focusing on one, yet the breadth you gather becomes a weapon others lack later."}], [{"kr": "진로를 두고 크게 방황하는 시기가 한 번 옵니다. 남들보다 늦은 것 같아 조급하겠지만, 이 방황이 없으면 평생 남의 길을 걷게 되니 오히려 필요한 시간입니다. 20대 후반부터 방향이 잡히기 시작합니다.", "en": "A season of real wandering over your path arrives once. You will feel behind and rush, yet without this wandering you would walk someone else's road for life — it is necessary time. Direction begins to settle in your late twenties."}, {"kr": "일찍 자리를 잡거나 좋은 사람을 만나 안정을 얻는 흐름입니다. 다만 그 안정이 너무 이른 나머지 도전할 기회를 놓칠 수 있으니, 20대에는 실패해도 되는 나이임을 기억하십시오.", "en": "You settle early or meet a good person and find stability. Yet stability this soon may cost you the chance to risk — remember that your twenties are the age where failing is allowed."}, {"kr": "고생이 많지만 그만큼 배우는 시기입니다. 이때의 노력이 곧바로 보상받지는 않아 억울할 수 있으나, 30대에 그 값이 한꺼번에 돌아오는 사주입니다.", "en": "A hard-working decade that teaches in equal measure. The effort is not repaid at once and may feel unjust, yet your chart returns the value all at once in your thirties."}], [{"kr": "본격적으로 자리가 잡히는 시기입니다. 직업적으로 인정받기 시작하고 재물의 기반이 만들어지는데, 이때 무리한 확장보다 기초를 다지면 40대의 절정이 훨씬 높아집니다. 결혼이나 큰 이동수가 있다면 이 시기입니다.", "en": "Your ground truly settles now. Recognition begins at work and the base of wealth forms — build foundations rather than overexpanding, and your forties peak far higher. Marriage or a major move, if any, belongs to this decade."}, {"kr": "일과 가정 사이에서 균형을 잡느라 가장 바쁜 시기입니다. 몸이 두 개라도 모자란 느낌이 들겠지만, 이 시기에 지킨 관계가 훗날 가장 큰 재산이 됩니다. 건강 관리를 시작해야 하는 나이이기도 합니다.", "en": "The busiest decade, balancing work and home. Two bodies would not be enough, yet the relationships you protect now become your greatest wealth later. It is also the age to begin caring for your health."}, {"kr": "한 번의 큰 전환이 있는 시기입니다. 이직·독립·이사 등으로 판이 바뀌는데, 두렵더라도 이 변화를 받아들이는 편이 사주 흐름에 맞습니다. 변화를 피하면 40대에 더 큰 형태로 다시 옵니다.", "en": "One great turning arrives. A job change, going independent, or relocation shifts your board — frightening as it is, accepting it matches your chart's flow. Avoided now, the change returns larger in your forties."}], [{"kr": "인생의 절정에 해당하는 시기입니다. 그동안 쌓아온 것이 형태를 갖추어 드러나며, 사회적 위치와 재물이 함께 올라갑니다. 다만 이 시기에 가장 조심할 것은 자만과 건강이며, 이 둘만 다스리면 50대까지 흐름이 이어집니다.", "en": "The peak of your life. What you accumulated takes visible form, and standing and wealth rise together. The two things to guard now are pride and health — master both, and the current carries into your fifties."}, {"kr": "책임이 가장 무거워지는 시기입니다. 위와 아래를 모두 챙겨야 하는 자리에 서게 되며, 그 무게가 버겁지만 이때 사람을 얻으면 평생의 자산이 됩니다. 재물은 크게 들어오나 나가는 곳도 많습니다.", "en": "Your heaviest decade of responsibility. You stand where both those above and below depend on you — the weight is real, yet the people you win now are a lifelong asset. Wealth arrives large but leaves through many doors."}, {"kr": "한 번의 시련을 통해 크게 성장하는 시기입니다. 뜻대로 되지 않는 일이 생기지만, 그것이 방향을 바로잡아 주는 계기가 됩니다. 이 시기를 잘 넘기면 50대 이후가 매우 편안합니다.", "en": "You grow greatly through one trial. Something refuses to go your way, yet it becomes the correction that sets your direction right. Pass this well and your fifties onward are remarkably at ease."}], [{"kr": "쌓아온 것을 거두는 시기입니다. 큰 욕심을 내지 않아도 자리와 재물이 유지되며, 후배나 자녀를 통해 보람을 느끼게 됩니다. 이 시기에는 새로 벌이기보다 물려주고 나누는 데서 복이 나옵니다.", "en": "A decade of harvest. Position and wealth hold without grasping, and fulfillment comes through juniors or children. Blessing now flows from passing on and sharing rather than starting anew."}, {"kr": "제2의 인생을 고민하게 되는 시기입니다. 그동안의 자리를 내려놓고 하고 싶었던 일로 방향을 트는 흐름이 있으며, 이때의 선택이 노년의 행복을 결정합니다. 건강 관리가 가장 중요한 나이입니다.", "en": "You begin weighing a second life. There is a current toward setting down your old post and turning to what you always wanted; this choice decides the happiness of your later years. Health care matters most now."}, {"kr": "인간관계가 정리되는 시기입니다. 멀어지는 사람이 있는 대신 진짜 남을 사람이 분명해지며, 그것이 서운함이 아니라 정돈임을 알게 됩니다. 재물은 안정적이나 자녀 문제로 지출이 늘 수 있습니다.", "en": "Relationships sort themselves. Some drift away while those who truly remain become clear — and you come to see this as ordering rather than loss. Wealth is stable, though children's matters may increase outgo."}], [{"kr": "가장 편안한 시기가 열립니다. 젊어서 고생한 만큼 노년이 안정되는 사주이며, 건강만 지키면 하고 싶은 것을 하며 지낼 수 있습니다. 손아래 사람들에게 베푸는 데서 큰 즐거움을 얻습니다.", "en": "Your most comfortable season opens. Your chart repays youthful hardship with a settled old age — guard your health and you may live doing what you wish. Great joy comes from giving to those younger than you."}, {"kr": "배움과 취미에서 새로운 세계를 여는 시기입니다. 나이가 들어 시작한 일에서 뜻밖의 재능이 드러나며, 그것이 노년의 활력이 됩니다. 사람과의 교류를 놓지 않는 것이 건강 비결입니다.", "en": "A season of new worlds through learning and hobbies. Talent surfaces unexpectedly in what you begin late, and it becomes the vitality of your later years. Not letting go of human contact is your health secret."}, {"kr": "가족과 뿌리를 돌아보는 시기입니다. 그동안 못했던 것을 가족과 함께하며 매듭을 푸는 흐름이며, 이 시기의 화해가 큰 복이 됩니다. 무리하지 않는 규칙적인 생활이 곧 장수의 비결입니다.", "en": "A season of turning back toward family and roots. You do together what you never could and untie old knots — the reconciliation of this time is a great blessing. A regular life without strain is the secret of longevity."}]], "JOB": [{"kr": "키우고 만들어내는 분야에서 재능이 빛납니다. 교육·기획·출판·디자인·의료처럼 사람이나 아이디어를 성장시키는 일이 잘 맞으며, 특히 오랜 시간에 걸쳐 쌓아가는 직종에서 두각을 나타냅니다. 반대로 결과가 즉시 나오는 단기 승부의 세계는 당신의 결을 갉아먹으니 피하는 편이 좋습니다.", "en": "Your talent shines in fields that grow and create. Education, planning, publishing, design, and medicine — anything that raises people or ideas — suits you, and you excel especially where value accrues over long time. Conversely, worlds of instant short-term outcomes wear against your grain; better avoided."}, {"kr": "사람 앞에 서고 알리는 분야가 잘 맞습니다. 방송·영업·마케팅·예술·요식업처럼 표현하고 드러내는 일에서 능력이 발휘되며, 당신의 열정 자체가 상품이 되는 직종에서 크게 됩니다. 다만 혼자 조용히 반복하는 일은 오래 견디기 어려우니 사람이 있는 자리를 택하십시오.", "en": "Fields that stand before people and announce suit you. Media, sales, marketing, the arts, hospitality — work that expresses and reveals draws out your ability, and you rise where your passion itself is the product. Solitary repetitive work is hard for you to endure long — choose seats with people in them."}, {"kr": "지키고 다지는 분야에서 신뢰를 얻습니다. 부동산·행정·금융관리·제조·농업처럼 기반을 다루는 일이 맞으며, 시간이 지날수록 대체 불가능한 사람이 되는 유형입니다. 화려한 직종보다 오래 남는 직종을 택할 때 이 사주의 힘이 온전히 나옵니다.", "en": "You earn trust in fields that guard and consolidate. Real estate, administration, financial management, manufacturing, agriculture — work handling foundations fits, and you become irreplaceable with time. Your chart's full force appears when you choose the enduring profession over the glamorous one."}, {"kr": "정밀함과 원칙이 필요한 분야에서 두각을 나타냅니다. 법률·의료·기술·감사·제조처럼 기준이 분명한 일에서 실력이 드러나며, 당신의 냉정한 판단이 그대로 경쟁력이 됩니다. 사람의 감정을 매일 다루어야 하는 직종은 소모가 크니 신중히 택하십시오.", "en": "You stand out where precision and principle are required. Law, medicine, engineering, audit, manufacturing — work with clear standards reveals your skill, and your cool judgment is competitiveness itself. Professions demanding daily emotional labor drain you — choose them carefully."}, {"kr": "흐름을 읽고 연결하는 분야에서 능력을 발휘합니다. 연구·무역·물류·상담·투자처럼 정보와 사람을 잇는 일이 잘 맞으며, 남들이 못 보는 판을 읽어내는 것이 당신의 무기입니다. 규칙이 지나치게 경직된 조직에서는 답답함을 느끼니 재량이 있는 자리를 택하십시오.", "en": "You excel where flows are read and connected. Research, trade, logistics, counseling, investment — work linking information and people fits, and reading boards others cannot see is your weapon. Rigidly ruled organizations stifle you — choose seats with discretion."}]};
+
+const TYPES = {kr:{tojeong:"토정비결", newyear:YEAR+"년 운세", nextyear:(YEAR+1)+"년 운세", today:"오늘의 운세", saju:"사주팔자", gunghap:"궁합", dream:"꿈해몽"},
+               en:{tojeong:"Tojeong Bigyeol", newyear:YEAR+" Fortune", nextyear:(YEAR+1)+" Fortune", today:"Today's Fortune", saju:"Saju (Four Pillars)", gunghap:"Compatibility", dream:"Dream Reading"}};
 const LV = {kr:["대길(大吉)","길(吉)","중길(中吉)","평(平)","조심(操心)"],
             en:["Great Fortune","Good Fortune","Fair Fortune","Steady","Take Care"]};
 
-/* ════════ 한자 풀이 (수준별) ════════ */
 const HANJA = [
  /* 0: 대길 */
  [{h:"雲開見月",r:"운개견월",kr:"구름이 걷혀 달을 보니 막힘이 사라지고 큰 뜻을 이룬다",en:"Clouds part to reveal the moon — obstacles vanish and great aims are achieved"},
@@ -457,92 +534,12 @@ const HANJA = [
   {h:"忍中有福",r:"인중유복",kr:"참는 가운데 복이 있으니 다툼을 피하면 길하다",en:"Fortune hides within patience — avoid conflict and stay safe"}]
 ];
 
-/* ════════ 카테고리 풀 (수준별 2개씩) ════════ */
-const POOL = {
- total: [
-  [{kr:"하늘이 돕고 사람이 따르는 해입니다. 오래 준비한 일이 빛을 보고, 귀인이 나타나 길을 열어 줍니다. 큰 결정을 내리기에 좋은 흐름이니 자신감을 가지되, 주변과 공을 나누면 복이 배가 됩니다.",en:"Heaven assists and people follow. Long-prepared work finally shines, and a helpful person opens new doors. It is a strong current for big decisions — move with confidence, and share credit to double your fortune."},
-   {kr:"운의 문이 활짝 열리는 시기입니다. 재물과 명예가 함께 따르며, 이동·변동수가 있다면 좋은 방향으로 작용합니다. 다만 커진 그릇만큼 책임도 커지니 약속은 반드시 지키십시오.",en:"The gate of fortune stands wide open. Wealth and honor arrive together, and any moves or changes work in your favor. With a larger vessel comes larger duty — keep every promise you make."}],
-  [{kr:"순풍에 돛을 단 형국입니다. 무리하지 않아도 일이 순조롭게 풀리며, 협력에서 특히 좋은 결실을 봅니다. 작은 성취를 꾸준히 쌓으면 연말에 큰 그림이 완성됩니다.",en:"Your sails catch a favorable wind. Matters resolve smoothly without force, and cooperation bears especially good fruit. Stack small wins steadily and a grand picture completes itself by year's end."},
-   {kr:"막혔던 물꼬가 트이는 운세입니다. 지난 시기의 노력이 인정받기 시작하고, 도와주는 사람이 늘어납니다. 다만 갑작스러운 지출 제안에는 하루 이상 생각할 시간을 두십시오.",en:"Blocked waters begin to flow. Past efforts gain recognition and supporters multiply. Only give yourself at least a day before agreeing to sudden spending proposals."}],
-  [{kr:"먼저는 더디고 뒤에는 빠른 해입니다. 상반기에는 기초를 다지는 데 힘쓰고, 하반기에 승부를 거십시오. 조급함만 다스리면 결과는 기대 이상입니다.",en:"Slow at first, swift at the end. Build foundations in the first half and make your move in the second. Master impatience, and results will exceed expectations."},
-   {kr:"오르막과 내리막이 번갈아 오지만 전체 방향은 위를 향합니다. 잘 풀릴 때 저축하고, 어려울 때 배우면 어느 쪽도 손해가 아닙니다.",en:"Ups and downs alternate, yet the overall path climbs. Save when things go well, learn when they do not — neither season is a loss."}],
-  [{kr:"크게 얻는 것도 잃는 것도 없는 평탄한 흐름입니다. 이런 때일수록 건강과 가족, 그리고 배움에 투자하면 다음 대운의 밑거름이 됩니다.",en:"A level road with no great gain or loss. Invest this quiet season in health, family, and learning — it becomes the soil of your next great cycle."},
-   {kr:"현상 유지가 곧 성공인 시기입니다. 새 일을 벌이기보다 지금 가진 것을 정돈하고 다듬으십시오. 정리 속에서 뜻밖의 기회가 보입니다.",en:"Maintaining is itself winning now. Rather than starting anew, organize and refine what you hold — unexpected opportunity hides in the tidying."}],
-  [{kr:"돌다리도 두드리며 건너야 하는 해입니다. 문서·계약·보증에는 특히 신중하고, 달콤한 제안일수록 두 번 확인하십시오. 조심함이 곧 최고의 개운법입니다.",en:"Tap even the stone bridge before crossing. Be extra careful with documents, contracts, and guarantees, and double-check the sweetest offers. Caution itself is your best luck charm."},
-   {kr:"구설과 시비가 붙기 쉬운 흐름이니 말을 줄이고 듣기를 늘리십시오. 다툼을 피하는 것만으로 재물과 인연이 지켜집니다.",en:"Gossip and disputes come easily now — speak less, listen more. Simply avoiding conflict protects both your wealth and your relationships."}]
- ],
- love: [
-  [{kr:"인연의 붉은 실이 팽팽해지는 때입니다. 미혼은 배필을 만날 수 있고, 기혼은 부부의 정이 새로워집니다. 마음을 표현할수록 복이 커집니다.",en:"The red thread of destiny pulls taut. The single may meet a life partner; the married rediscover their bond. The more you express your heart, the greater the blessing."}],
-  [{kr:"애정운이 따뜻하게 흐릅니다. 소개나 모임에서 좋은 인연이 닿고, 연인 사이에는 신뢰가 깊어집니다. 사소한 기념일을 챙기는 정성이 큰 감동이 됩니다.",en:"Warm currents flow through your love life. Introductions and gatherings bring good connections, and trust deepens between partners. Small acts of remembrance move hearts greatly."}],
-  [{kr:"서두르면 어긋나고 기다리면 맺어지는 애정운입니다. 상대의 속도를 존중하면 관계가 한 단계 깊어집니다.",en:"Rushing breaks the thread; waiting ties the knot. Respect your partner's pace and the bond deepens by a full step."}],
-  [{kr:"큰 변화 없이 잔잔한 애정운입니다. 익숙함을 지루함으로 오해하지 마십시오. 함께한 시간 자체가 이미 귀한 인연의 증거입니다.",en:"Calm waters, little change. Do not mistake familiarity for boredom — the time already shared is itself proof of a precious bond."}],
-  [{kr:"오해가 생기기 쉬운 때이니 문자보다 목소리로, 목소리보다 얼굴을 보고 대화하십시오. 제3자의 말은 절반만 믿는 것이 좋습니다.",en:"Misunderstandings spark easily — choose voice over text, and face-to-face over voice. Believe only half of what third parties say."}]
- ],
- work: [
-  [{kr:"직업운이 크게 트입니다. 승진·합격·계약 성사 등 기쁜 소식이 있고, 새 프로젝트는 이름을 알릴 기회가 됩니다. 성과를 문서로 남겨 두십시오.",en:"Career fortune opens wide — promotion, acceptance, or a signed deal brings joy, and new projects become your stage. Keep written records of your achievements."}],
-  [{kr:"노력한 만큼 정직하게 돌아오는 직업운입니다. 윗사람의 신임이 두터워지니 맡은 일에 책임을 다하면 연말에 보상이 따릅니다.",en:"Effort returns honestly in your work. Superiors' trust deepens — fulfill your duties and reward follows by year's end."}],
-  [{kr:"경쟁이 있으나 실력으로 이기는 형국입니다. 화려한 말보다 꾸준한 결과물이 당신을 증명합니다.",en:"Competition exists, but skill prevails. Steady results, not eloquent words, will prove your worth."}],
-  [{kr:"이직·전업 같은 큰 변동은 시기상조입니다. 지금 자리에서 배울 것을 마저 배우면 다음 기회에 몸값이 달라집니다.",en:"Big moves like changing jobs are premature. Finish learning what your current seat can teach — your value will differ at the next opportunity."}],
-  [{kr:"직장 내 구설과 문서 실수를 조심하십시오. 중요한 결재·서명은 한 번 더 검토하고, 뒷말에는 끼지 않는 것이 상책입니다.",en:"Beware workplace gossip and paperwork errors. Review every important approval twice, and stay out of talk behind backs."}]
- ],
- money: [
-  [{kr:"재물이 사방에서 들어오는 형국입니다. 본업 외의 수입이 생기거나 묵은 돈을 되찾을 수 있습니다. 들어올 때 일부를 반드시 묶어 두십시오.",en:"Wealth flows in from all directions — side income appears or old money returns. Set aside a portion the moment it arrives."}],
-  [{kr:"금전운이 안정적으로 상승합니다. 큰 횡재보다는 차곡차곡 쌓이는 재물이니 저축과 장기 투자에 유리한 흐름입니다.",en:"Money fortune rises steadily. This is accumulating wealth rather than windfall — favorable for savings and long-term investment."}],
-  [{kr:"들어오는 돈과 나가는 돈이 비슷한 시기입니다. 가계부를 쓰는 것만으로 새는 구멍이 보이고 운이 바뀝니다.",en:"Income and outgo run even. Simply keeping a ledger reveals the leaks — and changes your luck."}],
-  [{kr:"무리한 투자보다 지키는 것이 버는 것입니다. 원금 보장이 없는 제안은 이번 시기에는 흘려보내십시오.",en:"Protecting is earning now. Let offers without guaranteed principal pass you by this season."}],
-  [{kr:"보증·대여·동업 관련 금전 문제를 각별히 조심하십시오. 가까운 사이일수록 돈 문제는 문서로 남기는 것이 서로를 지킵니다.",en:"Be especially wary of guarantees, lending, and partnerships. The closer the relationship, the more a written record protects you both."}]
- ],
- health: [
-  [{kr:"기력이 충만한 때입니다. 새 운동을 시작하기에 좋고, 몸이 가벼워지니 마음도 밝아집니다.",en:"Vitality runs full. A fine time to begin new exercise — as the body lightens, so does the mind."}],
-  [{kr:"건강운이 양호하나 좋은 기운을 유지하려면 수면이 열쇠입니다. 자정 전에 잠드는 습관이 보약보다 낫습니다.",en:"Health holds well; sleep is the key to keeping it. Bedtime before midnight beats any tonic."}],
-  [{kr:"큰 탈은 없으나 환절기 호흡기와 소화기를 챙기십시오. 규칙적인 식사가 최고의 예방입니다.",en:"No major trouble, but mind your lungs and stomach at season's change. Regular meals are the finest prevention."}],
-  [{kr:"피로가 쌓이기 쉬운 흐름입니다. 몸이 보내는 작은 신호를 무시하지 말고, 미뤄 둔 건강검진이 있다면 올해 받으십시오.",en:"Fatigue accumulates easily. Heed the body's small signals, and take that postponed check-up this year."}],
-  [{kr:"과로와 밤샘이 화근이 되는 때입니다. 특히 술자리와 야식을 줄이면 몸과 재물이 함께 지켜집니다.",en:"Overwork and late nights breed trouble. Cut back on drinking and midnight meals — both health and wealth stay protected."}]
- ],
- advice: [
-  {kr:"오늘 가장 좋은 방위는 동쪽이며, 오전에 중요한 일을 처리하면 유리합니다.",en:"East is today's favorable direction; handle important matters in the morning."},
-  {kr:"귀인은 가까운 곳에 있습니다. 오래 연락하지 않은 사람에게 먼저 안부를 전해 보십시오.",en:"Your helper is nearby. Reach out first to someone you have not contacted in a while."},
-  {kr:"작은 약속일수록 지키십시오. 오늘의 신용이 내일의 재물이 됩니다.",en:"Keep even the smallest promise — today's trust becomes tomorrow's wealth."},
-  {kr:"결정을 앞두고 있다면 밤보다 아침의 판단을 믿으십시오.",en:"If a decision awaits, trust your morning judgment over your midnight one."},
-  {kr:"몸을 움직이면 운도 움직입니다. 가벼운 산책이 막힌 생각을 풀어 줍니다.",en:"Move the body and fortune moves too. A light walk unties tangled thoughts."},
-  {kr:"오늘은 붉은색 계열의 소지품이 좋은 기운을 더합니다.",en:"A touch of red among your belongings adds favorable energy today."}
- ],
- months: [
-  {kr:"새 계획을 세우기 좋으니 목표를 글로 적어 두면 이루어질 확률이 높아집니다.",en:"Fine for new plans — write down your goals to raise the odds of achieving them."},
-  {kr:"귀인이 나타나는 달입니다. 모임과 초대를 마다하지 마십시오.",en:"A helpful person appears — do not decline gatherings and invitations."},
-  {kr:"재물이 들어오나 나가는 구멍도 함께 열리니 지출 계획을 먼저 세우십시오.",en:"Money comes in, but an outflow opens too — plan spending first."},
-  {kr:"문서운이 있으니 계약·시험·신청 등에 유리한 달입니다.",en:"Document luck favors contracts, exams, and applications this month."},
-  {kr:"말조심이 필요한 달입니다. 농담이 오해가 되기 쉽습니다.",en:"Watch your words — jokes turn into misunderstandings easily."},
-  {kr:"이동수가 있으니 여행이나 출장이 좋은 기회를 물어다 줍니다.",en:"Movement is favored — travel or business trips bring opportunity."},
-  {kr:"건강을 먼저 챙기십시오. 무리한 일정은 이 달만큼은 피하는 것이 좋습니다.",en:"Put health first — avoid an overloaded schedule this month."},
-  {kr:"오랜 노력의 결실이 보이기 시작합니다. 포기하지 않은 자신을 칭찬하십시오.",en:"Fruits of long effort begin to show — credit yourself for not giving up."},
-  {kr:"가족과의 시간이 복을 부릅니다. 집안의 대소사에 정성을 다하십시오.",en:"Family time invites blessing — give your best to household matters."},
-  {kr:"금전 거래는 신중히, 특히 빌려주는 돈은 없다고 생각하는 것이 편합니다.",en:"Handle money exchanges carefully — assume lent money will not return."},
-  {kr:"배움에 투자하면 몇 배로 돌아오는 달입니다. 책 한 권이 길을 바꿉니다.",en:"Investment in learning returns manyfold — one book may change your path."},
-  {kr:"주변 정리가 운을 부릅니다. 버릴 것을 버리면 들어올 자리가 생깁니다.",en:"Tidying invites luck — discard the old and room opens for the new."},
-  {kr:"경쟁에서 유리한 위치에 서는 달입니다. 준비된 것을 보여 줄 기회를 잡으십시오.",en:"You stand advantaged in competition — seize the chance to show what you prepared."},
-  {kr:"뜻밖의 소식이 찾아옵니다. 놀라지 말고 차분히 대응하면 길하게 풀립니다.",en:"Unexpected news arrives — respond calmly and it resolves favorably."},
-  {kr:"인간관계의 매듭을 푸는 달입니다. 먼저 건네는 화해가 큰 복이 됩니다.",en:"A month to untie knots in relationships — reconciliation offered first becomes great fortune."},
-  {kr:"작은 행운이 이어지는 달입니다. 감사를 표현할수록 행운이 오래 머뭅니다.",en:"Small lucks follow one another — expressed gratitude makes them linger."}
- ]
-};
-
-/* ════════ 띠/오행 (궁합·사주) ════════ */
 const ZODIAC = {kr:["쥐","소","호랑이","토끼","용","뱀","말","양","원숭이","닭","개","돼지"],
                 en:["Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Sheep","Monkey","Rooster","Dog","Pig"]};
 const BRANCH_H = ["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
 const STEM_H   = ["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"];
 const ELEM = {kr:["목(木)","화(火)","토(土)","금(金)","수(水)"], en:["Wood","Fire","Earth","Metal","Water"]};
-const ELEM_CHAR = {
-  kr:["곧게 자라는 나무처럼 성장과 배움을 향해 뻗는 성품으로, 창의성과 인정이 많습니다.","타오르는 불처럼 열정적이고 표현이 밝으며, 사람을 끌어당기는 매력이 있습니다.","만물을 품는 흙처럼 신의가 두텁고 꾸준하여, 주변의 믿음을 얻는 성품입니다.","단단한 쇠처럼 결단력과 원칙이 분명하고, 한 번 맺은 약속은 끝까지 지킵니다.","흐르는 물처럼 지혜롭고 유연하여, 상황을 읽고 스며드는 힘이 뛰어납니다."],
-  en:["Like a growing tree, you reach toward growth and learning — creative and warm-hearted.","Like blazing fire, you are passionate and bright, with a magnetism that draws people in.","Like embracing earth, you are loyal and steady, earning deep trust from those around you.","Like tempered metal, you hold clear principles and decisiveness — a promise made is kept.","Like flowing water, you are wise and adaptable, reading situations and permeating obstacles."]
-};
-const ELEM_JOB = {
-  kr:["교육·기획·출판·디자인 등 키우고 만들어내는 분야에 재능이 빛납니다.","방송·영업·예술·요식업 등 사람 앞에 서고 알리는 분야가 잘 맞습니다.","부동산·행정·금융관리·농업 등 지키고 다지는 분야에서 신뢰를 얻습니다.","법률·의료·기술·제조 등 정밀함과 원칙이 필요한 분야에서 두각을 나타냅니다.","연구·무역·물류·상담 등 흐름을 읽고 연결하는 분야에서 능력을 발휘합니다."],
-  en:["Fields that grow and create — education, planning, publishing, design — suit you well.","Fields before people — media, sales, the arts, hospitality — fit your energy.","Fields that guard and build — real estate, administration, finance, agriculture — earn you trust.","Fields demanding precision — law, medicine, engineering, manufacturing — let you excel.","Fields reading flows and connecting — research, trade, logistics, counseling — reveal your gift."]
-};
 
-/* ════════ 꿈해몽 사전 (전통 해몽) ════════ */
 const DREAMS = [
  {kws:["돼지","pig"],kr:"돼지는 예로부터 재물과 복의 상징입니다. 재물이 들어오거나 좋은 기회가 찾아올 징조입니다.",en:"The pig has long symbolized wealth and blessing — money or a golden opportunity approaches."},
  {kws:["용","dragon"],kr:"용꿈은 최고의 길몽으로, 큰 성공·승진·명예를 예고합니다. 태몽이라면 귀한 자식을 얻을 징조입니다.",en:"A dragon dream is the highest omen — great success, promotion, or honor. As a conception dream, it heralds a distinguished child."},
@@ -597,31 +594,51 @@ const DREAMS = [
 const LBL = K ? {
   visitor1:"당신은 오늘 ", visitor2:" 번째로 ", visitor3:"을(를) 보는 방문자입니다",
   who:"님의 결과", home:"⌂ 처음으로", back:"↺ 다시 입력",
-  total:"총운", love:"애정·결혼운", work:"직업운", money:"금전운", health:"건강운",
-  monthly:"월별 운세", month:"월",
-  sumT:"올해의 괘", hanja:"한자", reading:"독음", meaning:"풀이",
-  advice:"오늘의 조언", other:"다른 운세 보기", retry:"다시 입력하기",
+  overview:"총평", total:"총운", love:"애정·결혼운", work:"직업운", money:"금전운", health:"건강운",
+  monthly:"월별 운세",
+  tjMonthly:"달마다 뽑은 시 한 줄", tjRead:"괘가 말하는 올해",
+  wkFlow:"이번 주 전체 흐름", wkBest:"가장 기운이 좋은 날", wkWorst:"가장 조심할 날",
+  wkTable:"일자별 운세", dayTitle:"의 운세", iljin:"일진",
+  cCol:"색", cDir:"방향", cItem:"소품", cAvoid:"피할 것",
+  tjNote:"토정비결은 조선 후기부터 전해 내려온 새해 세시풍속으로, 토정 이지함(李之菡) 선생이 지었다고 전해집니다. 사주 명리와는 계산법이 다른 별개의 전통이라 결과가 서로 다를 수 있습니다. 예로부터 명리는 평생의 뼈대를, 토정비결은 그 해의 분위기를 보는 것으로 여겨왔습니다.",
+  nyNote:"신년운세는 사주 명리(命理)로 내 사주와 올해의 기운이 만나는 자리를 풀이한 것입니다. 같은 해라도 토정비결과 결과가 다를 수 있으며, 이는 두 전통의 계산법이 서로 다르기 때문입니다.",
+  hanja:"한자", reading:"독음", meaning:"풀이",
+  luck:"개운 요약 — 이렇게 하면 운이 열립니다",
+  lDir:"좋은 방향", lCol:"좋은 색상", lNum:"행운의 숫자", lItem:"지니면 좋은 소품",
+  lInte:"인테리어 조언", lMove:"이동·이사에 좋은 시기", lAvoid:"피할 것",
+  advice:"조언", other:"다른 운세 보기", retry:"다시 입력하기",
   note:"본 운세는 한국 전통 명리·비결을 바탕으로 구성된 오락·참고용 콘텐츠입니다.",
-  yearP:"년주(年柱)", stem:"천간", branch:"지지", zodiac:"띠", elem:"오행",
-  nature:"타고난 성품", aptitude:"직업 적성",
-  sajuNote:"※ 1~2월생은 입춘 기준에 따라 띠가 달라질 수 있습니다. 정밀 사주 원국(월주·일주·시주) 풀이는 곧 업데이트됩니다.",
+  stem:"천간", branch:"지지", zodiac:"띠", elem:"오행",
+  nature:"타고난 성품과 기질", aptitude:"직업 적성", lifeflow:"연령대별 인생 흐름",
+  sajuNote:"※ 1~2월생은 입춘 기준에 따라 띠가 달라질 수 있습니다. 월주·일주·시주를 포함한 정밀 원국 풀이는 추후 업데이트 예정입니다.",
   gScore:"궁합 점수", me:"나", partner:"상대방", gTotal:"총평", gChem:"성격 궁합", gAdvice:"두 사람을 위한 조언",
   dSym:"꿈에서 발견된 상징", dNone:"입력하신 꿈에서 뚜렷한 전통 상징을 찾지 못했습니다. 꿈 전체의 분위기가 밝고 편안했다면 길몽으로, 무섭고 답답했다면 마음을 살피라는 신호로 보는 것이 전통 해몽의 기본입니다.",
-  dIntro:"전통 해몽", myDream:"내가 꾼 꿈"
+  dIntro:"전통 해몽", myDream:"내가 꾼 꿈",
+  months:["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"]
 } : {
   visitor1:"You are today's visitor No. ", visitor2:" for ", visitor3:"",
   who:"'s Reading", home:"⌂ Home", back:"↺ Edit Info",
-  total:"Overall Fortune", love:"Love & Marriage", work:"Career", money:"Wealth", health:"Health",
-  monthly:"Monthly Fortune", month:"",
-  sumT:"This Year's Hexagram", hanja:"Hanja", reading:"Reading", meaning:"Meaning",
-  advice:"Today's Advice", other:"Try Another Reading", retry:"Edit My Info",
+  overview:"Overview", total:"Overall Fortune", love:"Love & Marriage", work:"Career", money:"Wealth", health:"Health",
+  monthly:"Month by Month",
+  tjMonthly:"A Line of Verse for Each Month", tjRead:"What the Hexagram Says About Your Year",
+  wkFlow:"This Week's Overall Flow", wkBest:"Strongest day", wkWorst:"Day to take care",
+  wkTable:"Day by Day", dayTitle:"", iljin:"Iljin",
+  cCol:"Color", cDir:"Direction", cItem:"Item", cAvoid:"Avoid",
+  tjNote:"Tojeong Bigyeol is a New Year custom passed down since the late Joseon era, traditionally attributed to the scholar Tojeong Yi Ji-ham (1517–1578). It is a separate tradition from Saju astrology with an entirely different method, so the two readings may disagree. By custom, Saju describes the frame of a whole life, while Tojeong reads the mood of a single year.",
+  nyNote:"This yearly reading comes from Saju (Myeongni) astrology — where your birth chart meets the energy of the year. It may differ from your Tojeong Bigyeol reading, because the two traditions calculate in entirely different ways.",
+  hanja:"Hanja", reading:"Reading", meaning:"Meaning",
+  luck:"Luck Summary — How to Open Your Fortune",
+  lDir:"Lucky Direction", lCol:"Lucky Colors", lNum:"Lucky Numbers", lItem:"Items to Carry",
+  lInte:"Interior Advice", lMove:"Best Time to Move", lAvoid:"What to Avoid",
+  advice:"Advice", other:"Try Another Reading", retry:"Edit My Info",
   note:"This reading is entertainment/reference content based on Korean traditional fortune-telling.",
-  yearP:"Year Pillar", stem:"Heavenly Stem", branch:"Earthly Branch", zodiac:"Zodiac", elem:"Element",
-  nature:"Innate Nature", aptitude:"Career Aptitude",
-  sajuNote:"※ For Jan–Feb births, the zodiac year may differ by the Ipchun (spring) boundary. Full four-pillar analysis is coming soon.",
+  stem:"Heavenly Stem", branch:"Earthly Branch", zodiac:"Zodiac", elem:"Element",
+  nature:"Your Innate Nature", aptitude:"Career Aptitude", lifeflow:"Life Flow by Decade",
+  sajuNote:"※ For Jan–Feb births the zodiac year may shift at the Ipchun boundary. Full four-pillar analysis is coming in a future update.",
   gScore:"Compatibility Score", me:"You", partner:"Partner", gTotal:"Overview", gChem:"Character Chemistry", gAdvice:"Advice for You Two",
   dSym:"Symbols Found in Your Dream", dNone:"No distinct traditional symbol was found in your dream. In Korean tradition, a bright and peaceful dream is auspicious; a fearful or stifling one is a sign to tend your heart.",
-  dIntro:"Traditional Reading", myDream:"My Dream"
+  dIntro:"Traditional Reading", myDream:"My Dream",
+  months:["January","February","March","April","May","June","July","August","September","October","November","December"]
 };
 
 /* ════════ 렌더링 ════════ */
@@ -635,7 +652,6 @@ $("btnRetry").textContent = LBL.retry;
 $("btnRetry").href = "input.html?type=" + type;
 $("resNote").textContent = LBL.note;
 
-/* 방문자 카운터 (Abacus 무료 API · 실패 시 임시 숫자) */
 (async function(){
   const NS = "kfortune_story_v1";
   const now = new Date();
@@ -644,18 +660,30 @@ $("resNote").textContent = LBL.note;
   try{
     const res = await fetch("https://abacus.jasoncameron.dev/hit/" + NS + "/t_" + type + "_d" + y + mo + d).then(x => x.json());
     n = res.value;
-  }catch(e){
-    n = 41 + now.getHours() * 5;
-  }
+  }catch(e){ n = 41 + now.getHours() * 5; }
   $("resVisitor").innerHTML = LBL.visitor1 + "<b>" + n.toLocaleString() + "</b>" + LBL.visitor2 + (TYPES[LANG][type]||"") + LBL.visitor3;
 })();
 
-function nameOf(p){ return (p && p.name) ? p.name : ""; }
-if(P && P.name && type !== "dream") $("resWho").textContent = P.name + LBL.who;
+if(P && P.name && type !== "dream") $("resWho").textContent = K ? (P.name + LBL.who) : (P.name + LBL.who);
 
 function sec(title, html){ return '<div class="sec"><h3>' + title + '</h3>' + html + '</div>'; }
 function para(t){ return '<p>' + t + '</p>'; }
-function tx(o){ return K ? o.kr : o.en; }
+
+/* 개운 카드 */
+function luckCard(ei, r){
+  const L = DB.LUCK[ei];
+  const mv = K ? [pick(r,["3~5월","4~6월","6~8월","9~11월","10~12월"]), " (음력 기준 참고)"].join("")
+               : pick(r,["March–May","April–June","June–August","September–November","October–December"]);
+  return '<div class="luck-card"><h3>' + LBL.luck + '</h3><div class="luck-grid">'
+    + '<div class="luck-item"><span class="k">' + LBL.lDir + '</span><span class="v">' + tx(L.dir) + '</span></div>'
+    + '<div class="luck-item"><span class="k">' + LBL.lCol + '</span><span class="v">' + tx(L.col) + '</span></div>'
+    + '<div class="luck-item"><span class="k">' + LBL.lNum + '</span><span class="v">' + tx(L.num) + '</span></div>'
+    + '<div class="luck-item"><span class="k">' + LBL.lMove + '</span><span class="v">' + mv + '</span></div>'
+    + '<div class="luck-item luck-full"><span class="k">' + LBL.lItem + '</span><span class="v">' + tx(L.item) + '</span></div>'
+    + '<div class="luck-item luck-full"><span class="k">' + LBL.lInte + '</span><span class="v">' + tx(L.inte) + '</span></div>'
+    + '<div class="luck-item luck-full"><span class="k">' + LBL.lAvoid + '</span><span class="v">' + tx(L.avoid) + '</span></div>'
+    + '</div></div>';
+}
 
 let out = "";
 
@@ -665,11 +693,8 @@ if(type === "dream"){
   const hits = DREAMS.filter(d => d.kws.some(k => low.includes(k.toLowerCase())));
   out += sec(LBL.myDream, para(dreamText ? dreamText.replace(/</g,"&lt;") : "—"));
   if(hits.length){
-    let chips = hits.map(h => '<span class="dream-sym">' + h.kws[0] + '</span>').join("");
-    out += sec(LBL.dSym, chips);
-    hits.slice(0,6).forEach((h,i)=>{
-      out += sec(LBL.dIntro + " " + (i+1), para(tx(h)));
-    });
+    out += sec(LBL.dSym, hits.map(h => '<span class="dream-sym">' + h.kws[0] + '</span>').join(""));
+    hits.slice(0,6).forEach((h,i)=>{ out += sec(LBL.dIntro + " " + (i+1), para(tx(h))); });
   }else{
     out += sec(LBL.dIntro, para(LBL.dNone));
   }
@@ -678,12 +703,11 @@ else if(type === "gunghap" && P && P2){
   const y1 = +P.bdate.slice(0,4), y2 = +P2.bdate.slice(0,4);
   const b1 = (y1-4)%12, b2 = (y2-4)%12;
   const e1 = Math.floor(((y1-4)%10)/2), e2 = Math.floor(((y2-4)%10)/2);
-  /* 관계 판정 */
   const yukhap = [[0,1],[2,11],[3,10],[4,9],[5,8],[6,7]].some(p=>(p[0]===b1&&p[1]===b2)||(p[0]===b2&&p[1]===b1));
   const samhap = [[0,4,8],[2,6,10],[1,5,9],[3,7,11]].some(g=>g.includes(b1)&&g.includes(b2)&&b1!==b2);
   const chung = Math.abs(b1-b2)===6;
-  const saeng = (e1+1)%5===e2 || (e2+1)%5===e1;   /* 상생 */
-  const geuk  = (e1+2)%5===e2 || (e2+2)%5===e1;   /* 상극 */
+  const saeng = (e1+1)%5===e2 || (e2+1)%5===e1;
+  const geuk  = (e1+2)%5===e2 || (e2+2)%5===e1;
   let score = 68;
   if(yukhap) score += 20; else if(samhap) score += 16; else if(chung) score -= 22;
   if(saeng) score += 9; else if(geuk) score -= 7;
@@ -692,64 +716,176 @@ else if(type === "gunghap" && P && P2){
   score = Math.max(38, Math.min(99, score));
 
   out += '<table class="hanja-table"><tr><th></th><th>' + LBL.zodiac + '</th><th>' + LBL.elem + '</th></tr>'
-    + '<tr><td>' + (nameOf(P)||LBL.me) + '</td><td class="big" style="font-size:1.05rem">' + ZODIAC[LANG][b1] + ' (' + BRANCH_H[b1] + ')</td><td>' + ELEM[LANG][e1] + '</td></tr>'
-    + '<tr><td>' + (nameOf(P2)||LBL.partner) + '</td><td class="big" style="font-size:1.05rem">' + ZODIAC[LANG][b2] + ' (' + BRANCH_H[b2] + ')</td><td>' + ELEM[LANG][e2] + '</td></tr></table>';
+    + '<tr><td>' + ((P.name)||LBL.me) + '</td><td class="big" style="font-size:1.05rem">' + ZODIAC[LANG][b1] + ' (' + BRANCH_H[b1] + ')</td><td>' + ELEM[LANG][e1] + '</td></tr>'
+    + '<tr><td>' + ((P2.name)||LBL.partner) + '</td><td class="big" style="font-size:1.05rem">' + ZODIAC[LANG][b2] + ' (' + BRANCH_H[b2] + ')</td><td>' + ELEM[LANG][e2] + '</td></tr></table>';
   out += '<div class="score-ring"><span class="num">' + score + '</span><span class="of"> / 100 · ' + LBL.gScore + '</span></div>';
 
   let total;
-  if(yukhap) total = K?"두 사람은 육합(六合)의 인연으로, 서로의 부족함을 채워 주는 하늘이 맺은 짝입니다. 함께할수록 운이 커지는 상승 궁합입니다.":"You share a Yukhap bond — a heaven-tied pair completing each other's lack. Fortune grows the longer you stand together.";
-  else if(samhap) total = K?"두 사람은 삼합(三合)의 인연으로, 같은 방향을 바라보는 동지 같은 궁합입니다. 목표를 함께 세우면 큰일을 이룹니다.":"You share a Samhap bond — comrades gazing the same direction. Set goals together and great things follow.";
-  else if(chung) total = K?"두 사람은 충(沖)의 관계로 기질이 정반대라 부딪히기 쉬우나, 서로를 존중하면 오히려 서로에게 없는 것을 배우는 자석 같은 인연이 됩니다.":"Yours is a Chung (clash) pairing — opposite temperaments that spark, yet with respect you become magnets teaching each other what each lacks.";
-  else total = K?"두 사람은 무난하고 자연스러운 궁합입니다. 큰 파란 없이 서로에게 스며드는 인연이니, 표현을 아끼지 않는 것이 관계를 깊게 합니다.":"A natural, easy pairing — a bond that seeps in without storms. Generous expression is what deepens it.";
+  if(yukhap) total = K?"두 사람은 육합(六合)의 인연으로, 서로의 부족함을 채워 주는 하늘이 맺은 짝입니다. 함께할수록 운이 커지는 상승 궁합이며, 한 사람이 지칠 때 다른 사람이 자연스럽게 힘이 되어 주는 구조입니다. 오래 만날수록 서로를 닮아가며, 주변에서도 잘 어울린다는 말을 듣게 됩니다.":"You share a Yukhap bond — a heaven-tied pair completing each other's lack. Fortune grows the longer you stand together, and when one tires the other naturally becomes strength. The longer you meet, the more you resemble each other, and others will remark how well you fit.";
+  else if(samhap) total = K?"두 사람은 삼합(三合)의 인연으로, 같은 방향을 바라보는 동지 같은 궁합입니다. 연애 감정보다 함께 무언가를 이루어가는 동력이 강한 관계이며, 목표를 함께 세우면 혼자서는 못 할 일을 해냅니다. 다만 일에 몰두하다 서로의 감정을 놓치기 쉬우니 의식적으로 대화 시간을 만드십시오.":"You share a Samhap bond — comrades gazing in the same direction. Your bond runs on building something together more than on romance, and shared goals let you achieve what neither could alone. Absorbed in the work, you may lose track of each other's feelings — make time to talk on purpose.";
+  else if(chung) total = K?"두 사람은 충(沖)의 관계로 기질이 정반대입니다. 처음에는 그 다름에 강하게 끌리지만 시간이 지나면 바로 그 다름이 갈등의 원인이 되는 구조이니, 서로를 고치려 들지 않는 것이 이 궁합의 핵심입니다. 다름을 존중하는 법을 배우면 서로에게 없는 것을 채워주는 자석 같은 인연이 되지만, 이기려 들면 둘 다 지칩니다.":"Yours is a Chung (clash) pairing — opposite temperaments. The difference attracts powerfully at first, then becomes the very source of conflict; the key is never trying to fix each other. Learn to respect the difference and you become magnets supplying what the other lacks — try to win, and you both exhaust.";
+  else total = K?"두 사람은 무난하고 자연스러운 궁합입니다. 큰 파란 없이 서로에게 스며드는 인연이라 함께 있으면 편안하고, 굳이 애쓰지 않아도 관계가 유지됩니다. 다만 편안함이 지나쳐 표현을 게을리하면 어느 순간 거리가 생기니, 당연하게 여기지 않는 것이 이 궁합의 유일한 과제입니다.":"A natural, easy pairing — a bond that seeps in without storms. You are at ease together and the relationship holds without effort. But if comfort makes you lazy about expressing, distance appears one day — not taking each other for granted is this pairing's only task.";
   out += sec(LBL.gTotal, para(total));
 
   let chem;
-  if(saeng) chem = K?"오행이 서로를 살리는 상생(相生) 관계입니다. 한 사람의 기운이 다른 사람을 키워 주니, 곁에 있는 것만으로 서로에게 힘이 됩니다.":"Your elements nourish each other (Sangsaeng) — one's energy grows the other. Simply being near is mutual strength.";
-  else if(geuk) chem = K?"오행이 부딪히는 상극(相剋) 기운이 있어 의견 차이가 생길 수 있으나, 다름을 인정하면 서로를 단련시키는 좋은 숫돌이 됩니다.":"Your elements press against each other (Sanggeuk) — differences arise, yet acknowledged, they become whetstones sharpening you both.";
-  else chem = K?"오행이 나란히 흐르는 편안한 관계입니다. 비슷한 속도로 걷는 두 사람이니 큰 갈등 없이 오래갑니다.":"Your elements flow side by side — two people walking at a similar pace, lasting long without great conflict.";
+  if(saeng) chem = K?"오행이 서로를 살리는 상생(相生) 관계입니다. 한 사람의 기운이 다른 사람을 키워 주는 구조라, 곁에 있는 것만으로 서로에게 힘이 되고 함께 있을 때 각자의 능력이 더 잘 발휘됩니다. 이런 궁합은 연애뿐 아니라 동업이나 오랜 우정에서도 좋은 결과를 냅니다.":"Your elements nourish each other (Sangsaeng) — one's energy raises the other, so mere presence is strength and each performs better together. Such pairings prosper not only in romance but in partnership and lasting friendship.";
+  else if(geuk) chem = K?"오행이 부딪히는 상극(相剋)의 기운이 있습니다. 가치관과 속도가 달라 의견 차이가 자주 생기지만, 이것이 반드시 나쁜 것은 아닙니다 — 다름을 인정하면 서로를 단련시키는 좋은 숫돌이 되어 둘 다 성장합니다. 다만 감정이 격해질 때는 그 자리에서 결론 내지 말고 하루를 넘기는 규칙을 정해 두십시오.":"Your elements press against each other (Sanggeuk). Differing values and pace bring frequent disagreement — yet this is not simply bad: acknowledged, you become whetstones that sharpen and grow each other. Just make a rule never to conclude in the heat of the moment; let a day pass first.";
+  else chem = K?"오행이 나란히 흐르는 편안한 관계입니다. 비슷한 속도로 걷는 두 사람이라 큰 갈등 없이 오래가며, 서로의 방식을 이해하는 데 설명이 필요 없습니다. 다만 둘 다 비슷한 약점을 가질 수 있으니, 부족한 부분은 밖에서 채우는 지혜가 필요합니다.":"Your elements flow side by side — two people walking at a similar pace, lasting long without great conflict, understanding each other's ways without explanation. But you may share the same weaknesses; wisely fill those gaps from outside.";
   out += sec(LBL.gChem, para(chem));
-  out += sec(LBL.gAdvice, para(pick(r, POOL.advice) ? tx(pick(rng(hashStr("adv"+P.bdate+P2.bdate)), POOL.advice)) : ""));
+  out += luckCard(e1, rng(hashStr("luck"+P.bdate)));
+  out += sec(LBL.gAdvice, para(tx(pick(rng(hashStr("adv"+P.bdate+P2.bdate)), DB.FADV))));
 }
 else if(type === "saju" && P){
   const y = +P.bdate.slice(0,4);
   const si = (y-4)%10, bi = (y-4)%12, ei = Math.floor(si/2);
+  const r = rng(hashStr(P.bdate + (P.btime||"") + "saju"));
   out += '<table class="hanja-table"><tr><th>' + LBL.stem + '</th><th>' + LBL.branch + '</th><th>' + LBL.zodiac + '</th><th>' + LBL.elem + '</th></tr>'
     + '<tr><td class="big">' + STEM_H[si] + '</td><td class="big">' + BRANCH_H[bi] + '</td><td>' + ZODIAC[LANG][bi] + '</td><td>' + ELEM[LANG][ei] + '</td></tr></table>';
-  const r = rng(hashStr(P.bdate + (P.btime||"") + "saju"));
+  /* 총평 3~4단락 */
+  out += sec(LBL.nature,
+      para(tx(DB.NATURE[ei])) + para(tx(DB.ZT[bi]))
+    + para(tx(pick(r, DB.FADV))));
+  out += luckCard(ei, r);
+  out += sec(LBL.aptitude, para(tx(DB.JOB[ei])));
+  /* 연령대별 */
+  let ar = "";
+  for(let i=0; i<DB.AGES.length; i++){
+    ar += '<div class="age-row"><div class="ag">' + DB.AGES[i][K?0:1] + '</div><div class="at">' + tx(pick(r, DB.AGE_TXT[i])) + '</div></div>';
+  }
+  out += sec(LBL.lifeflow, ar);
   const lvl = Math.floor(r()*5);
-  out += '<div class="sum-card"><span class="lv">' + LBL.yearP + ' · ' + ELEM[LANG][ei] + '</span><p class="line">' + (K?ELEM_CHAR.kr[ei]:ELEM_CHAR.en[ei]) + '</p></div>';
-  out += sec(LBL.nature, para(K?ELEM_CHAR.kr[ei]:ELEM_CHAR.en[ei]));
-  out += sec(LBL.aptitude, para(K?ELEM_JOB.kr[ei]:ELEM_JOB.en[ei]));
-  out += sec(LBL.money, para(tx(pick(r, POOL.money[lvl]))));
-  out += sec(LBL.health, para(tx(pick(r, POOL.health[lvl]))));
-  out += sec(LBL.advice, para(tx(pick(r, POOL.advice))));
+  out += sec(LBL.money, para(tx(DB.MONEY[lvl])));
+  out += sec(LBL.love, para(tx(DB.LOVE[lvl])));
+  out += sec(LBL.health, para(tx(DB.HEALTH[lvl])));
   out += '<p class="note" style="margin-top:.6rem">' + LBL.sajuNote + '</p>';
 }
+else if(type === "today" && P){
+  /* ══ 오늘/특정일의 운세 — 실제 일진 기반 ══ */
+  const my = +P.bdate.slice(0,4);
+  const myElem = Math.floor(((my-4)%10)/2);
+  const ds = localStorage.getItem("kf_today_date") || "";
+  const base = ds ? new Date(ds + "T12:00:00") : new Date();
+  const range = localStorage.getItem("kf_today_range") || "day";
+
+  function dayInfo(dt){
+    const ij = iljin(dt);
+    const rel = ((ij.elem - myElem) % 5 + 5) % 5;
+    const R = DAYDB.REL[rel];
+    const L = DB.LUCK[ij.elem];
+    return {dt:dt, ij:ij, rel:rel, R:R, L:L,
+      hanja: STEM_H[ij.si] + BRANCH_H[ij.bi],
+      read: K ? (STEM_K[ij.si] + BR_K[ij.bi] + "일") : (STEM_H[ij.si] + BRANCH_H[ij.bi])};
+  }
+  function dayCard(info, isSel){
+    const dow = (info.dt.getDay() + 6) % 7;
+    return '<div class="dayrow' + (isSel ? ' sel' : '') + '">'
+      + '<div class="dh"><span class="dd">' + fmtDate(info.dt) + ' (' + DOW[LANG][dow] + ')</span>'
+      + '<span class="dj">' + info.hanja + ' ' + info.read + '</span>'
+      + '<span class="dl">' + LV[LANG][info.R.lvl] + '</span></div>'
+      + '<div class="dt">' + tx(info.R.line) + '</div>'
+      + '<div class="chips">'
+      + '<span class="chip"><b>' + LBL.cCol + '</b> ' + tx(info.L.col) + '</span>'
+      + '<span class="chip"><b>' + LBL.cDir + '</b> ' + tx(info.L.dir) + '</span>'
+      + '<span class="chip"><b>' + LBL.cItem + '</b> ' + tx(info.L.item) + '</span>'
+      + '<span class="chip warn"><b>' + LBL.cAvoid + '</b> ' + tx(info.R.avoid) + '</span>'
+      + '</div></div>';
+  }
+
+  const selInfo = dayInfo(base);
+
+  if(range === "week"){
+    /* 월~일 한 주 */
+    const mon = new Date(base); mon.setDate(base.getDate() - ((base.getDay() + 6) % 7));
+    const week = []; for(let i=0;i<7;i++){ const d = new Date(mon); d.setDate(mon.getDate()+i); week.push(dayInfo(d)); }
+    const avg = week.reduce((s,w)=>s+w.R.lvl,0) / 7;
+    const wl = avg < 1.2 ? 0 : avg < 1.9 ? 1 : avg < 2.6 ? 2 : avg < 3.3 ? 3 : 4;
+    let best = week[0], worst = week[0];
+    week.forEach(w=>{ if(w.R.lvl < best.R.lvl) best = w; if(w.R.lvl > worst.R.lvl) worst = w; });
+    const bd = (i)=> fmtDate(i.dt) + " (" + DOW[LANG][(i.dt.getDay()+6)%7] + ")";
+    out += sec(LBL.wkFlow, para(tx(DAYDB.WEEK[wl]))
+        + para("<b>" + LBL.wkBest + "</b> : " + bd(best) + " · " + tx(best.R.line)
+             + "<br><b>" + LBL.wkWorst + "</b> : " + bd(worst) + " · " + tx(worst.R.line)));
+  }
+
+  /* 선택한 날의 운세 */
+  out += '<div class="sum-card"><span class="lv">' + LV[LANG][selInfo.R.lvl] + '</span>'
+       + '<p class="line">' + fmtDate(selInfo.dt) + ' · ' + selInfo.hanja + ' ' + selInfo.read + '</p></div>';
+  out += '<table class="hanja-table"><tr><th>' + LBL.iljin + '</th><th>' + LBL.stem + '</th><th>' + LBL.branch + '</th><th>' + LBL.elem + '</th></tr>'
+       + '<tr><td class="big" style="font-size:1.2rem">' + selInfo.hanja + '</td><td class="big">' + STEM_H[selInfo.ij.si] + '</td><td class="big">' + BRANCH_H[selInfo.ij.bi] + '</td><td>' + ELEM[LANG][selInfo.ij.elem] + '</td></tr></table>';
+  out += sec(tx(selInfo.R.name), para(tx(selInfo.R.txt)));
+  /* 그 날의 개운 요약 */
+  out += '<div class="luck-card"><h3>' + LBL.luck + '</h3><div class="luck-grid">'
+    + '<div class="luck-item"><span class="k">' + LBL.lCol + '</span><span class="v">' + tx(selInfo.L.col) + '</span></div>'
+    + '<div class="luck-item"><span class="k">' + LBL.lDir + '</span><span class="v">' + tx(selInfo.L.dir) + '</span></div>'
+    + '<div class="luck-item"><span class="k">' + LBL.lNum + '</span><span class="v">' + tx(selInfo.L.num) + '</span></div>'
+    + '<div class="luck-item"><span class="k">' + LBL.cAvoid + '</span><span class="v">' + tx(selInfo.R.avoid) + '</span></div>'
+    + '<div class="luck-item luck-full"><span class="k">' + LBL.lItem + '</span><span class="v">' + tx(selInfo.L.item) + '</span></div>'
+    + '<div class="luck-item luck-full"><span class="k">' + LBL.lInte + '</span><span class="v">' + tx(selInfo.L.inte) + '</span></div>'
+    + '</div></div>';
+
+  if(range === "week"){
+    const mon = new Date(base); mon.setDate(base.getDate() - ((base.getDay() + 6) % 7));
+    let rows = "";
+    for(let i=0;i<7;i++){
+      const d = new Date(mon); d.setDate(mon.getDate()+i);
+      const info = dayInfo(d);
+      rows += dayCard(info, d.toDateString() === base.toDateString());
+    }
+    out += sec(LBL.wkTable, rows);
+  }
+  out += '<div class="tj-note">' + LBL.nyNote + '</div>';
+}
 else if(P){
-  /* tojeong / newyear / today */
-  const salt = type === "today" ? new Date().toISOString().slice(0,10) : String(new Date().getFullYear());
-  const r = rng(hashStr(P.bdate + "|" + (P.gender||"") + "|" + type + "|" + salt));
+  /* tojeong / newyear / nextyear */
+  const salt = String(TYPE_YEAR);
+  const r = rng(hashStr(P.bdate + "|" + (P.gender||"") + "|" + (P.btime||"") + "|" + type + "|" + salt));
   const lvl = Math.floor(r()*5);
+  const y = +P.bdate.slice(0,4);
+  const si = (y-4)%10, bi = (y-4)%12, ei = Math.floor(si/2);
   const hj = pick(r, HANJA[lvl]);
+
   out += '<div class="sum-card"><span class="lv">' + LV[LANG][lvl] + '</span><p class="line">' + tx(hj) + '</p></div>';
   out += '<table class="hanja-table"><tr><th>' + LBL.hanja + '</th><th>' + LBL.reading + '</th><th>' + LBL.meaning + '</th></tr>'
     + '<tr><td class="big">' + hj.h + '</td><td>' + hj.r + '</td><td style="text-align:left">' + tx(hj) + '</td></tr></table>';
-  out += sec(LBL.total, para(tx(pick(r, POOL.total[lvl]))));
-  out += sec(LBL.love,  para(tx(pick(r, POOL.love[lvl]))));
-  out += sec(LBL.work,  para(tx(pick(r, POOL.work[lvl]))));
-  out += sec(LBL.money, para(tx(pick(r, POOL.money[lvl]))));
-  out += sec(LBL.health,para(tx(pick(r, POOL.health[lvl]))));
-  if(type !== "today"){
+
+  /* 총평 3~4단락 */
+  out += sec(LBL.overview,
+      para(tx(DB.NATURE[ei])) + para(tx(DB.ZT[bi]))
+    + para(tx(DB.FLOW[lvl])) + para(tx(DB.FADV[lvl])));
+
+  /* 개운 요약 */
+  out += luckCard(ei, r);
+
+  if(type === "tojeong"){
+    /* 토정비결: 새해에 뽑는 시 한 편 — 짧고 시적으로 */
+    out += sec(LBL.tjRead, para(tx(DB.FLOW[lvl])));
     let rows = "", used = [];
-    for(let m=1; m<=12; m++){
-      let idx;
-      do{ idx = Math.floor(r()*POOL.months.length); }while(used.includes(idx) && used.length < POOL.months.length);
-      used.push(idx);
-      rows += '<tr><td class="m">' + (K ? m + "월" : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][m-1]) + '</td><td>' + tx(POOL.months[idx]) + '</td></tr>';
+    for(let m=0; m<12; m++){
+      let i, guard = 0;
+      do{ i = Math.floor(r()*TJM.length); guard++; }while(used.includes(i) && guard < 60);
+      used.push(i);
+      const p = TJM[i];
+      rows += '<div class="age-row"><div class="ag">' + LBL.months[m] + '</div><div class="at">'
+            + '<span class="poem">' + p.h + '</span><span class="poem-r">' + p.r + '</span><br>' + tx(p)
+            + '</div></div>';
     }
-    out += sec(LBL.monthly, '<table class="month-table">' + rows + '</table>');
+    out += sec(LBL.tjMonthly, rows);
+    out += '<div class="tj-note">' + LBL.tjNote + '</div>';
   }else{
-    out += sec(LBL.advice, para(tx(pick(r, POOL.advice))));
+    /* 신년운세 / 내년운세: 분야별 운 중심 */
+    out += sec(LBL.love,  para(tx(DB.LOVE[lvl])));
+    out += sec(LBL.work,  para(tx(DB.WORK[lvl])));
+    out += sec(LBL.money, para(tx(DB.MONEY[lvl])));
+    out += sec(LBL.health,para(tx(DB.HEALTH[lvl])));
+    let rows = "", used = [];
+    for(let m=0; m<12; m++){
+      let i, guard = 0;
+      do{ i = Math.floor(r()*DB.MONTHS.length); guard++; }while(used.includes(i) && guard < 40);
+      used.push(i);
+      rows += '<div class="age-row"><div class="ag">' + LBL.months[m] + '</div><div class="at">' + tx(DB.MONTHS[i]) + '</div></div>';
+    }
+    out += sec(LBL.monthly, rows);
+    out += '<div class="tj-note">' + LBL.nyNote + '</div>';
   }
 }
 else{
