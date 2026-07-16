@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F6F0E3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<title>K-Fortune Story | 운세 결과</title>
+<style>
+:root{
+  color-scheme:light dark;
+  --hanji:#F6F0E3;
+  --meok:#2B2620;
+  --noeurok:#2E6B5E;
+  --noeurok-deep:#1E4634;
+  --samcheong:#2C4E8A;
+  --jinsa:#C23B22;
+  --hwang:#E8A93D;
+  --bunhong:#D9738C;
+  --seokganju:#8A4A34;
+  --seokganju-dark:#6E3A28;
+  --stone:#B9B2A4;
+  --stone-dark:#8F887B;
+  --gold-line:#C9A85C;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px}
+body{
+  font-family:'Gowun Batang',serif;
+  background:#F6F0E3;
+  background:var(--hanji);
+  color:var(--meok);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* ── 좌우 기둥 ── */
+body::before, body::after{
+  content:"";
+  position:fixed; top:0; bottom:0;
+  width:clamp(10px, 3vw, 34px);
+  background:linear-gradient(90deg,
+    var(--seokganju-dark) 0%, var(--seokganju) 30%,
+    #A05A40 50%, var(--seokganju) 70%, var(--seokganju-dark) 100%);
+  box-shadow:inset 0 0 18px rgba(0,0,0,.25);
+  z-index:5;
+}
+body::before{left:0}
+body::after{right:0}
+
+/* ── 지붕(단청 처마) ── */
+.roof{position:relative; z-index:4;}
+.roof svg{display:block; width:100%; height:auto;}
+
+/* ── 호랑이 ── */
+.tiger{
+  position:absolute;
+  top:100px;
+  top:8.5vw;
+  right:30px;
+  right:clamp(14px, 4vw, 52px);
+  height:150px;
+  height:clamp(64px, 13.5vw, 240px);
+  width:auto;
+  z-index:6;
+  pointer-events:none;
+  filter:drop-shadow(0 2px 5px rgba(0,0,0,.3));
+  image-rendering:auto;
+}
+@media (max-width:560px){
+  .tiger{top:6vw; height:64px; height:clamp(48px, 15vw, 84px);}
+}
+
+/* ── 상단 바 (언어 토글: 좌측 상단) ── */
+.topbar{position:absolute; top:10px; left:clamp(20px,5vw,50px); z-index:10;}
+.lang-toggle{
+  display:inline-flex; border:2px solid var(--gold-line);
+  border-radius:999px; overflow:hidden; background:rgba(43,38,32,.55);
+  backdrop-filter:blur(2px);
+  font-family:'Noto Sans KR',sans-serif; font-size:.8rem; font-weight:700;
+}
+.lang-toggle button{
+  border:none; background:transparent; color:#EFE6D0;
+  padding:.35rem .85rem; cursor:pointer; transition:.2s;
+}
+.lang-toggle button.active{background:var(--gold-line); color:var(--meok);}
+
+/* ── 본문 ── */
+main{
+  flex:1; width:100%; max-width:920px;
+  margin:0 auto;
+  padding:2.2rem clamp(28px,7vw,60px) 3rem;
+  text-align:center;
+}
+.eyebrow{
+  font-family:'Noto Sans KR',sans-serif;
+  letter-spacing:.35em; font-size:.72rem; font-weight:500;
+  color:var(--seokganju); text-transform:uppercase;
+  margin-bottom:.7rem;
+}
+h1{
+  font-family:'Song Myung',serif;
+  font-size:clamp(1.9rem, 6vw, 3.1rem);
+  line-height:1.25; color:var(--meok);
+}
+h1 .accent{color:var(--jinsa);}
+.subtitle{
+  margin-top:.9rem;
+  font-size:clamp(.95rem, 2.6vw, 1.08rem);
+  color:#5A5245; line-height:1.7;
+}
+.visitor{
+  margin:1.6rem auto 0; display:inline-block;
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:.85rem; color:#6B6353;
+  border-top:1px solid var(--gold-line);
+  border-bottom:1px solid var(--gold-line);
+  padding:.5rem 1.4rem;
+}
+.visitor b{color:var(--jinsa); font-weight:700;}
+
+/* ── 운세 메뉴: PC 3열 고정 ── */
+.menu-title{
+  margin:2.6rem 0 1.3rem;
+  font-family:'Song Myung',serif;
+  font-size:1.15rem; color:var(--noeurok);
+  display:flex; align-items:center; gap:14px; justify-content:center;
+}
+.menu-title::before, .menu-title::after{
+  content:""; height:1px; width:56px; background:var(--gold-line);
+}
+.menu-grid{
+  display:flex; flex-direction:column;
+  gap:12px; max-width:540px; margin:0 auto;
+}
+.menu-btn{
+  border:1.5px solid #E4D9BF; background:#FFFDF7;
+  border-radius:16px; padding:.95rem 1.15rem;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  transition:transform .15s, box-shadow .15s, border-color .15s;
+  font-family:'Gowun Batang',serif;
+  text-align:left;
+}
+.menu-btn:hover, .menu-btn:focus-visible{
+  transform:translateY(-2px);
+  border-color:var(--hwang);
+  box-shadow:0 6px 16px rgba(138,74,52,.15);
+  outline:none;
+}
+.menu-btn .mtext{display:flex; flex-direction:column; gap:.28rem; flex:1; min-width:0;}
+.menu-btn .emblem{width:54px; height:54px; flex:0 0 54px;}
+.menu-btn .name{font-size:1.15rem; font-weight:700; color:var(--meok); line-height:1.3;}
+.menu-btn .desc{
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:.9rem; color:#6E6656; line-height:1.45;
+}
+
+/* ── 토스트 ── */
+.toast{
+  position:fixed; left:50%; bottom:90px;
+  transform:translateX(-50%) translateY(20px);
+  background:var(--meok); color:#F3EBD9;
+  font-family:'Noto Sans KR',sans-serif; font-size:.85rem;
+  padding:.65rem 1.3rem; border-radius:999px;
+  opacity:0; pointer-events:none; transition:.3s; z-index:50;
+  white-space:nowrap;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+/* ── 하단 돌기단 ── */
+footer{
+  position:relative; z-index:4;
+  background:linear-gradient(180deg, var(--stone) 0%, var(--stone-dark) 100%);
+  padding:1.1rem 0 .9rem; text-align:center;
+}
+footer::before{
+  content:""; display:block;
+  position:absolute; top:-8px; left:0; right:0; height:8px;
+  background:repeating-linear-gradient(90deg,
+    var(--stone-dark) 0 46px, #A39C8E 46px 48px);
+}
+footer p{
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:.72rem; color:#3E3A32; letter-spacing:.05em;
+}
+
+/* ── 모바일 보정 ── */
+@media (max-width:560px){
+  .menu-btn{padding:.85rem 1rem;}
+  .menu-btn .emblem{width:48px; height:48px; flex-basis:48px;}
+  .menu-btn .name{font-size:1.08rem;}
+  .menu-btn .desc{font-size:.86rem;}
+}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important;}
+}
+</style>
+<style>
+.navrow{display:flex; gap:.6rem; justify-content:flex-start; max-width:620px; margin:0 auto 1.2rem; font-family:'Noto Sans KR',sans-serif;}
+.homelink{display:inline-flex; align-items:center; gap:.4rem; color:var(--seokganju); text-decoration:none; font-weight:700; font-size:.88rem; border:1.5px solid var(--gold-line); border-radius:999px; padding:.4rem 1rem; background:#FFFDF7;}
+.homelink:hover{border-color:var(--hwang);}
+.res-wrap{max-width:620px; margin:0 auto; text-align:left;}
+.res-visitor{text-align:center; font-family:'Noto Sans KR',sans-serif; font-size:.82rem; color:#6B6353; margin-bottom:.9rem;}
+.res-visitor b{color:var(--jinsa);}
+.res-head{text-align:center; margin-bottom:1.3rem;}
+.res-head h1{font-size:clamp(1.6rem,5vw,2.2rem);}
+.res-head .who{margin-top:.4rem; font-family:'Noto Sans KR',sans-serif; font-size:.92rem; color:#6E6656;}
+.sum-card{background:#FFFDF7; border:2px solid var(--gold-line); border-radius:18px; padding:1.5rem 1.3rem; text-align:center; margin-bottom:1.2rem; box-shadow:0 4px 14px rgba(138,74,52,.08);}
+.sum-card .lv{display:inline-block; font-family:'Noto Sans KR',sans-serif; font-size:.8rem; font-weight:700; color:#FFF7EA; background:var(--jinsa); border-radius:999px; padding:.28rem 1rem; margin-bottom:.7rem;}
+.sum-card .line{font-family:'Song Myung',serif; font-size:clamp(1.12rem,3.6vw,1.4rem); line-height:1.55; color:var(--meok);}
+.hanja-table{width:100%; border-collapse:collapse; background:#FFFDF7; border-radius:14px; overflow:hidden; margin-bottom:1.2rem; border:1.5px solid #E4D9BF;}
+.hanja-table th{background:#F0E7CF; font-family:'Noto Sans KR',sans-serif; font-size:.8rem; color:#6B5B3E; padding:.55rem; border-bottom:1.5px solid #E4D9BF;}
+.hanja-table td{padding:.75rem .6rem; text-align:center; border-bottom:1px solid #EFE8D6; font-size:.95rem;}
+.hanja-table .big{font-family:'Song Myung',serif; font-size:1.5rem; letter-spacing:.25em; color:var(--samcheong);}
+.score-ring{text-align:center; margin:0 0 1.2rem;}
+.score-ring .num{font-family:'Song Myung',serif; font-size:3rem; color:var(--jinsa);}
+.score-ring .of{font-family:'Noto Sans KR',sans-serif; color:#8A8171; font-size:.9rem;}
+.sec{background:#FFFDF7; border:1.5px solid #E4D9BF; border-radius:16px; padding:1.15rem 1.2rem; margin-bottom:.95rem;}
+.sec h3{font-family:'Song Myung',serif; font-size:1.05rem; color:var(--noeurok); border-bottom:1.5px solid var(--gold-line); padding-bottom:.45rem; margin-bottom:.7rem; display:flex; align-items:center; gap:.5rem;}
+.sec p{font-size:.98rem; line-height:1.75; color:#3E382E;}
+.month-table{width:100%; border-collapse:collapse;}
+.month-table td{padding:.5rem .3rem; border-bottom:1px solid #EFE8D6; font-size:.9rem; line-height:1.55; vertical-align:top;}
+.month-table td.m{font-family:'Song Myung',serif; color:var(--jinsa); white-space:nowrap; width:3.4em; font-size:.95rem;}
+.dream-sym{display:inline-block; font-family:'Noto Sans KR',sans-serif; font-size:.85rem; font-weight:700; background:#F0E7CF; color:#6B5B3E; border-radius:999px; padding:.3rem .9rem; margin:0 .3rem .4rem 0;}
+.note{font-family:'Noto Sans KR',sans-serif; font-size:.78rem; color:#8A8171; text-align:center; margin:1.3rem 0 0; line-height:1.6;}
+.btnrow{display:flex; gap:12px; max-width:620px; margin:1.4rem auto 0;}
+.btn-run{flex:1; background:var(--jinsa); color:#FFF7EA; border:2px solid var(--gold-line); border-radius:12px; padding:.9rem; font-size:1.05rem; font-weight:700; font-family:'Gowun Batang',serif; cursor:pointer; text-align:center; text-decoration:none;}
+.btn-reset{flex:1; background:#FFFDF7; color:#6E6656; border:1.5px solid #D8CCAE; border-radius:12px; padding:.9rem; font-size:1rem; font-family:'Gowun Batang',serif; cursor:pointer; text-align:center; text-decoration:none;}
+</style>
+
+
+<style>
+/* ══ 다크모드 대응: 강제/자동 다크모드 기기에서 자동 적용 ══ */
+@media (prefers-color-scheme: dark){
+  :root{ color-scheme:light dark; }
+  body{ background:#221D16 !important; color:#EFE6D0; }
+  h1, .menu-btn .name, .sum-card .line{ color:#F0E7D4 !important; }
+  h1 .accent{ color:#E8785E !important; }
+  .eyebrow{ color:#D8A374 !important; }
+  .subtitle, .visitor, .count, .res-visitor{ color:#C9BFA9 !important; }
+  .visitor b, .res-visitor b, .count b, .score-ring .num{ color:#E8785E !important; }
+  .menu-title, .sec h3, .person-block h3{ color:#7FBFA5 !important; }
+  .menu-btn, .form-card, .sec, .sum-card, .ad-box, .homelink, .btn-reset, .lang-toggle{
+    background:#2A251E !important; border-color:#4A4336 !important;
+  }
+  .menu-btn .desc{ color:#A99F8C !important; }
+  .sec p, .month-table td, .radiorow label{ color:#D8CFBB !important; }
+  .field > label{ color:#C9B48A !important; }
+  .field input, .field select, .field textarea{
+    background:#332D25 !important; border-color:#5A4F3E !important; color:#EFE6D0 !important;
+  }
+  .radiorow label{ background:#332D25 !important; border-color:#5A4F3E !important; }
+  .radiorow label.sel{ background:#4A2A20 !important; border-color:#E8785E !important; color:#F0A28F !important; }
+  .hanja-table{ background:#2A251E !important; border-color:#4A4336 !important; }
+  .hanja-table th{ background:#3A332A !important; color:#D8C9A4 !important; border-color:#4A4336 !important; }
+  .hanja-table td{ border-color:#3A332A !important; color:#D8CFBB !important; }
+  .hanja-table .big{ color:#8FB3E8 !important; }
+  .month-table td{ border-color:#3A332A !important; }
+  .month-table td.m{ color:#E8785E !important; }
+  .note{ color:#A99F8C !important; }
+  .homelink{ color:#D8A374 !important; }
+  .btn-reset{ color:#C9BFA9 !important; }
+  .ad-slot{ background:#332D25 !important; border-color:#8A7A4E !important; color:#A99F8C !important; }
+  .ad-slot b{ color:#D8C9A4 !important; }
+  .ftitle p, #fsub, .res-head .who{ color:#C9BFA9 !important; }
+  .dream-sym{ background:#3A332A !important; color:#D8C9A4 !important; }
+}
+</style>
+</head>
+<body>
+<div class="roof" aria-hidden="true">
+<svg viewBox="0 0 1200 222" preserveAspectRatio="none">
+  <defs>
+    <!-- 기와 -->
+    <pattern id="giwa" width="46" height="26" patternUnits="userSpaceOnUse">
+      <rect width="46" height="26" fill="#3E4247"/>
+      <path d="M0,26 A23,23 0 0 1 46,26" fill="none" stroke="#565B61" stroke-width="3"/>
+      <path d="M-23,26 A23,23 0 0 1 23,26" fill="none" stroke="#2A2D31" stroke-width="2"/>
+    </pattern>
+
+    <!-- 서까래 연화 매듭 -->
+    <pattern id="rafter" width="60" height="36" patternUnits="userSpaceOnUse" patternTransform="translate(0,66)">
+      <rect width="60" height="36" fill="#2E6B5E"/>
+      <circle cx="30" cy="18" r="15.5" fill="#1E4634"/>
+      <circle cx="30" cy="18" r="14" fill="none" stroke="#EFE6D0" stroke-width="2.6" stroke-dasharray="3.6 3.4"/>
+      <circle cx="30" cy="18" r="10.5" fill="#C23B22"/>
+      <circle cx="30" cy="18" r="7" fill="#E8A93D"/>
+      <circle cx="30" cy="18" r="4" fill="#2C4E8A"/>
+      <circle cx="30" cy="18" r="1.6" fill="#EFE6D0"/>
+      <circle cx="0" cy="18" r="3.2" fill="#D9738C"/>
+      <circle cx="60" cy="18" r="3.2" fill="#D9738C"/>
+    </pattern>
+
+    <!-- 머리초: 겹겹 색동 반원 (사진2 스타일) -->
+    <pattern id="meoricho" width="150" height="74" patternUnits="userSpaceOnUse" patternTransform="translate(0,107.5)">
+      <rect width="150" height="74" fill="#2E6B5E"/>
+      <!-- 상단에서 내려오는 색동 아치 -->
+      <circle cx="75" cy="0" r="64" fill="#1E4634"/>
+      <circle cx="75" cy="0" r="61" fill="none" stroke="#EFE6D0" stroke-width="2.4" stroke-dasharray="4.6 4"/>
+      <circle cx="75" cy="0" r="57" fill="#3FA57A"/>
+      <circle cx="75" cy="0" r="51" fill="#EFE6D0"/>
+      <circle cx="75" cy="0" r="46" fill="#E8A93D"/>
+      <circle cx="75" cy="0" r="40" fill="#C23B22"/>
+      <circle cx="75" cy="0" r="34" fill="none" stroke="#EFE6D0" stroke-width="2" stroke-dasharray="3.4 3"/>
+      <circle cx="75" cy="0" r="31" fill="#2C4E8A"/>
+      <circle cx="75" cy="0" r="24" fill="#D9738C"/>
+      <circle cx="75" cy="0" r="17" fill="#EFE6D0"/>
+      <circle cx="75" cy="0" r="11" fill="#C23B22"/>
+      <circle cx="75" cy="0" r="5" fill="#E8A93D"/>
+      <!-- 아치 사이 하단 연꽃 봉오리 (타일 경계에서 합쳐짐) -->
+      <circle cx="0" cy="74" r="26" fill="#1E4634"/>
+      <circle cx="0" cy="74" r="22" fill="#3FA57A"/>
+      <circle cx="0" cy="74" r="17" fill="#D9738C"/>
+      <circle cx="0" cy="74" r="12" fill="#E8A93D"/>
+      <circle cx="0" cy="74" r="7" fill="#C23B22"/>
+      <circle cx="150" cy="74" r="26" fill="#1E4634"/>
+      <circle cx="150" cy="74" r="22" fill="#3FA57A"/>
+      <circle cx="150" cy="74" r="17" fill="#D9738C"/>
+      <circle cx="150" cy="74" r="12" fill="#E8A93D"/>
+      <circle cx="150" cy="74" r="7" fill="#C23B22"/>
+      <!-- 점 장식 -->
+      <circle cx="37" cy="58" r="2.4" fill="#EFE6D0"/>
+      <circle cx="113" cy="58" r="2.4" fill="#EFE6D0"/>
+    </pattern>
+
+    <!-- 꽃살 격자 (사진3 스타일) -->
+    <pattern id="lattice" width="84" height="48" patternUnits="userSpaceOnUse" patternTransform="translate(0,184)">
+      <rect width="84" height="48" fill="#14301F"/>
+      <g stroke="#3FA57A" stroke-width="6.5">
+        <line x1="0" y1="0" x2="84" y2="48"/>
+        <line x1="0" y1="48" x2="84" y2="0"/>
+        <line x1="-42" y1="48" x2="42" y2="0"/>
+        <line x1="42" y1="48" x2="126" y2="0"/>
+        <line x1="-42" y1="0" x2="42" y2="48"/>
+        <line x1="42" y1="0" x2="126" y2="48"/>
+        <line x1="0" y1="24" x2="84" y2="24"/>
+      </g>
+      <g stroke="#2B7D55" stroke-width="2">
+        <line x1="0" y1="0" x2="84" y2="48"/>
+        <line x1="0" y1="48" x2="84" y2="0"/>
+        <line x1="-42" y1="48" x2="42" y2="0"/>
+        <line x1="42" y1="48" x2="126" y2="0"/>
+        <line x1="-42" y1="0" x2="42" y2="48"/>
+        <line x1="42" y1="0" x2="126" y2="48"/>
+        <line x1="0" y1="24" x2="84" y2="24"/>
+      </g>
+      <!-- 교차점 꽃 -->
+      <g>
+        <circle cx="42" cy="24" r="6" fill="none" stroke="#E08FA6" stroke-width="6" stroke-dasharray="4.6 3.2"/>
+        <circle cx="42" cy="24" r="3" fill="#C23B22"/>
+        <circle cx="42" cy="24" r="1.4" fill="#E8C63D"/>
+      </g>
+      <g>
+        <circle cx="0" cy="0" r="6" fill="none" stroke="#E08FA6" stroke-width="6" stroke-dasharray="4.6 3.2"/>
+        <circle cx="0" cy="0" r="3" fill="#C23B22"/>
+        <circle cx="84" cy="0" r="6" fill="none" stroke="#E08FA6" stroke-width="6" stroke-dasharray="4.6 3.2"/>
+        <circle cx="84" cy="0" r="3" fill="#C23B22"/>
+        <circle cx="0" cy="48" r="6" fill="none" stroke="#E08FA6" stroke-width="6" stroke-dasharray="4.6 3.2"/>
+        <circle cx="0" cy="48" r="3" fill="#C23B22"/>
+        <circle cx="84" cy="48" r="6" fill="none" stroke="#E08FA6" stroke-width="6" stroke-dasharray="4.6 3.2"/>
+        <circle cx="84" cy="48" r="3" fill="#C23B22"/>
+      </g>
+    </pattern>
+  </defs>
+
+  <!-- 기와 지붕 (곡선 상단 + 직선 하단) -->
+  <path d="M0,30 C300,2 900,2 1200,30 L1200,58 L0,58 Z" fill="url(#giwa)"/>
+  <!-- 처마 목재선 -->
+  <rect x="0" y="58" width="1200" height="8" fill="#6E3A28"/>
+  <!-- 서까래 매듭 줄 -->
+  <rect x="0" y="66" width="1200" height="36" fill="url(#rafter)"/>
+  <!-- 백·적 구분선 -->
+  <rect x="0" y="102" width="1200" height="3" fill="#EFE6D0"/>
+  <rect x="0" y="105" width="1200" height="2.5" fill="#C23B22"/>
+  <!-- 머리초 색동 밴드 -->
+  <rect x="0" y="107.5" width="1200" height="74" fill="url(#meoricho)"/>
+  <!-- 구분선 -->
+  <rect x="0" y="181.5" width="1200" height="2.5" fill="#EFE6D0"/>
+  <!-- 꽃살 격자 밴드 -->
+  <rect x="0" y="184" width="1200" height="30" fill="url(#lattice)"/>
+  <!-- 하단 금선 마감 -->
+  <rect x="0" y="214" width="1200" height="8" fill="#C9A85C"/>
+</svg>
+
+<!-- ══ 흰 호랑이 (민화 까치호랑이 스타일: 앉은 자세, 왼팔 위로, 꼬리 오른쪽) ══ -->
+<img class="tiger" src="data:image/png;base64,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" alt="">
+</div>
+
+<main>
+  <div class="navrow">
+    <a class="homelink" id="lnkHome" href="index.html">⌂</a>
+    <a class="homelink" id="lnkBack" href="#">↺</a>
+  </div>
+  <div class="res-wrap">
+    <p class="res-visitor" id="resVisitor"></p>
+    <div class="res-head">
+      <p class="eyebrow">K-Fortune Story</p>
+      <h1 id="resTitle"></h1>
+      <p class="who" id="resWho"></p>
+    </div>
+    <div id="resBody"></div>
+    <p class="note" id="resNote"></p>
+  </div>
+  <div class="btnrow">
+    <a class="btn-run" id="btnOther" href="index.html"></a>
+    <a class="btn-reset" id="btnRetry" href="#"></a>
+  </div>
+</main>
+<footer>
+  <p data-i18n="footer">K-Fortune Story · 한국 전통 운세 이야기</p>
+</footer>
+<script>
+/* ════════ 공용 ════════ */
+const LANG = ["kr","en"].includes(localStorage.getItem("kf_lang")) ? localStorage.getItem("kf_lang") : "kr";
+const K = LANG === "kr";
+const type = new URLSearchParams(location.search).get("type") || localStorage.getItem("kf_selected") || "tojeong";
+const P  = JSON.parse(localStorage.getItem("kf_p_main") || "null");
+const P2 = JSON.parse(localStorage.getItem("kf_p_sub") || "null");
+
+function hashStr(s){ let h=1779033703; for(let i=0;i<s.length;i++){ h=Math.imul(h^s.charCodeAt(i),3432918353); h=(h<<13)|(h>>>19);} return h>>>0; }
+function rng(seed){ return function(){ seed|=0; seed=(seed+0x6D2B79F5)|0; let t=Math.imul(seed^(seed>>>15),1|seed); t=(t+Math.imul(t^(t>>>7),61|t))^t; return ((t^(t>>>14))>>>0)/4294967296; }; }
+function pick(r, arr){ return arr[Math.floor(r()*arr.length)]; }
+
+const TYPES = {kr:{tojeong:"토정비결", newyear:"신년운세", today:"오늘의 운세", saju:"사주팔자", gunghap:"궁합", dream:"꿈해몽"},
+               en:{tojeong:"Tojeong Bigyeol", newyear:"New Year Fortune", today:"Today's Fortune", saju:"Saju (Four Pillars)", gunghap:"Compatibility", dream:"Dream Reading"}};
+const LV = {kr:["대길(大吉)","길(吉)","중길(中吉)","평(平)","조심(操心)"],
+            en:["Great Fortune","Good Fortune","Fair Fortune","Steady","Take Care"]};
+
+/* ════════ 한자 풀이 (수준별) ════════ */
+const HANJA = [
+ /* 0: 대길 */
+ [{h:"雲開見月",r:"운개견월",kr:"구름이 걷혀 달을 보니 막힘이 사라지고 큰 뜻을 이룬다",en:"Clouds part to reveal the moon — obstacles vanish and great aims are achieved"},
+  {h:"枯木生花",r:"고목생화",kr:"마른 나무에 꽃이 피니 뜻밖의 경사와 성취가 따른다",en:"Flowers bloom on a withered tree — unexpected joy and success follow"},
+  {h:"龍得雲雨",r:"용득운우",kr:"용이 구름과 비를 얻으니 하는 일마다 크게 형통한다",en:"The dragon gains clouds and rain — every endeavor prospers greatly"}],
+ /* 1: 길 */
+ [{h:"東風解凍",r:"동풍해동",kr:"봄바람이 얼음을 녹이니 막혔던 일이 순조롭게 풀린다",en:"Spring wind melts the ice — stalled matters flow smoothly again"},
+  {h:"順水行舟",r:"순수행주",kr:"물길 따라 배를 띄우니 힘들이지 않고 나아간다",en:"A boat glides with the current — progress comes without strain"},
+  {h:"錦上添花",r:"금상첨화",kr:"비단 위에 꽃을 더하니 좋은 일에 좋은 일이 겹친다",en:"Flowers upon silk — good fortune layers upon good fortune"}],
+ /* 2: 중길 */
+ [{h:"先困後泰",r:"선곤후태",kr:"먼저는 어려우나 뒤에는 평안하니 인내가 복이 된다",en:"Hardship first, peace after — patience becomes your blessing"},
+  {h:"月滿則虧",r:"월만즉휴",kr:"달도 차면 기우니 좋을 때 겸손하면 복이 오래간다",en:"Even the full moon wanes — humility in good times makes fortune last"},
+  {h:"雨後地固",r:"우후지고",kr:"비 온 뒤 땅이 굳으니 시련이 오히려 기반을 다진다",en:"Ground hardens after rain — trials only strengthen your foundation"}],
+ /* 3: 평 */
+ [{h:"守分安命",r:"수분안명",kr:"분수를 지키면 평안하니 무리한 확장은 삼가라",en:"Keep to your measure and find peace — avoid overreaching"},
+  {h:"靜中有得",r:"정중유득",kr:"고요한 가운데 얻음이 있으니 서두르지 말라",en:"Gains come in stillness — do not rush"},
+  {h:"深根固枝",r:"심근고지",kr:"뿌리를 깊이 내리는 때이니 겉보다 안을 다져라",en:"A season for deep roots — strengthen within rather than without"}],
+ /* 4: 조심 */
+ [{h:"薄氷履行",r:"박빙이행",kr:"살얼음을 걷듯 신중하면 화를 면하고 복으로 바꾼다",en:"Tread as on thin ice — caution turns misfortune into blessing"},
+  {h:"口是禍門",r:"구시화문",kr:"입이 화의 문이니 말을 아끼면 구설이 스스로 물러난다",en:"The mouth is the gate of trouble — measured words keep gossip away"},
+  {h:"忍中有福",r:"인중유복",kr:"참는 가운데 복이 있으니 다툼을 피하면 길하다",en:"Fortune hides within patience — avoid conflict and stay safe"}]
+];
+
+/* ════════ 카테고리 풀 (수준별 2개씩) ════════ */
+const POOL = {
+ total: [
+  [{kr:"하늘이 돕고 사람이 따르는 해입니다. 오래 준비한 일이 빛을 보고, 귀인이 나타나 길을 열어 줍니다. 큰 결정을 내리기에 좋은 흐름이니 자신감을 가지되, 주변과 공을 나누면 복이 배가 됩니다.",en:"Heaven assists and people follow. Long-prepared work finally shines, and a helpful person opens new doors. It is a strong current for big decisions — move with confidence, and share credit to double your fortune."},
+   {kr:"운의 문이 활짝 열리는 시기입니다. 재물과 명예가 함께 따르며, 이동·변동수가 있다면 좋은 방향으로 작용합니다. 다만 커진 그릇만큼 책임도 커지니 약속은 반드시 지키십시오.",en:"The gate of fortune stands wide open. Wealth and honor arrive together, and any moves or changes work in your favor. With a larger vessel comes larger duty — keep every promise you make."}],
+  [{kr:"순풍에 돛을 단 형국입니다. 무리하지 않아도 일이 순조롭게 풀리며, 협력에서 특히 좋은 결실을 봅니다. 작은 성취를 꾸준히 쌓으면 연말에 큰 그림이 완성됩니다.",en:"Your sails catch a favorable wind. Matters resolve smoothly without force, and cooperation bears especially good fruit. Stack small wins steadily and a grand picture completes itself by year's end."},
+   {kr:"막혔던 물꼬가 트이는 운세입니다. 지난 시기의 노력이 인정받기 시작하고, 도와주는 사람이 늘어납니다. 다만 갑작스러운 지출 제안에는 하루 이상 생각할 시간을 두십시오.",en:"Blocked waters begin to flow. Past efforts gain recognition and supporters multiply. Only give yourself at least a day before agreeing to sudden spending proposals."}],
+  [{kr:"먼저는 더디고 뒤에는 빠른 해입니다. 상반기에는 기초를 다지는 데 힘쓰고, 하반기에 승부를 거십시오. 조급함만 다스리면 결과는 기대 이상입니다.",en:"Slow at first, swift at the end. Build foundations in the first half and make your move in the second. Master impatience, and results will exceed expectations."},
+   {kr:"오르막과 내리막이 번갈아 오지만 전체 방향은 위를 향합니다. 잘 풀릴 때 저축하고, 어려울 때 배우면 어느 쪽도 손해가 아닙니다.",en:"Ups and downs alternate, yet the overall path climbs. Save when things go well, learn when they do not — neither season is a loss."}],
+  [{kr:"크게 얻는 것도 잃는 것도 없는 평탄한 흐름입니다. 이런 때일수록 건강과 가족, 그리고 배움에 투자하면 다음 대운의 밑거름이 됩니다.",en:"A level road with no great gain or loss. Invest this quiet season in health, family, and learning — it becomes the soil of your next great cycle."},
+   {kr:"현상 유지가 곧 성공인 시기입니다. 새 일을 벌이기보다 지금 가진 것을 정돈하고 다듬으십시오. 정리 속에서 뜻밖의 기회가 보입니다.",en:"Maintaining is itself winning now. Rather than starting anew, organize and refine what you hold — unexpected opportunity hides in the tidying."}],
+  [{kr:"돌다리도 두드리며 건너야 하는 해입니다. 문서·계약·보증에는 특히 신중하고, 달콤한 제안일수록 두 번 확인하십시오. 조심함이 곧 최고의 개운법입니다.",en:"Tap even the stone bridge before crossing. Be extra careful with documents, contracts, and guarantees, and double-check the sweetest offers. Caution itself is your best luck charm."},
+   {kr:"구설과 시비가 붙기 쉬운 흐름이니 말을 줄이고 듣기를 늘리십시오. 다툼을 피하는 것만으로 재물과 인연이 지켜집니다.",en:"Gossip and disputes come easily now — speak less, listen more. Simply avoiding conflict protects both your wealth and your relationships."}]
+ ],
+ love: [
+  [{kr:"인연의 붉은 실이 팽팽해지는 때입니다. 미혼은 배필을 만날 수 있고, 기혼은 부부의 정이 새로워집니다. 마음을 표현할수록 복이 커집니다.",en:"The red thread of destiny pulls taut. The single may meet a life partner; the married rediscover their bond. The more you express your heart, the greater the blessing."}],
+  [{kr:"애정운이 따뜻하게 흐릅니다. 소개나 모임에서 좋은 인연이 닿고, 연인 사이에는 신뢰가 깊어집니다. 사소한 기념일을 챙기는 정성이 큰 감동이 됩니다.",en:"Warm currents flow through your love life. Introductions and gatherings bring good connections, and trust deepens between partners. Small acts of remembrance move hearts greatly."}],
+  [{kr:"서두르면 어긋나고 기다리면 맺어지는 애정운입니다. 상대의 속도를 존중하면 관계가 한 단계 깊어집니다.",en:"Rushing breaks the thread; waiting ties the knot. Respect your partner's pace and the bond deepens by a full step."}],
+  [{kr:"큰 변화 없이 잔잔한 애정운입니다. 익숙함을 지루함으로 오해하지 마십시오. 함께한 시간 자체가 이미 귀한 인연의 증거입니다.",en:"Calm waters, little change. Do not mistake familiarity for boredom — the time already shared is itself proof of a precious bond."}],
+  [{kr:"오해가 생기기 쉬운 때이니 문자보다 목소리로, 목소리보다 얼굴을 보고 대화하십시오. 제3자의 말은 절반만 믿는 것이 좋습니다.",en:"Misunderstandings spark easily — choose voice over text, and face-to-face over voice. Believe only half of what third parties say."}]
+ ],
+ work: [
+  [{kr:"직업운이 크게 트입니다. 승진·합격·계약 성사 등 기쁜 소식이 있고, 새 프로젝트는 이름을 알릴 기회가 됩니다. 성과를 문서로 남겨 두십시오.",en:"Career fortune opens wide — promotion, acceptance, or a signed deal brings joy, and new projects become your stage. Keep written records of your achievements."}],
+  [{kr:"노력한 만큼 정직하게 돌아오는 직업운입니다. 윗사람의 신임이 두터워지니 맡은 일에 책임을 다하면 연말에 보상이 따릅니다.",en:"Effort returns honestly in your work. Superiors' trust deepens — fulfill your duties and reward follows by year's end."}],
+  [{kr:"경쟁이 있으나 실력으로 이기는 형국입니다. 화려한 말보다 꾸준한 결과물이 당신을 증명합니다.",en:"Competition exists, but skill prevails. Steady results, not eloquent words, will prove your worth."}],
+  [{kr:"이직·전업 같은 큰 변동은 시기상조입니다. 지금 자리에서 배울 것을 마저 배우면 다음 기회에 몸값이 달라집니다.",en:"Big moves like changing jobs are premature. Finish learning what your current seat can teach — your value will differ at the next opportunity."}],
+  [{kr:"직장 내 구설과 문서 실수를 조심하십시오. 중요한 결재·서명은 한 번 더 검토하고, 뒷말에는 끼지 않는 것이 상책입니다.",en:"Beware workplace gossip and paperwork errors. Review every important approval twice, and stay out of talk behind backs."}]
+ ],
+ money: [
+  [{kr:"재물이 사방에서 들어오는 형국입니다. 본업 외의 수입이 생기거나 묵은 돈을 되찾을 수 있습니다. 들어올 때 일부를 반드시 묶어 두십시오.",en:"Wealth flows in from all directions — side income appears or old money returns. Set aside a portion the moment it arrives."}],
+  [{kr:"금전운이 안정적으로 상승합니다. 큰 횡재보다는 차곡차곡 쌓이는 재물이니 저축과 장기 투자에 유리한 흐름입니다.",en:"Money fortune rises steadily. This is accumulating wealth rather than windfall — favorable for savings and long-term investment."}],
+  [{kr:"들어오는 돈과 나가는 돈이 비슷한 시기입니다. 가계부를 쓰는 것만으로 새는 구멍이 보이고 운이 바뀝니다.",en:"Income and outgo run even. Simply keeping a ledger reveals the leaks — and changes your luck."}],
+  [{kr:"무리한 투자보다 지키는 것이 버는 것입니다. 원금 보장이 없는 제안은 이번 시기에는 흘려보내십시오.",en:"Protecting is earning now. Let offers without guaranteed principal pass you by this season."}],
+  [{kr:"보증·대여·동업 관련 금전 문제를 각별히 조심하십시오. 가까운 사이일수록 돈 문제는 문서로 남기는 것이 서로를 지킵니다.",en:"Be especially wary of guarantees, lending, and partnerships. The closer the relationship, the more a written record protects you both."}]
+ ],
+ health: [
+  [{kr:"기력이 충만한 때입니다. 새 운동을 시작하기에 좋고, 몸이 가벼워지니 마음도 밝아집니다.",en:"Vitality runs full. A fine time to begin new exercise — as the body lightens, so does the mind."}],
+  [{kr:"건강운이 양호하나 좋은 기운을 유지하려면 수면이 열쇠입니다. 자정 전에 잠드는 습관이 보약보다 낫습니다.",en:"Health holds well; sleep is the key to keeping it. Bedtime before midnight beats any tonic."}],
+  [{kr:"큰 탈은 없으나 환절기 호흡기와 소화기를 챙기십시오. 규칙적인 식사가 최고의 예방입니다.",en:"No major trouble, but mind your lungs and stomach at season's change. Regular meals are the finest prevention."}],
+  [{kr:"피로가 쌓이기 쉬운 흐름입니다. 몸이 보내는 작은 신호를 무시하지 말고, 미뤄 둔 건강검진이 있다면 올해 받으십시오.",en:"Fatigue accumulates easily. Heed the body's small signals, and take that postponed check-up this year."}],
+  [{kr:"과로와 밤샘이 화근이 되는 때입니다. 특히 술자리와 야식을 줄이면 몸과 재물이 함께 지켜집니다.",en:"Overwork and late nights breed trouble. Cut back on drinking and midnight meals — both health and wealth stay protected."}]
+ ],
+ advice: [
+  {kr:"오늘 가장 좋은 방위는 동쪽이며, 오전에 중요한 일을 처리하면 유리합니다.",en:"East is today's favorable direction; handle important matters in the morning."},
+  {kr:"귀인은 가까운 곳에 있습니다. 오래 연락하지 않은 사람에게 먼저 안부를 전해 보십시오.",en:"Your helper is nearby. Reach out first to someone you have not contacted in a while."},
+  {kr:"작은 약속일수록 지키십시오. 오늘의 신용이 내일의 재물이 됩니다.",en:"Keep even the smallest promise — today's trust becomes tomorrow's wealth."},
+  {kr:"결정을 앞두고 있다면 밤보다 아침의 판단을 믿으십시오.",en:"If a decision awaits, trust your morning judgment over your midnight one."},
+  {kr:"몸을 움직이면 운도 움직입니다. 가벼운 산책이 막힌 생각을 풀어 줍니다.",en:"Move the body and fortune moves too. A light walk unties tangled thoughts."},
+  {kr:"오늘은 붉은색 계열의 소지품이 좋은 기운을 더합니다.",en:"A touch of red among your belongings adds favorable energy today."}
+ ],
+ months: [
+  {kr:"새 계획을 세우기 좋으니 목표를 글로 적어 두면 이루어질 확률이 높아집니다.",en:"Fine for new plans — write down your goals to raise the odds of achieving them."},
+  {kr:"귀인이 나타나는 달입니다. 모임과 초대를 마다하지 마십시오.",en:"A helpful person appears — do not decline gatherings and invitations."},
+  {kr:"재물이 들어오나 나가는 구멍도 함께 열리니 지출 계획을 먼저 세우십시오.",en:"Money comes in, but an outflow opens too — plan spending first."},
+  {kr:"문서운이 있으니 계약·시험·신청 등에 유리한 달입니다.",en:"Document luck favors contracts, exams, and applications this month."},
+  {kr:"말조심이 필요한 달입니다. 농담이 오해가 되기 쉽습니다.",en:"Watch your words — jokes turn into misunderstandings easily."},
+  {kr:"이동수가 있으니 여행이나 출장이 좋은 기회를 물어다 줍니다.",en:"Movement is favored — travel or business trips bring opportunity."},
+  {kr:"건강을 먼저 챙기십시오. 무리한 일정은 이 달만큼은 피하는 것이 좋습니다.",en:"Put health first — avoid an overloaded schedule this month."},
+  {kr:"오랜 노력의 결실이 보이기 시작합니다. 포기하지 않은 자신을 칭찬하십시오.",en:"Fruits of long effort begin to show — credit yourself for not giving up."},
+  {kr:"가족과의 시간이 복을 부릅니다. 집안의 대소사에 정성을 다하십시오.",en:"Family time invites blessing — give your best to household matters."},
+  {kr:"금전 거래는 신중히, 특히 빌려주는 돈은 없다고 생각하는 것이 편합니다.",en:"Handle money exchanges carefully — assume lent money will not return."},
+  {kr:"배움에 투자하면 몇 배로 돌아오는 달입니다. 책 한 권이 길을 바꿉니다.",en:"Investment in learning returns manyfold — one book may change your path."},
+  {kr:"주변 정리가 운을 부릅니다. 버릴 것을 버리면 들어올 자리가 생깁니다.",en:"Tidying invites luck — discard the old and room opens for the new."},
+  {kr:"경쟁에서 유리한 위치에 서는 달입니다. 준비된 것을 보여 줄 기회를 잡으십시오.",en:"You stand advantaged in competition — seize the chance to show what you prepared."},
+  {kr:"뜻밖의 소식이 찾아옵니다. 놀라지 말고 차분히 대응하면 길하게 풀립니다.",en:"Unexpected news arrives — respond calmly and it resolves favorably."},
+  {kr:"인간관계의 매듭을 푸는 달입니다. 먼저 건네는 화해가 큰 복이 됩니다.",en:"A month to untie knots in relationships — reconciliation offered first becomes great fortune."},
+  {kr:"작은 행운이 이어지는 달입니다. 감사를 표현할수록 행운이 오래 머뭅니다.",en:"Small lucks follow one another — expressed gratitude makes them linger."}
+ ]
+};
+
+/* ════════ 띠/오행 (궁합·사주) ════════ */
+const ZODIAC = {kr:["쥐","소","호랑이","토끼","용","뱀","말","양","원숭이","닭","개","돼지"],
+                en:["Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Sheep","Monkey","Rooster","Dog","Pig"]};
+const BRANCH_H = ["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
+const STEM_H   = ["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"];
+const ELEM = {kr:["목(木)","화(火)","토(土)","금(金)","수(水)"], en:["Wood","Fire","Earth","Metal","Water"]};
+const ELEM_CHAR = {
+  kr:["곧게 자라는 나무처럼 성장과 배움을 향해 뻗는 성품으로, 창의성과 인정이 많습니다.","타오르는 불처럼 열정적이고 표현이 밝으며, 사람을 끌어당기는 매력이 있습니다.","만물을 품는 흙처럼 신의가 두텁고 꾸준하여, 주변의 믿음을 얻는 성품입니다.","단단한 쇠처럼 결단력과 원칙이 분명하고, 한 번 맺은 약속은 끝까지 지킵니다.","흐르는 물처럼 지혜롭고 유연하여, 상황을 읽고 스며드는 힘이 뛰어납니다."],
+  en:["Like a growing tree, you reach toward growth and learning — creative and warm-hearted.","Like blazing fire, you are passionate and bright, with a magnetism that draws people in.","Like embracing earth, you are loyal and steady, earning deep trust from those around you.","Like tempered metal, you hold clear principles and decisiveness — a promise made is kept.","Like flowing water, you are wise and adaptable, reading situations and permeating obstacles."]
+};
+const ELEM_JOB = {
+  kr:["교육·기획·출판·디자인 등 키우고 만들어내는 분야에 재능이 빛납니다.","방송·영업·예술·요식업 등 사람 앞에 서고 알리는 분야가 잘 맞습니다.","부동산·행정·금융관리·농업 등 지키고 다지는 분야에서 신뢰를 얻습니다.","법률·의료·기술·제조 등 정밀함과 원칙이 필요한 분야에서 두각을 나타냅니다.","연구·무역·물류·상담 등 흐름을 읽고 연결하는 분야에서 능력을 발휘합니다."],
+  en:["Fields that grow and create — education, planning, publishing, design — suit you well.","Fields before people — media, sales, the arts, hospitality — fit your energy.","Fields that guard and build — real estate, administration, finance, agriculture — earn you trust.","Fields demanding precision — law, medicine, engineering, manufacturing — let you excel.","Fields reading flows and connecting — research, trade, logistics, counseling — reveal your gift."]
+};
+
+/* ════════ 꿈해몽 사전 (전통 해몽) ════════ */
+const DREAMS = [
+ {kws:["돼지","pig"],kr:"돼지는 예로부터 재물과 복의 상징입니다. 재물이 들어오거나 좋은 기회가 찾아올 징조입니다.",en:"The pig has long symbolized wealth and blessing — money or a golden opportunity approaches."},
+ {kws:["용","dragon"],kr:"용꿈은 최고의 길몽으로, 큰 성공·승진·명예를 예고합니다. 태몽이라면 귀한 자식을 얻을 징조입니다.",en:"A dragon dream is the highest omen — great success, promotion, or honor. As a conception dream, it heralds a distinguished child."},
+ {kws:["뱀","serpent","snake"],kr:"뱀은 재물과 지혜, 태몽의 상징입니다. 물리면 오히려 재물이 붙는 길몽으로 봅니다.",en:"The snake signifies wealth, wisdom, and conception. Being bitten is read as fortune attaching itself to you."},
+ {kws:["호랑이","tiger"],kr:"호랑이는 권세와 명예의 상징입니다. 호랑이를 타거나 만나면 큰 인물의 도움을 받을 징조입니다.",en:"The tiger embodies power and honor — riding or meeting one foretells aid from a powerful figure."},
+ {kws:["물고기","생선","fish"],kr:"물고기는 재물과 다산의 상징입니다. 큰 물고기를 잡으면 큰 재물이 들어옵니다.",en:"Fish symbolize wealth and abundance — catching a large one brings large fortune."},
+ {kws:["똥","대변","poop","feces"],kr:"똥꿈은 대표적인 재물꿈입니다. 몸에 묻거나 밟으면 뜻밖의 횡재가 따릅니다.",en:"Dreams of excrement are classic wealth dreams — touching or stepping in it brings unexpected windfall."},
+ {kws:["피","blood"],kr:"피는 전통적으로 재물을 뜻합니다. 피를 흘리거나 묻히는 꿈은 재물이 생길 징조입니다.",en:"Blood traditionally means wealth — shedding or being stained with it signals incoming money."},
+ {kws:["이빨","이가 빠","치아","teeth","tooth"],kr:"이가 빠지는 꿈은 전통적으로 가까운 사람의 우환을 암시한다고 봅니다. 가족의 안부를 살피고 건강을 챙기라는 신호로 받아들이십시오.",en:"Losing teeth traditionally hints at concern for someone close — take it as a sign to check on family and mind health."},
+ {kws:["죽","죽는","죽었","death","die","dead"],kr:"꿈속의 죽음은 끝이 아니라 새로운 시작을 뜻하는 역몽입니다. 낡은 것이 끝나고 새 운이 열립니다.",en:"Death in dreams is a reversed omen — not an end but a new beginning. The old closes and new fortune opens."},
+ {kws:["시험","exam","test"],kr:"시험 꿈은 현실의 평가나 결정을 앞둔 긴장을 담습니다. 준비한 만큼 좋은 결과가 따를 것입니다.",en:"Exam dreams carry tension before real evaluation — results will follow your preparation."},
+ {kws:["신발","구두","shoe"],kr:"신발은 배우자·지위·터전을 상징합니다. 새 신은 새 출발, 잃어버리면 소중한 것을 살피라는 뜻입니다.",en:"Shoes symbolize partner, position, and foundation — new shoes mean a fresh start; losing them says guard what is precious."},
+ {kws:["하늘을 날","날아","flying","fly"],kr:"하늘을 나는 꿈은 신분 상승과 소원 성취의 길몽입니다. 자유롭게 날수록 운이 크게 열립니다.",en:"Flying is an omen of rising status and fulfilled wishes — the freer the flight, the greater the fortune."},
+ {kws:["떨어지","추락","falling","fell"],kr:"떨어지는 꿈은 지위나 마음의 불안을 비춥니다. 무리한 확장을 줄이고 기반을 다지라는 신호입니다.",en:"Falling reflects unease about standing or heart — a signal to consolidate rather than overextend."},
+ {kws:["조상","돌아가신","죽은 사람","ancestor","deceased"],kr:"조상이나 고인이 나타나는 꿈은 보살핌과 전할 말이 있다는 뜻으로, 대체로 길몽입니다. 밝은 표정이었다면 좋은 소식이 옵니다.",en:"Ancestors or the departed appearing means guardianship and a message — mostly auspicious. A bright face heralds good news."},
+ {kws:["아기","아이를 낳","baby","birth"],kr:"아기는 새로운 시작과 결실을 상징합니다. 예쁜 아기를 안으면 새 일이 순조롭게 자랍니다.",en:"A baby symbolizes new beginnings and fruition — holding a lovely baby means new ventures grow smoothly."},
+ {kws:["임신","pregnan"],kr:"임신 꿈은 창조와 잉태의 상징으로, 새 프로젝트나 소망이 자라나고 있음을 뜻합니다.",en:"Pregnancy dreams symbolize creation — a new project or wish is quietly growing."},
+ {kws:["돈","현금","money","cash"],kr:"꿈에서 돈을 줍는 것은 전통 해몽에서는 오히려 지출을 조심하라는 뜻으로 봅니다. 잃는 꿈이 도리어 재물이 들어오는 역몽입니다.",en:"Finding money traditionally warns of spending; losing it is the reversed omen of wealth coming in."},
+ {kws:["금","보석","반지","gold","jewel","ring"],kr:"금과 보석은 명예와 귀한 인연을 뜻합니다. 반지를 받으면 좋은 인연이나 계약이 성사됩니다.",en:"Gold and jewels mean honor and precious bonds — receiving a ring seals a good relationship or contract."},
+ {kws:["집","house","home"],kr:"집은 자신과 터전의 상징입니다. 새 집이나 큰 집은 발전을, 무너지는 집은 변동을 앞둔 마음을 비춥니다.",en:"A house mirrors self and foundation — a new or grand house means growth; a collapsing one reflects change ahead."},
+ {kws:["불","화재","fire"],kr:"불꿈은 번창의 대표 길몽입니다. 집이 활활 타오르면 사업과 가세가 크게 일어납니다.",en:"Fire is a classic omen of prosperity — a house ablaze means business and family fortune rising high."},
+ {kws:["맑은 물","깨끗한 물","clear water"],kr:"맑은 물은 재물과 마음의 평안을 뜻하는 길몽입니다. 마시거나 몸을 담그면 더욱 좋습니다.",en:"Clear water means wealth and peace of mind — drinking or bathing in it is even better."},
+ {kws:["물","바다","강","water","sea","ocean","river"],kr:"물은 재물과 감정의 흐름입니다. 맑고 잔잔하면 길하고, 탁하거나 범람하면 감정과 지출을 다스리라는 뜻입니다.",en:"Water is the flow of wealth and emotion — clear and calm is auspicious; murky or flooding says govern feelings and spending."},
+ {kws:["산","mountain"],kr:"산에 오르는 꿈은 목표 성취를 뜻합니다. 정상에 오르면 큰 뜻을 이룹니다.",en:"Climbing a mountain means achieving goals — reaching the summit fulfills a great ambition."},
+ {kws:["비","rain"],kr:"비는 근심을 씻고 풍요를 부르는 상징입니다. 단비를 맞으면 막힌 일이 해갈됩니다.",en:"Rain washes worry and calls abundance — welcome rain relieves what was blocked."},
+ {kws:["눈","snow"],kr:"눈은 정화와 풍년의 상징입니다. 소복이 쌓인 눈은 재물이 쌓일 징조입니다.",en:"Snow symbolizes purification and plenty — thick snowfall is wealth piling up."},
+ {kws:["개","강아지","dog","puppy"],kr:"개는 충직한 친구와 조력자의 상징입니다. 따르는 개는 귀인이 곁에 있다는 뜻입니다.",en:"A dog symbolizes loyal friends and helpers — one following you means an ally is near."},
+ {kws:["고양이","cat"],kr:"고양이는 예민한 관계와 구설을 암시합니다. 다정한 고양이라면 여성 귀인의 도움이 있습니다.",en:"A cat hints at delicate relations and gossip — a friendly cat means help from a female ally."},
+ {kws:["새","bird"],kr:"새는 소식의 상징입니다. 날아드는 새는 반가운 소식, 날아가는 새는 떠나보낼 일을 뜻합니다.",en:"Birds carry news — one flying in brings welcome word; one flying away means a letting-go."},
+ {kws:["말","horse"],kr:"말은 출세와 이동의 상징입니다. 달리는 말을 타면 일이 빠르게 성사됩니다.",en:"A horse means advancement and movement — riding a galloping one speeds matters to success."},
+ {kws:["소","cow","ox"],kr:"소는 조상과 재산의 상징입니다. 살진 소가 들어오면 집안에 재물이 늘어납니다.",en:"An ox symbolizes ancestors and property — a plump ox entering means household wealth grows."},
+ {kws:["닭","rooster","chicken"],kr:"닭은 새벽을 알리는 시작의 상징입니다. 우는 닭은 기쁜 소식이 가까웠다는 뜻입니다.",en:"The rooster announces dawn — its crow means joyful news is near."},
+ {kws:["쥐","rat","mouse"],kr:"쥐는 작은 손실과 근심을 암시합니다. 문단속하듯 재물과 문서를 점검하라는 신호입니다.",en:"A rat hints at small losses — a signal to check your valuables and documents as you would lock a door."},
+ {kws:["벌레","insect","bug"],kr:"벌레는 자잘한 구설과 신경 쓰이는 일을 뜻합니다. 벌레를 없애면 근심도 사라집니다.",en:"Insects mean petty gossip and nagging worries — removing them removes the worry."},
+ {kws:["꽃","flower"],kr:"꽃은 경사와 인연의 상징입니다. 활짝 핀 꽃은 기쁜 일이, 꽃을 받으면 좋은 인연이 찾아옵니다.",en:"Flowers mean celebration and connection — full bloom brings joy; receiving flowers brings a fine bond."},
+ {kws:["나무","tree"],kr:"나무는 성장과 집안의 기둥을 상징합니다. 푸르게 자란 나무는 가운이 일어나는 길몽입니다.",en:"A tree symbolizes growth and the family pillar — a lush tree means rising family fortune."},
+ {kws:["열매","과일","fruit"],kr:"열매는 노력의 결실입니다. 잘 익은 과일을 따면 성과와 재물이 손에 들어옵니다.",en:"Fruit is the harvest of effort — picking ripe fruit places achievement and wealth in your hands."},
+ {kws:["결혼","혼인","wedding","marriage"],kr:"꿈속 결혼식은 전통 해몽에서 신중히 보는 상징이니, 들뜬 약속보다 주변 관계를 차분히 살피라는 뜻으로 받아들이십시오.",en:"A dream wedding is read cautiously in tradition — take it as counsel to review relationships calmly rather than rush promises."},
+ {kws:["전쟁","싸움","war","fight"],kr:"전쟁과 싸움은 내면의 갈등과 경쟁을 비춥니다. 이기는 꿈이라면 현실의 경쟁에서도 승산이 있습니다.",en:"War and fights mirror inner conflict and rivalry — victory in the dream means good odds in reality."},
+ {kws:["칼","총","knife","sword","gun"],kr:"칼과 총은 결단과 권력의 상징입니다. 손에 쥐면 주도권을 잡고, 위협받으면 구설을 조심하라는 뜻입니다.",en:"Blades and guns symbolize decision and power — holding one means seizing initiative; being threatened warns of gossip."},
+ {kws:["귀신","유령","ghost"],kr:"귀신은 마음속 불안의 상징이나, 도깨비라면 오히려 재물을 몰고 오는 존재로 봅니다. 무섭지 않았다면 길몽입니다.",en:"Ghosts embody hidden unease, yet the Korean dokkaebi brings wealth — if you felt no fear, it is auspicious."},
+ {kws:["별","star"],kr:"별은 명예와 귀한 인물의 상징입니다. 별을 삼키거나 품으면 큰 인물이 될 태몽으로 봅니다.",en:"Stars mean honor and greatness — swallowing or embracing one is a conception omen of a remarkable child."},
+ {kws:["달","moon"],kr:"달은 소원과 어머니의 상징입니다. 보름달을 보면 소원이 이루어질 징조입니다.",en:"The moon holds wishes and the maternal — a full moon foretells a wish fulfilled."},
+ {kws:["해","태양","sun"],kr:"해는 최고 권위와 대길의 상징입니다. 해를 품는 꿈은 크게 될 인물의 태몽으로 유명합니다.",en:"The sun is supreme authority and great fortune — embracing it is the famed conception dream of greatness."},
+ {kws:["자동차","차 사고","car","accident"],kr:"자동차는 인생의 진행 속도입니다. 사고나 고장은 계획의 차질을 암시하니 일정에 여유를 두십시오.",en:"A car is life's pace — crashes or breakdowns hint at plan disruptions; leave slack in your schedule."},
+ {kws:["경찰","police"],kr:"경찰은 규율과 양심의 상징입니다. 도움을 받으면 길하고, 쫓기면 마음의 짐을 정리하라는 뜻입니다.",en:"Police embody rule and conscience — receiving help is auspicious; being chased says settle a burden of heart."},
+ {kws:["도둑","thief","rob"],kr:"도둑이 들면 뜻밖에도 재물이 들어오는 역몽으로 봅니다. 다만 실제 보안 점검도 겸하십시오.",en:"A thief entering is read in reverse — wealth coming in. Still, check your locks in waking life."},
+ {kws:["머리카락","hair"],kr:"머리카락을 자르면 근심을 덜고, 빠지면 기력과 구설을 살피라는 뜻입니다.",en:"Cutting hair sheds worry; losing it says tend your vitality and watch for gossip."}
+];
+
+/* ════════ 라벨 ════════ */
+const LBL = K ? {
+  visitor1:"당신은 오늘 ", visitor2:" 번째로 ", visitor3:"을(를) 보는 방문자입니다",
+  who:"님의 결과", home:"⌂ 처음으로", back:"↺ 다시 입력",
+  total:"총운", love:"애정·결혼운", work:"직업운", money:"금전운", health:"건강운",
+  monthly:"월별 운세", month:"월",
+  sumT:"올해의 괘", hanja:"한자", reading:"독음", meaning:"풀이",
+  advice:"오늘의 조언", other:"다른 운세 보기", retry:"다시 입력하기",
+  note:"본 운세는 한국 전통 명리·비결을 바탕으로 구성된 오락·참고용 콘텐츠입니다.",
+  yearP:"년주(年柱)", stem:"천간", branch:"지지", zodiac:"띠", elem:"오행",
+  nature:"타고난 성품", aptitude:"직업 적성",
+  sajuNote:"※ 1~2월생은 입춘 기준에 따라 띠가 달라질 수 있습니다. 정밀 사주 원국(월주·일주·시주) 풀이는 곧 업데이트됩니다.",
+  gScore:"궁합 점수", me:"나", partner:"상대방", gTotal:"총평", gChem:"성격 궁합", gAdvice:"두 사람을 위한 조언",
+  dSym:"꿈에서 발견된 상징", dNone:"입력하신 꿈에서 뚜렷한 전통 상징을 찾지 못했습니다. 꿈 전체의 분위기가 밝고 편안했다면 길몽으로, 무섭고 답답했다면 마음을 살피라는 신호로 보는 것이 전통 해몽의 기본입니다.",
+  dIntro:"전통 해몽", myDream:"내가 꾼 꿈"
+} : {
+  visitor1:"You are today's visitor No. ", visitor2:" for ", visitor3:"",
+  who:"'s Reading", home:"⌂ Home", back:"↺ Edit Info",
+  total:"Overall Fortune", love:"Love & Marriage", work:"Career", money:"Wealth", health:"Health",
+  monthly:"Monthly Fortune", month:"",
+  sumT:"This Year's Hexagram", hanja:"Hanja", reading:"Reading", meaning:"Meaning",
+  advice:"Today's Advice", other:"Try Another Reading", retry:"Edit My Info",
+  note:"This reading is entertainment/reference content based on Korean traditional fortune-telling.",
+  yearP:"Year Pillar", stem:"Heavenly Stem", branch:"Earthly Branch", zodiac:"Zodiac", elem:"Element",
+  nature:"Innate Nature", aptitude:"Career Aptitude",
+  sajuNote:"※ For Jan–Feb births, the zodiac year may differ by the Ipchun (spring) boundary. Full four-pillar analysis is coming soon.",
+  gScore:"Compatibility Score", me:"You", partner:"Partner", gTotal:"Overview", gChem:"Character Chemistry", gAdvice:"Advice for You Two",
+  dSym:"Symbols Found in Your Dream", dNone:"No distinct traditional symbol was found in your dream. In Korean tradition, a bright and peaceful dream is auspicious; a fearful or stifling one is a sign to tend your heart.",
+  dIntro:"Traditional Reading", myDream:"My Dream"
+};
+
+/* ════════ 렌더링 ════════ */
+const $ = id => document.getElementById(id);
+$("resTitle").textContent = TYPES[LANG][type] || type;
+$("lnkHome").textContent = LBL.home;
+$("lnkBack").textContent = LBL.back;
+$("lnkBack").href = "input.html?type=" + type;
+$("btnOther").textContent = LBL.other;
+$("btnRetry").textContent = LBL.retry;
+$("btnRetry").href = "input.html?type=" + type;
+$("resNote").textContent = LBL.note;
+
+/* 방문자 카운터 (Abacus 무료 API · 실패 시 임시 숫자) */
+(async function(){
+  const NS = "kfortune_story_v1";
+  const now = new Date();
+  const y = now.getFullYear(), mo = String(now.getMonth()+1).padStart(2,"0"), d = String(now.getDate()).padStart(2,"0");
+  let n;
+  try{
+    const res = await fetch("https://abacus.jasoncameron.dev/hit/" + NS + "/t_" + type + "_d" + y + mo + d).then(x => x.json());
+    n = res.value;
+  }catch(e){
+    n = 41 + now.getHours() * 5;
+  }
+  $("resVisitor").innerHTML = LBL.visitor1 + "<b>" + n.toLocaleString() + "</b>" + LBL.visitor2 + (TYPES[LANG][type]||"") + LBL.visitor3;
+})();
+
+function nameOf(p){ return (p && p.name) ? p.name : ""; }
+if(P && P.name && type !== "dream") $("resWho").textContent = P.name + LBL.who;
+
+function sec(title, html){ return '<div class="sec"><h3>' + title + '</h3>' + html + '</div>'; }
+function para(t){ return '<p>' + t + '</p>'; }
+function tx(o){ return K ? o.kr : o.en; }
+
+let out = "";
+
+if(type === "dream"){
+  const dreamText = localStorage.getItem("kf_dream") || "";
+  const low = dreamText.toLowerCase();
+  const hits = DREAMS.filter(d => d.kws.some(k => low.includes(k.toLowerCase())));
+  out += sec(LBL.myDream, para(dreamText ? dreamText.replace(/</g,"&lt;") : "—"));
+  if(hits.length){
+    let chips = hits.map(h => '<span class="dream-sym">' + h.kws[0] + '</span>').join("");
+    out += sec(LBL.dSym, chips);
+    hits.slice(0,6).forEach((h,i)=>{
+      out += sec(LBL.dIntro + " " + (i+1), para(tx(h)));
+    });
+  }else{
+    out += sec(LBL.dIntro, para(LBL.dNone));
+  }
+}
+else if(type === "gunghap" && P && P2){
+  const y1 = +P.bdate.slice(0,4), y2 = +P2.bdate.slice(0,4);
+  const b1 = (y1-4)%12, b2 = (y2-4)%12;
+  const e1 = Math.floor(((y1-4)%10)/2), e2 = Math.floor(((y2-4)%10)/2);
+  /* 관계 판정 */
+  const yukhap = [[0,1],[2,11],[3,10],[4,9],[5,8],[6,7]].some(p=>(p[0]===b1&&p[1]===b2)||(p[0]===b2&&p[1]===b1));
+  const samhap = [[0,4,8],[2,6,10],[1,5,9],[3,7,11]].some(g=>g.includes(b1)&&g.includes(b2)&&b1!==b2);
+  const chung = Math.abs(b1-b2)===6;
+  const saeng = (e1+1)%5===e2 || (e2+1)%5===e1;   /* 상생 */
+  const geuk  = (e1+2)%5===e2 || (e2+2)%5===e1;   /* 상극 */
+  let score = 68;
+  if(yukhap) score += 20; else if(samhap) score += 16; else if(chung) score -= 22;
+  if(saeng) score += 9; else if(geuk) score -= 7;
+  const r = rng(hashStr(P.bdate + P2.bdate));
+  score += Math.floor(r()*7) - 3;
+  score = Math.max(38, Math.min(99, score));
+
+  out += '<table class="hanja-table"><tr><th></th><th>' + LBL.zodiac + '</th><th>' + LBL.elem + '</th></tr>'
+    + '<tr><td>' + (nameOf(P)||LBL.me) + '</td><td class="big" style="font-size:1.05rem">' + ZODIAC[LANG][b1] + ' (' + BRANCH_H[b1] + ')</td><td>' + ELEM[LANG][e1] + '</td></tr>'
+    + '<tr><td>' + (nameOf(P2)||LBL.partner) + '</td><td class="big" style="font-size:1.05rem">' + ZODIAC[LANG][b2] + ' (' + BRANCH_H[b2] + ')</td><td>' + ELEM[LANG][e2] + '</td></tr></table>';
+  out += '<div class="score-ring"><span class="num">' + score + '</span><span class="of"> / 100 · ' + LBL.gScore + '</span></div>';
+
+  let total;
+  if(yukhap) total = K?"두 사람은 육합(六合)의 인연으로, 서로의 부족함을 채워 주는 하늘이 맺은 짝입니다. 함께할수록 운이 커지는 상승 궁합입니다.":"You share a Yukhap bond — a heaven-tied pair completing each other's lack. Fortune grows the longer you stand together.";
+  else if(samhap) total = K?"두 사람은 삼합(三合)의 인연으로, 같은 방향을 바라보는 동지 같은 궁합입니다. 목표를 함께 세우면 큰일을 이룹니다.":"You share a Samhap bond — comrades gazing the same direction. Set goals together and great things follow.";
+  else if(chung) total = K?"두 사람은 충(沖)의 관계로 기질이 정반대라 부딪히기 쉬우나, 서로를 존중하면 오히려 서로에게 없는 것을 배우는 자석 같은 인연이 됩니다.":"Yours is a Chung (clash) pairing — opposite temperaments that spark, yet with respect you become magnets teaching each other what each lacks.";
+  else total = K?"두 사람은 무난하고 자연스러운 궁합입니다. 큰 파란 없이 서로에게 스며드는 인연이니, 표현을 아끼지 않는 것이 관계를 깊게 합니다.":"A natural, easy pairing — a bond that seeps in without storms. Generous expression is what deepens it.";
+  out += sec(LBL.gTotal, para(total));
+
+  let chem;
+  if(saeng) chem = K?"오행이 서로를 살리는 상생(相生) 관계입니다. 한 사람의 기운이 다른 사람을 키워 주니, 곁에 있는 것만으로 서로에게 힘이 됩니다.":"Your elements nourish each other (Sangsaeng) — one's energy grows the other. Simply being near is mutual strength.";
+  else if(geuk) chem = K?"오행이 부딪히는 상극(相剋) 기운이 있어 의견 차이가 생길 수 있으나, 다름을 인정하면 서로를 단련시키는 좋은 숫돌이 됩니다.":"Your elements press against each other (Sanggeuk) — differences arise, yet acknowledged, they become whetstones sharpening you both.";
+  else chem = K?"오행이 나란히 흐르는 편안한 관계입니다. 비슷한 속도로 걷는 두 사람이니 큰 갈등 없이 오래갑니다.":"Your elements flow side by side — two people walking at a similar pace, lasting long without great conflict.";
+  out += sec(LBL.gChem, para(chem));
+  out += sec(LBL.gAdvice, para(pick(r, POOL.advice) ? tx(pick(rng(hashStr("adv"+P.bdate+P2.bdate)), POOL.advice)) : ""));
+}
+else if(type === "saju" && P){
+  const y = +P.bdate.slice(0,4);
+  const si = (y-4)%10, bi = (y-4)%12, ei = Math.floor(si/2);
+  out += '<table class="hanja-table"><tr><th>' + LBL.stem + '</th><th>' + LBL.branch + '</th><th>' + LBL.zodiac + '</th><th>' + LBL.elem + '</th></tr>'
+    + '<tr><td class="big">' + STEM_H[si] + '</td><td class="big">' + BRANCH_H[bi] + '</td><td>' + ZODIAC[LANG][bi] + '</td><td>' + ELEM[LANG][ei] + '</td></tr></table>';
+  const r = rng(hashStr(P.bdate + (P.btime||"") + "saju"));
+  const lvl = Math.floor(r()*5);
+  out += '<div class="sum-card"><span class="lv">' + LBL.yearP + ' · ' + ELEM[LANG][ei] + '</span><p class="line">' + (K?ELEM_CHAR.kr[ei]:ELEM_CHAR.en[ei]) + '</p></div>';
+  out += sec(LBL.nature, para(K?ELEM_CHAR.kr[ei]:ELEM_CHAR.en[ei]));
+  out += sec(LBL.aptitude, para(K?ELEM_JOB.kr[ei]:ELEM_JOB.en[ei]));
+  out += sec(LBL.money, para(tx(pick(r, POOL.money[lvl]))));
+  out += sec(LBL.health, para(tx(pick(r, POOL.health[lvl]))));
+  out += sec(LBL.advice, para(tx(pick(r, POOL.advice))));
+  out += '<p class="note" style="margin-top:.6rem">' + LBL.sajuNote + '</p>';
+}
+else if(P){
+  /* tojeong / newyear / today */
+  const salt = type === "today" ? new Date().toISOString().slice(0,10) : String(new Date().getFullYear());
+  const r = rng(hashStr(P.bdate + "|" + (P.gender||"") + "|" + type + "|" + salt));
+  const lvl = Math.floor(r()*5);
+  const hj = pick(r, HANJA[lvl]);
+  out += '<div class="sum-card"><span class="lv">' + LV[LANG][lvl] + '</span><p class="line">' + tx(hj) + '</p></div>';
+  out += '<table class="hanja-table"><tr><th>' + LBL.hanja + '</th><th>' + LBL.reading + '</th><th>' + LBL.meaning + '</th></tr>'
+    + '<tr><td class="big">' + hj.h + '</td><td>' + hj.r + '</td><td style="text-align:left">' + tx(hj) + '</td></tr></table>';
+  out += sec(LBL.total, para(tx(pick(r, POOL.total[lvl]))));
+  out += sec(LBL.love,  para(tx(pick(r, POOL.love[lvl]))));
+  out += sec(LBL.work,  para(tx(pick(r, POOL.work[lvl]))));
+  out += sec(LBL.money, para(tx(pick(r, POOL.money[lvl]))));
+  out += sec(LBL.health,para(tx(pick(r, POOL.health[lvl]))));
+  if(type !== "today"){
+    let rows = "", used = [];
+    for(let m=1; m<=12; m++){
+      let idx;
+      do{ idx = Math.floor(r()*POOL.months.length); }while(used.includes(idx) && used.length < POOL.months.length);
+      used.push(idx);
+      rows += '<tr><td class="m">' + (K ? m + "월" : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][m-1]) + '</td><td>' + tx(POOL.months[idx]) + '</td></tr>';
+    }
+    out += sec(LBL.monthly, '<table class="month-table">' + rows + '</table>');
+  }else{
+    out += sec(LBL.advice, para(tx(pick(r, POOL.advice))));
+  }
+}
+else{
+  out = '<div class="sec"><p>' + (K ? "입력 정보가 없습니다. 처음 화면에서 다시 시작해 주세요." : "No input found. Please start again from the home screen.") + '</p></div>';
+}
+
+$("resBody").innerHTML = out;
+</script>
+</body>
+</html>
