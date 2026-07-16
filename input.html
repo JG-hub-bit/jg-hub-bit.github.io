@@ -245,6 +245,7 @@ footer p{
   background:#FFF; color:var(--meok);
 }
 .field textarea{min-height:110px; resize:vertical;}
+.fhelp{font-family:'Noto Sans KR',sans-serif; font-size:.74rem; color:#8A8171; margin-top:.32rem; line-height:1.5;}
 .field input:focus, .field select:focus, .field textarea:focus{
   outline:none; border-color:var(--hwang);
 }
@@ -294,6 +295,7 @@ footer p{
   .menu-btn .desc{ color:#A99F8C !important; }
   .sec p, .month-table td, .radiorow label{ color:#D8CFBB !important; }
   .field > label{ color:#C9B48A !important; }
+  .fhelp{color:#A99F8C !important;}
   .field input, .field select, .field textarea{
     background:#332D25 !important; border-color:#5A4F3E !important; color:#EFE6D0 !important;
   }
@@ -478,7 +480,9 @@ const T = {
     rDay:"그 날 하루만", rWeek:"그 날이 속한 한 주 (월~일)",
     gender:"성별", male:"남성", female:"여성",
     bdate:"생년월일", cal:"양력/음력", solar:"양력", lunar:"음력",
-    btime:"태어난 시간", region:"태어난 지역", regionPh:"예: 서울 (선택)",
+    btime:"태어난 시간 (12지시)", etime:"정확한 출생 시각 (선택 · 알면 훨씬 정밀해집니다)",
+    region:"태어난 지역", regionHelp:"진태양시 보정에 사용됩니다",
+    cityNone:"모름 / 해외", etimeHelp:"입력하시면 진태양시로 보정해 시주를 정확히 계산합니다",
     dreamLabel:"꾼 꿈의 내용", dreamPh:"꿈에서 본 장면, 등장한 사람·동물·사물 등을 자유롭게 적어주세요",
     run:"운세 보기", reset:"초기화",
     needBdate:"생년월일을 입력해 주세요", needDream:"꿈 내용을 입력해 주세요",
@@ -495,7 +499,9 @@ const T = {
     rDay:"That single day", rWeek:"The whole week (Mon–Sun)",
     gender:"Gender", male:"Male", female:"Female",
     bdate:"Date of Birth", cal:"Calendar", solar:"Solar", lunar:"Lunar",
-    btime:"Time of Birth", region:"Birthplace", regionPh:"e.g. Seoul (optional)",
+    btime:"Time of Birth (2-hour block)", etime:"Exact birth time (optional · far more precise)",
+    region:"Birthplace", regionHelp:"Used for true solar time correction",
+    cityNone:"Unknown / Overseas", etimeHelp:"If given, your Hour Pillar is calculated from true solar time",
     dreamLabel:"Describe Your Dream", dreamPh:"Describe scenes, people, animals or objects that appeared in your dream",
     run:"Reveal My Fortune", reset:"Reset",
     needBdate:"Please enter your date of birth", needDream:"Please describe your dream",
@@ -510,14 +516,21 @@ const T = {
 })() ];
 
 /* ══════════ 운세종류별 입력 구성 ══════════ */
+const CITY = [
+  ["seoul","서울","Seoul"],["busan","부산","Busan"],["daegu","대구","Daegu"],["incheon","인천","Incheon"],
+  ["gwangju","광주","Gwangju"],["daejeon","대전","Daejeon"],["ulsan","울산","Ulsan"],["suwon","수원","Suwon"],
+  ["chuncheon","춘천","Chuncheon"],["gangneung","강릉","Gangneung"],["cheongju","청주","Cheongju"],
+  ["jeonju","전주","Jeonju"],["pohang","포항","Pohang"],["changwon","창원","Changwon"],
+  ["mokpo","목포","Mokpo"],["jeju","제주","Jeju"]
+];
 const params = new URLSearchParams(location.search);
 const type = params.get("type") || localStorage.getItem("kf_selected") || "tojeong";
 const CFG = {
-  tojeong: {persons:[ {key:"main", fields:["name","gender","bdate","cal","btime"]} ]},
-  newyear: {persons:[ {key:"main", fields:["name","gender","bdate","cal","btime"]} ]},
-  nextyear:{persons:[ {key:"main", fields:["name","gender","bdate","cal","btime"]} ]},
-  today:   {persons:[ {key:"main", fields:["tdate","trange","name","gender","bdate","cal","btime"]} ]},
-  saju:    {persons:[ {key:"main", fields:["name","gender","bdate","cal","btime","region"]} ]},
+  tojeong: {persons:[ {key:"main", fields:["name","gender","bdate","cal"]} ]},
+  newyear: {persons:[ {key:"main", fields:["name","gender","bdate","cal","btime","etime","region"]} ]},
+  nextyear:{persons:[ {key:"main", fields:["name","gender","bdate","cal","btime","etime","region"]} ]},
+  today:   {persons:[ {key:"tdate_only"} ], persons:[ {key:"main", fields:["tdate","trange","name","gender","bdate","cal","btime","etime","region"]} ]},
+  saju:    {persons:[ {key:"main", fields:["name","gender","bdate","cal","btime","etime","region"]} ]},
   gunghap: {persons:[ {key:"main", fields:["name","gender","bdate","cal","btime"]},
                       {key:"sub",  fields:["name","gender","bdate","cal","btime"]} ]},
   dream:   {dream:true}
@@ -555,8 +568,16 @@ function fieldHTML(p, f){
     return '<div class="field"><label>'+T.trange+'</label><div class="radiorow" data-group="'+id+'">'
       +'<label><input type="radio" name="'+id+'" value="day" checked><span>'+T.rDay+'</span></label>'
       +'<label><input type="radio" name="'+id+'" value="week"><span>'+T.rWeek+'</span></label></div></div>';
-  if(f === "region")
-    return '<div class="field"><label for="'+id+'">'+T.region+'</label><input type="text" id="'+id+'" placeholder="'+T.regionPh+'"></div>';
+  if(f === "etime")
+    return '<div class="field"><label for="'+id+'">'+T.etime+'</label><input type="time" id="'+id+'">'
+      +'<div class="fhelp">'+T.etimeHelp+'</div></div>';
+  if(f === "region"){
+    const lang = ["kr","en"].includes(localStorage.getItem("kf_lang")) ? localStorage.getItem("kf_lang") : "kr";
+    let opts = '<option value="">'+T.cityNone+'</option>';
+    CITY.forEach(c => { opts += '<option value="'+c[0]+'">'+(lang==="kr"?c[1]:c[2])+'</option>'; });
+    return '<div class="field"><label for="'+id+'">'+T.region+'</label><select id="'+id+'">'+opts+'</select>'
+      +'<div class="fhelp">'+T.regionHelp+'</div></div>';
+  }
   return "";
 }
 
@@ -590,7 +611,7 @@ document.querySelectorAll(".radiorow").forEach(row=>{
 function loadProfile(pkey){
   const d = JSON.parse(localStorage.getItem("kf_p_" + pkey) || "null");
   if(!d) return;
-  ["name","bdate","region"].forEach(f=>{
+  ["name","bdate","region","etime"].forEach(f=>{
     const el = document.getElementById(pkey+"_"+f);
     if(el && d[f]) el.value = d[f];
   });
@@ -601,6 +622,8 @@ function loadProfile(pkey){
   });
   const bt = document.getElementById(pkey+"_btime");
   if(bt && d.btime) bt.value = d.btime;
+  const rg = document.getElementById(pkey+"_region");
+  if(rg && d.region) rg.value = d.region;
 }
 if(!cfg.dream) cfg.persons.forEach(p=>loadProfile(p.key));
 
@@ -634,7 +657,7 @@ function run(){
       localStorage.setItem("kf_p_"+p.key, JSON.stringify({
         name:get(p.key+"_name"), gender:rad(p.key+"_gender"),
         bdate:bd, cal:rad(p.key+"_cal"),
-        btime:get(p.key+"_btime"), region:get(p.key+"_region")
+        btime:get(p.key+"_btime"), etime:get(p.key+"_etime"), region:get(p.key+"_region")
       }));
     }
   }
