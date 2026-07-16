@@ -466,8 +466,10 @@ footer p{
   </div>
 </main>
 <footer>
-  <p data-i18n="footer">K-Fortune Story · 한국 전통 운세 이야기</p>
+  <p><a href="about.html" id="fA">서비스 소개</a> · <a href="privacy.html" id="fP">개인정보처리방침</a> · <a href="terms.html" id="fT">이용약관</a></p>
+  <p style="margin-top:.4rem; opacity:.8">K-Fortune Story</p>
 </footer>
+<style>footer a{color:#3E3A32; text-decoration:none; border-bottom:1px solid rgba(62,58,50,.4);}</style>
 <script>
 /* ════════ 공용 ════════ */
 const LANG = (function(){
@@ -893,6 +895,15 @@ else{
 }
 
 $("resBody").innerHTML = out;
+</script>
+<script>
+(function(){
+  const s = localStorage.getItem("kf_lang");
+  const ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "en"];
+  const k = (s === "kr" || s === "en") ? (s === "kr") : ls.some(l => (l||"").toLowerCase().startsWith("ko"));
+  const t = k ? ["서비스 소개","개인정보처리방침","이용약관"] : ["About","Privacy Policy","Terms"];
+  ["fA","fP","fT"].forEach((id,i)=>{ const e = document.getElementById(id); if(e) e.textContent = t[i]; });
+})();
 </script>
 </body>
 </html>
