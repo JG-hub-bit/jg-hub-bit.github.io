@@ -557,7 +557,7 @@ footer p{
 <div class="toast" id="toast"></div>
 
 <footer>
-  <p><a href="about.html" id="fA">서비스 소개</a> · <a href="privacy.html" id="fP">개인정보처리방침</a> · <a href="terms.html" id="fT">이용약관</a></p>
+  <p><a href="about.html" id="fA" data-i18n="fA">서비스 소개</a> · <a href="privacy.html" id="fP" data-i18n="fP">개인정보처리방침</a> · <a href="terms.html" id="fT" data-i18n="fT">이용약관</a></p>
   <p style="margin-top:.4rem; opacity:.8">K-Fortune Story</p>
 </footer>
 <style>footer a{color:#3E3A32; text-decoration:none; border-bottom:1px solid rgba(62,58,50,.4);}</style>
@@ -579,6 +579,7 @@ const I18N = {
     m5:"두 사람은 잘 맞을까?", m5d:"궁합 · 띠와 오행으로 보는 인연",
     m6:"그 꿈은 무슨 뜻일까?", m6d:"꿈해몽 · 한국 전통 해몽",
     footer:"K-Fortune Story · 한국 전통 운세 이야기",
+    fA:"서비스 소개", fP:"개인정보처리방침", fT:"이용약관",
     toastSoon:"2단계에서 입력 화면이 연결됩니다 🙂",
     insT1:"홈 화면에 추가하기",
     insT2auto:"버튼 한 번이면 앱처럼 열립니다", insT2man:"몇 번만 누르면 앱처럼 열립니다",
@@ -608,6 +609,7 @@ const I18N = {
     m5:"Do we match?", m5d:"Korean synastry · zodiac & five elements",
     m6:"What did my dream mean?", m6d:"Traditional Korean dream reading",
     footer:"K-Fortune Story · Korean Traditional Fortune Telling",
+    fA:"About", fP:"Privacy Policy", fT:"Terms",
     toastSoon:"Input screen coming in Step 2 🙂",
     insT1:"Add to Home Screen",
     insT2auto:"One tap and it opens like an app", insT2man:"A few taps and it opens like an app",
@@ -644,6 +646,7 @@ function setLang(lang){
     if(I18N[lang][key] !== undefined) el.innerHTML = I18N[lang][key];
   });
   if(typeof renderVisitor === "function") renderVisitor();
+  if(typeof window._insRefresh === "function") window._insRefresh();
 }
 
 let _counts = null;
@@ -709,6 +712,11 @@ updateVisitor();
     btn.textContent = (mode === "auto") ? T().insBtn : T().insBtnMan;
   }
   function showBar(){ setBar(); bar.classList.add("on"); }
+  /* 언어 토글 시 배너·모달 문구 즉시 갱신 */
+  window._insRefresh = function(){
+    if(bar.classList.contains("on")) setBar();
+    if(modal.classList.contains("on")) openModal();
+  };
 
   /* 안드로이드·PC 크롬/엣지 → 원클릭 설치 */
   window.addEventListener("beforeinstallprompt", e => {
@@ -761,15 +769,6 @@ updateVisitor();
   document.getElementById("mClose").addEventListener("click", ()=> modal.classList.remove("on"));
   modal.addEventListener("click", e => { if(e.target === modal) modal.classList.remove("on"); });
   window.addEventListener("appinstalled", ()=> bar.classList.remove("on"));
-})();
-</script>
-<script>
-(function(){
-  const s = localStorage.getItem("kf_lang");
-  const ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "en"];
-  const k = (s === "kr" || s === "en") ? (s === "kr") : ls.some(l => (l||"").toLowerCase().startsWith("ko"));
-  const t = k ? ["서비스 소개","개인정보처리방침","이용약관"] : ["About","Privacy Policy","Terms"];
-  ["fA","fP","fT"].forEach((id,i)=>{ const e = document.getElementById(id); if(e) e.textContent = t[i]; });
 })();
 </script>
 <script>
