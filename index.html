@@ -8,6 +8,7 @@
 <title>K-Fortune Story | 한국 전통 운세</title>
 <meta name="description" content="토정비결, 사주, 궁합, 꿈해몽 — 한국 전통 운세를 온라인으로. Korean traditional fortune telling online.">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2795871274635118" crossorigin="anonymous"></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous"></script>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -190,14 +191,13 @@ h1 .accent{color:var(--jinsa);}
 
 
 /* ── 사이트 공유 바 ── */
-.share-bar{display:flex; align-items:center; gap:.55rem; margin:.2rem 0 .5rem; flex-wrap:wrap;}
+.share-bar{display:flex; align-items:center; gap:.55rem; margin:.2rem 0 1.3rem; flex-wrap:wrap;}
 .share-bar .sb-label{font-family:'Gowun Batang',serif; font-size:.86rem; font-weight:700; color:var(--noeurok); white-space:nowrap;}
 .share-bar .sb-div{width:1px; height:15px; background:var(--gold-line);}
 .sb-icons{display:flex; align-items:center; gap:.4rem; flex-wrap:wrap;}
 .sb-btn{width:34px; height:34px; border-radius:50%; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; transition:transform .12s, box-shadow .12s; background:#FFFDF7; box-shadow:0 1px 4px rgba(138,74,52,.14);}
 .sb-btn:hover{transform:translateY(-2px); box-shadow:0 4px 10px rgba(138,74,52,.22);}
 .sb-btn svg{width:19px; height:19px; display:block;}
-.share-luck{font-family:'Noto Sans KR',sans-serif; font-size:.8rem; color:#A0968A; margin:0 0 1.3rem; letter-spacing:-.01em;}
 /* ── 오늘의 일진 바 ── */
 .today-bar{
   max-width:540px; margin:1.4rem auto 0; padding:.8rem 1.1rem;
@@ -352,8 +352,6 @@ footer p{
   .install{background:#2A251E !important; border-color:#8A7A4E !important;}
   .install .t1{color:#F0E7D4 !important;} .install .t2{color:#A99F8C !important;}
   .share-bar .sb-label{color:#C9A85C !important;}
-  .sb-btn{background:#2A251E !important;}
-  .share-luck{color:#8A8171 !important;}
   .today-bar{background:#2A251E !important; border-color:#8A7A4E !important;}
   .today-bar .tb-line{color:#C9BFA9 !important;}
   .today-bar .tb-mean{border-color:#4A4336 !important; color:#B0A896 !important;}
@@ -542,8 +540,6 @@ footer p{
     <span class="sb-div"></span>
     <div class="sb-icons" id="sbIcons"></div>
   </div>
-  <p class="share-luck" id="shareLuck" data-i18n="shareLuck">나눌수록 커지는 게 복이래 🍀 친구한테도 슥—</p>
-
   <p class="eyebrow" data-i18n="eyebrow">K-Style Fortune Telling</p>
   <h1><span data-i18n="title1">운명의 문이 </span><span class="accent" data-i18n="title2">열립니다</span></h1>
   <p class="subtitle" data-i18n="subtitle">
@@ -677,7 +673,7 @@ const YR = new Date().getFullYear();
 const I18N = {
   kr: {
     eyebrow: "K-Style Fortune Telling",
-    shareLabel:"공유하기", shareLuck:"나눌수록 커지는 게 복이래 🍀 친구한테도 슥—",
+    shareLabel:"공유하기",
     shareTitle:"K-Fortune Story · 한국 전통 운세", shareText:"사주·토정비결·오늘의 운세, 이거 은근 잘 맞음 🔮 너도 봐봐",
     shareDone:"복 나눔 완료 ✨ 너한테도 좋은 거 올 거야",
     title1: "운명의 문이 ", title2: "열립니다",
@@ -710,7 +706,7 @@ const I18N = {
   },
   en: {
     eyebrow: "Korean Traditional Fortune",
-    shareLabel:"Share", shareLuck:"Good luck grows when you share it 🍀 pass it on",
+    shareLabel:"Share",
     shareTitle:"K-Fortune Story · Korean Fortune Telling", shareText:"Saju, Tojeong & daily fortune — lowkey accurate 🔮 try it",
     shareDone:"Shared ✨ good things coming your way",
     title1: "The Gate of Destiny ", title2: "Opens",
@@ -911,6 +907,8 @@ function renderToday(){
 }
 
 
+/* 카카오 SDK 초기화 */
+try{ if(window.Kakao && !Kakao.isInitialized()) Kakao.init("b0a14ae94e71c8295b9ab5f97cf6516a"); }catch(e){}
 /* ══ 사이트 공유 ══ */
 const SHARE_URL = "https://kfortunestory.com";
 const SVG_KAKAO = '<svg viewBox="0 0 24 24"><path fill="#3C1E1E" d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7-.2.7-.8 2.6-.9 3-.1.5.2.5.4.4.2-.1 2.6-1.8 3.7-2.5.7.1 1.4.2 2.1.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>';
@@ -942,12 +940,30 @@ function renderShare(){
       navigator.share({title:T.shareTitle, text:txt, url:url}).then(blessToast).catch(()=>{});
     });
   }
-  /* 카카오톡 */
+  /* 카카오톡 (SDK) */
   add(SVG_KAKAO, "KakaoTalk", ()=>{
-    /* SDK 없이 웹 공유 스킴 — 모바일은 앱, PC는 웹 공유창 */
-    window.open("https://sharer.kakao.com/talk/friends/picker/link?app_key=&url=" + enc(url), "_blank");
-    /* 폴백: 링크 복사 안내 */
-    setTimeout(blessToast, 300);
+    if(window.Kakao && Kakao.isInitialized && Kakao.isInitialized() && Kakao.Share){
+      try{
+        Kakao.Share.sendDefault({
+          objectType: "feed",
+          content: {
+            title: T.shareTitle,
+            description: T.shareText,
+            imageUrl: "https://kfortunestory.com/og-image.png",
+            link: { mobileWebUrl: url, webUrl: url }
+          },
+          buttons: [{ title: (currentLang==="kr"?"운세 보러 가기":"See my fortune"), link: { mobileWebUrl: url, webUrl: url } }]
+        });
+        blessToast();
+      }catch(e){
+        window.open("https://accounts.kakao.com", "_blank");
+      }
+    }else{
+      /* SDK 미로드 시 폴백: 링크 복사 */
+      (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject())
+        .then(()=>showToast(currentLang==="kr"?"카톡 앱에 붙여넣어 공유하세요 (링크 복사됨)":"Link copied — paste into KakaoTalk"))
+        .catch(()=>prompt(currentLang==="kr"?"이 링크를 복사하세요":"Copy this link", url));
+    }
   });
   /* WhatsApp */
   add(SVG_WA, "WhatsApp", ()=>{ window.open("https://wa.me/?text=" + full, "_blank"); blessToast(); });
