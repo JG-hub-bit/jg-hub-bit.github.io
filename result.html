@@ -326,6 +326,23 @@ footer p{
 .deun tr.now{background:#FBEFE9;}
 .deun tr.now .g{color:var(--jinsa);}
 .deun tr.now td{font-weight:700; color:var(--jinsa);}
+
+/* ── 운세 카드 공유 ── */
+.share-result{margin-top:1.6rem; text-align:center;}
+.sr-btn{background:linear-gradient(135deg,var(--jinsa),#8A4A34); color:#FFF7EA; border:none; border-radius:14px; padding:.95rem 1.6rem; font-family:'Gowun Batang',serif; font-size:1.02rem; font-weight:700; cursor:pointer; box-shadow:0 4px 14px rgba(194,59,34,.28); transition:transform .12s;}
+.sr-btn:hover{transform:translateY(-2px);}
+.sr-btn:disabled{opacity:.6;}
+.sr-luck{font-family:'Noto Sans KR',sans-serif; font-size:.82rem; color:#A0968A; margin-top:.7rem;}
+.sr-modal{position:fixed; inset:0; z-index:200; background:rgba(30,26,20,.7); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; padding:1.2rem;}
+.sr-card{max-width:400px; width:100%;}
+.sr-card img{width:100%; border-radius:18px; box-shadow:0 12px 40px rgba(0,0,0,.4); display:block;}
+.sr-actions{display:flex; gap:.5rem; margin-top:1rem;}
+.sr-a{flex:1; text-align:center; border:none; border-radius:12px; padding:.85rem; font-family:'Gowun Batang',serif; font-size:.95rem; font-weight:700; cursor:pointer; text-decoration:none;}
+.sr-share{background:var(--jinsa); color:#FFF7EA;}
+.sr-save{background:#FFFDF7; color:var(--seokganju); border:1.5px solid var(--gold-line);}
+.sr-close{background:transparent; color:#D8CFBB; border:1.5px solid rgba(255,255,255,.3);}
+.kf-toast{position:fixed; left:50%; bottom:2rem; transform:translateX(-50%) translateY(20px); background:var(--meok); color:#FFF7EA; padding:.8rem 1.3rem; border-radius:12px; font-family:'Noto Sans KR',sans-serif; font-size:.88rem; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:300; max-width:88vw; text-align:center;}
+.kf-toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 .tj-note{background:#F0E7CF; border-radius:10px; padding:.8rem 1rem; font-family:'Noto Sans KR',sans-serif; font-size:.8rem; line-height:1.65; color:#6B5B3E; margin-bottom:.95rem;}
 @media (max-width:560px){
   .luck-grid{grid-template-columns:1fr;}
@@ -1212,6 +1229,7 @@ function luckLevel(A, e1, e2){
 }
 
 let out = "";
+let shareData = null;   /* 운세 카드 공유용 {title, grade, stars, sub, sub2} */
 
 if(type === "dream"){
   const dreamText = localStorage.getItem("kf_dream") || "";
@@ -1246,6 +1264,8 @@ else if(type === "gunghap" && P && P2){
     + '<tr><td>' + ((P2.name)||LBL.partner) + '</td><td class="big" style="font-size:1.05rem">' + ZODIAC[LANG][b2] + ' (' + BRANCH_H[b2] + ')</td><td>' + ELEM[LANG][e2] + '</td></tr></table>';
   const gStar = score >= 88 ? 5 : (score >= 74 ? 4 : (score >= 60 ? 3 : (score >= 48 ? 2 : 1)));
   const gGcol = gStar >= 4 ? "#3FA57A" : (gStar === 3 ? "#8F887B" : "#C97A2B");
+  shareData = {title:(K?"궁합":"Compatibility"), stars:gStar, grade:score+(K?"점":" pts"), sub:(yukhap?(K?"육합 · 하늘이 맺은 짝":"Yukhap · heaven-tied"):samhap?(K?"삼합 · 같은 곳을 보는 사이":"Samhap"):chung?(K?"충 · 끌리는 정반대":"Chung · opposites"):(K?"무난하고 편안한 인연":"An easy pairing")),
+    sub2:(P.name||"")+(P.name&&P2.name?" ♥ ":"")+(P2.name||"")};
   out += '<div class="score-ring"><span class="num">' + score + '</span><span class="of"> / 100 · ' + LBL.gScore + '</span>'
        + '<div class="gc-stars" style="color:' + gGcol + ';font-size:1.4rem;margin-top:.5rem">' + "★".repeat(gStar) + '<span class="gc-empty">' + "★".repeat(5-gStar) + '</span></div></div>';
 
@@ -1340,6 +1360,8 @@ else if(type === "today" && new URLSearchParams(location.search).get("z") !== nu
   $("resWho").textContent = "";
   const zStar = [3,4,4,2,5][rel];   /* 비화3 식상4 재성4 관성2 인성5 */
   const zGcol = zStar >= 4 ? "#3FA57A" : (zStar === 3 ? "#8F887B" : "#C97A2B");
+  shareData = {title:(K?nm+" 오늘의 운세":nm+" Today"), stars:zStar, grade:relTag[LANG][rel], sub:(K?_TXT.ZODIAC_TIP[rel].kr.replace("오늘의 한마디 — ",""):_TXT.ZODIAC_TIP[rel].en.replace("Today's word — ","")),
+    sub2:ZEMO[z] + " " + fmtDate(now)};
   out += '<div class="grade-card" style="border-color:' + zGcol + '">'
        + '<div class="gc-year">' + ZEMO[z] + " " + nm + " · " + fmtDate(now) + '</div>'
        + '<div class="gc-stars" style="color:' + zGcol + '">' + "★".repeat(zStar) + '<span class="gc-empty">' + "★".repeat(5-zStar) + '</span></div>'
@@ -1408,6 +1430,8 @@ else if(type === "today" && P){
   /* 선택한 날의 운세 — 별점 카드 */
   const dStar = selInfo.R.lvl === 0 ? 5 : (selInfo.R.lvl === 1 ? 4 : (selInfo.R.lvl === 2 ? 3 : 2));
   const dGcol = dStar >= 4 ? "#3FA57A" : (dStar === 3 ? "#8F887B" : "#C97A2B");
+  shareData = {title:(K?"오늘의 운세":"Today's Fortune"), stars:dStar, grade:LV[LANG][selInfo.R.lvl], sub:tx(selInfo.R.line),
+    sub2:fmtDate(selInfo.dt) + " · " + selInfo.hanja};
   out += '<div class="grade-card" style="border-color:' + dGcol + '">'
        + '<div class="gc-year">' + fmtDate(selInfo.dt) + ' · ' + selInfo.hanja + ' ' + selInfo.read + '</div>'
        + '<div class="gc-stars" style="color:' + dGcol + '">' + "★".repeat(dStar) + '<span class="gc-empty">' + "★".repeat(5-dStar) + '</span></div>'
@@ -1445,6 +1469,8 @@ else if(type === "tojeong" && P){
   const hj = pick(r, HANJA[lvl]);
   const tStar = 5 - lvl;
   const tGcol = tStar >= 4 ? "#3FA57A" : (tStar === 3 ? "#8F887B" : "#C97A2B");
+  shareData = {title:(K?TYPE_YEAR+"년 토정비결":TYPE_YEAR+" Tojeong"), stars:tStar, grade:LV[LANG][lvl], sub:hj.r,
+    sub2:tx(hj).slice(0,22)};
   out += '<div class="grade-card" style="border-color:' + tGcol + '">'
        + '<div class="gc-stars" style="color:' + tGcol + '">' + "★".repeat(tStar) + '<span class="gc-empty">' + "★".repeat(5-tStar) + '</span></div>'
        + '<div class="gc-tag" style="background:' + tGcol + '">' + LV[LANG][lvl] + '</div>'
@@ -1479,6 +1505,8 @@ else if(P){
   const gcol = gcolors[FS.grade];
 
   /* ── 종합 판정 카드 ── */
+  shareData = {title:(K? TYPE_YEAR+"년 신년운세":TYPE_YEAR+" Fortune"), stars:FS.grade, grade:tx(G.tag), sub:tx(G.cat),
+    sub2:(K?"직업 "+"★".repeat(FS.scores.gwan)+" · 재물 "+"★".repeat(FS.scores.jae)+" · 애정 "+"★".repeat(FS.scores.sik) : "Career "+"★".repeat(FS.scores.gwan)+" · Wealth "+"★".repeat(FS.scores.jae))};
   out += '<div class="grade-card" style="border-color:'+gcol+'">'
        + '<div class="gc-year">' + TYPE_YEAR + ' · ' + SH[Y.s] + BH[Y.b] + (K ? " " + SK[Y.s] + BK[Y.b] + "년" : "") + '</div>'
        + '<div class="gc-stars" style="color:'+gcol+'">' + "★".repeat(FS.grade) + '<span class="gc-empty">' + "★".repeat(5-FS.grade) + '</span></div>'
@@ -1557,6 +1585,124 @@ else{
 }
 
 $("resBody").innerHTML = out;
+
+function showToast(msg){
+  let t = document.getElementById("kfToast");
+  if(!t){ t = document.createElement("div"); t.id = "kfToast"; t.className = "kf-toast"; document.body.appendChild(t); }
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(t._timer); t._timer = setTimeout(()=>t.classList.remove("show"), 2600);
+}
+/* ══════════ 내 운세 카드 공유 ══════════ */
+(function(){
+  if(!shareData) return;
+  const SHARE_URL = "https://kfortunestory.com";
+  const T = {
+    kr:{btn:"내 운세 카드 공유하기", making:"카드 만드는 중…", save:"이미지 저장", share:"공유하기",
+        luck:"좋은 운은 나눌수록 커진대 🍀", done:"복 나눔 완료 ✨ 너한테도 좋은 거 올 거야",
+        cap:"내 " + shareData.title + " 결과 ⭐ 너도 봐봐 → kfortunestory.com", close:"닫기"},
+    en:{btn:"Share my fortune card", making:"Making your card…", save:"Save image", share:"Share",
+        luck:"Good luck grows when you share it 🍀", done:"Shared ✨ good things coming",
+        cap:"My " + shareData.title + " ⭐ check yours → kfortunestory.com", close:"Close"}
+  }[LANG];
+
+  /* 공유 버튼 삽입 */
+  const bar = document.createElement("div");
+  bar.className = "share-result";
+  bar.innerHTML = '<button class="sr-btn" id="srBtn">✨ ' + T.btn + '</button>'
+    + '<p class="sr-luck">' + T.luck + '</p>';
+  $("resBody").appendChild(bar);
+
+  const GCOL = {5:"#D4A017",4:"#3FA57A",3:"#8F887B",2:"#C97A2B",1:"#C23B22"};
+  const stars = Math.max(1, Math.min(5, shareData.stars||3));
+  const gcol = GCOL[stars];
+
+  /* 정사각형 카드 SVG (1080x1080) */
+  function cardSVG(){
+    const esc = s => (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    const starStr = "★".repeat(stars) + "☆".repeat(5-stars);
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">'
+      + '<rect width="1080" height="1080" fill="#F6F0E3"/>'
+      /* 상단 단청 띠 */
+      + '<rect x="0" y="0" width="1080" height="70" fill="#2E6B5E"/>'
+      + Array.from({length:10},(_,i)=>{const cx=54+i*120;return '<circle cx="'+cx+'" cy="35" r="22" fill="#1E4634"/><circle cx="'+cx+'" cy="35" r="15" fill="#C23B22"/><circle cx="'+cx+'" cy="35" r="8" fill="#E8A93D"/>';}).join("")
+      + '<rect x="0" y="70" width="1080" height="8" fill="#C9A85C"/>'
+      /* 좌우 기둥 */
+      + '<rect x="0" y="0" width="30" height="1080" fill="#8A4A34"/><rect x="1050" y="0" width="30" height="1080" fill="#8A4A34"/>'
+      /* 하단 기단 */
+      + '<rect x="0" y="1010" width="1080" height="70" fill="#B9B2A4"/><rect x="0" y="1004" width="1080" height="6" fill="#C9A85C"/>'
+      /* 백호 얼굴 (간략) */
+      + '<g transform="translate(540,265) scale(1.5)">'
+      + '<circle cx="0" cy="0" r="54" fill="#FAF9F5" stroke="#2E3138" stroke-width="3.6"/>'
+      + '<path d="M-40,-46 Q-50,-78 -22,-70 Q-8,-65 -16,-42 Z" fill="#FAF9F5" stroke="#2E3138" stroke-width="3.4"/>'
+      + '<path d="M40,-46 Q50,-78 22,-70 Q8,-65 16,-42 Z" fill="#FAF9F5" stroke="#2E3138" stroke-width="3.4"/>'
+      + '<g fill="#33383F"><path d="M0,-48 C-4,-38 -4,-27 0,-17 C4,-27 4,-38 0,-48 Z"/><path d="M-20,-44 C-22,-34 -19,-26 -13,-21 Z"/><path d="M20,-44 C22,-34 19,-26 13,-21 Z"/></g>'
+      + '<g stroke="#2E3138" stroke-width="6" stroke-linecap="round"><path d="M-32,-12 L-11,-4"/><path d="M32,-12 L11,-4"/></g>'
+      + '<circle cx="-19" cy="7" r="13" fill="#F5A623" stroke="#2E3138" stroke-width="3"/><circle cx="-19" cy="7" r="5" fill="#2B2620"/>'
+      + '<circle cx="19" cy="7" r="13" fill="#F5A623" stroke="#2E3138" stroke-width="3"/><circle cx="19" cy="7" r="5" fill="#2B2620"/>'
+      + '<path d="M-8,26 L8,26 C8,34 4,38 0,38 C-4,38 -8,34 -8,26 Z" fill="#D96A5A" stroke="#2E3138" stroke-width="2.6"/>'
+      + '<path d="M-34,40 Q0,34 34,40 Q35,54 0,60 Q-35,54 -34,40 Z" fill="#FFF" stroke="#2E3138" stroke-width="3.2"/></g>'
+      /* 제목 */
+      + '<text x="540" y="470" text-anchor="middle" font-family="serif" font-size="52" font-weight="700" fill="#2B2620">' + esc(shareData.title) + '</text>'
+      /* 별점 */
+      + '<text x="540" y="588" text-anchor="middle" font-family="sans-serif" font-size="92" fill="' + gcol + '" letter-spacing="8">' + starStr + '</text>'
+      /* 등급 뱃지 */
+      + '<rect x="390" y="628" width="300" height="74" rx="37" fill="' + gcol + '"/>'
+      + '<text x="540" y="678" text-anchor="middle" font-family="serif" font-size="44" font-weight="700" fill="#FFF">' + esc(shareData.grade) + '</text>'
+      /* 서브 */
+      + '<text x="540" y="775" text-anchor="middle" font-family="serif" font-size="40" fill="#4A4236">' + esc((shareData.sub||"").slice(0,26)) + '</text>'
+      + (shareData.sub2 ? '<text x="540" y="835" text-anchor="middle" font-family="sans-serif" font-size="32" fill="#8A7A4E">' + esc(shareData.sub2.slice(0,30)) + '</text>' : '')
+      /* 하단 브랜드 */
+      + '<text x="540" y="945" text-anchor="middle" font-family="serif" font-size="42" font-weight="700" fill="#8A4A34">K-Fortune Story</text>'
+      + '<text x="540" y="982" text-anchor="middle" font-family="sans-serif" font-size="27" fill="#A0968A">kfortunestory.com</text>'
+      + '</svg>';
+  }
+
+  async function makeBlob(){
+    const svg = cardSVG();
+    const img = new Image();
+    const svgBlob = new Blob([svg], {type:"image/svg+xml;charset=utf-8"});
+    const svgUrl = URL.createObjectURL(svgBlob);
+    await new Promise((res,rej)=>{ img.onload=res; img.onerror=rej; img.src=svgUrl; });
+    const canvas = document.createElement("canvas");
+    canvas.width = 1080; canvas.height = 1080;
+    canvas.getContext("2d").drawImage(img, 0, 0);
+    URL.revokeObjectURL(svgUrl);
+    return await new Promise(res => canvas.toBlob(res, "image/png"));
+  }
+
+  /* 미리보기 모달 */
+  function openModal(blob){
+    const url = URL.createObjectURL(blob);
+    const m = document.createElement("div");
+    m.className = "sr-modal";
+    m.innerHTML = '<div class="sr-card">'
+      + '<img src="' + url + '" alt="fortune card">'
+      + '<div class="sr-actions">'
+      + (navigator.canShare && navigator.canShare({files:[new File([blob],"f.png",{type:"image/png"})]}) ? '<button class="sr-a sr-share" id="srShare">' + T.share + '</button>' : '')
+      + '<a class="sr-a sr-save" href="' + url + '" download="my-fortune.png">' + T.save + '</a>'
+      + '<button class="sr-a sr-close" id="srClose">' + T.close + '</button>'
+      + '</div></div>';
+    document.body.appendChild(m);
+    m.addEventListener("click", e=>{ if(e.target===m){ m.remove(); URL.revokeObjectURL(url); } });
+    const sc = document.getElementById("srClose"); if(sc) sc.addEventListener("click", ()=>{ m.remove(); URL.revokeObjectURL(url); });
+    const ss = document.getElementById("srShare");
+    if(ss) ss.addEventListener("click", async ()=>{
+      try{
+        const file = new File([blob], "my-fortune.png", {type:"image/png"});
+        await navigator.share({files:[file], text:T.cap});
+        showToast(T.done);
+      }catch(e){}
+    });
+  }
+
+  document.getElementById("srBtn").addEventListener("click", async ()=>{
+    const btn = document.getElementById("srBtn");
+    const orig = btn.textContent; btn.textContent = T.making; btn.disabled = true;
+    try{ const blob = await makeBlob(); openModal(blob); }
+    catch(e){ showToast(LANG==="kr"?"카드 생성 실패, 다시 시도해줘":"Failed, try again"); }
+    btn.textContent = orig; btn.disabled = false;
+  });
+})();
 </script>
 <script>
 (function(){

@@ -188,6 +188,16 @@ h1 .accent{color:var(--jinsa);}
   font-size:.82rem; color:#6E6656; line-height:1.45;
 }
 
+
+/* ── 사이트 공유 바 ── */
+.share-bar{display:flex; align-items:center; gap:.55rem; margin:.2rem 0 .5rem; flex-wrap:wrap;}
+.share-bar .sb-label{font-family:'Gowun Batang',serif; font-size:.86rem; font-weight:700; color:var(--noeurok); white-space:nowrap;}
+.share-bar .sb-div{width:1px; height:15px; background:var(--gold-line);}
+.sb-icons{display:flex; align-items:center; gap:.4rem; flex-wrap:wrap;}
+.sb-btn{width:34px; height:34px; border-radius:50%; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; transition:transform .12s, box-shadow .12s; background:#FFFDF7; box-shadow:0 1px 4px rgba(138,74,52,.14);}
+.sb-btn:hover{transform:translateY(-2px); box-shadow:0 4px 10px rgba(138,74,52,.22);}
+.sb-btn svg{width:19px; height:19px; display:block;}
+.share-luck{font-family:'Noto Sans KR',sans-serif; font-size:.8rem; color:#A0968A; margin:0 0 1.3rem; letter-spacing:-.01em;}
 /* ── 오늘의 일진 바 ── */
 .today-bar{
   max-width:540px; margin:1.4rem auto 0; padding:.8rem 1.1rem;
@@ -341,6 +351,9 @@ footer p{
   .menu-btn .desc{ color:#A99F8C !important; }
   .install{background:#2A251E !important; border-color:#8A7A4E !important;}
   .install .t1{color:#F0E7D4 !important;} .install .t2{color:#A99F8C !important;}
+  .share-bar .sb-label{color:#C9A85C !important;}
+  .sb-btn{background:#2A251E !important;}
+  .share-luck{color:#8A8171 !important;}
   .today-bar{background:#2A251E !important; border-color:#8A7A4E !important;}
   .today-bar .tb-line{color:#C9BFA9 !important;}
   .today-bar .tb-mean{border-color:#4A4336 !important; color:#B0A896 !important;}
@@ -524,6 +537,13 @@ footer p{
 
 <!-- ══════════ 본문 ══════════ -->
 <main>
+  <div class="share-bar" id="shareBar">
+    <span class="sb-label" data-i18n="shareLabel">공유하기</span>
+    <span class="sb-div"></span>
+    <div class="sb-icons" id="sbIcons"></div>
+  </div>
+  <p class="share-luck" id="shareLuck" data-i18n="shareLuck">나눌수록 커지는 게 복이래 🍀 친구한테도 슥—</p>
+
   <p class="eyebrow" data-i18n="eyebrow">K-Style Fortune Telling</p>
   <h1><span data-i18n="title1">운명의 문이 </span><span class="accent" data-i18n="title2">열립니다</span></h1>
   <p class="subtitle" data-i18n="subtitle">
@@ -657,6 +677,9 @@ const YR = new Date().getFullYear();
 const I18N = {
   kr: {
     eyebrow: "K-Style Fortune Telling",
+    shareLabel:"공유하기", shareLuck:"나눌수록 커지는 게 복이래 🍀 친구한테도 슥—",
+    shareTitle:"K-Fortune Story · 한국 전통 운세", shareText:"사주·토정비결·오늘의 운세, 이거 은근 잘 맞음 🔮 너도 봐봐",
+    shareDone:"복 나눔 완료 ✨ 너한테도 좋은 거 올 거야",
     title1: "운명의 문이 ", title2: "열립니다",
     subtitle: "500년을 이어온 한국 전통 운세의 지혜.<br>토정비결부터 꿈해몽까지, 당신의 이야기를 풀어드립니다.",
     visitorPre: "당신은 오늘 ", visitorPost: " 번째 방문자입니다",
@@ -687,6 +710,9 @@ const I18N = {
   },
   en: {
     eyebrow: "Korean Traditional Fortune",
+    shareLabel:"Share", shareLuck:"Good luck grows when you share it 🍀 pass it on",
+    shareTitle:"K-Fortune Story · Korean Fortune Telling", shareText:"Saju, Tojeong & daily fortune — lowkey accurate 🔮 try it",
+    shareDone:"Shared ✨ good things coming your way",
     title1: "The Gate of Destiny ", title2: "Opens",
     subtitle: "Five centuries of Korean fortune-telling wisdom.<br>From Tojeong Bigyeol to dream reading — discover your story.",
     visitorPre: "You are today's visitor No. ", visitorPost: "",
@@ -738,6 +764,7 @@ function setLang(lang){
   if(typeof renderVisitor === "function") renderVisitor();
   if(typeof window._insRefresh === "function") window._insRefresh();
   if(typeof renderToday === "function") renderToday();
+  if(typeof renderShare === "function") renderShare();
 }
 
 let _counts = null;
@@ -883,8 +910,62 @@ function renderToday(){
   });
 }
 
+
+/* ══ 사이트 공유 ══ */
+const SHARE_URL = "https://kfortunestory.com";
+const SVG_KAKAO = '<svg viewBox="0 0 24 24"><path fill="#3C1E1E" d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7-.2.7-.8 2.6-.9 3-.1.5.2.5.4.4.2-.1 2.6-1.8 3.7-2.5.7.1 1.4.2 2.1.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>';
+const SVG_WA = '<svg viewBox="0 0 24 24"><path fill="#25D366" d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.8.8.8-2.8-.2-.3A8 8 0 1112 20zm4.4-5.9c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.6 6.6 0 01-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3a2.8 2.8 0 00-.9 2.1c0 1.2.9 2.4 1 2.6.1.2 1.7 2.7 4.2 3.7 1.6.6 2.2.7 2.9.6.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1z"/></svg>';
+const SVG_X = '<svg viewBox="0 0 24 24"><path fill="#1A1A1A" d="M17.5 3h3l-6.6 7.5L21.8 21h-6l-4.7-6.2L5.6 21H2.5l7-8L2.2 3h6.2l4.3 5.7zm-1 16h1.7L7.5 4.8H5.7z"/></svg>';
+const SVG_FB = '<svg viewBox="0 0 24 24"><path fill="#0866FF" d="M22 12a10 10 0 10-11.6 9.9v-7h-2.5V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0022 12z"/></svg>';
+const SVG_LINK = '<svg viewBox="0 0 24 24" fill="none" stroke="#8A4A34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></svg>';
+const SVG_MORE = '<svg viewBox="0 0 24 24" fill="none" stroke="#8A4A34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.3M8.2 13.2l7.6 4.3"/></svg>';
+
+function blessToast(){
+  const T = I18N[currentLang];
+  showToast(T.shareDone);
+}
+function renderShare(){
+  const box = document.getElementById("sbIcons");
+  if(!box) return;
+  const T = I18N[currentLang];
+  const txt = T.shareText, url = SHARE_URL;
+  const enc = encodeURIComponent, full = enc(txt + " " + url);
+  box.innerHTML = "";
+  const add = (svg, label, fn) => {
+    const b = document.createElement("button");
+    b.className = "sb-btn"; b.innerHTML = svg; b.title = label; b.setAttribute("aria-label", label);
+    b.addEventListener("click", fn); box.appendChild(b);
+  };
+  /* 네이티브 공유 (모바일 - 카톡·인스타·라인 다 뜸) */
+  if(navigator.share){
+    add(SVG_MORE, "Share", ()=>{
+      navigator.share({title:T.shareTitle, text:txt, url:url}).then(blessToast).catch(()=>{});
+    });
+  }
+  /* 카카오톡 */
+  add(SVG_KAKAO, "KakaoTalk", ()=>{
+    /* SDK 없이 웹 공유 스킴 — 모바일은 앱, PC는 웹 공유창 */
+    window.open("https://sharer.kakao.com/talk/friends/picker/link?app_key=&url=" + enc(url), "_blank");
+    /* 폴백: 링크 복사 안내 */
+    setTimeout(blessToast, 300);
+  });
+  /* WhatsApp */
+  add(SVG_WA, "WhatsApp", ()=>{ window.open("https://wa.me/?text=" + full, "_blank"); blessToast(); });
+  /* X */
+  add(SVG_X, "X", ()=>{ window.open("https://twitter.com/intent/tweet?text=" + enc(txt) + "&url=" + enc(url), "_blank"); blessToast(); });
+  /* Facebook */
+  add(SVG_FB, "Facebook", ()=>{ window.open("https://www.facebook.com/sharer/sharer.php?u=" + enc(url), "_blank"); blessToast(); });
+  /* 링크 복사 */
+  add(SVG_LINK, "Copy link", ()=>{
+    (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject())
+      .then(()=>showToast(currentLang==="kr"?"링크 복사됨 ✨ 아무 데나 붙여넣기":"Link copied ✨"))
+      .catch(()=>{ prompt(currentLang==="kr"?"이 링크를 복사하세요":"Copy this link", url); });
+  });
+}
+
 setLang(currentLang);
 updateVisitor();
+renderShare();
 renderToday();
 
 /* ══ 홈 화면 추가 — 플랫폼 자동 감지 ══ */
