@@ -266,6 +266,8 @@ footer p{
   background:#FFF; color:var(--meok);
 }
 .field textarea{min-height:110px; resize:vertical;}
+.region-2{display:flex; gap:.5rem;}
+.region-2 select{flex:1; min-width:0;}
 .fhelp{font-family:'Noto Sans KR',sans-serif; font-size:.74rem; color:#8A8171; margin-top:.32rem; line-height:1.5;}
 .field input:focus, .field select:focus, .field textarea:focus{
   outline:none; border-color:var(--hwang);
@@ -493,7 +495,7 @@ footer p{
 const T = {
   kr: {
     home:"⌂ 처음으로",
-    types:{tojeong:"토정비결", newyear:"2026년 운세", nextyear:"2027년 운세", today:"오늘의 운세", saju:"사주팔자", gunghap:"궁합", dream:"꿈해몽"},
+    types:{tojeong:"토정비결", newyear:"2026년 신년운세", nextyear:"2027년 신년운세 미리보기", today:"오늘의 운세", saju:"내 인생, 운의 흐름", gunghap:"궁합", dream:"꿈해몽"},
     sub:"아래 정보를 입력해 주세요",
     me:"나의 정보", partner:"상대방 정보",
     name:"이름", namePh:"이름 (선택)",
@@ -503,7 +505,7 @@ const T = {
     bdate:"생년월일", cal:"양력/음력", solar:"양력", lunar:"음력",
     btime:"태어난 시간 (12지시)", etime:"정확한 출생 시각 (선택 · 알면 훨씬 정밀해집니다)",
     region:"태어난 지역", regionHelp:"진태양시 보정에 사용됩니다",
-    cityNone:"모름 / 해외", etimeHelp:"입력하시면 진태양시로 보정해 시주를 정확히 계산합니다",
+    provNone:"모름 / 선택 안 함", cityDefault:"시·군·구 선택", etimeHelp:"입력하시면 진태양시로 보정해 시주를 정확히 계산합니다",
     dreamLabel:"꾼 꿈의 내용", dreamPh:"꿈에서 본 장면, 등장한 사람·동물·사물 등을 자유롭게 적어주세요",
     run:"운세 보기", reset:"초기화",
     needBdate:"생년월일을 입력해 주세요", needDream:"꿈 내용을 입력해 주세요",
@@ -522,7 +524,7 @@ const T = {
     bdate:"Date of Birth", cal:"Calendar", solar:"Solar", lunar:"Lunar",
     btime:"Time of Birth (2-hour block)", etime:"Exact birth time (optional · far more precise)",
     region:"Birthplace", regionHelp:"Used for true solar time correction",
-    cityNone:"Unknown / Overseas", etimeHelp:"If given, your Hour Pillar is calculated from true solar time",
+    provNone:"Unknown / Skip", cityDefault:"Select city", etimeHelp:"If given, your Hour Pillar is calculated from true solar time",
     dreamLabel:"Describe Your Dream", dreamPh:"Describe scenes, people, animals or objects that appeared in your dream",
     run:"Reveal My Fortune", reset:"Reset",
     needBdate:"Please enter your date of birth", needDream:"Please describe your dream",
@@ -537,13 +539,7 @@ const T = {
 })() ];
 
 /* ══════════ 운세종류별 입력 구성 ══════════ */
-const CITY = [
-  ["seoul","서울","Seoul"],["busan","부산","Busan"],["daegu","대구","Daegu"],["incheon","인천","Incheon"],
-  ["gwangju","광주","Gwangju"],["daejeon","대전","Daejeon"],["ulsan","울산","Ulsan"],["suwon","수원","Suwon"],
-  ["chuncheon","춘천","Chuncheon"],["gangneung","강릉","Gangneung"],["cheongju","청주","Cheongju"],
-  ["jeonju","전주","Jeonju"],["pohang","포항","Pohang"],["changwon","창원","Changwon"],
-  ["mokpo","목포","Mokpo"],["jeju","제주","Jeju"]
-];
+const REGIONS = {"seoul": {"kr": "서울특별시", "en": "Seoul", "cities": [{"k": "seoul", "kr": "서울 전체", "en": "Seoul", "lon": 126.978}]}, "busan": {"kr": "부산광역시", "en": "Busan", "cities": [{"k": "busan", "kr": "부산 전체", "en": "Busan", "lon": 129.075}]}, "daegu": {"kr": "대구광역시", "en": "Daegu", "cities": [{"k": "daegu", "kr": "대구 전체", "en": "Daegu", "lon": 128.601}]}, "incheon": {"kr": "인천광역시", "en": "Incheon", "cities": [{"k": "incheon", "kr": "인천 전체", "en": "Incheon", "lon": 126.705}]}, "gwangju": {"kr": "광주광역시", "en": "Gwangju", "cities": [{"k": "gwangju", "kr": "광주 전체", "en": "Gwangju", "lon": 126.851}]}, "daejeon": {"kr": "대전광역시", "en": "Daejeon", "cities": [{"k": "daejeon", "kr": "대전 전체", "en": "Daejeon", "lon": 127.385}]}, "ulsan": {"kr": "울산광역시", "en": "Ulsan", "cities": [{"k": "ulsan", "kr": "울산 전체", "en": "Ulsan", "lon": 129.311}]}, "sejong": {"kr": "세종특별자치시", "en": "Sejong", "cities": [{"k": "sejong", "kr": "세종 전체", "en": "Sejong", "lon": 127.289}]}, "gyeonggi": {"kr": "경기도", "en": "Gyeonggi", "cities": [{"k": "suwon", "kr": "수원시", "en": "Suwon", "lon": 127.029}, {"k": "yongin", "kr": "용인시", "en": "Yongin", "lon": 127.178}, {"k": "seongnam", "kr": "성남시", "en": "Seongnam", "lon": 127.138}, {"k": "goyang", "kr": "고양시", "en": "Goyang", "lon": 126.832}, {"k": "bucheon", "kr": "부천시", "en": "Bucheon", "lon": 126.766}, {"k": "ansan", "kr": "안산시", "en": "Ansan", "lon": 126.831}, {"k": "anyang", "kr": "안양시", "en": "Anyang", "lon": 126.957}, {"k": "namyangju", "kr": "남양주시", "en": "Namyangju", "lon": 127.216}, {"k": "hwaseong", "kr": "화성시", "en": "Hwaseong", "lon": 126.831}, {"k": "pyeongtaek", "kr": "평택시", "en": "Pyeongtaek", "lon": 127.113}, {"k": "uijeongbu", "kr": "의정부시", "en": "Uijeongbu", "lon": 127.034}, {"k": "paju", "kr": "파주시", "en": "Paju", "lon": 126.78}, {"k": "gimpo", "kr": "김포시", "en": "Gimpo", "lon": 126.716}, {"k": "gwangju_gg", "kr": "광주시", "en": "Gwangju-si", "lon": 127.257}, {"k": "gwangmyeong", "kr": "광명시", "en": "Gwangmyeong", "lon": 126.865}, {"k": "gunpo", "kr": "군포시", "en": "Gunpo", "lon": 126.935}, {"k": "osan", "kr": "오산시", "en": "Osan", "lon": 127.077}, {"k": "icheon", "kr": "이천시", "en": "Icheon", "lon": 127.442}, {"k": "yangju", "kr": "양주시", "en": "Yangju", "lon": 127.046}, {"k": "guri", "kr": "구리시", "en": "Guri", "lon": 127.13}, {"k": "anseong", "kr": "안성시", "en": "Anseong", "lon": 127.28}, {"k": "pocheon", "kr": "포천시", "en": "Pocheon", "lon": 127.2}, {"k": "uiwang", "kr": "의왕시", "en": "Uiwang", "lon": 126.968}, {"k": "hanam", "kr": "하남시", "en": "Hanam", "lon": 127.215}, {"k": "yeoju", "kr": "여주시", "en": "Yeoju", "lon": 127.637}, {"k": "dongducheon", "kr": "동두천시", "en": "Dongducheon", "lon": 127.06}, {"k": "gwacheon", "kr": "과천시", "en": "Gwacheon", "lon": 126.988}, {"k": "yangpyeong", "kr": "양평군", "en": "Yangpyeong", "lon": 127.492}, {"k": "gapyeong", "kr": "가평군", "en": "Gapyeong", "lon": 127.51}, {"k": "yeoncheon", "kr": "연천군", "en": "Yeoncheon", "lon": 127.075}]}, "gangwon": {"kr": "강원특별자치도", "en": "Gangwon", "cities": [{"k": "chuncheon", "kr": "춘천시", "en": "Chuncheon", "lon": 127.734}, {"k": "wonju", "kr": "원주시", "en": "Wonju", "lon": 127.92}, {"k": "gangneung", "kr": "강릉시", "en": "Gangneung", "lon": 128.896}, {"k": "donghae", "kr": "동해시", "en": "Donghae", "lon": 129.114}, {"k": "taebaek", "kr": "태백시", "en": "Taebaek", "lon": 128.986}, {"k": "sokcho", "kr": "속초시", "en": "Sokcho", "lon": 128.591}, {"k": "samcheok", "kr": "삼척시", "en": "Samcheok", "lon": 129.166}, {"k": "hongcheon", "kr": "홍천군", "en": "Hongcheon", "lon": 127.889}, {"k": "hoengseong", "kr": "횡성군", "en": "Hoengseong", "lon": 127.985}, {"k": "yeongwol", "kr": "영월군", "en": "Yeongwol", "lon": 128.462}, {"k": "pyeongchang", "kr": "평창군", "en": "Pyeongchang", "lon": 128.39}, {"k": "jeongseon", "kr": "정선군", "en": "Jeongseon", "lon": 128.661}, {"k": "cheorwon", "kr": "철원군", "en": "Cheorwon", "lon": 127.313}, {"k": "hwacheon", "kr": "화천군", "en": "Hwacheon", "lon": 127.708}, {"k": "yanggu", "kr": "양구군", "en": "Yanggu", "lon": 127.99}, {"k": "inje", "kr": "인제군", "en": "Inje", "lon": 128.17}, {"k": "goseong_gw", "kr": "고성군", "en": "Goseong-gw", "lon": 128.468}, {"k": "yangyang", "kr": "양양군", "en": "Yangyang", "lon": 128.619}]}, "chungbuk": {"kr": "충청북도", "en": "Chungbuk", "cities": [{"k": "cheongju", "kr": "청주시", "en": "Cheongju", "lon": 127.489}, {"k": "chungju", "kr": "충주시", "en": "Chungju", "lon": 127.926}, {"k": "jecheon", "kr": "제천시", "en": "Jecheon", "lon": 128.191}, {"k": "boeun", "kr": "보은군", "en": "Boeun", "lon": 127.729}, {"k": "okcheon", "kr": "옥천군", "en": "Okcheon", "lon": 127.571}, {"k": "yeongdong", "kr": "영동군", "en": "Yeongdong", "lon": 127.783}, {"k": "jeungpyeong", "kr": "증평군", "en": "Jeungpyeong", "lon": 127.581}, {"k": "jincheon", "kr": "진천군", "en": "Jincheon", "lon": 127.435}, {"k": "goesan", "kr": "괴산군", "en": "Goesan", "lon": 127.786}, {"k": "eumseong", "kr": "음성군", "en": "Eumseong", "lon": 127.69}, {"k": "danyang", "kr": "단양군", "en": "Danyang", "lon": 128.365}]}, "chungnam": {"kr": "충청남도", "en": "Chungnam", "cities": [{"k": "cheonan", "kr": "천안시", "en": "Cheonan", "lon": 127.114}, {"k": "gongju", "kr": "공주시", "en": "Gongju", "lon": 127.119}, {"k": "boryeong", "kr": "보령시", "en": "Boryeong", "lon": 126.613}, {"k": "asan", "kr": "아산시", "en": "Asan", "lon": 127.004}, {"k": "seosan", "kr": "서산시", "en": "Seosan", "lon": 126.45}, {"k": "nonsan", "kr": "논산시", "en": "Nonsan", "lon": 127.099}, {"k": "gyeryong", "kr": "계룡시", "en": "Gyeryong", "lon": 127.249}, {"k": "dangjin", "kr": "당진시", "en": "Dangjin", "lon": 126.646}, {"k": "geumsan", "kr": "금산군", "en": "Geumsan", "lon": 127.488}, {"k": "buyeo", "kr": "부여군", "en": "Buyeo", "lon": 126.91}, {"k": "seocheon", "kr": "서천군", "en": "Seocheon", "lon": 126.691}, {"k": "cheongyang", "kr": "청양군", "en": "Cheongyang", "lon": 126.802}, {"k": "hongseong", "kr": "홍성군", "en": "Hongseong", "lon": 126.661}, {"k": "yesan", "kr": "예산군", "en": "Yesan", "lon": 126.845}, {"k": "taean", "kr": "태안군", "en": "Taean", "lon": 126.298}]}, "jeonbuk": {"kr": "전북특별자치도", "en": "Jeonbuk", "cities": [{"k": "jeonju", "kr": "전주시", "en": "Jeonju", "lon": 127.148}, {"k": "gunsan", "kr": "군산시", "en": "Gunsan", "lon": 126.737}, {"k": "iksan", "kr": "익산시", "en": "Iksan", "lon": 126.958}, {"k": "jeongeup", "kr": "정읍시", "en": "Jeongeup", "lon": 126.856}, {"k": "namwon", "kr": "남원시", "en": "Namwon", "lon": 127.39}, {"k": "gimje", "kr": "김제시", "en": "Gimje", "lon": 126.881}, {"k": "wanju", "kr": "완주군", "en": "Wanju", "lon": 127.162}, {"k": "jinan", "kr": "진안군", "en": "Jinan", "lon": 127.425}, {"k": "muju", "kr": "무주군", "en": "Muju", "lon": 127.661}, {"k": "jangsu", "kr": "장수군", "en": "Jangsu", "lon": 127.521}, {"k": "imsil", "kr": "임실군", "en": "Imsil", "lon": 127.289}, {"k": "sunchang", "kr": "순창군", "en": "Sunchang", "lon": 127.137}, {"k": "gochang", "kr": "고창군", "en": "Gochang", "lon": 126.702}, {"k": "buan", "kr": "부안군", "en": "Buan", "lon": 126.733}]}, "jeonnam": {"kr": "전라남도", "en": "Jeonnam", "cities": [{"k": "mokpo", "kr": "목포시", "en": "Mokpo", "lon": 126.392}, {"k": "yeosu", "kr": "여수시", "en": "Yeosu", "lon": 127.662}, {"k": "suncheon", "kr": "순천시", "en": "Suncheon", "lon": 127.487}, {"k": "naju", "kr": "나주시", "en": "Naju", "lon": 126.711}, {"k": "gwangyang", "kr": "광양시", "en": "Gwangyang", "lon": 127.696}, {"k": "damyang", "kr": "담양군", "en": "Damyang", "lon": 126.988}, {"k": "gokseong", "kr": "곡성군", "en": "Gokseong", "lon": 127.292}, {"k": "gurye", "kr": "구례군", "en": "Gurye", "lon": 127.463}, {"k": "goheung", "kr": "고흥군", "en": "Goheung", "lon": 127.285}, {"k": "boseong", "kr": "보성군", "en": "Boseong", "lon": 127.08}, {"k": "hwasun", "kr": "화순군", "en": "Hwasun", "lon": 126.986}, {"k": "jangheung", "kr": "장흥군", "en": "Jangheung", "lon": 126.907}, {"k": "gangjin", "kr": "강진군", "en": "Gangjin", "lon": 126.767}, {"k": "haenam", "kr": "해남군", "en": "Haenam", "lon": 126.599}, {"k": "yeongam", "kr": "영암군", "en": "Yeongam", "lon": 126.697}, {"k": "muan", "kr": "무안군", "en": "Muan", "lon": 126.481}, {"k": "hampyeong", "kr": "함평군", "en": "Hampyeong", "lon": 126.517}, {"k": "yeonggwang", "kr": "영광군", "en": "Yeonggwang", "lon": 126.512}, {"k": "jangseong", "kr": "장성군", "en": "Jangseong", "lon": 126.785}, {"k": "wando", "kr": "완도군", "en": "Wando", "lon": 126.755}, {"k": "jindo", "kr": "진도군", "en": "Jindo", "lon": 126.263}, {"k": "sinan", "kr": "신안군", "en": "Sinan", "lon": 126.351}]}, "gyeongbuk": {"kr": "경상북도", "en": "Gyeongbuk", "cities": [{"k": "pohang", "kr": "포항시", "en": "Pohang", "lon": 129.343}, {"k": "gyeongju", "kr": "경주시", "en": "Gyeongju", "lon": 129.225}, {"k": "gimcheon", "kr": "김천시", "en": "Gimcheon", "lon": 128.114}, {"k": "andong", "kr": "안동시", "en": "Andong", "lon": 128.727}, {"k": "gumi", "kr": "구미시", "en": "Gumi", "lon": 128.344}, {"k": "yeongju", "kr": "영주시", "en": "Yeongju", "lon": 128.624}, {"k": "yeongcheon", "kr": "영천시", "en": "Yeongcheon", "lon": 128.939}, {"k": "sangju", "kr": "상주시", "en": "Sangju", "lon": 128.159}, {"k": "mungyeong", "kr": "문경시", "en": "Mungyeong", "lon": 128.187}, {"k": "gyeongsan", "kr": "경산시", "en": "Gyeongsan", "lon": 128.741}, {"k": "gunwi", "kr": "군위군", "en": "Gunwi", "lon": 128.573}, {"k": "uiseong", "kr": "의성군", "en": "Uiseong", "lon": 128.697}, {"k": "cheongsong", "kr": "청송군", "en": "Cheongsong", "lon": 129.057}, {"k": "yeongyang", "kr": "영양군", "en": "Yeongyang", "lon": 129.112}, {"k": "yeongdeok", "kr": "영덕군", "en": "Yeongdeok", "lon": 129.366}, {"k": "cheongdo", "kr": "청도군", "en": "Cheongdo", "lon": 128.734}, {"k": "goryeong", "kr": "고령군", "en": "Goryeong", "lon": 128.263}, {"k": "seongju", "kr": "성주군", "en": "Seongju", "lon": 128.283}, {"k": "chilgok", "kr": "칠곡군", "en": "Chilgok", "lon": 128.402}, {"k": "yecheon", "kr": "예천군", "en": "Yecheon", "lon": 128.437}, {"k": "bonghwa", "kr": "봉화군", "en": "Bonghwa", "lon": 128.732}, {"k": "uljin", "kr": "울진군", "en": "Uljin", "lon": 129.4}, {"k": "ulleung", "kr": "울릉군", "en": "Ulleung", "lon": 130.905}]}, "gyeongnam": {"kr": "경상남도", "en": "Gyeongnam", "cities": [{"k": "changwon", "kr": "창원시", "en": "Changwon", "lon": 128.682}, {"k": "jinju", "kr": "진주시", "en": "Jinju", "lon": 128.108}, {"k": "tongyeong", "kr": "통영시", "en": "Tongyeong", "lon": 128.433}, {"k": "sacheon", "kr": "사천시", "en": "Sacheon", "lon": 128.064}, {"k": "gimhae", "kr": "김해시", "en": "Gimhae", "lon": 128.889}, {"k": "miryang", "kr": "밀양시", "en": "Miryang", "lon": 128.749}, {"k": "geoje", "kr": "거제시", "en": "Geoje", "lon": 128.621}, {"k": "yangsan", "kr": "양산시", "en": "Yangsan", "lon": 129.037}, {"k": "uiryeong", "kr": "의령군", "en": "Uiryeong", "lon": 128.262}, {"k": "haman", "kr": "함안군", "en": "Haman", "lon": 128.406}, {"k": "changnyeong", "kr": "창녕군", "en": "Changnyeong", "lon": 128.492}, {"k": "goseong_gn", "kr": "고성군", "en": "Goseong-gn", "lon": 128.322}, {"k": "namhae", "kr": "남해군", "en": "Namhae", "lon": 127.892}, {"k": "hadong", "kr": "하동군", "en": "Hadong", "lon": 127.751}, {"k": "sancheong", "kr": "산청군", "en": "Sancheong", "lon": 127.874}, {"k": "hamyang", "kr": "함양군", "en": "Hamyang", "lon": 127.725}, {"k": "geochang", "kr": "거창군", "en": "Geochang", "lon": 127.909}, {"k": "hapcheon", "kr": "합천군", "en": "Hapcheon", "lon": 128.166}]}, "jeju": {"kr": "제주특별자치도", "en": "Jeju", "cities": [{"k": "jeju", "kr": "제주시", "en": "Jeju City", "lon": 126.531}, {"k": "seogwipo", "kr": "서귀포시", "en": "Seogwipo", "lon": 126.56}]}, "overseas": {"kr": "해외", "en": "Overseas", "cities": [{"k": "ov_kst", "kr": "동일 시간대 (한국시각 사용)", "en": "Same as Korea time", "lon": 135.0}, {"k": "ov_japan", "kr": "일본", "en": "Japan", "lon": 139.7}, {"k": "ov_china_e", "kr": "중국 (동부·베이징/상하이)", "en": "China (East)", "lon": 118.8}, {"k": "ov_china_w", "kr": "중국 (서부)", "en": "China (West)", "lon": 103.8}, {"k": "ov_taiwan", "kr": "대만", "en": "Taiwan", "lon": 121.5}, {"k": "ov_vietnam", "kr": "베트남", "en": "Vietnam", "lon": 106.7}, {"k": "ov_thai", "kr": "태국", "en": "Thailand", "lon": 100.5}, {"k": "ov_singapore", "kr": "싱가포르", "en": "Singapore", "lon": 103.8}, {"k": "ov_india", "kr": "인도", "en": "India", "lon": 77.2}, {"k": "ov_uae", "kr": "UAE·중동", "en": "UAE·Middle East", "lon": 55.3}, {"k": "ov_uk", "kr": "영국", "en": "UK", "lon": -0.13}, {"k": "ov_france", "kr": "프랑스·중부유럽", "en": "France·C.Europe", "lon": 2.35}, {"k": "ov_germany", "kr": "독일", "en": "Germany", "lon": 13.4}, {"k": "ov_us_east", "kr": "미국 동부", "en": "US East", "lon": -74.0}, {"k": "ov_us_central", "kr": "미국 중부", "en": "US Central", "lon": -87.6}, {"k": "ov_us_mtn", "kr": "미국 산악부", "en": "US Mountain", "lon": -105.0}, {"k": "ov_us_west", "kr": "미국 서부", "en": "US West", "lon": -118.2}, {"k": "ov_canada", "kr": "캐나다", "en": "Canada", "lon": -79.4}, {"k": "ov_australia", "kr": "호주 (동부)", "en": "Australia (East)", "lon": 151.2}, {"k": "ov_other", "kr": "기타 지역", "en": "Other", "lon": 135.0}]}};
 const params = new URLSearchParams(location.search);
 const type = params.get("type") || localStorage.getItem("kf_selected") || "tojeong";
 const CFG = {
@@ -594,9 +590,11 @@ function fieldHTML(p, f){
       +'<div class="fhelp">'+T.etimeHelp+'</div></div>';
   if(f === "region"){
     const lang = ["kr","en"].includes(localStorage.getItem("kf_lang")) ? localStorage.getItem("kf_lang") : "kr";
-    let opts = '<option value="">'+T.cityNone+'</option>';
-    CITY.forEach(c => { opts += '<option value="'+c[0]+'">'+(lang==="kr"?c[1]:c[2])+'</option>'; });
-    return '<div class="field"><label for="'+id+'">'+T.region+'</label><select id="'+id+'">'+opts+'</select>'
+    let provOpts = '<option value="">'+T.provNone+'</option>';
+    Object.keys(REGIONS).forEach(pk => { provOpts += '<option value="'+pk+'">'+(lang==="kr"?REGIONS[pk].kr:REGIONS[pk].en)+'</option>'; });
+    return '<div class="field"><label for="'+id+'">'+T.region+'</label>'
+      +'<div class="region-2"><select id="'+id+'_prov" class="region-prov">'+provOpts+'</select>'
+      +'<select id="'+id+'_city" class="region-city" style="display:none"></select></div>'
       +'<div class="fhelp">'+T.regionHelp+'</div></div>';
   }
   return "";
@@ -628,6 +626,34 @@ document.querySelectorAll(".radiorow").forEach(row=>{
   });
 });
 
+/* ══════════ 지역 2단계 (시도 → 시군구) ══════════ */
+function fillCities(pkey, cityKey){
+  const prov = document.getElementById(pkey+"_region_prov");
+  const citySel = document.getElementById(pkey+"_region_city");
+  if(!prov || !citySel) return;
+  const pk = prov.value;
+  const lang = ["kr","en"].includes(localStorage.getItem("kf_lang")) ? localStorage.getItem("kf_lang") : "kr";
+  if(!pk || !REGIONS[pk]){ citySel.style.display = "none"; citySel.innerHTML = ""; return; }
+  const cities = REGIONS[pk].cities;
+  /* 시군구가 1개뿐(광역시)이면 굳이 안 보여줌 */
+  if(cities.length <= 1){
+    citySel.style.display = "none";
+    citySel.innerHTML = '<option value="'+cities[0].k+'">'+(lang==="kr"?cities[0].kr:cities[0].en)+'</option>';
+    citySel.value = cities[0].k;
+    return;
+  }
+  let opts = '<option value="">'+T.cityDefault+'</option>';
+  cities.forEach(c => { opts += '<option value="'+c.k+'">'+(lang==="kr"?c.kr:c.en)+'</option>'; });
+  citySel.innerHTML = opts;
+  citySel.style.display = "";
+  if(cityKey) citySel.value = cityKey;
+}
+/* 시도 select에 이벤트 바인딩 */
+document.querySelectorAll(".region-prov").forEach(sel=>{
+  const pkey = sel.id.replace("_region_prov","");
+  sel.addEventListener("change", ()=>fillCities(pkey));
+});
+
 /* ══════════ 자동 입력 (재방문 시 기억) ══════════ */
 function loadProfile(pkey){
   const d = JSON.parse(localStorage.getItem("kf_p_" + pkey) || "null");
@@ -643,8 +669,17 @@ function loadProfile(pkey){
   });
   const bt = document.getElementById(pkey+"_btime");
   if(bt && d.btime) bt.value = d.btime;
-  const rg = document.getElementById(pkey+"_region");
-  if(rg && d.region) rg.value = d.region;
+  /* 지역: 저장된 시군구 키(d.region)로부터 시도를 역추적해 복원 */
+  if(d.region){
+    let foundProv = null;
+    Object.keys(REGIONS).forEach(pk=>{
+      if(REGIONS[pk].cities.some(c=>c.k===d.region)) foundProv = pk;
+    });
+    if(foundProv){
+      const prov = document.getElementById(pkey+"_region_prov");
+      if(prov){ prov.value = foundProv; fillCities(pkey, d.region); }
+    }
+  }
 }
 if(!cfg.dream) cfg.persons.forEach(p=>loadProfile(p.key));
 
@@ -675,10 +710,18 @@ function run(){
       if(!bd){ alert(T.needBdate); return; }
       const get = id => (document.getElementById(id)||{}).value || "";
       const rad = n => (document.querySelector('input[name="'+n+'"]:checked')||{}).value || "";
+      const regionVal = pk => {
+        const city = (document.getElementById(pk+"_region_city")||{}).value || "";
+        if(city) return city;
+        const prov = (document.getElementById(pk+"_region_prov")||{}).value || "";
+        /* 시군구 미선택 시: 광역시(도시1개)면 그 키, 아니면 빈값 */
+        if(prov && REGIONS[prov] && REGIONS[prov].cities.length===1) return REGIONS[prov].cities[0].k;
+        return "";
+      };
       localStorage.setItem("kf_p_"+p.key, JSON.stringify({
         name:get(p.key+"_name"), gender:rad(p.key+"_gender"),
         bdate:bd, cal:rad(p.key+"_cal"),
-        btime:get(p.key+"_btime"), etime:get(p.key+"_etime"), region:get(p.key+"_region")
+        btime:get(p.key+"_btime"), etime:get(p.key+"_etime"), region:regionVal(p.key)
       }));
     }
   }

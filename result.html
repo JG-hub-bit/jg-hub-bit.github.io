@@ -729,25 +729,8 @@ const JJG = [[[8, 10], [9, 20]], [[9, 9], [7, 3], [5, 18]], [[4, 7], [2, 7], [0,
 const JJG_NAME = {kr:["여기","중기","정기"], en:["Residual","Middle","Primary"]};
 
 /* 주요 도시 경도 */
-const CITY = [
-  {k:"seoul",  kr:"서울",   en:"Seoul",     lon:126.978},
-  {k:"busan",  kr:"부산",   en:"Busan",     lon:129.075},
-  {k:"daegu",  kr:"대구",   en:"Daegu",     lon:128.601},
-  {k:"incheon",kr:"인천",   en:"Incheon",   lon:126.705},
-  {k:"gwangju",kr:"광주",   en:"Gwangju",   lon:126.851},
-  {k:"daejeon",kr:"대전",   en:"Daejeon",   lon:127.385},
-  {k:"ulsan",  kr:"울산",   en:"Ulsan",     lon:129.311},
-  {k:"suwon",  kr:"수원",   en:"Suwon",     lon:127.029},
-  {k:"chuncheon",kr:"춘천", en:"Chuncheon", lon:127.734},
-  {k:"gangneung",kr:"강릉", en:"Gangneung", lon:128.896},
-  {k:"cheongju",kr:"청주",  en:"Cheongju",  lon:127.489},
-  {k:"jeonju", kr:"전주",   en:"Jeonju",    lon:127.148},
-  {k:"pohang", kr:"포항",   en:"Pohang",    lon:129.343},
-  {k:"changwon",kr:"창원",  en:"Changwon",  lon:128.682},
-  {k:"mokpo",  kr:"목포",   en:"Mokpo",     lon:126.392},
-  {k:"jeju",   kr:"제주",   en:"Jeju",      lon:126.531}
-];
-function cityLon(k){ const c = CITY.find(x=>x.k===k); return c ? c.lon : null; }
+const CITY_LON = {"seoul": 126.978, "busan": 129.075, "daegu": 128.601, "incheon": 126.705, "gwangju": 126.851, "daejeon": 127.385, "ulsan": 129.311, "sejong": 127.289, "suwon": 127.029, "yongin": 127.178, "seongnam": 127.138, "goyang": 126.832, "bucheon": 126.766, "ansan": 126.831, "anyang": 126.957, "namyangju": 127.216, "hwaseong": 126.831, "pyeongtaek": 127.113, "uijeongbu": 127.034, "paju": 126.78, "gimpo": 126.716, "gwangju_gg": 127.257, "gwangmyeong": 126.865, "gunpo": 126.935, "osan": 127.077, "icheon": 127.442, "yangju": 127.046, "guri": 127.13, "anseong": 127.28, "pocheon": 127.2, "uiwang": 126.968, "hanam": 127.215, "yeoju": 127.637, "dongducheon": 127.06, "gwacheon": 126.988, "yangpyeong": 127.492, "gapyeong": 127.51, "yeoncheon": 127.075, "chuncheon": 127.734, "wonju": 127.92, "gangneung": 128.896, "donghae": 129.114, "taebaek": 128.986, "sokcho": 128.591, "samcheok": 129.166, "hongcheon": 127.889, "hoengseong": 127.985, "yeongwol": 128.462, "pyeongchang": 128.39, "jeongseon": 128.661, "cheorwon": 127.313, "hwacheon": 127.708, "yanggu": 127.99, "inje": 128.17, "goseong_gw": 128.468, "yangyang": 128.619, "cheongju": 127.489, "chungju": 127.926, "jecheon": 128.191, "boeun": 127.729, "okcheon": 127.571, "yeongdong": 127.783, "jeungpyeong": 127.581, "jincheon": 127.435, "goesan": 127.786, "eumseong": 127.69, "danyang": 128.365, "cheonan": 127.114, "gongju": 127.119, "boryeong": 126.613, "asan": 127.004, "seosan": 126.45, "nonsan": 127.099, "gyeryong": 127.249, "dangjin": 126.646, "geumsan": 127.488, "buyeo": 126.91, "seocheon": 126.691, "cheongyang": 126.802, "hongseong": 126.661, "yesan": 126.845, "taean": 126.298, "jeonju": 127.148, "gunsan": 126.737, "iksan": 126.958, "jeongeup": 126.856, "namwon": 127.39, "gimje": 126.881, "wanju": 127.162, "jinan": 127.425, "muju": 127.661, "jangsu": 127.521, "imsil": 127.289, "sunchang": 127.137, "gochang": 126.702, "buan": 126.733, "mokpo": 126.392, "yeosu": 127.662, "suncheon": 127.487, "naju": 126.711, "gwangyang": 127.696, "damyang": 126.988, "gokseong": 127.292, "gurye": 127.463, "goheung": 127.285, "boseong": 127.08, "hwasun": 126.986, "jangheung": 126.907, "gangjin": 126.767, "haenam": 126.599, "yeongam": 126.697, "muan": 126.481, "hampyeong": 126.517, "yeonggwang": 126.512, "jangseong": 126.785, "wando": 126.755, "jindo": 126.263, "sinan": 126.351, "pohang": 129.343, "gyeongju": 129.225, "gimcheon": 128.114, "andong": 128.727, "gumi": 128.344, "yeongju": 128.624, "yeongcheon": 128.939, "sangju": 128.159, "mungyeong": 128.187, "gyeongsan": 128.741, "gunwi": 128.573, "uiseong": 128.697, "cheongsong": 129.057, "yeongyang": 129.112, "yeongdeok": 129.366, "cheongdo": 128.734, "goryeong": 128.263, "seongju": 128.283, "chilgok": 128.402, "yecheon": 128.437, "bonghwa": 128.732, "uljin": 129.4, "ulleung": 130.905, "changwon": 128.682, "jinju": 128.108, "tongyeong": 128.433, "sacheon": 128.064, "gimhae": 128.889, "miryang": 128.749, "geoje": 128.621, "yangsan": 129.037, "uiryeong": 128.262, "haman": 128.406, "changnyeong": 128.492, "goseong_gn": 128.322, "namhae": 127.892, "hadong": 127.751, "sancheong": 127.874, "hamyang": 127.725, "geochang": 127.909, "hapcheon": 128.166, "jeju": 126.531, "seogwipo": 126.56, "ov_kst": 135.0, "ov_japan": 139.7, "ov_china_e": 118.8, "ov_china_w": 103.8, "ov_taiwan": 121.5, "ov_vietnam": 106.7, "ov_thai": 100.5, "ov_singapore": 103.8, "ov_india": 77.2, "ov_uae": 55.3, "ov_uk": -0.13, "ov_france": 2.35, "ov_germany": 13.4, "ov_us_east": -74.0, "ov_us_central": -87.6, "ov_us_mtn": -105.0, "ov_us_west": -118.2, "ov_canada": -79.4, "ov_australia": 151.2, "ov_other": 135.0};
+function cityLon(k){ return (k && CITY_LON[k] !== undefined) ? CITY_LON[k] : null; }
 
 /* IANA 기준 UTC 오프셋(분) — 현지 시각(분, epoch 기준 가정치)으로 조회 */
 function tzOffsetAt(utcMin){
