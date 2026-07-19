@@ -288,6 +288,8 @@ footer p{
 .age-row{display:flex; gap:.8rem; padding:.75rem 0; border-bottom:1px solid #EFE8D6;}
 .age-row:last-child{border-bottom:none;}
 .age-row .ag{font-family:'Song Myung',serif; color:var(--jinsa); font-size:.92rem; white-space:nowrap; flex:0 0 5.6em; padding-top:.1rem;}
+.age-row .mstar{font-size:.78rem; letter-spacing:-1px;}
+.age-row .mstar .gc-empty{color:#E0D6BE;}
 .age-row .at{font-size:.94rem; line-height:1.7; color:#3E382E;}
 .poem{font-family:'Song Myung',serif; font-size:1.05rem; color:var(--samcheong); letter-spacing:.12em;}
 .poem-r{font-family:'Noto Sans KR',sans-serif; font-size:.76rem; color:#8A8171; margin-left:.5rem;}
@@ -1259,7 +1261,10 @@ else if(type === "gunghap" && P && P2){
   out += '<table class="hanja-table"><tr><th></th><th>' + LBL.zodiac + '</th><th>' + LBL.elem + '</th></tr>'
     + '<tr><td>' + ((P.name)||LBL.me) + '</td><td class="big" style="font-size:1.05rem">' + ZODIAC[LANG][b1] + ' (' + BRANCH_H[b1] + ')</td><td>' + ELEM[LANG][e1] + '</td></tr>'
     + '<tr><td>' + ((P2.name)||LBL.partner) + '</td><td class="big" style="font-size:1.05rem">' + ZODIAC[LANG][b2] + ' (' + BRANCH_H[b2] + ')</td><td>' + ELEM[LANG][e2] + '</td></tr></table>';
-  out += '<div class="score-ring"><span class="num">' + score + '</span><span class="of"> / 100 · ' + LBL.gScore + '</span></div>';
+  const gStar = score >= 88 ? 5 : (score >= 74 ? 4 : (score >= 60 ? 3 : (score >= 48 ? 2 : 1)));
+  const gGcol = gStar >= 4 ? "#3FA57A" : (gStar === 3 ? "#8F887B" : "#C97A2B");
+  out += '<div class="score-ring"><span class="num">' + score + '</span><span class="of"> / 100 · ' + LBL.gScore + '</span>'
+       + '<div class="gc-stars" style="color:' + gGcol + ';font-size:1.4rem;margin-top:.5rem">' + "★".repeat(gStar) + '<span class="gc-empty">' + "★".repeat(5-gStar) + '</span></div></div>';
 
   let total;
   if(yukhap) total = K?"두 사람은 육합(六合)의 인연으로, 서로의 부족함을 채워 주는 하늘이 맺은 짝입니다. 함께할수록 운이 커지는 상승 궁합이며, 한 사람이 지칠 때 다른 사람이 자연스럽게 힘이 되어 주는 구조입니다. 오래 만날수록 서로를 닮아가며, 주변에서도 잘 어울린다는 말을 듣게 됩니다.":"You share a Yukhap bond — a heaven-tied pair completing each other's lack. Fortune grows the longer you stand together, and when one tires the other naturally becomes strength. The longer you meet, the more you resemble each other, and others will remark how well you fit.";
@@ -1280,6 +1285,30 @@ else if(type === "saju" && P){
   /* ══ 사주팔자 — 절기 기반 정밀 명식 ══ */
   const M = mySaju(P), S = M.S, A = M.A;
   const curAge = YEAR - (+P.bdate.slice(0,4)) + 1;
+
+  /* 타고난 그릇 — 오행 분포로 분야별 잠재력 (평생) */
+  const cnt = A.cnt, de = A.de;
+  const total = cnt.reduce((s,x)=>s+x, 0) || 1;
+  function potScore(el){
+    /* 해당 오행이 사주에 적절히 있으면 높음 (0이면 결핍, 과다도 감점) */
+    const ratio = cnt[el] / total;
+    if(ratio >= 0.15 && ratio <= 0.35) return 5;
+    if(ratio >= 0.10 && ratio < 0.15) return 4;
+    if(ratio > 0.35 && ratio <= 0.45) return 4;
+    if(ratio >= 0.05 && ratio < 0.10) return 3;
+    if(ratio > 0.45) return 3;
+    if(ratio > 0) return 2;
+    return 1;
+  }
+  const sajuScores = {
+    jae:  potScore((de+2)%5),
+    gwan: potScore((de+3)%5),
+    sik:  potScore((de+1)%5),
+    bi:   potScore(de),
+    in:   potScore((de+4)%5)
+  };
+  out += sec(K ? "타고난 그릇 · 오행이 말하는 잠재력" : "Your Innate Vessel", '<div class="radar-wrap">' + radarChart(sajuScores) + '</div>');
+  out += '<p class="note" style="margin:-.5rem 0 1rem;text-align:center">' + (K ? "사주 속 다섯 기운의 균형으로 본 분야별 타고난 힘입니다. 균형 잡힌 기운일수록 별이 높습니다." : "Your innate strength by area, read from the balance of the five elements in your chart.") + '</p>';
 
   out += mingsikTable(S);
   if(S.hS < 0) out += '<p class="note" style="margin:-.4rem 0 .9rem">' + LBL.noSi + '</p>';
@@ -1326,8 +1355,12 @@ else if(type === "today" && new URLSearchParams(location.search).get("z") !== nu
 
   $("resTitle").textContent = K ? (nm + " 오늘의 운세") : (nm + " · Today");
   $("resWho").textContent = "";
-  out += '<div class="sum-card"><span class="lv">' + relTag[LANG][rel] + '</span>'
-       + '<p class="line">' + ZEMO[z] + " " + nm + " · " + fmtDate(now) + '</p></div>';
+  const zStar = [3,4,4,2,5][rel];   /* 비화3 식상4 재성4 관성2 인성5 */
+  const zGcol = zStar >= 4 ? "#3FA57A" : (zStar === 3 ? "#8F887B" : "#C97A2B");
+  out += '<div class="grade-card" style="border-color:' + zGcol + '">'
+       + '<div class="gc-year">' + ZEMO[z] + " " + nm + " · " + fmtDate(now) + '</div>'
+       + '<div class="gc-stars" style="color:' + zGcol + '">' + "★".repeat(zStar) + '<span class="gc-empty">' + "★".repeat(5-zStar) + '</span></div>'
+       + '<div class="gc-tag" style="background:' + zGcol + '">' + relTag[LANG][rel] + '</div></div>';
   out += '<p class="note" style="margin:-.3rem 0 1rem">' + (K ? "해당 띠 " : "Born: ") + yearStr + '</p>';
   out += sec(K ? "오늘의 " + nm : "The " + nm + " today", para(K ? _TXT.ZODIAC_DAY[rel].kr : _TXT.ZODIAC_DAY[rel].en));
   out += '<div class="luck-card"><h3>' + (K?"오늘 하늘의 기운":"Today's sky") + '</h3><div class="luck-grid">'
@@ -1389,9 +1422,14 @@ else if(type === "today" && P){
              + "<br><b>" + LBL.wkWorst + "</b> : " + bd(worst) + " · " + tx(worst.R.line)));
   }
 
-  /* 선택한 날의 운세 */
-  out += '<div class="sum-card"><span class="lv">' + LV[LANG][selInfo.R.lvl] + '</span>'
-       + '<p class="line">' + fmtDate(selInfo.dt) + ' · ' + selInfo.hanja + ' ' + selInfo.read + '</p></div>';
+  /* 선택한 날의 운세 — 별점 카드 */
+  const dStar = selInfo.R.lvl === 0 ? 5 : (selInfo.R.lvl === 1 ? 4 : (selInfo.R.lvl === 2 ? 3 : 2));
+  const dGcol = dStar >= 4 ? "#3FA57A" : (dStar === 3 ? "#8F887B" : "#C97A2B");
+  out += '<div class="grade-card" style="border-color:' + dGcol + '">'
+       + '<div class="gc-year">' + fmtDate(selInfo.dt) + ' · ' + selInfo.hanja + ' ' + selInfo.read + '</div>'
+       + '<div class="gc-stars" style="color:' + dGcol + '">' + "★".repeat(dStar) + '<span class="gc-empty">' + "★".repeat(5-dStar) + '</span></div>'
+       + '<div class="gc-tag" style="background:' + dGcol + '">' + LV[LANG][selInfo.R.lvl] + '</div>'
+       + '<div class="gc-cat">' + tx(selInfo.R.line) + '</div></div>';
   out += '<table class="hanja-table"><tr><th>' + LBL.iljin + '</th><th>' + LBL.stem + '</th><th>' + LBL.branch + '</th><th>' + LBL.elem + '</th></tr>'
        + '<tr><td class="big" style="font-size:1.2rem">' + selInfo.hanja + '</td><td class="big">' + STEM_H[selInfo.ij.si] + '</td><td class="big">' + BRANCH_H[selInfo.ij.bi] + '</td><td>' + ELEM[LANG][selInfo.ij.elem] + '</td></tr></table>';
   out += sec(tx(selInfo.R.name), para(tx(selInfo.R.txt)));
@@ -1422,7 +1460,12 @@ else if(type === "tojeong" && P){
   const r = rng(hashStr(P.bdate + "|tojeong|" + TYPE_YEAR));
   const lvl = Math.floor(r()*5);
   const hj = pick(r, HANJA[lvl]);
-  out += '<div class="sum-card"><span class="lv">' + LV[LANG][lvl] + '</span><p class="line">' + tx(hj) + '</p></div>';
+  const tStar = 5 - lvl;
+  const tGcol = tStar >= 4 ? "#3FA57A" : (tStar === 3 ? "#8F887B" : "#C97A2B");
+  out += '<div class="grade-card" style="border-color:' + tGcol + '">'
+       + '<div class="gc-stars" style="color:' + tGcol + '">' + "★".repeat(tStar) + '<span class="gc-empty">' + "★".repeat(5-tStar) + '</span></div>'
+       + '<div class="gc-tag" style="background:' + tGcol + '">' + LV[LANG][lvl] + '</div>'
+       + '<div class="gc-cat" style="margin-top:.6rem">' + tx(hj) + '</div></div>';
   out += '<table class="hanja-table"><tr><th>' + LBL.hanja + '</th><th>' + LBL.reading + '</th><th>' + LBL.meaning + '</th></tr>'
     + '<tr><td class="big">' + hj.h + '</td><td>' + hj.r + '</td><td style="text-align:left">' + tx(hj) + '</td></tr></table>';
   out += sec(LBL.tjRead, para(tx(DB.FLOW[lvl])) + para(tx(DB.FADV[lvl])));
@@ -1513,7 +1556,10 @@ else if(P){
     const startDt = new Date(Date.UTC(TYPE_YEAR, 0, 1) + st*60000);
     const mNum = startDt.getUTCMonth();                       /* 0~11 */
     const vIdx = (i + grp) % 3;                               /* 같은 십신이라도 달마다 다른 문장 */
-    rows += '<div class="age-row"><div class="ag">' + fmtMD(TYPE_YEAR, st) + '<br><span style="font-size:.78em;opacity:.75">~' + enLabel + '</span></div>'
+    const mStar = mlv === 0 ? 5 : (mlv === 1 ? 4 : (mlv === 2 ? 3 : 2));
+    const mCol = mStar >= 4 ? "#3FA57A" : (mStar === 3 ? "#8F887B" : "#C97A2B");
+    rows += '<div class="age-row"><div class="ag">' + fmtMD(TYPE_YEAR, st) + '<br><span style="font-size:.78em;opacity:.75">~' + enLabel + '</span>'
+          + '<br><span class="mstar" style="color:' + mCol + '">' + "★".repeat(mStar) + '<span class="gc-empty">' + "★".repeat(5-mStar) + '</span></span></div>'
           + '<div class="at"><span class="poem">' + SH[W.s] + BH[W.b] + '</span><span class="poem-r">'
           + (K ? (SK[W.s] + BK[W.b] + "월 · " + ssName(ss)) : ssName(ss)) + '</span>' + tag + '<br>'
           + tx(SJT.WOL_V[grp][vIdx]) + ' ' + tx(SJT.LUCK_V[mlv][i % 2]) + ' ' + tx(SJT.MCTX[mNum])
