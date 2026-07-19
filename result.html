@@ -6,6 +6,7 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#F6F0E3">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2795871274635118" crossorigin="anonymous"></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous"></script>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -339,6 +340,7 @@ footer p{
 .sr-actions{display:flex; gap:.5rem; margin-top:1rem;}
 .sr-a{flex:1; text-align:center; border:none; border-radius:12px; padding:.85rem; font-family:'Gowun Batang',serif; font-size:.95rem; font-weight:700; cursor:pointer; text-decoration:none;}
 .sr-share{background:var(--jinsa); color:#FFF7EA;}
+.sr-kakao{background:#FEE500; color:#3C1E1E;}
 .sr-save{background:#FFFDF7; color:var(--seokganju); border:1.5px solid var(--gold-line);}
 .sr-close{background:transparent; color:#D8CFBB; border:1.5px solid rgba(255,255,255,.3);}
 .kf-toast{position:fixed; left:50%; bottom:2rem; transform:translateX(-50%) translateY(20px); background:var(--meok); color:#FFF7EA; padding:.8rem 1.3rem; border-radius:12px; font-family:'Noto Sans KR',sans-serif; font-size:.88rem; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:300; max-width:88vw; text-align:center;}
@@ -1596,6 +1598,7 @@ function showToast(msg){
 (function(){
   if(!shareData) return;
   const SHARE_URL = "https://kfortunestory.com";
+  try{ if(window.Kakao && !Kakao.isInitialized()) Kakao.init("b0a14ae94e71c8295b9ab5f97cf6516a"); }catch(e){}
   const T = {
     kr:{btn:"내 운세 카드 공유하기", making:"카드 만드는 중…", save:"이미지 저장", share:"공유하기",
         luck:"좋은 운은 나눌수록 커진대 🍀", done:"복 나눔 완료 ✨ 너한테도 좋은 거 올 거야",
@@ -1675,10 +1678,13 @@ function showToast(msg){
     const url = URL.createObjectURL(blob);
     const m = document.createElement("div");
     m.className = "sr-modal";
+    const canShareFiles = navigator.canShare && navigator.canShare({files:[new File([blob],"f.png",{type:"image/png"})]});
+    const hasKakao = window.Kakao && Kakao.isInitialized && Kakao.isInitialized() && Kakao.Share;
     m.innerHTML = '<div class="sr-card">'
       + '<img src="' + url + '" alt="fortune card">'
       + '<div class="sr-actions">'
-      + (navigator.canShare && navigator.canShare({files:[new File([blob],"f.png",{type:"image/png"})]}) ? '<button class="sr-a sr-share" id="srShare">' + T.share + '</button>' : '')
+      + (canShareFiles ? '<button class="sr-a sr-share" id="srShare">' + T.share + '</button>' : '')
+      + (hasKakao ? '<button class="sr-a sr-kakao" id="srKakao">' + (LANG==="kr"?"카톡":"Kakao") + '</button>' : '')
       + '<a class="sr-a sr-save" href="' + url + '" download="my-fortune.png">' + T.save + '</a>'
       + '<button class="sr-a sr-close" id="srClose">' + T.close + '</button>'
       + '</div></div>';
@@ -1692,6 +1698,23 @@ function showToast(msg){
         await navigator.share({files:[file], text:T.cap});
         showToast(T.done);
       }catch(e){}
+    });
+    const sk = document.getElementById("srKakao");
+    if(sk) sk.addEventListener("click", ()=>{
+      try{
+        const starStr = "★".repeat(shareData.stars||3) + "☆".repeat(5-(shareData.stars||3));
+        Kakao.Share.sendDefault({
+          objectType: "feed",
+          content: {
+            title: shareData.title + " · " + shareData.grade + " " + starStr,
+            description: (shareData.sub||"") + "\n\n" + (LANG==="kr"?"내 운세 보러 가기 →":"See your fortune →"),
+            imageUrl: "https://kfortunestory.com/og-image.png",
+            link: { mobileWebUrl: SHARE_URL, webUrl: SHARE_URL }
+          },
+          buttons: [{ title: (LANG==="kr"?"나도 보기":"Try mine"), link: { mobileWebUrl: SHARE_URL, webUrl: SHARE_URL } }]
+        });
+        showToast(T.done);
+      }catch(e){ showToast(LANG==="kr"?"카톡 공유 실패":"Kakao share failed"); }
     });
   }
 
