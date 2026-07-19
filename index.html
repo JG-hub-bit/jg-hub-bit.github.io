@@ -190,11 +190,12 @@ h1 .accent{color:var(--jinsa);}
 
 /* ── 오늘의 일진 바 ── */
 .today-bar{
-  max-width:540px; margin:1.4rem auto 0; padding:.7rem 1rem;
+  max-width:540px; margin:1.4rem auto 0; padding:.8rem 1.1rem;
   background:#FFFDF7; border:1.5px solid var(--gold-line); border-radius:12px;
-  display:flex; align-items:center; justify-content:center; gap:.5rem; flex-wrap:wrap;
-  font-family:'Noto Sans KR',sans-serif; font-size:.86rem; color:#6E6656;
+  font-family:'Noto Sans KR',sans-serif;
 }
+.today-bar .tb-line{display:flex; align-items:center; justify-content:center; gap:.5rem; flex-wrap:wrap; font-size:.86rem; color:#6E6656;}
+.today-bar .tb-mean{margin-top:.5rem; padding-top:.5rem; border-top:1px dashed #E4D9BF; font-size:.8rem; line-height:1.6; color:#7A7263; text-align:center;}
 .today-bar .ji{font-family:'Song Myung',serif; color:var(--samcheong); font-size:1rem;}
 .today-bar .dot{color:#C9A85C;}
 .today-bar .term{color:var(--jinsa); font-weight:700;}
@@ -229,7 +230,11 @@ h1 .accent{color:var(--jinsa);}
 .zdetail.on{display:block;}
 .zdetail .zh{font-family:'Song Myung',serif; font-size:1.1rem; color:var(--jinsa); margin-bottom:.5rem;}
 .zdetail .zt{font-family:'Gowun Batang',serif; font-size:.96rem; line-height:1.7; color:#3E382E;}
-.zdetail .znote{font-family:'Noto Sans KR',sans-serif; font-size:.74rem; color:#8A8171; margin-top:.7rem;}
+.zdetail .zyears{font-family:'Noto Sans KR',sans-serif; font-size:.76rem; color:#8A7A4E; margin-bottom:.6rem; padding-bottom:.5rem; border-bottom:1px dashed #E4D9BF;}
+.zdetail .zmore{display:block; text-align:center; margin-top:.9rem; background:var(--jinsa); color:#FFF7EA; border-radius:10px; padding:.7rem; font-family:'Gowun Batang',serif; font-size:.92rem; font-weight:700; text-decoration:none;}
+.zdetail .zsaju{margin-top:.9rem; padding-top:.8rem; border-top:1px solid #EFE8D6; font-family:'Noto Sans KR',sans-serif; font-size:.8rem; line-height:1.6; color:#6E6656; text-align:center;}
+.zdetail .zsaju b{color:var(--jinsa);}
+.zdetail .zsaju a{display:inline-block; margin-top:.4rem; color:var(--seokganju); font-weight:700; text-decoration:none; border-bottom:1.5px solid var(--gold-line);}
 /* ── 설치 배너 ── */
 .install{
   display:none; max-width:540px; margin:1.6rem auto 0;
@@ -336,14 +341,19 @@ footer p{
   .menu-btn .desc{ color:#A99F8C !important; }
   .install{background:#2A251E !important; border-color:#8A7A4E !important;}
   .install .t1{color:#F0E7D4 !important;} .install .t2{color:#A99F8C !important;}
-  .today-bar{background:#2A251E !important; border-color:#8A7A4E !important; color:#C9BFA9 !important;}
+  .today-bar{background:#2A251E !important; border-color:#8A7A4E !important;}
+  .today-bar .tb-line{color:#C9BFA9 !important;}
+  .today-bar .tb-mean{border-color:#4A4336 !important; color:#B0A896 !important;}
   .today-bar .ji{color:#8FB3E8 !important;} .today-bar .term{color:#E8785E !important;}
   .myday{background:linear-gradient(135deg,#2A251E,#332B1E) !important; border-color:#8A7A4E !important;}
   .myday .t1{color:#C9B48A !important;} .myday .t2{color:#F0E7D4 !important;}
   .zbtn{background:#2A251E !important; border-color:#4A4336 !important;}
   .zbtn .zn{color:#C9BFA9 !important;}
   .zdetail{background:#2A251E !important; border-color:#8A7A4E !important;}
-  .zdetail .zt{color:#D8CFBB !important;} .zdetail .znote{color:#A99F8C !important;}
+  .zdetail .zt{color:#D8CFBB !important;}
+  .zdetail .zyears{color:#C9B48A !important; border-color:#4A4336 !important;}
+  .zdetail .zsaju{border-color:#3A332A !important; color:#C9BFA9 !important;}
+  .zdetail .zsaju b, .zdetail .zsaju a{color:#E8785E !important;}
   .ins-card{background:#2A251E !important; border-color:#8A7A4E !important;}
   .ins-card h3{color:#F0E7D4 !important;} .ins-card > p{color:#A99F8C !important;}
   .mstep{background:#332D25 !important;} .mstep .tx{color:#D8CFBB !important;}
@@ -769,6 +779,7 @@ function showToast(msg){
 }
 
 
+const _TXT = {"JEOL": {"소한": {"kr": "소한(小寒), 한 해 중 가장 추운 때입니다. 몸을 따뜻이 하고 무리한 일보다 안을 다지기 좋은 시기입니다.", "en": "Sohan, the coldest stretch of the year. A time to keep warm and strengthen your foundations rather than push outward."}, "입춘": {"kr": "입춘(立春), 봄이 시작되고 사주에서 말하는 진짜 새해가 열리는 절기입니다. 새 뜻을 세우기에 가장 좋은 때입니다.", "en": "Ipchun, the start of spring and the true new year in Saju. The finest time to set fresh intentions."}, "경칩": {"kr": "경칩(驚蟄), 겨울잠 자던 벌레도 깨어나는 때입니다. 미뤄둔 일을 다시 꺼내 움직이기 좋은 절기입니다.", "en": "Gyeongchip, when even hibernating creatures stir. A good time to take up what you postponed."}, "청명": {"kr": "청명(淸明), 하늘이 맑고 만물이 자라는 때입니다. 새 일을 벌이고 바깥 활동을 넓히기 좋습니다.", "en": "Cheongmyeong, clear skies and growing things. Good for starting ventures and widening your activity."}, "입하": {"kr": "입하(立夏), 여름이 시작되는 절기입니다. 기운이 왕성해지니 벌여둔 일에 속도를 내기 좋습니다.", "en": "Ipha, the start of summer. Energy runs high — a good time to pick up the pace on what you began."}, "망종": {"kr": "망종(芒種), 씨앗을 뿌리고 거둘 준비를 하는 때입니다. 부지런히 움직인 만큼 하반기에 거둡니다.", "en": "Mangjong, the season of sowing and preparing to reap. What you tend now, you harvest later."}, "소서": {"kr": "소서(小暑), 본격적인 더위가 시작되는 때입니다. 몸을 아끼며 페이스를 조절하기 좋은 절기입니다.", "en": "Soseo, when real heat begins. A time to spare your body and manage your pace."}, "입추": {"kr": "입추(立秋), 더위 속에서도 가을 기운이 처음 드는 절기입니다. 벌여둔 일 중 거둘 것을 가려내기 좋은 때입니다.", "en": "Ipchu, when autumn's first breath enters even amid the heat. A time to sort out what is ready to harvest."}, "백로": {"kr": "백로(白露), 이슬이 맺히기 시작하는 때입니다. 결실이 여물어 가니 마무리에 힘을 쏟기 좋습니다.", "en": "Baengno, when dew begins to form. Fruits ripen — a good time to put force into finishing."}, "한로": {"kr": "한로(寒露), 찬 이슬이 내리는 때입니다. 한 해를 정리하고 거둔 것을 챙기기 좋은 절기입니다.", "en": "Hallo, when cold dew falls. A time to wrap up the year and gather what you have earned."}, "입동": {"kr": "입동(立冬), 겨울이 시작되는 절기입니다. 밖으로 벌이기보다 안으로 갈무리하기 좋은 때입니다.", "en": "Ipdong, the start of winter. Better for storing inward than expanding outward."}, "대설": {"kr": "대설(大雪), 눈이 많이 내리는 때입니다. 한 해를 마무리하고 다음을 준비하기 좋은 절기입니다.", "en": "Daeseol, the season of deep snow. A time to close the year and prepare for the next."}}, "STEM_MEAN": [{"kr": "갑(甲)은 곧게 뻗는 큰 나무의 기운입니다. 시작과 도전에 힘이 실리는 날입니다.", "en": "Gap is the energy of a tall, upright tree — a day that favours beginnings and bold moves."}, {"kr": "을(乙)은 부드럽게 감기는 풀과 넝쿨의 기운입니다. 유연하게 돌아가는 지혜가 통하는 날입니다.", "en": "Eul is the energy of grass and vine — a day when flexible, roundabout wisdom works best."}, {"kr": "병(丙)은 온 세상을 비추는 태양의 기운입니다. 드러내고 표현하는 일에 힘이 실립니다.", "en": "Byeong is the energy of the blazing sun — a day that favours revealing and expressing."}, {"kr": "정(丁)은 은은히 밝히는 등불의 기운입니다. 세심하게 살피고 다듬는 일에 좋습니다.", "en": "Jeong is the energy of a steady lamp — good for careful attention and refinement."}, {"kr": "무(戊)는 든든한 큰 산의 기운입니다. 중심을 잡고 버티는 힘이 실리는 날입니다.", "en": "Mu is the energy of a great mountain — a day for holding your center and standing firm."}, {"kr": "기(己)는 만물을 기르는 기름진 흙의 기운입니다. 품고 다지는 일에 힘이 실립니다.", "en": "Gi is the energy of fertile soil — a day that favours nurturing and consolidating."}, {"kr": "경(庚)은 단단한 무쇠와 바위의 기운입니다. 결단하고 밀어붙이는 힘이 실리는 날입니다.", "en": "Gyeong is the energy of iron and rock — a day for decisiveness and pushing through."}, {"kr": "신(辛)은 잘 다듬은 보석의 기운입니다. 예리하게 가려내고 정리하는 일에 좋습니다.", "en": "Sin is the energy of a polished gem — good for sharp discernment and putting things in order."}, {"kr": "임(壬)은 넓게 흐르는 큰 바다의 기운입니다. 크게 보고 널리 연결하는 힘이 실립니다.", "en": "Im is the energy of the wide ocean — a day for big-picture thinking and broad connection."}, {"kr": "계(癸)는 촉촉이 스며드는 이슬과 비의 기운입니다. 조용히 파고들고 준비하는 일에 좋습니다.", "en": "Gye is the energy of dew and rain — good for quiet depth and preparation."}], "ZODIAC_DAY": [{"kr": "오늘은 당신의 띠와 같은 기운이 흐르는 날입니다. 익숙한 일은 술술 풀리지만, 비슷한 사람과 부딪히기 쉬운 날이기도 합니다. 고집을 세우기보다 한 발 양보하면 오히려 얻는 것이 많습니다. 친구나 동료와의 자리에서 뜻밖의 도움을 얻을 수 있으니 사람을 멀리하지 마십시오. 다만 오늘은 지갑을 여는 자리가 잦을 수 있으니, 큰 지출은 하루 미루는 것이 좋습니다.", "en": "Today runs on the same energy as your sign. Familiar tasks flow easily, but you may clash with people like yourself. Yielding a step rather than digging in wins you more. Unexpected help comes from friends and colleagues, so do not keep people at arm's length. Just watch the wallet — postpone any large spending by a day."}, {"kr": "오늘은 당신의 기운이 밖으로 뻗어나가는 날입니다. 말과 표현에 힘이 실리니 발표, 제안, 오랜만의 연락처럼 나를 드러내는 일에 좋습니다. 막혔던 아이디어가 풀리고 사람들의 반응도 좋은 날입니다. 다만 기분이 좋아 말이 앞서기 쉬우니, 지키지 못할 약속은 입 밖에 내지 마십시오. 오늘 한 말은 오래 기억되니, 한 박자만 늦춰 말하면 실수가 없습니다.", "en": "Today your energy reaches outward. Words carry weight — good for presenting, proposing, or reaching out after a long silence. Blocked ideas loosen and people respond well. But high spirits push words ahead of thought; do not voice a promise you cannot keep. What you say today is remembered — slow by one beat and you make no mistakes."}, {"kr": "오늘은 재물의 기운이 도는 날입니다. 돈과 관련된 협상이나 결정에서 평소보다 유리한 자리에 서고, 미뤄둔 금전 문제를 처리하기에도 좋습니다. 감이 잘 맞는 날이니 사고팔거나 조건을 조율하는 일을 오늘 하십시오. 다만 재물운이 좋은 날은 씀씀이도 함께 커지는 법입니다. 눈에 들어오는 것을 다 사지 말고, 오늘 번 것의 일부는 반드시 남겨두십시오.", "en": "Today wealth energy circulates. You stand better placed in money negotiations and decisions, and it is a good day to clear postponed financial matters. Your instincts land well — buy, sell, or settle terms today. But on strong-wealth days, spending swells too. Do not buy everything that catches your eye; set aside part of what you earn."}, {"kr": "오늘은 당신을 누르는 기운이 있는 날이니, 한 박자 늦추는 것이 상책입니다. 윗사람이나 규칙, 마감이 유난히 무겁게 느껴지고 하려던 일이 한 번씩 막힐 수 있습니다. 이런 날은 정면으로 부딪히지 말고 몸을 낮추면 화가 비껴갑니다. 특히 사람을 조심하십시오 — 오늘 오간 말 한마디가 구설이 될 수 있습니다. 서류나 계약은 반드시 한 번 더 확인하고, 서명은 급하게 하지 마십시오.", "en": "Today an energy presses on you — slowing down is the wise move. Superiors, rules, and deadlines feel unusually heavy, and your plans may stall. Do not collide head-on; keep low and trouble passes you by. Above all, be careful with people — a single word today can become gossip. Check documents and contracts twice, and never sign in a hurry."}, {"kr": "오늘은 당신을 돕는 기운이 드는 날, 하루 중 가장 든든한 날입니다. 어른이나 선배, 오래 알던 사람에게서 도움이 오니 부탁할 일이 있으면 오늘 꺼내십시오. 배우고 익히는 일이 잘 되는 날이라 공부, 시험, 면접, 상담처럼 머리 쓰는 일을 오늘로 잡으면 좋습니다. 문서와 계약도 순조롭게 풀리는 날입니다. 마음이 편안하고 판단이 흐려지지 않으니, 미뤄둔 중요한 결정을 내리기에도 좋은 날입니다.", "en": "Today a supportive energy arrives — the sturdiest day of the cycle. Help comes from elders, seniors, or people you have long known, so raise any request now. Learning goes well: schedule study, exams, interviews, or consultations for today. Documents and contracts resolve smoothly. Your mind is calm and clear — a good day to make the important decision you postponed."}], "ZODIAC_TIP": [{"kr": "오늘의 한마디 — 다툼을 피하고, 큰 지출은 내일로.", "en": "Today's word — avoid quarrels, and leave big spending for tomorrow."}, {"kr": "오늘의 한마디 — 표현은 좋으나, 약속은 신중히.", "en": "Today's word — express freely, but promise carefully."}, {"kr": "오늘의 한마디 — 실속을 챙기되, 씀씀이를 살펴라.", "en": "Today's word — secure real gains, but watch your spending."}, {"kr": "오늘의 한마디 — 사람과 문서를 조심하고, 몸을 낮춰라.", "en": "Today's word — mind people and paperwork, and keep low."}, {"kr": "오늘의 한마디 — 도움을 청하고, 중요한 일을 처리하라.", "en": "Today's word — ask for help, and handle what matters."}]};
 /* ══════ 메인 미니 엔진 ══════ */
 const _TT = "05p412gs1zjm2x4t3vav4tyr5swa6rsf7qch8odd9ltgaisk05yt12qg1ztb2xek3vkr4u8p5t686s2a7qma8on79m3baj2h068r130e20382xoe3vuf4ui85tfn6sbm7qvn8owl9mcuajc506ik13a720cz2xy23w424urv5tpd6slg7r5i8p6i9mmpajlz06sd13k020ms2y7v3wdv4v1p5tz86svc7rfe8pgc9mwhajvp05y312ps1zsm2xdr3vjq4u7i5t4w6s0x7qky8olw9m22aj1b067p12zg202c2xnj3vtl4uhd5tes6sas7qus8ovr9mbzajb906hn139b20c32xx73w364uqx5tob6skc7r4e8p5f9mloajkz06rd13iz20lq2y6s3wcr4v0j5ty06su37re48pf39mvaajuk05wx12ol1zrd2xci3vij4u6e5t3w6rzz7qjz8okv9m11aj0b066q12yf20192xmb3vs84ufx5td96s997qta8ou99mahaj9t06g9137y20ar2xvt3w1o4upe5tmt6six7r318p439mkbajjk06pv13hh20k92y5c3wbb4uz45twl6ssp7rcu8pdv9mu3ajtb05vm12n71zpx2xb03vgz4u4q5t236ry47qi78oj89lziaiyt065712wt1zzk2xkm3vqk4uec5tbr6s7t7qrx8osz9m9baj8p06f4136p209c2xu93w034uns5tl86shc7r1h8p2l9miyajic06os13ge20j12y3y3w9q4uxe5tuu6sqz7rb58pc89msiajru05u912ly1zop2x9q3vfm4u3b5t0q6rwu7qh08oi29lydaixp064412vt1zyl2xjl3vpe4ucz5ta86s687qqc8org9m7vaj7a06dr135f20862xt53vyy4uml5tjx6sfy7r048p199mhoajh206nh13f220hr2y2r3w8n4uwf5ttv6spy7ra38pb59mrhajqu05ta12kw1znl2x8l3veg4u265szj6rvk7qfm8ogn9lwxaiwb062t12ui1zxa2xia3vo54ubv5t9a6s5d7qpi8oql9m6xaj6b06cq134c20702xry3vxq4ulf5tiu6sf17qz98p0f9mgsajg506mh13e220go2y1l3w7e4uv25tsi6soo7r8y8pa49mqhajpt05s512jp1zmc2x7b3vd64u0x5syd6ruj7qes8ofz9lweaivs062612tq1zwc2xh63vmw4uai5t7u6s3w7qo48opd9m5waj5f06bx133i20622xqu3vwh4uk15the6sdk7qxu8oz39mflajf206lj13d420fp2y0j3w684utt5tr86sng7r7q8p8y9mpeajot05ra12ix1zlk2x6f3vc44tzn5sww6rsx7qd48oeb9luraiu8060q12sf1zv52xg13vlr4u9a5t6k6s2l7qmt8oo29m4kaj4306ak1325204q2xpk3vva4uiu5tg66sc97qwh8oxr9meaajds06k913bt20ed2xz63w4v4usg5tps6slw7r638p7a9mnqajn605pn12h91zjv2x4r3vai4ty65svl6rrq7qby8od49ltjaisz05zg12r41ztq2xek3vk74u7q5t516s147qlc8oml9m33aj2k0692130p203a2xo23vto4uh65tei6sao7qv08owc9mcuajc906in13a520cp2xxj3w394uqv5toa6skj7r4x8p699mmrajm605ok12g11zik2x3d3v934twn5sty6rq27qac8obn9ls7airq05y712pr1zsa2xd13vin4u675t3k6rzp7qk08old9m20aj1m068412zm20222xmp3vs94ufs5td76s9g7qtu8ov99mbwajbh06i0139j20c02xwn3w244upk5tmw6sj47r3h8p4u9mlfajky05ng12f21zhm2x2d3v7y4tvf5ssr6roy7q9c8oaq9lrcaiqw05xe12p01zrl2xcc3vhv4u595t2g6ryi7qiu8oka9m0zaj0n067712ys201b2xlz3vrh4uev5tc36s877qsj8otz9manaja906gr138b20as2xvi3w144uon5tm06si77r2k8p3x9mkjajk405mm12e71zgq2x1g3v714tui5srr6rnt7q828o9d9lpyaipk05w412ns1zqd2xb33vgm4u415t1b6rxg7qhs8oj59lzraizc065u12xe1zzw2xkk3vq34udj5taw6s757qrl8ot19m9oaj9806fo1376209m2xu93vzs4un95tkk6sgq7r158p2k9mj7ajiq05l512cn1zf32wzs3v5d4tsv5sq86rmf7q6u8o8b9lp0aiol05v312ml1zoz2x9k3vf14u2f5szp6rvv7qga8ohs9lykaiya064u12wd1zyr2xj93vol4ubx5t966s5e7qpu8orc9m83aj7q06ea135t20872xsr3vy64ull5tix6sf77qzq8p189mhyajhj05k212bm1ze22wyp3v444trg5son6rkr7q558o6m9lndain105tl12l71znp2x8b3vdq4u115sy76rub7qeq8og99lx3aiws063c12uu1zx72xhr3vn64uak5t7u6s427qok8oq49m6xaj6n06d6134o20702xrj3vwy4ukc5thm6sds7qy78ozo9mgeajg205im12a71zcm2wx73v2m4tq15snc6rjk7q408o5i9lm8ailw05sg12k11zmh2x703vcd4tzo5swy6rt57qdn8of79lw0aivq062a12tu1zw92xgr3vm34u9c5t6k6s2s7qnc8ooy9m5qaj5d06bu133b205o2xq83vvn4uj15tgd6sco7qx98oyx9mfqajfe05hv129a1zbn2ww63v1l4toy5sm76rid7q2t8o4f9llaail205rn12j51zlh2x5y3vba4tyj5svr6rry7qcf8oe29luzaiut061e12sw1zv52xfj3vks4u835t5e6s1q7qmc8oo09m4waj4p06ba132t20542xpi3vur4ui05tf86sbg7qw08oxm9mefaje505gq128a1zap2wv73v0i4tnq5sky6rh57q1o8o3b9lk7aijx05qi12i21zkf2x4x3va74txe5suj6rqp7qb88ocx9ltvaitq060c12rv1zu62xel3vju4u705t456s0b7qku8omh9m3daj35069q1317203i2xnx3vt84ugj5tdu6sa37quo8owa9md5ajcw05fh126z1z9b2wtr3uz24tmc5sjk6rfq7q078o1t9linaiif05p212gm1ziy2x3e3v8m4tvs5ssz6rp67q9q8obe9lsaais105yl12q11zsb2xco3vhw4u555t2f6rys7qji8olb9m29aj20068i12zw20242xmh3vrp4uey5tc76s8h7qt38ouu9mbrajbj05e1125g1z7p2ws23uxa4tkj5shs6re17pyn8o0f9lhgaiha05nw12fc1zhj2x1t3v6y4tu45srb6rnl7q898oa39lr6air505xt12pb1zri2xbq3vgr4u3u5t106rx97qhx8ojq9m0raj0m067912yr20102xla3vqf4udj5tar6s727qrs8otm9manajah05d3124l1z6w2wra3uwg4tjk5sgo6rcu7pxg8nz89lgaaig705mv12ef1zgq2x133v694ttb5sqd6rmi7q728o8v9lpyaipw05wj12o01zq82xai3vfn4u2t5t016rwb7qh08oiu9lzxaizu066h12xx20042xkf3vpl4ucs5ta06s697qqu8osj9m9iaj9d05c1123j1z5t2wq53uvb4tih5sfo6rbx7pwj8nya9lf8aif305lq12d91zfj2wzt3v4w4ts05sp76rli7q688o829lp4aip005vn12n41zpb2x9k3ven4u1q5syv6rv67qfw8ohr9lysaiym065512wj1zyp2xiy3vo34ub95t8h6s4u7qpm8orj9m8laj8g05az122c1z4g2woq3utv4th05se76rag7pv58nx19le5aie405ks12c81zec2wyi3v3j4tql5snp6rjy7q4n8o6j9lnpainp05ud12ls1znu2x7w3vcu4tzv5sx36rth7qec8ogc9lxiaixg064312vj1zxn2xhr3vmq4u9r5t6x6s387qo08opx9m71aj6y059m12131z3a2wni3usi4tfh5sck6r8s7pti8nvf9lclaicl05j912aq1zcv2wx13v204toy5sm16ria7q328o529lmbaime05t412kk1zmo2x6t3vbr4tyq5svt6rs17qcr8oep9lvwaivw062k12u01zw42xg93vl94u8a5t5g6s1s7qmi8oof9m5laj5k058811zp1z1u2wm13ur24te35sb86r7i7ps88nu49lb9aiba05i0129j1zbq2wvw3v0u4tnt5skw6rh47q1v8o3t9ll0aikz05rm12j11zl42x583va64tx75sud6rqs7qbp8odr9luzaiuy061j12sw1zuy2xf23vk24u755t4c6s0p7qli8onj9m4qaj4q057c11yq1z0s2wkw3upw4tcx5sa26r6c7pr58nt59lafaiah05h6128l1zal2wul3uzf4tme5sjj6rfw7q0s8o2w9lk8aikd05r512il1zkm2x4l3v9d4tw95std6rpq7qam8oco9ltyaitz060p12s41zu72xe83vj24u5z5t326rzf7qkb8ome9m3oaj3p056d11xt1yzw2wk03uox4tbu5s8v6r547ppy8ns19l9dai9h05g7127o1z9r2wtu3uyp4tll5sik6rer7pzj8o1l9liyaij205ps12h51zj52x353v7z4tuw5ss06roc7q988obd9lspaist05zi12qw1zsw2xcv3vhr4u4q5t1v6ry87qj18ol19m2aaj2d055311wj1yyl2wim3unh4tae5s7h6r3s7pol8nql9l7uai7x05en12631z852ws33uwv4tjp5sgs6rd57py38o099lhnaihr05og12fu1zhu2x1t3v6k4ttf5sqi6rmv7q7u8o9z9lrcaire05y112pc1zrb2xba3vg44u305t036rwg7qhe8ojl9m0yaj12053q11v21ywz2wgy3ulr4t8n5s5q6r217pmy8np49l6kai6s05dl12501z6y2wqu3uvk4tie5sff6rbp7pwl8nyq9lg6aige05n612el1zgi2x0c3v4z4trs5sou6rla7q6a8o8j9lpzaiq505ww12oa1zq92xa63vew4u1q5syt6rv77qg58oic9lzqaizv052m11u11yw32wg23uku4t7n5s4n6r0x7pls8nny9l5eai5k05cc123r1z5q2wpn3uuc4th35se36raf7pve8nxo9lf7aifg05m812dm1zfk2wzf3v454tqy5so06rke7q5c8o7j9lozaip505vw12na1zp72x943vdu4u0p5sxs6ru57qf38oh99lyoaiyt051k11sy1yux2wet3ujj4t6d5s3f6qzs7pkr8nmy9l4eai4l05bd122s1z4s2wop3utd4tg55sd66r9j7pui8nwr9le8aiee05l312ce1zea2wy33v2r4tpj5sml6rj17q458o6i9lo0aio605uu12m31znx2x7q3vcf4tzb5swf6rsu7qdw8og79lxqaixx050n11rz1ytu2wdn3uib4t545s266qyi7pjh8nlr9l3bai3l05ae121r1z3k2wn83urq4tee5sbe6r7t7psw8nva9lcxaida05k512bi1zdc2wx13v1j4to65sl76rhn7q2r8o549lmnaimx05tp12l31zmz2x6q3vba4txy5suw6rr97qcb8oeo9lw8aiwh04z911qm1ysj2wcc3ugx4t3l5s0h6qws7phs8nk59l1sai24058z120e1z2b2wm43uqp4tdc5sa96r6j7prh8ntt9lbgaibs05im129y1zbr2wvh3v014tmq5sjp6rg37q148o3h9ll2aild05s612jj1zld2x533v9o4twg5sti6rpx7qay8od89luraiv004xu11p81yr52way3ufk4t2a5rza6qvo7pgo8niy9l0hai0q057i11yw1z0r2wkh3uoy4tbk5s8j6r4z7pq58nsl9la8aiaj05hb128m1zaf2wu43uyn4tlc5sid6rev7q028o2j9lk5aikf05r412id1zk42x3t3v8e4tv45ss56rol7q9q8oc69ltuaiu504ww11o51ypw2w9k3ue24t0p5rxp6qu47pf88nhq9kzhahzx056s11y51yzw2wji3unx4taj5s7i6r3x7pp28nrj9l99ai9o05gj127v1z9l2wt63uxj4tk35sh16rdi7pyq8o199lj0aijd05q712hj1zjb2x2y3v7d4ttz5sqx6rnd7q8j8ob19lsqait404vy11nb1yp62w8w3udd4szz5rwv6qt77pe98ngp9kygahyv055q11x31yyv2wih3umv4t9d5s686r2l7pnq8nq99l82ai8k05fg126s1z8j2ws33uwi4tj35sg26rci7pxo8o059lhuaii905p312gf1zi72x1t3v694tsw5spv6rma7q7e8o9t9lrhairu04uo11m11ynt2w7g3ubu4sye5rva6qro7pct8nfb9kx1ahxf054b11vo1yxh2wh43ulj4t825s4z6r1f7pml8np49l6vai7905e1125a1z6z2wqk3uuy4thi5seg6raw7pw68nyr9lgjaigx05no12ew1zgj2x033v4h4tr45so46rkk7q5s8o8d9lq5aiql04te11ko1ymd2w5x3uab4swx5rtw6qqb7pbh8ne09kvtahwb053711ui1yw52wfk3ujs4t685s346qzl7pkv8nni9l5eai5x05cu12451z5t2wp83utg4tfx5scu6r9e7puq8nxd9lf7aifm05mh12ds1zfi2wz13v3c4tpu5smq6rj67q4g8o729lowaipc04s611jh1yl62w4q3u904svf5rs86qom7p9t8ncg9kueahuy051v11t71yuw2wef3uiq4t565s216qyg7pjo8nmc9l49ai4t05bp122z1z4l2wo13usb4tes5sbp6r857ptf8nw29ldyaieg05lc12cm1ze92wxp3v1y4toh5slg6rhx7q368o5r9lnlaio304qz11ic1yk32w3m3u7x4suf5rrd6qnu7p928nbo9ktiahtz050w11s71ytv2wda3uhh4t3v5s0p6qx77pij8nla9l38ai3r05am121v1z3h2wmw3ur34tdj5sah6r717psf8nv69ld4aidm05kf12bm1zd72wwn3v0x4tng5ske6rgw7q278o4x9lmvaine04q911hi1yj22w2g3u6m4st05rpu6qm97p7k8naa9ksaahsy04zy11ra1ysv2wc73ugb4t2o5rzj6qw17phd8nk59l24ai2q059o120z1z2k2wlw3upz4tcc5s966r5o7pr28ntu9lbtaicd05j912aj1zc52wvj3uzo4tm15siv6rfb7q0m8o3d9llcailx";
 const _SE = [0,0,1,1,2,2,3,3,4,4];
@@ -806,10 +817,15 @@ function renderToday(){
   const jiHanja = _SH[ij.si]+_BH[ij.bi], jiKr = _SK[ij.si]+_BK[ij.bi];
   const termTxt = tOn ? ('<span class="term">'+(K?"오늘 "+tName+" · 절기":tName+" today")+'</span>')
                       : ('<span class="term">'+tName+" D-"+tD+'</span>');
+  const stemMean = K ? _TXT.STEM_MEAN[ij.si].kr : _TXT.STEM_MEAN[ij.si].en;
+  let jeolMean = "";
+  if(tOn && _TXT.JEOL[tName]) jeolMean = K ? _TXT.JEOL[tName].kr : _TXT.JEOL[tName].en;
   document.getElementById("todayBar").innerHTML =
-    '<span>'+dateStr+'</span><span class="dot">·</span>'
+    '<div class="tb-line">'
+    +'<span>'+dateStr+'</span><span class="dot">·</span>'
     +'<span class="ji">'+jiHanja+' '+jiKr+(K?"일":"")+'</span><span class="dot">·</span>'
-    +termTxt;
+    +termTxt+'</div>'
+    +'<div class="tb-mean">'+stemMean+(jeolMean ? " "+jeolMean : "")+'</div>';
 
   /* 오늘의 나 */
   const p = JSON.parse(localStorage.getItem("kf_p_main")||"null");
@@ -836,6 +852,13 @@ function renderToday(){
   }
   grid += '</div><div class="zdetail" id="zdetail"></div>';
   zt.innerHTML = grid;
+  /* 띠 → 대표 출생연도 (12지 순환, 최근 세대) */
+  function zodiacYears(z){
+    const base = 2020 + z * 0;  /* 2020=쥐(z0) 기준 */
+    const ys = [];
+    for(let yy=1948; yy<=2020; yy++){ if(((yy-4)%12+12)%12 === z) ys.push(yy); }
+    return ys.filter(y=>y>=1948 && y<=2008);
+  }
   zt.querySelectorAll(".zbtn").forEach(b=>{
     b.addEventListener("click", ()=>{
       const z = +b.dataset.z;
@@ -843,11 +866,18 @@ function renderToday(){
       b.classList.add("sel");
       const rel = ((ij.elem - _BE[z])%5+5)%5;
       const dt = document.getElementById("zdetail");
-      dt.innerHTML = '<div class="zh">'+_ZEMO[z]+' '+(K?_ZK[z]+"띠":_ZE[z])+' · '+_REL_TAG[currentLang][rel]+'</div>'
-        +'<div class="zt">'+(K?_REL_KR[rel]:_REL_EN[rel])+'. '
-        +(K?"오늘 하늘의 기운은 "+_EL.kr[ij.elem]+"이며, 당신의 띠와 만나 이런 하루를 만듭니다."
-           :"Today's energy is "+_EL.en[ij.elem]+", meeting your sign to shape the day.")+'</div>'
-        +'<div class="znote">'+(K?"※ 띠만으로 보는 간략 운세입니다. 정확한 오늘의 운세는 생년월일시로 확인하세요.":"※ A brief sign-only reading. For an accurate daily fortune, use your full birth data.")+'</div>';
+      const nm = K ? _ZK[z]+"띠" : _ZE[z];
+      const brief = K ? _REL_KR[rel] : _REL_EN[rel];
+      const years = zodiacYears(z);
+      const yearStr = years.map(y=> K ? (y+"년생") : ("'"+String(y).slice(2))).join(K ? " · " : " · ");
+      dt.innerHTML =
+        '<div class="zh">'+_ZEMO[z]+' '+nm+' · '+_REL_TAG[currentLang][rel]+'</div>'
+        +'<div class="zyears">'+(K?"해당 띠 ":"Born: ")+yearStr+'</div>'
+        +'<div class="zt">'+brief+'. '
+        +(K?"오늘 하늘의 기운은 "+_EL.kr[ij.elem]+"이며, "+nm+"과 만나 이런 하루를 만듭니다.":"Today's energy is "+_EL.en[ij.elem]+", meeting the "+nm+" to shape the day.")+'</div>'
+        +'<a class="zmore" href="ad.html?type=today&z='+z+'">'+(K?"이 띠의 오늘 운세 자세히 보기 →":"See today in detail →")+'</a>'
+        +'<div class="zsaju">'+(K?"띠로 보면 이런데, <b>사주팔자</b>로 오늘 내 일진은 어떨까요?":"This is by sign — but what does your <b>Saju</b> say about today?")
+        +'<a href="input.html?type=today">'+(K?"내 사주로 오늘 보기 →":"Read today by my Saju →")+'</a></div>';
       dt.classList.add("on");
     });
   });

@@ -450,7 +450,9 @@ document.getElementById("adDesc").textContent = T.adDesc;
 document.getElementById("cLabel").textContent = T.count;
 document.getElementById("btnGo").textContent = T.go;
 
-const type = new URLSearchParams(location.search).get("type") || localStorage.getItem("kf_selected") || "tojeong";
+const _qs = new URLSearchParams(location.search);
+const type = _qs.get("type") || localStorage.getItem("kf_selected") || "tojeong";
+const _z = _qs.get("z");   /* 띠별 상세용 */
 let n = 5;
 const timer = setInterval(()=>{
   n--;
@@ -462,7 +464,9 @@ const timer = setInterval(()=>{
   }
 }, 1000);
 document.getElementById("btnGo").addEventListener("click", ()=>{
-  location.href = "result.html?type=" + type;
+  let url = "result.html?type=" + encodeURIComponent(type);
+  if(_z !== null) url += "&z=" + encodeURIComponent(_z);
+  location.href = url;
 });
 </script>
 <script>
