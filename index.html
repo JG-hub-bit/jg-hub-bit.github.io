@@ -15,6 +15,20 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="K-Fortune">
+<meta name="description" content="토정비결·사주팔자·2026 신년운세·궁합·꿈해몽·오늘의 운세를 절기 기반 정밀 명식으로. 매일 바뀌는 오늘의 일진과 띠별 운세까지. 무료 한국 전통 운세.">
+<link rel="canonical" href="https://kfortunestory.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="K-Fortune Story">
+<meta property="og:title" content="K-Fortune Story · 한국 전통 운세 | 사주·토정비결·오늘의 운세">
+<meta property="og:description" content="토정비결·사주팔자·2026 신년운세·궁합·꿈해몽·오늘의 운세를 절기 기반 정밀 명식으로. 매일 바뀌는 오늘의 일진과 띠별 운세까지. 무료 한국 전통 운세.">
+<meta property="og:url" content="https://kfortunestory.com/">
+<meta property="og:image" content="https://kfortunestory.com/og-image.png">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="K-Fortune Story · 한국 전통 운세 | 사주·토정비결·오늘의 운세">
+<meta name="twitter:description" content="토정비결·사주팔자·2026 신년운세·궁합·꿈해몽·오늘의 운세를 절기 기반 정밀 명식으로. 매일 바뀌는 오늘의 일진과 띠별 운세까지. 무료 한국 전통 운세.">
+<meta name="twitter:image" content="https://kfortunestory.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
@@ -174,6 +188,48 @@ h1 .accent{color:var(--jinsa);}
   font-size:.82rem; color:#6E6656; line-height:1.45;
 }
 
+/* ── 오늘의 일진 바 ── */
+.today-bar{
+  max-width:540px; margin:1.4rem auto 0; padding:.7rem 1rem;
+  background:#FFFDF7; border:1.5px solid var(--gold-line); border-radius:12px;
+  display:flex; align-items:center; justify-content:center; gap:.5rem; flex-wrap:wrap;
+  font-family:'Noto Sans KR',sans-serif; font-size:.86rem; color:#6E6656;
+}
+.today-bar .ji{font-family:'Song Myung',serif; color:var(--samcheong); font-size:1rem;}
+.today-bar .dot{color:#C9A85C;}
+.today-bar .term{color:var(--jinsa); font-weight:700;}
+/* ── 오늘의 나 ── */
+.myday{
+  display:none; max-width:540px; margin:.7rem auto 0; padding:1rem 1.15rem;
+  background:linear-gradient(135deg,#FFFDF7,#F6EEDD); border:2px solid var(--gold-line);
+  border-radius:14px; text-align:left; align-items:center; gap:.9rem;
+}
+.myday.on{display:flex;}
+.myday .lv{flex:0 0 auto; font-family:'Noto Sans KR',sans-serif; font-size:.72rem; font-weight:700;
+  color:#FFF7EA; background:var(--jinsa); border-radius:999px; padding:.3rem .7rem;}
+.myday .txt{flex:1; min-width:0;}
+.myday .t1{font-family:'Gowun Batang',serif; font-size:.78rem; color:#8A7A4E;}
+.myday .t2{font-family:'Song Myung',serif; font-size:1.02rem; color:var(--meok); line-height:1.4; margin-top:.15rem;}
+.myday .go{flex:0 0 auto; background:var(--jinsa); color:#FFF7EA; border-radius:9px;
+  padding:.5rem .8rem; font-family:'Gowun Batang',serif; font-size:.85rem; font-weight:700; text-decoration:none; white-space:nowrap;}
+/* ── 띠별 운세 ── */
+.zodiac-sec{max-width:600px; margin:2.4rem auto 0;}
+.zodiac-title{font-family:'Song Myung',serif; font-size:clamp(.95rem,3.4vw,1.15rem); color:var(--noeurok);
+  display:flex; align-items:center; gap:10px; justify-content:center; white-space:nowrap; margin-bottom:1.1rem;}
+.zodiac-title::before,.zodiac-title::after{content:""; height:1px; background:var(--gold-line); flex:0 1 46px; min-width:10px;}
+.zodiac-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:.5rem;}
+.zbtn{background:#FFFDF7; border:1.5px solid #E4D9BF; border-radius:12px; padding:.6rem .3rem;
+  text-align:center; cursor:pointer; transition:border-color .15s;}
+.zbtn:hover,.zbtn.sel{border-color:var(--jinsa);}
+.zbtn .emo{font-size:1.5rem; line-height:1;}
+.zbtn .zn{font-family:'Noto Sans KR',sans-serif; font-size:.72rem; color:#6E6656; margin-top:.2rem;}
+.zbtn .zg{display:inline-block; width:7px; height:7px; border-radius:50%; margin-top:.25rem;}
+.zdetail{display:none; margin-top:.9rem; background:#FFFDF7; border:1.5px solid var(--gold-line);
+  border-radius:14px; padding:1.1rem 1.2rem;}
+.zdetail.on{display:block;}
+.zdetail .zh{font-family:'Song Myung',serif; font-size:1.1rem; color:var(--jinsa); margin-bottom:.5rem;}
+.zdetail .zt{font-family:'Gowun Batang',serif; font-size:.96rem; line-height:1.7; color:#3E382E;}
+.zdetail .znote{font-family:'Noto Sans KR',sans-serif; font-size:.74rem; color:#8A8171; margin-top:.7rem;}
 /* ── 설치 배너 ── */
 .install{
   display:none; max-width:540px; margin:1.6rem auto 0;
@@ -280,6 +336,14 @@ footer p{
   .menu-btn .desc{ color:#A99F8C !important; }
   .install{background:#2A251E !important; border-color:#8A7A4E !important;}
   .install .t1{color:#F0E7D4 !important;} .install .t2{color:#A99F8C !important;}
+  .today-bar{background:#2A251E !important; border-color:#8A7A4E !important; color:#C9BFA9 !important;}
+  .today-bar .ji{color:#8FB3E8 !important;} .today-bar .term{color:#E8785E !important;}
+  .myday{background:linear-gradient(135deg,#2A251E,#332B1E) !important; border-color:#8A7A4E !important;}
+  .myday .t1{color:#C9B48A !important;} .myday .t2{color:#F0E7D4 !important;}
+  .zbtn{background:#2A251E !important; border-color:#4A4336 !important;}
+  .zbtn .zn{color:#C9BFA9 !important;}
+  .zdetail{background:#2A251E !important; border-color:#8A7A4E !important;}
+  .zdetail .zt{color:#D8CFBB !important;} .zdetail .znote{color:#A99F8C !important;}
   .ins-card{background:#2A251E !important; border-color:#8A7A4E !important;}
   .ins-card h3{color:#F0E7D4 !important;} .ins-card > p{color:#A99F8C !important;}
   .mstep{background:#332D25 !important;} .mstep .tx{color:#D8CFBB !important;}
@@ -307,6 +371,17 @@ footer p{
   .dream-sym{ background:#3A332A !important; color:#D8C9A4 !important; }
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"K-Fortune Story",
+  "alternateName":"한국 전통 운세",
+  "url":"https://kfortunestory.com/",
+  "description":"토정비결·사주팔자·신년운세·궁합·꿈해몽·오늘의 운세를 절기 기반 정밀 명식으로 제공하는 무료 한국 전통 운세 서비스",
+  "inLanguage":["ko","en"]
+}
+</script>
 </head>
 <body>
 
@@ -448,6 +523,9 @@ footer p{
 
   <div class="visitor" id="visitorBox">…</div>
 
+  <div class="today-bar" id="todayBar"></div>
+  <div class="myday" id="myDay"></div>
+
   <h2 class="menu-title" data-i18n="menuTitle">보고 싶은 운세를 선택하세요</h2>
 
   <div class="menu-grid">
@@ -535,6 +613,8 @@ footer p{
       </svg>
     </button>
   </div>
+
+  <div class="zodiac-sec" id="zodiacSec"></div>
 
   <div class="install" id="installBar">
     <img src="icon-192.png" alt="">
@@ -647,6 +727,7 @@ function setLang(lang){
   });
   if(typeof renderVisitor === "function") renderVisitor();
   if(typeof window._insRefresh === "function") window._insRefresh();
+  if(typeof renderToday === "function") renderToday();
 }
 
 let _counts = null;
@@ -687,8 +768,94 @@ function showToast(msg){
   t._timer = setTimeout(()=>t.classList.remove("show"), 2200);
 }
 
+
+/* ══════ 메인 미니 엔진 ══════ */
+const _TT = "05p412gs1zjm2x4t3vav4tyr5swa6rsf7qch8odd9ltgaisk05yt12qg1ztb2xek3vkr4u8p5t686s2a7qma8on79m3baj2h068r130e20382xoe3vuf4ui85tfn6sbm7qvn8owl9mcuajc506ik13a720cz2xy23w424urv5tpd6slg7r5i8p6i9mmpajlz06sd13k020ms2y7v3wdv4v1p5tz86svc7rfe8pgc9mwhajvp05y312ps1zsm2xdr3vjq4u7i5t4w6s0x7qky8olw9m22aj1b067p12zg202c2xnj3vtl4uhd5tes6sas7qus8ovr9mbzajb906hn139b20c32xx73w364uqx5tob6skc7r4e8p5f9mloajkz06rd13iz20lq2y6s3wcr4v0j5ty06su37re48pf39mvaajuk05wx12ol1zrd2xci3vij4u6e5t3w6rzz7qjz8okv9m11aj0b066q12yf20192xmb3vs84ufx5td96s997qta8ou99mahaj9t06g9137y20ar2xvt3w1o4upe5tmt6six7r318p439mkbajjk06pv13hh20k92y5c3wbb4uz45twl6ssp7rcu8pdv9mu3ajtb05vm12n71zpx2xb03vgz4u4q5t236ry47qi78oj89lziaiyt065712wt1zzk2xkm3vqk4uec5tbr6s7t7qrx8osz9m9baj8p06f4136p209c2xu93w034uns5tl86shc7r1h8p2l9miyajic06os13ge20j12y3y3w9q4uxe5tuu6sqz7rb58pc89msiajru05u912ly1zop2x9q3vfm4u3b5t0q6rwu7qh08oi29lydaixp064412vt1zyl2xjl3vpe4ucz5ta86s687qqc8org9m7vaj7a06dr135f20862xt53vyy4uml5tjx6sfy7r048p199mhoajh206nh13f220hr2y2r3w8n4uwf5ttv6spy7ra38pb59mrhajqu05ta12kw1znl2x8l3veg4u265szj6rvk7qfm8ogn9lwxaiwb062t12ui1zxa2xia3vo54ubv5t9a6s5d7qpi8oql9m6xaj6b06cq134c20702xry3vxq4ulf5tiu6sf17qz98p0f9mgsajg506mh13e220go2y1l3w7e4uv25tsi6soo7r8y8pa49mqhajpt05s512jp1zmc2x7b3vd64u0x5syd6ruj7qes8ofz9lweaivs062612tq1zwc2xh63vmw4uai5t7u6s3w7qo48opd9m5waj5f06bx133i20622xqu3vwh4uk15the6sdk7qxu8oz39mflajf206lj13d420fp2y0j3w684utt5tr86sng7r7q8p8y9mpeajot05ra12ix1zlk2x6f3vc44tzn5sww6rsx7qd48oeb9luraiu8060q12sf1zv52xg13vlr4u9a5t6k6s2l7qmt8oo29m4kaj4306ak1325204q2xpk3vva4uiu5tg66sc97qwh8oxr9meaajds06k913bt20ed2xz63w4v4usg5tps6slw7r638p7a9mnqajn605pn12h91zjv2x4r3vai4ty65svl6rrq7qby8od49ltjaisz05zg12r41ztq2xek3vk74u7q5t516s147qlc8oml9m33aj2k0692130p203a2xo23vto4uh65tei6sao7qv08owc9mcuajc906in13a520cp2xxj3w394uqv5toa6skj7r4x8p699mmrajm605ok12g11zik2x3d3v934twn5sty6rq27qac8obn9ls7airq05y712pr1zsa2xd13vin4u675t3k6rzp7qk08old9m20aj1m068412zm20222xmp3vs94ufs5td76s9g7qtu8ov99mbwajbh06i0139j20c02xwn3w244upk5tmw6sj47r3h8p4u9mlfajky05ng12f21zhm2x2d3v7y4tvf5ssr6roy7q9c8oaq9lrcaiqw05xe12p01zrl2xcc3vhv4u595t2g6ryi7qiu8oka9m0zaj0n067712ys201b2xlz3vrh4uev5tc36s877qsj8otz9manaja906gr138b20as2xvi3w144uon5tm06si77r2k8p3x9mkjajk405mm12e71zgq2x1g3v714tui5srr6rnt7q828o9d9lpyaipk05w412ns1zqd2xb33vgm4u415t1b6rxg7qhs8oj59lzraizc065u12xe1zzw2xkk3vq34udj5taw6s757qrl8ot19m9oaj9806fo1376209m2xu93vzs4un95tkk6sgq7r158p2k9mj7ajiq05l512cn1zf32wzs3v5d4tsv5sq86rmf7q6u8o8b9lp0aiol05v312ml1zoz2x9k3vf14u2f5szp6rvv7qga8ohs9lykaiya064u12wd1zyr2xj93vol4ubx5t966s5e7qpu8orc9m83aj7q06ea135t20872xsr3vy64ull5tix6sf77qzq8p189mhyajhj05k212bm1ze22wyp3v444trg5son6rkr7q558o6m9lndain105tl12l71znp2x8b3vdq4u115sy76rub7qeq8og99lx3aiws063c12uu1zx72xhr3vn64uak5t7u6s427qok8oq49m6xaj6n06d6134o20702xrj3vwy4ukc5thm6sds7qy78ozo9mgeajg205im12a71zcm2wx73v2m4tq15snc6rjk7q408o5i9lm8ailw05sg12k11zmh2x703vcd4tzo5swy6rt57qdn8of79lw0aivq062a12tu1zw92xgr3vm34u9c5t6k6s2s7qnc8ooy9m5qaj5d06bu133b205o2xq83vvn4uj15tgd6sco7qx98oyx9mfqajfe05hv129a1zbn2ww63v1l4toy5sm76rid7q2t8o4f9llaail205rn12j51zlh2x5y3vba4tyj5svr6rry7qcf8oe29luzaiut061e12sw1zv52xfj3vks4u835t5e6s1q7qmc8oo09m4waj4p06ba132t20542xpi3vur4ui05tf86sbg7qw08oxm9mefaje505gq128a1zap2wv73v0i4tnq5sky6rh57q1o8o3b9lk7aijx05qi12i21zkf2x4x3va74txe5suj6rqp7qb88ocx9ltvaitq060c12rv1zu62xel3vju4u705t456s0b7qku8omh9m3daj35069q1317203i2xnx3vt84ugj5tdu6sa37quo8owa9md5ajcw05fh126z1z9b2wtr3uz24tmc5sjk6rfq7q078o1t9linaiif05p212gm1ziy2x3e3v8m4tvs5ssz6rp67q9q8obe9lsaais105yl12q11zsb2xco3vhw4u555t2f6rys7qji8olb9m29aj20068i12zw20242xmh3vrp4uey5tc76s8h7qt38ouu9mbrajbj05e1125g1z7p2ws23uxa4tkj5shs6re17pyn8o0f9lhgaiha05nw12fc1zhj2x1t3v6y4tu45srb6rnl7q898oa39lr6air505xt12pb1zri2xbq3vgr4u3u5t106rx97qhx8ojq9m0raj0m067912yr20102xla3vqf4udj5tar6s727qrs8otm9manajah05d3124l1z6w2wra3uwg4tjk5sgo6rcu7pxg8nz89lgaaig705mv12ef1zgq2x133v694ttb5sqd6rmi7q728o8v9lpyaipw05wj12o01zq82xai3vfn4u2t5t016rwb7qh08oiu9lzxaizu066h12xx20042xkf3vpl4ucs5ta06s697qqu8osj9m9iaj9d05c1123j1z5t2wq53uvb4tih5sfo6rbx7pwj8nya9lf8aif305lq12d91zfj2wzt3v4w4ts05sp76rli7q688o829lp4aip005vn12n41zpb2x9k3ven4u1q5syv6rv67qfw8ohr9lysaiym065512wj1zyp2xiy3vo34ub95t8h6s4u7qpm8orj9m8laj8g05az122c1z4g2woq3utv4th05se76rag7pv58nx19le5aie405ks12c81zec2wyi3v3j4tql5snp6rjy7q4n8o6j9lnpainp05ud12ls1znu2x7w3vcu4tzv5sx36rth7qec8ogc9lxiaixg064312vj1zxn2xhr3vmq4u9r5t6x6s387qo08opx9m71aj6y059m12131z3a2wni3usi4tfh5sck6r8s7pti8nvf9lclaicl05j912aq1zcv2wx13v204toy5sm16ria7q328o529lmbaime05t412kk1zmo2x6t3vbr4tyq5svt6rs17qcr8oep9lvwaivw062k12u01zw42xg93vl94u8a5t5g6s1s7qmi8oof9m5laj5k058811zp1z1u2wm13ur24te35sb86r7i7ps88nu49lb9aiba05i0129j1zbq2wvw3v0u4tnt5skw6rh47q1v8o3t9ll0aikz05rm12j11zl42x583va64tx75sud6rqs7qbp8odr9luzaiuy061j12sw1zuy2xf23vk24u755t4c6s0p7qli8onj9m4qaj4q057c11yq1z0s2wkw3upw4tcx5sa26r6c7pr58nt59lafaiah05h6128l1zal2wul3uzf4tme5sjj6rfw7q0s8o2w9lk8aikd05r512il1zkm2x4l3v9d4tw95std6rpq7qam8oco9ltyaitz060p12s41zu72xe83vj24u5z5t326rzf7qkb8ome9m3oaj3p056d11xt1yzw2wk03uox4tbu5s8v6r547ppy8ns19l9dai9h05g7127o1z9r2wtu3uyp4tll5sik6rer7pzj8o1l9liyaij205ps12h51zj52x353v7z4tuw5ss06roc7q988obd9lspaist05zi12qw1zsw2xcv3vhr4u4q5t1v6ry87qj18ol19m2aaj2d055311wj1yyl2wim3unh4tae5s7h6r3s7pol8nql9l7uai7x05en12631z852ws33uwv4tjp5sgs6rd57py38o099lhnaihr05og12fu1zhu2x1t3v6k4ttf5sqi6rmv7q7u8o9z9lrcaire05y112pc1zrb2xba3vg44u305t036rwg7qhe8ojl9m0yaj12053q11v21ywz2wgy3ulr4t8n5s5q6r217pmy8np49l6kai6s05dl12501z6y2wqu3uvk4tie5sff6rbp7pwl8nyq9lg6aige05n612el1zgi2x0c3v4z4trs5sou6rla7q6a8o8j9lpzaiq505ww12oa1zq92xa63vew4u1q5syt6rv77qg58oic9lzqaizv052m11u11yw32wg23uku4t7n5s4n6r0x7pls8nny9l5eai5k05cc123r1z5q2wpn3uuc4th35se36raf7pve8nxo9lf7aifg05m812dm1zfk2wzf3v454tqy5so06rke7q5c8o7j9lozaip505vw12na1zp72x943vdu4u0p5sxs6ru57qf38oh99lyoaiyt051k11sy1yux2wet3ujj4t6d5s3f6qzs7pkr8nmy9l4eai4l05bd122s1z4s2wop3utd4tg55sd66r9j7pui8nwr9le8aiee05l312ce1zea2wy33v2r4tpj5sml6rj17q458o6i9lo0aio605uu12m31znx2x7q3vcf4tzb5swf6rsu7qdw8og79lxqaixx050n11rz1ytu2wdn3uib4t545s266qyi7pjh8nlr9l3bai3l05ae121r1z3k2wn83urq4tee5sbe6r7t7psw8nva9lcxaida05k512bi1zdc2wx13v1j4to65sl76rhn7q2r8o549lmnaimx05tp12l31zmz2x6q3vba4txy5suw6rr97qcb8oeo9lw8aiwh04z911qm1ysj2wcc3ugx4t3l5s0h6qws7phs8nk59l1sai24058z120e1z2b2wm43uqp4tdc5sa96r6j7prh8ntt9lbgaibs05im129y1zbr2wvh3v014tmq5sjp6rg37q148o3h9ll2aild05s612jj1zld2x533v9o4twg5sti6rpx7qay8od89luraiv004xu11p81yr52way3ufk4t2a5rza6qvo7pgo8niy9l0hai0q057i11yw1z0r2wkh3uoy4tbk5s8j6r4z7pq58nsl9la8aiaj05hb128m1zaf2wu43uyn4tlc5sid6rev7q028o2j9lk5aikf05r412id1zk42x3t3v8e4tv45ss56rol7q9q8oc69ltuaiu504ww11o51ypw2w9k3ue24t0p5rxp6qu47pf88nhq9kzhahzx056s11y51yzw2wji3unx4taj5s7i6r3x7pp28nrj9l99ai9o05gj127v1z9l2wt63uxj4tk35sh16rdi7pyq8o199lj0aijd05q712hj1zjb2x2y3v7d4ttz5sqx6rnd7q8j8ob19lsqait404vy11nb1yp62w8w3udd4szz5rwv6qt77pe98ngp9kygahyv055q11x31yyv2wih3umv4t9d5s686r2l7pnq8nq99l82ai8k05fg126s1z8j2ws33uwi4tj35sg26rci7pxo8o059lhuaii905p312gf1zi72x1t3v694tsw5spv6rma7q7e8o9t9lrhairu04uo11m11ynt2w7g3ubu4sye5rva6qro7pct8nfb9kx1ahxf054b11vo1yxh2wh43ulj4t825s4z6r1f7pml8np49l6vai7905e1125a1z6z2wqk3uuy4thi5seg6raw7pw68nyr9lgjaigx05no12ew1zgj2x033v4h4tr45so46rkk7q5s8o8d9lq5aiql04te11ko1ymd2w5x3uab4swx5rtw6qqb7pbh8ne09kvtahwb053711ui1yw52wfk3ujs4t685s346qzl7pkv8nni9l5eai5x05cu12451z5t2wp83utg4tfx5scu6r9e7puq8nxd9lf7aifm05mh12ds1zfi2wz13v3c4tpu5smq6rj67q4g8o729lowaipc04s611jh1yl62w4q3u904svf5rs86qom7p9t8ncg9kueahuy051v11t71yuw2wef3uiq4t565s216qyg7pjo8nmc9l49ai4t05bp122z1z4l2wo13usb4tes5sbp6r857ptf8nw29ldyaieg05lc12cm1ze92wxp3v1y4toh5slg6rhx7q368o5r9lnlaio304qz11ic1yk32w3m3u7x4suf5rrd6qnu7p928nbo9ktiahtz050w11s71ytv2wda3uhh4t3v5s0p6qx77pij8nla9l38ai3r05am121v1z3h2wmw3ur34tdj5sah6r717psf8nv69ld4aidm05kf12bm1zd72wwn3v0x4tng5ske6rgw7q278o4x9lmvaine04q911hi1yj22w2g3u6m4st05rpu6qm97p7k8naa9ksaahsy04zy11ra1ysv2wc73ugb4t2o5rzj6qw17phd8nk59l24ai2q059o120z1z2k2wlw3upz4tcc5s966r5o7pr28ntu9lbtaicd05j912aj1zc52wvj3uzo4tm15siv6rfb7q0m8o3d9llcailx";
+const _SE = [0,0,1,1,2,2,3,3,4,4];
+const _BE = [4,2,0,0,2,1,1,2,3,3,2,4];
+const _SK = ["갑","을","병","정","무","기","경","신","임","계"];
+const _BK = ["자","축","인","묘","진","사","오","미","신","유","술","해"];
+const _SH = ["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"];
+const _BH = ["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
+const _EL = {kr:["목","화","토","금","수"], en:["Wood","Fire","Earth","Metal","Water"]};
+const _ZK = ["쥐","소","호랑이","토끼","용","뱀","말","양","원숭이","닭","개","돼지"];
+const _ZE = ["Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Sheep","Monkey","Rooster","Dog","Pig"];
+const _ZEMO = ["🐭","🐮","🐯","🐰","🐲","🐍","🐴","🐑","🐵","🐔","🐶","🐷"];
+const _NM = {kr:["소한","입춘","경칩","청명","입하","망종","소서","입추","백로","한로","입동","대설"],
+             en:["Sohan","Ipchun","Gyeongchip","Cheongmyeong","Ipha","Mangjong","Soseo","Ipchu","Baengno","Hallo","Ipdong","Daeseol"]};
+const _REL_KR = ["나와 같은 기운이 흐르는 무난한 날","기운이 밖으로 뻗어 표현에 좋은 날","재물의 기운이 도는 실속의 날","한 박자 늦추면 무사한 조심의 날","도움과 배움이 들어오는 든든한 날"];
+const _REL_EN = ["A steady day of your own energy","A day to reach out and express","A day wealth energy flows","A day to slow by one beat","A day help and learning arrive"];
+const _REL_TAG = {kr:["평","길","길","조심","대길"], en:["Steady","Good","Good","Care","Great"]};
+const _REL_LV = [2,1,1,4,0];
+const _GCOL = ["#8F887B","#3FA57A","#3FA57A","#C23B22","#D4A017"];
+function _termMin(y,i){ if(y<1900||y>2060) return null; const off=((y-1900)*12+i)*4; return parseInt(_TT.substr(off,4),36); }
+function _jdn(y,m,d){ const a=Math.floor((14-m)/12),yy=y+4800-a,mm=m+12*a-3; return d+Math.floor((153*mm+2)/5)+365*yy+Math.floor(yy/4)-Math.floor(yy/100)+Math.floor(yy/400)-32045; }
+function _iljin(dt){ const i=((_jdn(dt.getFullYear(),dt.getMonth()+1,dt.getDate())+49)%60+60)%60; return {si:i%10, bi:i%12, elem:_SE[i%10]}; }
+function _dayElem(bdate){ const y=+bdate.slice(0,4),m=+bdate.slice(5,7),d=+bdate.slice(8,10); const i=((_jdn(y,m,d)+49)%60+60)%60; return _SE[i%10]; }
+
+function renderToday(){
+  const K = currentLang === "kr";
+  const now = new Date();
+  const ij = _iljin(now);
+  const y = now.getFullYear();
+  const nowMin = Math.round((Date.UTC(y,now.getMonth(),now.getDate()) - Date.UTC(y,0,1))/60000);
+  let tName=null, tD=null, tOn=false;
+  for(let i=0;i<12;i++){ const t=_termMin(y,i); if(t!==null){ const dd=Math.round((t-nowMin)/1440); if(dd===0){tName=_NM[currentLang][i];tOn=true;break;} if(t>nowMin){tName=_NM[currentLang][i];tD=Math.ceil((t-nowMin)/1440);break;} } }
+  if(!tName){ tName=_NM[currentLang][0]; tD=30; }
+  const dateStr = K ? (now.getMonth()+1)+"월 "+now.getDate()+"일" : now.toLocaleDateString("en-US",{month:"short",day:"numeric"});
+  const jiHanja = _SH[ij.si]+_BH[ij.bi], jiKr = _SK[ij.si]+_BK[ij.bi];
+  const termTxt = tOn ? ('<span class="term">'+(K?"오늘 "+tName+" · 절기":tName+" today")+'</span>')
+                      : ('<span class="term">'+tName+" D-"+tD+'</span>');
+  document.getElementById("todayBar").innerHTML =
+    '<span>'+dateStr+'</span><span class="dot">·</span>'
+    +'<span class="ji">'+jiHanja+' '+jiKr+(K?"일":"")+'</span><span class="dot">·</span>'
+    +termTxt;
+
+  /* 오늘의 나 */
+  const p = JSON.parse(localStorage.getItem("kf_p_main")||"null");
+  const my = document.getElementById("myDay");
+  if(p && p.bdate){
+    const de = _dayElem(p.bdate);
+    const rel = ((ij.elem - de)%5+5)%5;
+    const nm = p.name ? (K? p.name+"님, ":p.name+", ") : "";
+    my.innerHTML = '<span class="lv">'+(_REL_TAG[currentLang][rel])+'</span>'
+      +'<div class="txt"><div class="t1">'+(K?"오늘의 나":"Your day")+'</div>'
+      +'<div class="t2">'+nm+(K?_REL_KR[rel]:_REL_EN[rel])+'</div></div>'
+      +'<a class="go" href="input.html?type=today">'+(K?"자세히 →":"More →")+'</a>';
+    my.classList.add("on");
+  }else{ my.classList.remove("on"); }
+
+  /* 띠별 */
+  const zt = document.getElementById("zodiacSec");
+  let grid = '<div class="zodiac-title">'+(K?"오늘의 띠별 운세":"Today by Zodiac")+'</div><div class="zodiac-grid">';
+  for(let z=0;z<12;z++){
+    const rel = ((ij.elem - _BE[z])%5+5)%5;
+    grid += '<div class="zbtn" data-z="'+z+'"><div class="emo">'+_ZEMO[z]+'</div>'
+      +'<div class="zn">'+(K?_ZK[z]:_ZE[z])+'</div>'
+      +'<span class="zg" style="background:'+_GCOL[rel]+'"></span></div>';
+  }
+  grid += '</div><div class="zdetail" id="zdetail"></div>';
+  zt.innerHTML = grid;
+  zt.querySelectorAll(".zbtn").forEach(b=>{
+    b.addEventListener("click", ()=>{
+      const z = +b.dataset.z;
+      zt.querySelectorAll(".zbtn").forEach(x=>x.classList.remove("sel"));
+      b.classList.add("sel");
+      const rel = ((ij.elem - _BE[z])%5+5)%5;
+      const dt = document.getElementById("zdetail");
+      dt.innerHTML = '<div class="zh">'+_ZEMO[z]+' '+(K?_ZK[z]+"띠":_ZE[z])+' · '+_REL_TAG[currentLang][rel]+'</div>'
+        +'<div class="zt">'+(K?_REL_KR[rel]:_REL_EN[rel])+'. '
+        +(K?"오늘 하늘의 기운은 "+_EL.kr[ij.elem]+"이며, 당신의 띠와 만나 이런 하루를 만듭니다."
+           :"Today's energy is "+_EL.en[ij.elem]+", meeting your sign to shape the day.")+'</div>'
+        +'<div class="znote">'+(K?"※ 띠만으로 보는 간략 운세입니다. 정확한 오늘의 운세는 생년월일시로 확인하세요.":"※ A brief sign-only reading. For an accurate daily fortune, use your full birth data.")+'</div>';
+      dt.classList.add("on");
+    });
+  });
+}
+
 setLang(currentLang);
 updateVisitor();
+renderToday();
 
 /* ══ 홈 화면 추가 — 플랫폼 자동 감지 ══ */
 (function(){
