@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+      <rect width="512" height="512" rx="96" fill="#8A4A34"/>
+      <circle cx="256" cy="256" r="215" fill="#F6F0E3"/>
+      <circle cx="256" cy="256" r="215" fill="none" stroke="#C9A85C" stroke-width="8"/>
+      <defs>
+  <linearGradient id="tgFace" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#FFFFFF"/>
+    <stop offset="55%" stop-color="#F7F4EC"/>
+    <stop offset="100%" stop-color="#E9E2D1"/>
+  </linearGradient>
+  <linearGradient id="tgEar" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#FFFFFF"/>
+    <stop offset="100%" stop-color="#EDE7D8"/>
+  </linearGradient>
+  <radialGradient id="tgEye" cx="35%" cy="30%" r="75%">
+    <stop offset="0%" stop-color="#FFD65C"/>
+    <stop offset="55%" stop-color="#F2AE12"/>
+    <stop offset="100%" stop-color="#C7820A"/>
+  </radialGradient>
+  <radialGradient id="tgInEar" cx="40%" cy="30%" r="80%">
+    <stop offset="0%" stop-color="#FFC2C2"/>
+    <stop offset="100%" stop-color="#E88989"/>
+  </radialGradient>
+  <linearGradient id="tgNose" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#E8604C"/>
+    <stop offset="100%" stop-color="#C23B22"/>
+  </linearGradient>
+  <linearGradient id="tgLip" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#9C3226"/>
+    <stop offset="100%" stop-color="#6E1F18"/>
+  </linearGradient>
+</defs><g transform="translate(256,268) scale(1.35)">
+  <!-- 귀 (뒤) -->
+  <path d="M-46,-53 Q-59,-86 -29,-77 Q-13,-72 -21,-46 Z" fill="url(#tgEar)" stroke="#241F1B" stroke-width="3.6" stroke-linejoin="round"/>
+  <path d="M46,-53 Q59,-86 29,-77 Q13,-72 21,-46 Z" fill="url(#tgEar)" stroke="#241F1B" stroke-width="3.6" stroke-linejoin="round"/>
+  <path d="M-41,-58 Q-49,-75 -31,-69 Q-27,-59 -29,-51 Z" fill="url(#tgInEar)" stroke="#241F1B" stroke-width="1.6"/>
+  <path d="M41,-58 Q49,-75 31,-69 Q27,-59 29,-51 Z" fill="url(#tgInEar)" stroke="#241F1B" stroke-width="1.6"/>
+  <path d="M-39,-62 L-34,-53 L-43,-53 Z" fill="#241F1B"/>
+  <path d="M39,-62 L34,-53 L43,-53 Z" fill="#241F1B"/>
+
+  <!-- 얼굴 바탕 (둥근 사각, 그라데이션) -->
+  <path d="M-59,-8 Q-61,-49 -30,-55 Q0,-59 30,-55 Q61,-49 59,-8 Q61,33 40,53 Q20,69 0,69 Q-20,69 -40,53 Q-61,33 -59,-8 Z" fill="url(#tgFace)" stroke="#241F1B" stroke-width="4.2" stroke-linejoin="round"/>
+  <!-- 얼굴 하이라이트 (광택) -->
+  <path d="M-38,-40 Q-30,-48 -16,-46 Q-28,-38 -32,-24 Q-40,-30 -38,-40 Z" fill="#FFFFFF" opacity="0.55"/>
+
+  <!-- 볼 갈퀴 털 -->
+  <g fill="url(#tgEar)" stroke="#241F1B" stroke-width="3" stroke-linejoin="round">
+    <path d="M-59,-6 L-80,-11 L-59,4 Z"/>
+    <path d="M-60,8 L-82,10 L-59,20 Z"/>
+    <path d="M-57,24 L-76,33 L-53,39 Z"/>
+    <path d="M59,-6 L80,-11 L59,4 Z"/>
+    <path d="M60,8 L82,10 L59,20 Z"/>
+    <path d="M57,24 L76,33 L53,39 Z"/>
+  </g>
+
+  <!-- 이마 王 무늬 -->
+  <g fill="#241F1B">
+    <path d="M0,-51 C-4.5,-40 -4.5,-27 0,-16 C4.5,-27 4.5,-40 0,-51 Z"/>
+    <path d="M-17,-49 C-20,-39 -17,-29 -10,-23 C-11.5,-33 -13.5,-43 -17,-49 Z"/>
+    <path d="M17,-49 C20,-39 17,-29 10,-23 C11.5,-33 13.5,-43 17,-49 Z"/>
+    <path d="M-31,-43 C-34,-35 -31,-27 -24,-23 C-26.5,-32 -28.5,-38 -31,-43 Z"/>
+    <path d="M31,-43 C34,-35 31,-27 24,-23 C26.5,-32 28.5,-38 31,-43 Z"/>
+  </g>
+
+  <!-- 표범 점무늬 -->
+  <g fill="#241F1B">
+    <circle cx="-41" cy="-31" r="2.7"/><circle cx="-47" cy="-16" r="2.7"/><circle cx="-49" cy="-1" r="2.7"/>
+    <circle cx="41" cy="-31" r="2.7"/><circle cx="47" cy="-16" r="2.7"/><circle cx="49" cy="-1" r="2.7"/>
+    <circle cx="-35" cy="-43" r="2.3"/><circle cx="35" cy="-43" r="2.3"/>
+  </g>
+
+  <!-- 눈썹 -->
+  <path d="M-41,-15 Q-28,-24 -11,-15" fill="none" stroke="#241F1B" stroke-width="5.4" stroke-linecap="round"/>
+  <path d="M41,-15 Q28,-24 11,-15" fill="none" stroke="#241F1B" stroke-width="5.4" stroke-linecap="round"/>
+
+  <!-- 붉은 눈두덩 -->
+  <path d="M-43,-8 Q-26,-17 -7,-6 Q-26,7 -43,-2 Z" fill="#D94A3D" opacity="0.82"/>
+  <path d="M43,-8 Q26,-17 7,-6 Q26,7 43,-2 Z" fill="#D94A3D" opacity="0.82"/>
+
+  <!-- 눈 -->
+  <ellipse cx="-24.5" cy="-2" rx="15.5" ry="16.5" fill="url(#tgEye)" stroke="#241F1B" stroke-width="3.6"/>
+  <ellipse cx="24.5" cy="-2" rx="15.5" ry="16.5" fill="url(#tgEye)" stroke="#241F1B" stroke-width="3.6"/>
+  <circle cx="-24.5" cy="-1" r="7.8" fill="#241F1B"/>
+  <circle cx="24.5" cy="-1" r="7.8" fill="#241F1B"/>
+  <circle cx="-21" cy="-4.5" r="2.8" fill="#FFF"/>
+  <circle cx="28" cy="-4.5" r="2.8" fill="#FFF"/>
+  <circle cx="-27.5" cy="2" r="1.2" fill="#FFF" opacity="0.7"/>
+  <circle cx="21.5" cy="2" r="1.2" fill="#FFF" opacity="0.7"/>
+
+  <!-- 콧대 -->
+  <path d="M-8,4 Q-14.5,20 -10,33" fill="none" stroke="#241F1B" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M8,4 Q14.5,20 10,33" fill="none" stroke="#241F1B" stroke-width="3.2" stroke-linecap="round"/>
+
+  <!-- 코 -->
+  <path d="M-9.5,20 L9.5,20 Q10.5,31 0,35 Q-10.5,31 -9.5,20 Z" fill="url(#tgNose)" stroke="#241F1B" stroke-width="2.8" stroke-linejoin="round"/>
+  <path d="M0,35 L0,43" stroke="#241F1B" stroke-width="2.6" stroke-linecap="round"/>
+
+  <!-- 입 (벌린, 송곳니) -->
+  <path d="M0,43 Q-19,45 -31,41 Q-25,60 0,62 Q25,60 31,41 Q19,45 0,43 Z" fill="url(#tgLip)" stroke="#241F1B" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M-13,50 Q0,53 13,50 Q0,60 -13,50 Z" fill="#C23B22"/>
+  <path d="M-21,44 L-17,57 L-13,45 Z" fill="#FFFDF8" stroke="#241F1B" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M21,44 L17,57 L13,45 Z" fill="#FFFDF8" stroke="#241F1B" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- 수염점 -->
+  <g fill="#241F1B"><circle cx="-31" cy="31" r="1.9"/><circle cx="-33" cy="39" r="1.9"/><circle cx="31" cy="31" r="1.9"/><circle cx="33" cy="39" r="1.9"/></g>
+</g>
+    </svg>

@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 650" width="760" height="650">
+  <defs>
+  <linearGradient id="bodyG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#FFFFFF"/>
+    <stop offset="60%" stop-color="#F5F1E6"/>
+    <stop offset="100%" stop-color="#E7DFC9"/>
+  </linearGradient>
+  <linearGradient id="earG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#FFFFFF"/>
+    <stop offset="100%" stop-color="#EDE7D8"/>
+  </linearGradient>
+  <radialGradient id="eyeG" cx="35%" cy="30%" r="75%">
+    <stop offset="0%" stop-color="#FFDD6E"/>
+    <stop offset="55%" stop-color="#F5B31A"/>
+    <stop offset="100%" stop-color="#D68A0E"/>
+  </radialGradient>
+  <radialGradient id="inEarG" cx="40%" cy="30%" r="80%">
+    <stop offset="0%" stop-color="#FFC9C9"/>
+    <stop offset="100%" stop-color="#EE9494"/>
+  </radialGradient>
+  <linearGradient id="noseG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#F0705B"/>
+    <stop offset="100%" stop-color="#D14A2E"/>
+  </linearGradient>
+  <linearGradient id="pineG" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#6FA972"/>
+    <stop offset="100%" stop-color="#3F7B49"/>
+  </linearGradient>
+  <linearGradient id="trunkG" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#C9986B"/>
+    <stop offset="100%" stop-color="#A97748"/>
+  </linearGradient>
+</defs>
+  <rect width="760" height="650" fill="#F6F0E3"/>
+  <g transform="translate(112,110) scale(1.25)">
+      <path d="M0,140 C10,90 30,40 70,0" stroke="url(#trunkG)" stroke-width="16" fill="none" stroke-linecap="round"/>
+      <path d="M20,90 C-10,80 -35,60 -50,35" stroke="url(#trunkG)" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <!-- 솔잎 뭉치들 -->
+      <g fill="url(#pineG)" stroke="#241F1B" stroke-width="2" stroke-linejoin="round">
+        <path d="M55,-10 l18,-22 l6,10 l16,-14 l-2,16 l20,-4 l-14,16 l16,8 l-20,4 l10,16 l-20,-6 l0,18 l-14,-14 l-8,16 l-6,-18 l-16,10 l4,-18 l-18,4 l12,-14 l-16,-6 l18,-6 Z"/>
+        <path d="M-45,25 l14,-18 l5,8 l13,-11 l-2,13 l16,-3 l-11,13 l13,6 l-16,3 l8,13 l-16,-5 l0,14 l-11,-11 l-6,13 l-5,-14 l-13,8 l3,-14 l-14,3 l9,-11 l-13,-5 l14,-5 Z"/>
+        <path d="M10,-45 l12,-15 l4,7 l11,-9 l-1,11 l13,-2 l-9,11 l11,5 l-13,2 l6,11 l-13,-4 l0,12 l-9,-9 l-5,11 l-4,-12 l-11,7 l2,-12 l-12,2 l7,-9 l-11,-4 l12,-4 Z"/>
+      </g>
+      <!-- 까치 (실루엣) -->
+      <g transform="translate(58,-58) rotate(6)">
+        <path d="M0,0 Q-8,-4 -18,-2 Q-10,2 -6,6 Q-14,10 -22,20 Q-10,16 -2,10 Q6,16 8,26 Q10,14 6,6 Q16,2 24,-6 Q12,-4 4,-2 Q2,-8 8,-16 Q-2,-10 0,0 Z" fill="#2A2620" stroke="#241F1B" stroke-width="1.5"/>
+        <path d="M-14,-1 Q-8,2 -3,6 Q-8,4 -13,3 Z" fill="#F5F1E6"/>
+        <circle cx="1" cy="-3" r="1.6" fill="#F5F1E6"/>
+      </g>
+    </g>
+  <g transform="translate(417,252) scale(1.5)"><path d="M120,40 C185,20 220,60 210,110 C204,145 165,150 150,120"
+      fill="url(#bodyG)" stroke="#241F1B" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/><path d="M140,44 C150,40 158,42 163,50 C155,52 146,52 140,44 Z" fill="#241F1B" opacity="1"/><path d="M155,58 C168,52 178,56 182,66 C172,68 160,66 155,58 Z" fill="#241F1B" opacity="1"/><path d="M168,76 C182,72 194,78 196,90 C184,90 172,86 168,76 Z" fill="#241F1B" opacity="1"/><path d="M172,98 C186,98 196,106 194,118 C182,116 172,110 172,98 Z" fill="#241F1B" opacity="1"/><ellipse cx="196" cy="112" rx="16" ry="13" fill="url(#bodyG)" stroke="#241F1B" stroke-width="5"/><path d="M40,60 C100,40 150,70 150,140 C150,190 100,210 55,205 C10,200 -10,160 -5,110 C0,75 15,62 40,60 Z"
+      fill="url(#bodyG)" stroke="#241F1B" stroke-width="6" stroke-linejoin="round"/><path d="M30,80 C45,78 55,90 52,108 C40,106 28,96 30,80 Z" fill="#241F1B" opacity="1"/><path d="M60,72 C78,70 90,86 86,108 C70,106 56,92 60,72 Z" fill="#241F1B" opacity="1"/><path d="M92,78 C112,78 124,96 118,118 C100,116 86,100 92,78 Z" fill="#241F1B" opacity="1"/><path d="M115,98 C134,100 144,120 136,140 C118,136 106,118 115,98 Z" fill="#241F1B" opacity="1"/><path d="M40,120 C56,118 66,134 60,152 C46,150 34,138 40,120 Z" fill="#241F1B" opacity="1"/><path d="M68,132 C86,132 96,150 88,168 C72,166 60,150 68,132 Z" fill="#241F1B" opacity="1"/><path d="M95,150 C112,152 120,168 110,184 C94,182 84,166 95,150 Z" fill="#241F1B" opacity="1"/><path d="M-20,90 C-45,95 -58,120 -55,155 C-53,180 -35,195 -12,192 C8,189 18,168 14,140 C10,112 2,88 -20,90 Z"
+      fill="url(#bodyG)" stroke="#241F1B" stroke-width="6" stroke-linejoin="round"/><path d="M-40,110 C-30,108 -22,118 -25,132 C-35,130 -44,122 -40,110 Z" fill="#241F1B" opacity="1"/><path d="M-44,140 C-33,138 -24,148 -28,163 C-39,161 -48,152 -44,140 Z" fill="#241F1B" opacity="1"/><path d="M-30,160 C-18,159 -10,170 -15,183 C-27,181 -35,171 -30,160 Z" fill="#241F1B" opacity="1"/><path d="M-30,188 Q-38,204 -32,214 Q-24,206 -22,196 Z" fill="url(#bodyG)" stroke="#241F1B" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M-14,190 Q-16,208 -8,216 Q-2,206 -4,194 Z" fill="url(#bodyG)" stroke="#241F1B" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M2,186 Q4,204 12,210 Q18,198 12,186 Z" fill="url(#bodyG)" stroke="#241F1B" stroke-width="4" stroke-linejoin="round"/><path d="M55,196 Q50,214 60,222 Q70,214 66,198 Z" fill="url(#bodyG)" stroke="#241F1B" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M78,198 Q76,216 86,222 Q94,212 90,198 Z" fill="url(#bodyG)" stroke="#241F1B" stroke-width="4" stroke-linejoin="round"/><g fill="#241F1B" opacity="0.9"><circle cx="-8" cy="115" r="3"/><circle cx="-2" cy="130" r="2.6"/><circle cx="-10" cy="145" r="2.6"/></g></g>
+  <path d="M337,320
+      Q337,360.0 357,400
+      L477,400
+      Q457,360.0 457,320 Z"
+      fill="url(#bodyG)" stroke="none"/>
+  <g transform="translate(397,260) scale(1.7)">
+  <!-- 귀 -->
+  <path d="M-48,-55 Q-63,-92 -30,-82 Q-13,-76 -22,-48 Z" fill="url(#earG)" stroke="#241F1B" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M48,-55 Q63,-92 30,-82 Q13,-76 22,-48 Z" fill="url(#earG)" stroke="#241F1B" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M-43,-61 Q-52,-79 -32,-72 Q-28,-61 -30,-52 Z" fill="url(#inEarG)"/>
+  <path d="M43,-61 Q52,-79 32,-72 Q28,-61 30,-52 Z" fill="url(#inEarG)"/>
+
+  <!-- 얼굴 (둥글둥글, 고양이상으로 볼살 강조) -->
+  <path d="M-62,-6 Q-64,-46 -32,-54 Q0,-60 32,-54 Q64,-46 62,-6
+           Q65,30 46,50 Q30,64 0,66 Q-30,64 -46,50 Q-65,30 -62,-6 Z"
+        fill="url(#bodyG)" stroke="#241F1B" stroke-width="4.4" stroke-linejoin="round"/>
+  <!-- 광택 -->
+  <path d="M-40,-38 Q-30,-47 -14,-45 Q-27,-36 -32,-20 Q-42,-27 -40,-38 Z" fill="#FFFFFF" opacity="0.55"/>
+
+  <!-- 볼 갈퀴 (짧고 통통, 사나운 느낌 완화) -->
+  <g fill="url(#earG)" stroke="#241F1B" stroke-width="2.6" stroke-linejoin="round">
+    <path d="M-61,10 L-78,7 L-62,20 Z"/>
+    <path d="M-63,24 L-80,26 L-63,34 Z"/>
+    <path d="M61,10 L78,7 L62,20 Z"/>
+    <path d="M63,24 L80,26 L63,34 Z"/>
+  </g>
+
+  <!-- 이마 王 무늬 (작고 은은하게) -->
+  <g fill="#241F1B" opacity="0.92">
+    <path d="M0,-46 C-3.5,-37 -3.5,-26 0,-16 C3.5,-26 3.5,-37 0,-46 Z"/>
+    <path d="M-15,-44 C-17.5,-35 -15,-26 -9,-21 C-10.5,-30 -12,-39 -15,-44 Z"/>
+    <path d="M15,-44 C17.5,-35 15,-26 9,-21 C10.5,-30 12,-39 15,-44 Z"/>
+  </g>
+  <!-- 점무늬 -->
+  <g fill="#241F1B" opacity="0.85">
+    <circle cx="-44" cy="-26" r="2.4"/><circle cx="-50" cy="-12" r="2.4"/>
+    <circle cx="44" cy="-26" r="2.4"/><circle cx="50" cy="-12" r="2.4"/>
+  </g>
+
+  <!-- 눈썹: 완만한 곡선 (친근하게, 치켜올라가지 않음) -->
+  <path d="M-38,-19 Q-27,-24 -14,-19" fill="none" stroke="#241F1B" stroke-width="4.6" stroke-linecap="round"/>
+  <path d="M38,-19 Q27,-24 14,-19" fill="none" stroke="#241F1B" stroke-width="4.6" stroke-linecap="round"/>
+
+  <!-- 볼터치 (은은한 홍조 — 귀여움 포인트) -->
+  <ellipse cx="-42" cy="8" rx="11" ry="7" fill="#F2A6A0" opacity="0.55"/>
+  <ellipse cx="42" cy="8" rx="11" ry="7" fill="#F2A6A0" opacity="0.55"/>
+
+  <!-- 눈: 둥글고 큼직, 위를 향한 곡선 아래눈꺼풀로 웃는 인상 -->
+  <ellipse cx="-23" cy="-4" rx="15" ry="15.5" fill="url(#eyeG)" stroke="#241F1B" stroke-width="3.4"/>
+  <ellipse cx="23" cy="-4" rx="15" ry="15.5" fill="url(#eyeG)" stroke="#241F1B" stroke-width="3.4"/>
+  <circle cx="-22" cy="-2" r="6.6" fill="#241F1B"/>
+  <circle cx="22" cy="-2" r="6.6" fill="#241F1B"/>
+  <circle cx="-18.5" cy="-6" r="2.6" fill="#FFF"/>
+  <circle cx="25.5" cy="-6" r="2.6" fill="#FFF"/>
+  <circle cx="-25.5" cy="1" r="1.2" fill="#FFF" opacity="0.8"/>
+  <circle cx="19.5" cy="1" r="1.2" fill="#FFF" opacity="0.8"/>
+  <!-- 웃는 아래 눈매 라인 -->
+  <path d="M-35,3 Q-23,10 -11,2" fill="none" stroke="#241F1B" stroke-width="2.6" stroke-linecap="round" opacity="0.7"/>
+  <path d="M11,2 Q23,10 35,3" fill="none" stroke="#241F1B" stroke-width="2.6" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- 코 -->
+  <path d="M-8,16 Q0,12 8,16 Q9,25 0,29 Q-9,25 -8,16 Z" fill="url(#noseG)" stroke="#241F1B" stroke-width="2.4" stroke-linejoin="round"/>
+
+  <!-- 입: 살짝 벌린 미소, 송곳니는 작고 귀엽게 -->
+  <path d="M0,29 Q-3,34 -3,38" fill="none" stroke="#241F1B" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M-3,38 Q-20,40 -28,32 Q-24,46 -8,50 Q0,52 8,50 Q24,46 28,32 Q20,40 3,38 Z"
+        fill="#F0705B" opacity="0.9" stroke="#241F1B" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M-16,38 L-13,47 L-10,39 Z" fill="#FFFDF8" stroke="#241F1B" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M16,38 L13,47 L10,39 Z" fill="#FFFDF8" stroke="#241F1B" stroke-width="1.6" stroke-linejoin="round"/>
+
+  <!-- 수염점 -->
+  <g fill="#241F1B"><circle cx="-28" cy="28" r="1.6"/><circle cx="-30" cy="35" r="1.6"/><circle cx="28" cy="28" r="1.6"/><circle cx="30" cy="35" r="1.6"/></g>
+</g>
+</svg>
