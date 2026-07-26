@@ -1774,7 +1774,7 @@ function showToast(msg){
   wrap.className = "more-links";
   wrap.innerHTML = '<p class="ml-title">' + (K ? "다른 운세도 보기" : "Explore more fortunes") + '</p>'
     + '<div class="ml-grid">' + ALL.map(x => {
-        const href = (x.gate ? "ad.html?type=" : "input.html?type=") + x.t;
+        const href = (x.gate ? "result.html?type=" : "input.html?type=") + x.t;   /* TEMP: 승인 후 "ad.html?type="로 원복 */
         return '<a class="ml-chip" href="' + href + '">' + (K ? x.kr : x.en) + '</a>';
       }).join("") + '</div>';
 

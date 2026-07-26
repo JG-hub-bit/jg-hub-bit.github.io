@@ -732,7 +732,7 @@ function run(){
     localStorage.setItem("kf_today_range", rg ? rg.value : "day");
   }
   localStorage.setItem("kf_selected", type);
-  location.href = "ad.html?type=" + type;
+  location.href = "result.html?type=" + type;   /* TEMP: AdSense 승인 전까지 게이트 우회. 승인 후 "ad.html?type="로 원복 */
 }
 function resetForm(){
   document.querySelectorAll("#formArea input[type=text], #formArea input[type=date], #formArea textarea").forEach(el=>el.value="");
