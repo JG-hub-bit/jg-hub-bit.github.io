@@ -205,6 +205,17 @@ h1 .accent{color:var(--jinsa);}
   padding:.15rem .55rem; border-radius:10px;
   letter-spacing:.02em;
 }
+
+/* ── FAQ 섹션 ── */
+.faq-sec{margin:2.2rem 0 1rem; padding-top:1.6rem; border-top:1px dashed var(--gold-line);}
+.faq-title{font-family:'Gowun Batang',serif; font-size:1.15rem; font-weight:700; color:var(--seokganju); margin:0 0 1rem; text-align:center;}
+.faq-item{border:1.3px solid var(--gold-line); border-radius:12px; margin-bottom:.6rem; overflow:hidden; background:#FFFDF7;}
+.faq-q{width:100%; text-align:left; background:none; border:none; padding:.9rem 1.1rem; font-family:'Noto Sans KR',sans-serif; font-size:.92rem; font-weight:700; color:var(--meok); cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:.6rem;}
+.faq-arrow{font-size:1.2rem; color:var(--jinsa); transition:transform .2s; flex-shrink:0;}
+.faq-item.open .faq-arrow{transform:rotate(45deg);}
+.faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+.faq-item.open .faq-a{max-height:400px;}
+.faq-a p{margin:0; padding:0 1.1rem 1rem; font-family:'Noto Sans KR',sans-serif; font-size:.85rem; line-height:1.6; color:#5A5248;}
 /* ── 사이트 공유 바 ── */
 .share-bar{display:flex; align-items:center; gap:.55rem; margin:.2rem 0 1.3rem; flex-wrap:wrap;}
 .share-bar .sb-label{font-family:'Gowun Batang',serif; font-size:.86rem; font-weight:700; color:var(--noeurok); white-space:nowrap;}
@@ -366,6 +377,10 @@ footer p{
   .menu-btn .desc{ color:#A99F8C !important; }
   .install{background:#2A251E !important; border-color:#8A7A4E !important;}
   .install .t1{color:#F0E7D4 !important;} .install .t2{color:#A99F8C !important;}
+  .faq-title{color:#D8A374 !important;}
+  .faq-item{background:#2A251E !important; border-color:#8A7A4E !important;}
+  .faq-q{color:#EDE6D6 !important;}
+  .faq-a p{color:#C9BFA9 !important;}
   .share-bar .sb-label{color:#C9A85C !important;}
   .today-bar{background:#2A251E !important; border-color:#8A7A4E !important;}
   .today-bar .tb-line{color:#C9BFA9 !important;}
@@ -665,6 +680,11 @@ footer p{
     <button id="insBtn"></button>
     <button class="x" id="insX">✕</button>
   </div>
+
+  <div class="faq-sec" id="faqSec">
+    <h2 class="faq-title" id="faqTitle"></h2>
+    <div class="faq-list" id="faqList"></div>
+  </div>
 </main>
 
 <div class="ins-modal" id="insModal">
@@ -780,6 +800,7 @@ function setLang(lang){
   if(typeof window._insRefresh === "function") window._insRefresh();
   if(typeof renderToday === "function") renderToday();
   if(typeof renderShare === "function") renderShare();
+  if(typeof renderFAQ === "function") renderFAQ();
 }
 
 let _counts = null;
@@ -997,6 +1018,91 @@ function renderShare(){
       .catch(()=>{ prompt(currentLang==="kr"?"이 링크를 복사하세요":"Copy this link", url); });
   });
 }
+
+/* ══ FAQ 섹션 + JSON-LD (SEO) ══ */
+const FAQ = {
+  kr: {
+    title: "자주 묻는 질문",
+    items: [
+      ["사주와 토정비결은 뭐가 다른가요?",
+       "사주팔자는 명리학(命理學)을 바탕으로 태어난 연·월·일·시 여덟 글자로 그 사람의 타고난 성품과 평생의 흐름을 읽는 방식입니다. 토정비결은 주역의 원리로 그 해의 괘를 뽑아 한 해의 길흉을 보는 점서(占書) 전통이라, 계산법 자체가 다릅니다. 그래서 같은 사람이라도 두 결과가 다르게 나올 수 있습니다."],
+      ["운세는 정말 무료인가요?",
+       "네, 사주팔자·토정비결·신년운세·궁합·꿈해몽·오늘의 운세 모두 무료로 이용하실 수 있습니다. 회원가입이나 결제 없이 생년월일만 입력하면 바로 결과를 볼 수 있습니다."],
+      ["오늘의 운세는 얼마나 자주 바뀌나요?",
+       "오늘의 운세는 매일 바뀌는 일진(그날의 천간·지지)을 기반으로 계산되기 때문에 매일 새로운 결과가 나옵니다. 자정이 지나면 새로운 하루의 운세로 갱신됩니다."],
+      ["정확한 사주 풀이를 위해 태어난 시간이 꼭 필요한가요?",
+       "가능하면 입력하시는 걸 권합니다. 사주팔자는 연·월·일·시 네 기둥(四柱)을 모두 써서 여덟 글자(八字)를 만드는데, 시간이 빠지면 그중 두 글자(시주)가 빠진 채로 풀이하게 되어 정확도가 떨어집니다. 시간을 모르신다면 입력 없이도 이용은 가능합니다."],
+      ["입력한 생년월일 등 개인정보는 어떻게 처리되나요?",
+       "입력하신 정보는 브라우저(기기) 안에만 저장되며, 서버로 전송되거나 외부에 저장되지 않습니다. 자세한 내용은 개인정보처리방침 페이지에서 확인하실 수 있습니다."],
+      ["궁합은 어떻게 계산되나요?",
+       "두 사람의 생년월일시로 각각의 사주를 뽑은 뒤, 두 사주의 천간·지지가 서로 합(合)을 이루는지, 충(沖)하는지를 살펴 궁합 점수와 풀이를 냅니다. 육합·삼합처럼 서로 끌어당기는 조합인지, 충처럼 부딪히는 조합인지에 따라 결과가 달라집니다."],
+      ["신년운세와 토정비결 중 뭘 봐야 하나요?",
+       "정답은 없습니다. 신년운세는 내 사주와 그해의 기운이 만나는 지점을 명리학으로 풀이한 것이고, 토정비결은 주역 괘로 그해를 점치는 별개의 전통입니다. 재미 삼아 둘 다 보고 비교해 보시는 것도 좋습니다."],
+      ["꿈해몽은 어떤 원리로 풀이하나요?",
+       "꿈에 나온 대표적인 상징(동물, 자연物, 상황 등)을 전통 해몽 사전에서 찾아 그 의미를 풀이합니다. 47가지 이상의 상징 데이터베이스를 기반으로 하며, 같은 상징이라도 상황에 따라 다른 의미로 풀이될 수 있습니다."]
+    ]
+  },
+  en: {
+    title: "Frequently Asked Questions",
+    items: [
+      ["What's the difference between Saju and Tojeong Bigyeol?",
+       "Saju (Four Pillars) is rooted in Myeongrihak — it reads a person's innate nature and life pattern from eight characters derived from their birth year, month, day, and hour. Tojeong Bigyeol is a divination tradition based on the I Ching, drawing a hexagram to read the fortunes of a single year. Because the methods differ, results for the same person can differ too."],
+      ["Is this service really free?",
+       "Yes — Saju, Tojeong Bigyeol, New Year fortune, compatibility, dream interpretation, and daily fortune are all free. No sign-up or payment required; just enter a birth date to see your result."],
+      ["How often does the daily fortune change?",
+       "Today's fortune is calculated from that day's Iljin (the day's heavenly stem and earthly branch), so it updates every day at midnight."],
+      ["Do I need my exact birth time for an accurate Saju reading?",
+       "It's recommended if you know it. Saju uses four pillars (year, month, day, hour) to form eight characters — without the hour, two of those characters are missing, which reduces accuracy. You can still use the service without it."],
+      ["How is my birth date and other info handled?",
+       "Your input is stored only in your browser's local storage — it's never sent to or stored on a server. See the Privacy Policy page for details."],
+      ["How is compatibility calculated?",
+       "Each person's Saju is derived from their birth date and time, then the two charts are compared for harmonious combinations (hap) or clashes (chung) between their stems and branches to produce a score and interpretation."],
+      ["Should I check New Year Fortune or Tojeong Bigyeol?",
+       "There's no single right answer — New Year Fortune reads where your Saju meets the year's energy through Myeongrihak, while Tojeong Bigyeol divines the year through an I Ching hexagram, a separate tradition. Many people enjoy comparing both."],
+      ["How does dream interpretation work?",
+       "Key symbols in your dream (animals, natural elements, situations) are matched against a traditional dream-symbol dictionary of 47+ entries. The same symbol can carry different meanings depending on context."]
+    ]
+  }
+};
+
+function renderFAQ(){
+  const box = document.getElementById("faqList");
+  const titleEl = document.getElementById("faqTitle");
+  if(!box || !titleEl) return;
+  const F = FAQ[currentLang] || FAQ.kr;
+  titleEl.textContent = F.title;
+  box.innerHTML = F.items.map((qa, i) =>
+    '<div class="faq-item">'
+    + '<button class="faq-q" data-idx="' + i + '">' + qa[0] + '<span class="faq-arrow">+</span></button>'
+    + '<div class="faq-a"><p>' + qa[1] + '</p></div>'
+    + '</div>'
+  ).join("");
+  box.querySelectorAll(".faq-q").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const item = btn.closest(".faq-item");
+      item.classList.toggle("open");
+    });
+  });
+
+  /* JSON-LD FAQPage 스키마 (한국어 콘텐츠 기준으로 고정 삽입) */
+  const existing = document.getElementById("faqSchema");
+  if(existing) existing.remove();
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": FAQ.kr.items.map(qa => ({
+      "@type": "Question",
+      "name": qa[0],
+      "acceptedAnswer": { "@type": "Answer", "text": qa[1] }
+    }))
+  };
+  const s = document.createElement("script");
+  s.id = "faqSchema";
+  s.type = "application/ld+json";
+  s.textContent = JSON.stringify(schema);
+  document.head.appendChild(s);
+}
+
 
 setLang(currentLang);
 updateVisitor();

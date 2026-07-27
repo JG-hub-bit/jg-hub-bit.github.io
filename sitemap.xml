@@ -2,32 +2,84 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kfortunestory.com/</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://kfortunestory.com/about.html</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://kfortunestory.com/input.html</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://kfortunestory.com/privacy.html</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://kfortunestory.com/terms.html</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
+
+  <!-- 주요 운세 타입 (샘플 결과로 크롤링 가능) -->
+  <url>
+    <loc>https://kfortunestory.com/result.html?type=newyear</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kfortunestory.com/result.html?type=today</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kfortunestory.com/result.html?type=saju</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kfortunestory.com/result.html?type=tojeong</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kfortunestory.com/result.html?type=gunghap</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kfortunestory.com/result.html?type=dream</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 띠별 오늘의 운세 (롱테일 키워드: "쥐띠 오늘의 운세" 등) -->
+  <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=0</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=1</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=2</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=3</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=4</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=5</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=6</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=7</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=8</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=9</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=10</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=11</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>

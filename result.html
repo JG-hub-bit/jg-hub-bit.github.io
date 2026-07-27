@@ -591,6 +591,37 @@ const LANG = (function(){
 })();
 const K = LANG === "kr";
 const type = new URLSearchParams(location.search).get("type") || localStorage.getItem("kf_selected") || "tojeong";
+
+/* ── SEO: 타입별 title/meta description 동적 설정 (롱테일 키워드 대응) ── */
+(function(){
+  const zParam = new URLSearchParams(location.search).get("z");
+  const ZK = ["쥐","소","호랑이","토끼","용","뱀","말","양","원숭이","닭","개","돼지"];
+  const ZE = ["Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Sheep","Monkey","Rooster","Dog","Pig"];
+  const YEAR = new Date().getFullYear();
+  let title, desc;
+  if(type === "today" && zParam !== null){
+    const zi = parseInt(zParam, 10);
+    if(K){ title = ZK[zi] + "띠 오늘의 운세 | K-Fortune Story"; desc = ZK[zi] + "띠 오늘의 운세를 무료로 확인하세요. 매일 바뀌는 일진과 " + ZK[zi] + "띠 개운 팁까지."; }
+    else { title = "Today's Fortune for " + ZE[zi] + " | K-Fortune Story"; desc = "Free daily fortune for the Year of the " + ZE[zi] + ", updated every day with practical tips."; }
+  } else {
+    const T = {
+      newyear:  [K?(YEAR+"년 신년운세 | K-Fortune Story"):(YEAR+" New Year Fortune | K-Fortune Story"), K?"내 사주로 보는 "+YEAR+"년 종합 신년운세. 별점, 오각형 그래프, 월별 흐름까지 무료로 확인하세요.":"Your personalized "+YEAR+" fortune, free."],
+      nextyear: [K?((YEAR+1)+"년 신년운세 미리보기 | K-Fortune Story"):((YEAR+1)+" Fortune Preview | K-Fortune Story"), K?"내년을 미리 준비하는 "+(YEAR+1)+"년 신년운세 미리보기.":"A sneak peek at your "+(YEAR+1)+" fortune."],
+      today:    [K?"오늘의 운세 | K-Fortune Story":"Today's Fortune | K-Fortune Story", K?"내 사주로 보는 오늘의 운세와 일진. 매일 바뀌는 정확한 오늘의 운세를 무료로 확인하세요.":"Your personalized daily fortune, free."],
+      saju:     [K?"사주팔자 무료 풀이 | K-Fortune Story":"Free Saju Reading | K-Fortune Story", K?"생년월일시로 보는 정통 사주팔자 명식 풀이. 오행, 신강신약, 대운까지 무료로 확인하세요.":"A traditional Korean Four Pillars (Saju) reading, free."],
+      tojeong:  [K?(YEAR+"년 토정비결 무료보기 | K-Fortune Story"):(YEAR+" Tojeong Bigyeol | K-Fortune Story"), K?YEAR+"년 토정비결로 보는 올 한 해의 길흉. 괘로 뽑아보는 전통 신년 운세.":"Traditional Korean New Year divination, free."],
+      gunghap:  [K?"궁합 무료보기 | K-Fortune Story":"Free Compatibility Check | K-Fortune Story", K?"두 사람의 생년월일로 보는 사주 궁합. 육합·삼합·충까지 무료로 확인하세요.":"Free Korean-style compatibility reading for couples."],
+      dream:    [K?"꿈해몽 무료풀이 | K-Fortune Story":"Free Dream Interpretation | K-Fortune Story", K?"꿈에 나온 상징으로 보는 전통 꿈해몽. 47가지 상징으로 무료 풀이합니다.":"Free traditional Korean dream interpretation."]
+    }[type];
+    if(T){ title = T[0]; desc = T[1]; }
+  }
+  if(title){ document.title = title; }
+  if(desc){
+    let m = document.querySelector('meta[name="description"]');
+    if(!m){ m = document.createElement("meta"); m.setAttribute("name","description"); document.head.appendChild(m); }
+    m.setAttribute("content", desc);
+  }
+})();
 let P  = JSON.parse(localStorage.getItem("kf_p_main") || "null");
 let P2 = JSON.parse(localStorage.getItem("kf_p_sub") || "null");
 /* 입력 정보가 없으면(신규 방문·검색엔진 크롤러 등) 예시 데이터로 실제 결과를 보여준다.
