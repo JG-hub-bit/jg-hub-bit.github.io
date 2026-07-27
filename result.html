@@ -358,6 +358,9 @@ footer p{
 .sample-notice strong{display:block; font-family:'Gowun Batang',serif; font-size:1rem; color:var(--seokganju); margin-bottom:.4rem;}
 .sample-notice p{font-family:'Noto Sans KR',sans-serif; font-size:.86rem; color:#6B6152; line-height:1.5; margin:0 0 .8rem;}
 .sample-cta{display:inline-block; background:var(--jinsa); color:#FFF7EA; font-family:'Gowun Batang',serif; font-weight:700; font-size:.9rem; padding:.6rem 1.2rem; border-radius:10px; text-decoration:none;}
+
+/* ── 카카오 애드핏 광고 슬롯 ── */
+.ad-slot-mid{margin:1.3rem 0; text-align:center; min-height:250px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.02); border-radius:12px;}
 .tj-note{background:#F0E7CF; border-radius:10px; padding:.8rem 1rem; font-family:'Noto Sans KR',sans-serif; font-size:.8rem; line-height:1.65; color:#6B5B3E; margin-bottom:.95rem;}
 @media (max-width:560px){
   .luck-grid{grid-template-columns:1fr;}
@@ -1355,6 +1358,7 @@ else if(type === "saju" && P){
          + S.solarHH + ":" + String(S.solarMM).padStart(2,"0") + " (" + (sh>0?"+":"") + sh + (K?"분":" min") + ")</p>";
   }
   out += sec(LBL.ohaeng, ohBar(A));
+  out += "<!--KAD-->";
   out += sec(LBL.gangyak, para(tx(SJT.STRONG[A.strong ? 0 : 1])) + para(tx(SJT.YONG_DESC[A.yong])));
   out += luckCardY(A);
   const GK = gyeokguk(S);
@@ -1399,6 +1403,7 @@ else if(type === "today" && new URLSearchParams(location.search).get("z") !== nu
        + '<div class="gc-year">' + ZEMO[z] + " " + nm + " · " + fmtDate(now) + '</div>'
        + '<div class="gc-stars" style="color:' + zGcol + '">' + "★".repeat(zStar) + '<span class="gc-empty">' + "★".repeat(5-zStar) + '</span></div>'
        + '<div class="gc-tag" style="background:' + zGcol + '">' + relTag[LANG][rel] + '</div></div>';
+  out += "<!--KAD-->";
   out += '<p class="note" style="margin:-.3rem 0 1rem">' + (K ? "해당 띠 " : "Born: ") + yearStr + '</p>';
   out += sec(K ? "오늘의 " + nm : "The " + nm + " today", para(K ? _TXT.ZODIAC_DAY[rel].kr : _TXT.ZODIAC_DAY[rel].en));
   out += '<div class="luck-card"><h3>' + (K?"오늘 하늘의 기운":"Today's sky") + '</h3><div class="luck-grid">'
@@ -1470,6 +1475,7 @@ else if(type === "today" && P){
        + '<div class="gc-stars" style="color:' + dGcol + '">' + "★".repeat(dStar) + '<span class="gc-empty">' + "★".repeat(5-dStar) + '</span></div>'
        + '<div class="gc-tag" style="background:' + dGcol + '">' + LV[LANG][selInfo.R.lvl] + '</div>'
        + '<div class="gc-cat">' + tx(selInfo.R.line) + '</div></div>';
+  out += "<!--KAD-->";
   out += '<table class="hanja-table"><tr><th>' + LBL.iljin + '</th><th>' + LBL.stem + '</th><th>' + LBL.branch + '</th><th>' + LBL.elem + '</th></tr>'
        + '<tr><td class="big" style="font-size:1.2rem">' + selInfo.hanja + '</td><td class="big">' + STEM_H[selInfo.ij.si] + '</td><td class="big">' + BRANCH_H[selInfo.ij.bi] + '</td><td>' + ELEM[LANG][selInfo.ij.elem] + '</td></tr></table>';
   out += sec(tx(selInfo.R.name), para(tx(selInfo.R.txt)));
@@ -1508,6 +1514,7 @@ else if(type === "tojeong" && P){
        + '<div class="gc-stars" style="color:' + tGcol + '">' + "★".repeat(tStar) + '<span class="gc-empty">' + "★".repeat(5-tStar) + '</span></div>'
        + '<div class="gc-tag" style="background:' + tGcol + '">' + LV[LANG][lvl] + '</div>'
        + '<div class="gc-cat" style="margin-top:.6rem">' + tx(hj) + '</div></div>';
+  out += "<!--KAD-->";
   out += '<table class="hanja-table"><tr><th>' + LBL.hanja + '</th><th>' + LBL.reading + '</th><th>' + LBL.meaning + '</th></tr>'
     + '<tr><td class="big">' + hj.h + '</td><td>' + hj.r + '</td><td style="text-align:left">' + tx(hj) + '</td></tr></table>';
   out += sec(LBL.tjRead, para(tx(DB.FLOW[lvl])) + para(tx(DB.FADV[lvl])));
@@ -1562,6 +1569,7 @@ else if(P){
   });
   frows += '</div>';
   out += sec(K ? "분야별 운세" : "By Area", frows);
+  out += "<!--KAD-->";
 
   /* ── 명식 (접기) ── */
   out += mingsikTable(S);
@@ -1616,6 +1624,16 @@ else if(P){
 else{
 
   out = '<div class="sec"><p>' + (K ? "입력 정보가 없습니다. 처음 화면에서 다시 시작해 주세요." : "No input found. Please start again from the home screen.") + '</p></div>';
+}
+
+/* ── 카카오 애드핏 광고 삽입 ── */
+const AD_HTML = '<div class="ad-slot-mid"><ins class="kakao_ad_area" style="display:none;" '
+  + 'data-ad-unit="DAN-IOTGVNMt8Z3Y4HWp" data-ad-width="300" data-ad-height="250"></ins></div>';
+if(out.includes("<!--KAD-->")){
+  out = out.replace("<!--KAD-->", AD_HTML);
+}else{
+  /* 궁합·꿈해몽처럼 카드형 요약이 없는 타입은 본문 끝에 추가 */
+  out += AD_HTML;
 }
 
 $("resBody").innerHTML = out;
@@ -1819,5 +1837,7 @@ if("serviceWorker" in navigator){
   window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(()=>{}));
 }
 </script>
+<!-- 카카오 애드핏: 위 스크립트들로 광고 슬롯(.kakao_ad_area)이 이미 DOM에 삽입된 뒤 실행되도록 최하단에 배치 -->
+<script type="text/javascript" src="//t1.kakaocdn.net/kas/static/ba.min.js" async></script>
 </body>
 </html>
