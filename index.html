@@ -138,14 +138,6 @@ h1 .accent{color:var(--jinsa);}
   font-size:clamp(.95rem, 2.6vw, 1.08rem);
   color:#5A5245; line-height:1.7;
 }
-.visitor{
-  margin:1.6rem auto 0; display:inline-block;
-  font-family:'Noto Sans KR',sans-serif;
-  font-size:.85rem; color:#6B6353;
-  border-top:1px solid var(--gold-line);
-  border-bottom:1px solid var(--gold-line);
-  padding:.5rem 1.4rem;
-}
 .visitor b{color:var(--jinsa); font-weight:700;}
 
 /* ── 운세 메뉴: PC 3열 고정 ── */
@@ -368,7 +360,7 @@ footer p{
   h1, .menu-btn .name, .sum-card .line{ color:#F0E7D4 !important; }
   h1 .accent{ color:#E8785E !important; }
   .eyebrow{ color:#D8A374 !important; }
-  .subtitle, .visitor, .count, .res-visitor{ color:#C9BFA9 !important; }
+  .subtitle, .count, .res-visitor{ color:#C9BFA9 !important; }
   .visitor b, .res-visitor b, .count b, .score-ring .num{ color:#E8785E !important; }
   .menu-title, .sec h3, .person-block h3{ color:#7FBFA5 !important; }
   .menu-btn, .form-card, .sec, .sum-card, .ad-box, .homelink, .btn-reset, .lang-toggle{
@@ -577,7 +569,6 @@ footer p{
     토정비결부터 꿈해몽까지, 당신의 이야기를 풀어드립니다.
   </p>
 
-  <div class="visitor" id="visitorBox">…</div>
 
   <div class="today-bar" id="todayBar"></div>
   <div class="myday" id="myDay"></div>
@@ -796,36 +787,10 @@ function setLang(lang){
     const key = el.getAttribute("data-i18n");
     if(I18N[lang][key] !== undefined) el.innerHTML = I18N[lang][key];
   });
-  if(typeof renderVisitor === "function") renderVisitor();
   if(typeof window._insRefresh === "function") window._insRefresh();
   if(typeof renderToday === "function") renderToday();
   if(typeof renderShare === "function") renderShare();
   if(typeof renderFAQ === "function") renderFAQ();
-}
-
-let _counts = null;
-function renderVisitor(){
-  const box = document.getElementById("visitorBox");
-  if(!_counts){ box.textContent = "…"; return; }
-  const c = _counts;
-  box.innerHTML = (currentLang === "kr")
-    ? "당신은 오늘 <b>" + c.d.toLocaleString() + "</b>번째 · 이번 달 <b>" + c.m.toLocaleString() + "</b>번째 · 올해 <b>" + c.y.toLocaleString() + "</b>번째 방문자입니다"
-    : "Visitor No. <b>" + c.d.toLocaleString() + "</b> today · <b>" + c.m.toLocaleString() + "</b> this month · <b>" + c.y.toLocaleString() + "</b> this year";
-}
-async function updateVisitor(){
-  const NS = "kfortune_story_v1";
-  const now = new Date();
-  const y = now.getFullYear(), mo = String(now.getMonth()+1).padStart(2,"0"), d = String(now.getDate()).padStart(2,"0");
-  try{
-    const urls = ["y"+y, "m"+y+mo, "d"+y+mo+d].map(k => "https://abacus.jasoncameron.dev/hit/" + NS + "/" + k);
-    const rs = await Promise.all(urls.map(u => fetch(u).then(r => r.json())));
-    _counts = { y: rs[0].value, m: rs[1].value, d: rs[2].value };
-  }catch(e){
-    /* 오프라인/차단 시 임시 숫자 */
-    const demo = 128 + now.getHours() * 9;
-    _counts = { y: demo * 37, m: demo * 6, d: demo };
-  }
-  renderVisitor();
 }
 
 function goFortune(type){
@@ -1105,7 +1070,6 @@ function renderFAQ(){
 
 
 setLang(currentLang);
-updateVisitor();
 renderShare();
 renderToday();
 
