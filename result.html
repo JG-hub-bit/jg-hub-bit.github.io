@@ -1807,7 +1807,7 @@ function showToast(msg){
           objectType: "feed",
           content: {
             title: shareData.title + " · " + shareData.grade + " " + starStr,
-            description: (shareData.sub||"") + "\n\n" + (LANG==="kr"?"내 운세 보러 가기 →":"See your fortune →"),
+            description: (shareData.sub||"").slice(0,26) + "\n" + "kfortunestory.com",
             imageUrl: "https://kfortunestory.com/og-image.png",
             link: { mobileWebUrl: SHARE_URL, webUrl: SHARE_URL }
           },
