@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F6F0E3">
+<title>Get Your Korean Name | K-Fortune Story</title>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2795871274635118" crossorigin="anonymous"></script>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="description" content="Get a real Korean name generated with traditional Korean naming principles (Suri-seongmyeonghak) — not just a random pick, but a name that follows genuine Korean rules of sound and fortune.">
+<link rel="canonical" href="https://kfortunestory.com/korean-name.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="K-Fortune Story">
+<meta property="og:title" content="Get Your Korean Name | K-Fortune Story">
+<meta property="og:description" content="Get a real Korean name generated with traditional Korean naming principles — not just a random pick, but genuine Korean rules of sound and fortune.">
+<meta property="og:url" content="https://kfortunestory.com/korean-name.html">
+<meta property="og:image" content="https://kfortunestory.com/og-image.png">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light dark;
+  --hanji:#F6F0E3; --meok:#2B2620; --noeurok:#2E6B5E; --noeurok-deep:#1E4634;
+  --jinsa:#C23B22; --hwang:#E8A93D; --seokganju:#8A4A34; --seokganju-dark:#6E3A28;
+  --stone:#B9B2A4; --gold-line:#C9A85C;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px}
+body{background:var(--hanji); color:var(--meok); font-family:'Noto Sans KR',sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased;}
+@media (prefers-color-scheme: dark){
+  body{background:#1A1712; color:#EDE6D6;}
+}
+.topband{background:var(--noeurok); height:10px;}
+header{padding:2.2rem 1.4rem 1.4rem; text-align:center; max-width:640px; margin:0 auto;}
+.homelink{display:inline-block; margin-bottom:1rem; font-family:'Gowun Batang',serif; font-size:.95rem; color:var(--seokganju); text-decoration:none; border-bottom:1px solid var(--gold-line); padding-bottom:2px;}
+.eyebrow{font-family:'Noto Sans KR',sans-serif; font-size:.82rem; letter-spacing:.08em; color:var(--seokganju); text-transform:uppercase; margin-bottom:.5rem;}
+h1{font-family:'Song Myung',serif; font-size:clamp(1.6rem,6vw,2.3rem); font-weight:400; color:var(--meok); margin-bottom:.7rem;}
+h1 .accent{color:var(--jinsa);}
+.subtitle{font-family:'Noto Sans KR',sans-serif; font-size:.95rem; color:#5A5245; max-width:480px; margin:0 auto;}
+@media (prefers-color-scheme: dark){
+  .subtitle{color:#C9BFA9;}
+  h1{color:#EDE6D6;}
+}
+main{max-width:640px; margin:0 auto; padding:1rem 1.4rem 3rem;}
+
+.card{background:#FFFDF7; border:1.3px solid var(--gold-line); border-radius:16px; padding:1.4rem; margin-bottom:1.3rem;}
+@media (prefers-color-scheme: dark){ .card{background:#241F1A; border-color:#6E5F3E;} }
+.card h2{font-family:'Gowun Batang',serif; font-size:1.05rem; color:var(--seokganju); margin-bottom:.9rem;}
+@media (prefers-color-scheme: dark){ .card h2{color:#D8A374;} }
+
+label{display:block; font-size:.85rem; font-weight:700; color:var(--meok); margin-bottom:.4rem;}
+@media (prefers-color-scheme: dark){ label{color:#EDE6D6;} }
+select, input[type=text]{width:100%; padding:.7rem .85rem; border:1.3px solid var(--gold-line); border-radius:10px; font-size:.95rem; font-family:'Noto Sans KR',sans-serif; background:#FFFDF7; color:var(--meok); margin-bottom:1rem;}
+@media (prefers-color-scheme: dark){ select,input[type=text]{background:#1A1712; color:#EDE6D6; border-color:#6E5F3E;} }
+
+.vibe-grid{display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin-bottom:1rem;}
+.vibe-opt{border:1.5px solid var(--gold-line); border-radius:12px; padding:.75rem .6rem; text-align:center; cursor:pointer; transition:all .15s; background:#FFFDF7;}
+@media (prefers-color-scheme: dark){ .vibe-opt{background:#1A1712;} }
+.vibe-opt.sel{border-color:var(--jinsa); background:rgba(194,59,34,.08); box-shadow:0 0 0 1.5px var(--jinsa) inset;}
+.vibe-opt .ic{font-size:1.4rem; display:block; margin-bottom:.3rem;}
+.vibe-opt .lbl{font-size:.78rem; font-weight:700; display:block;}
+.vibe-opt .sub{font-size:.68rem; color:#8A7A5E; display:block; margin-top:.1rem;}
+
+.gen-btn{width:100%; background:linear-gradient(135deg,var(--jinsa),var(--seokganju)); color:#FFF7EA; border:none; border-radius:14px; padding:1rem; font-family:'Gowun Batang',serif; font-size:1.05rem; font-weight:700; cursor:pointer; box-shadow:0 4px 14px rgba(194,59,34,.28);}
+.gen-btn:disabled{opacity:.55;}
+
+.result-card{background:#FFFDF7; border:1.5px solid var(--gold-line); border-radius:16px; padding:1.3rem; margin-bottom:1rem; position:relative;}
+@media (prefers-color-scheme: dark){ .result-card{background:#241F1A; border-color:#6E5F3E;} }
+.rank-badge{position:absolute; top:-10px; left:16px; background:var(--hwang); color:#3A2E12; font-size:.72rem; font-weight:700; padding:.2rem .6rem; border-radius:8px;}
+.rname-hangul{font-family:'Song Myung',serif; font-size:1.7rem; color:var(--jinsa); margin:.5rem 0 .1rem;}
+.rname-roman{font-family:'Noto Sans KR',sans-serif; font-size:1rem; color:var(--meok); font-weight:700;}
+@media (prefers-color-scheme: dark){ .rname-roman{color:#EDE6D6;} }
+.rname-hanja{font-family:serif; font-size:1rem; color:#8A7A5E; margin-left:.4rem;}
+.rmeaning{font-size:.85rem; color:#5A5245; margin-top:.6rem; line-height:1.55;}
+@media (prefers-color-scheme: dark){ .rmeaning{color:#C9BFA9;} }
+.rmeaning b{color:var(--seokganju);}
+@media (prefers-color-scheme: dark){ .rmeaning b{color:#D8A374;} }
+.rgrade{display:inline-flex; align-items:center; gap:.3rem; margin-top:.7rem; font-size:.78rem; background:rgba(46,107,94,.1); color:var(--noeurok-deep); padding:.35rem .7rem; border-radius:20px; font-weight:700;}
+@media (prefers-color-scheme: dark){ .rgrade{background:rgba(46,107,94,.25); color:#8FD9C4;} }
+
+.ad-slot{margin:1.5rem 0; min-height:100px; display:flex; align-items:center; justify-content:center;}
+.intro-note{font-size:.82rem; color:#8A7A5E; text-align:center; margin:1rem 0 1.6rem; line-height:1.6;}
+footer{text-align:center; padding:1.4rem; font-size:.78rem; color:#8A7A5E;}
+footer a{color:#8A7A5E;}
+.spinner{display:inline-block; width:16px; height:16px; border:2px solid rgba(255,255,255,.4); border-top-color:#FFF7EA; border-radius:50%; animation:spin .7s linear infinite; margin-right:.4rem; vertical-align:-3px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+<div class="topband"></div>
+<header>
+  <a class="homelink" href="index.html">← K-Fortune Story</a>
+  <p class="eyebrow">Korean Naming Tradition · 성명학</p>
+  <h1>Get Your <span class="accent">Korean Name</span></h1>
+  <p class="subtitle">Not a random generator. Every name here is checked against real Korean naming rules — stroke-count numerology (Suri-seongmyeonghak) and Five Elements sound harmony — the same system Korean parents use for their own children.</p>
+</header>
+
+<main>
+  <div class="card">
+    <h2>1. Choose a Korean family name</h2>
+    <label for="surnameSel">Family name (성)</label>
+    <select id="surnameSel"></select>
+    <p id="surnameDesc" style="font-size:.8rem;color:#8A7A5E;margin-top:-.6rem;"></p>
+  </div>
+
+  <div class="card">
+    <h2>2. What quality should your name reflect?</h2>
+    <div class="vibe-grid" id="vibeGrid"></div>
+  </div>
+
+  <button class="gen-btn" id="genBtn">✨ Generate My Korean Name</button>
+  <p class="intro-note">Each result is checked against the traditional 81-number fortune table (수리 81수) used in real Korean naming — only harmonious combinations are shown.</p>
+
+  <div id="adSlotTop" class="ad-slot"><ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-IOTGVNMt8Z3Y4HWp" data-ad-width="300" data-ad-height="250"></ins></div>
+
+  <div id="results"></div>
+</main>
+
+<footer>
+  <p><a href="about.html">About</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+  <p style="margin-top:.4rem;">K-Fortune Story · kfortunestory.com</p>
+</footer>
+
+<script>
+const SURI81 = {"1":{"grade":"길","name":"태극격(太極格)","desc":"만물이 처음 움직이는 근원의 수로, 새로 뜻을 세우면 크게 발전하고 존귀해지는 기운입니다."},"2":{"grade":"흉","name":"분리격(分離格)","desc":"시작은 있으나 매듭짓지 못해 역경에서 벗어나기 어려운 수입니다."},"3":{"grade":"길","name":"명예격(名譽格)","desc":"지혜와 재능이 두루 갖춰져 하는 일마다 순조롭게 뻗어나가는 대길수입니다."},"4":{"grade":"흉","name":"부정격(不定格)","desc":"기초가 흔들려 매사에 파란과 곡절이 따르기 쉬운 수입니다."},"5":{"grade":"길","name":"정성격(定成格)","desc":"음양이 고르게 어우러져 뜻한 바를 무리 없이 이루는 안정된 수입니다."},"6":{"grade":"길","name":"계승격(繼承格)","desc":"선대의 덕을 이어받아 순탄하게 부와 명예를 쌓아가는 수입니다."},"7":{"grade":"길","name":"독립격(獨立格)","desc":"굳은 의지로 어려움을 뚫고 나가 스스로 일가를 이루는 강건한 수입니다."},"8":{"grade":"길","name":"개물격(開物格)","desc":"꾸준한 노력이 쌓여 마침내 뜻을 관철해내는 끈기의 수입니다."},"9":{"grade":"흉","name":"궁박격(窮迫格)","desc":"재능은 있으나 결실을 눈앞에서 놓치기 쉬운 아쉬움의 수입니다."},"10":{"grade":"흉","name":"공허격(空虛格)","desc":"모든 것이 흩어지고 비어 매사에 막힘이 많은 수입니다."},"11":{"grade":"길","name":"재흥격(再興格)","desc":"어려움이 있어도 다시 일어서는 힘이 있어 가문과 자신을 함께 일으키는 수입니다."},"12":{"grade":"흉","name":"박약격(薄弱格)","desc":"의지와 기반이 약해 힘에 부치는 일을 벌이면 고생이 따르는 수입니다."},"13":{"grade":"길","name":"지모격(智謀格)","desc":"총명한 지혜로 임기응변에 능해 어떤 자리에서도 두각을 나타내는 수입니다."},"14":{"grade":"흉","name":"이산격(離散格)","desc":"가까운 인연이 흩어지기 쉬워 가정과 인간관계에 마음을 써야 하는 수입니다."},"15":{"grade":"길","name":"통솔격(統率格)","desc":"온화하면서도 위엄이 있어 주변의 신망을 얻고 큰 뜻을 이루는 수입니다."},"16":{"grade":"길","name":"덕망격(德望格)","desc":"어질고 후덕한 성품으로 사람이 따르고 재물과 명예가 함께 오는 수입니다."},"17":{"grade":"길","name":"건창격(健暢格)","desc":"굳센 의지로 밀고 나가 뜻한 일을 시원스럽게 이뤄내는 수입니다."},"18":{"grade":"길","name":"발전격(發展格)","desc":"안팎으로 뜻이 통해 계획한 일이 착실하게 뻗어나가는 수입니다."},"19":{"grade":"흉","name":"고난격(苦難格)","desc":"재주는 뛰어나나 걸림돌이 많아 뜻을 다 펴지 못하는 수입니다."},"20":{"grade":"흉","name":"허망격(虛妄格)","desc":"기초가 굳지 못해 노력한 만큼 결실을 보기 어려운 수입니다."},"21":{"grade":"길","name":"두령격(頭領格)","desc":"독립적이고 강한 기상으로 앞장서서 이끄는 자리에 어울리는 수입니다."},"22":{"grade":"흉","name":"중절격(中折格)","desc":"한창 순조롭다가도 중도에 꺾이기 쉬워 마무리에 신중해야 하는 수입니다."},"23":{"grade":"길","name":"융창격(隆昌格)","desc":"기세가 왕성하게 뻗어 일찍부터 이름을 떨치는 수입니다."},"24":{"grade":"길","name":"입신격(立身格)","desc":"작게 시작해도 차곡차곡 쌓아 마침내 큰 재물과 지위에 이르는 수입니다."},"25":{"grade":"길","name":"안강격(安康格)","desc":"재치와 실속을 함께 갖춰 무리 없이 안정을 이루는 수입니다."},"26":{"grade":"흉","name":"영웅격(英雄格)","desc":"큰 그릇이나 기복이 심해 파란만장한 삶을 겪기 쉬운 수입니다."},"27":{"grade":"반길반흉","name":"중단격(中斷格)","desc":"한때 크게 성하다가도 자만하면 시비와 구설로 꺾이기 쉬운, 길흉이 엇갈리는 수입니다."},"28":{"grade":"흉","name":"파란격(波瀾格)","desc":"기복과 풍파가 잦아 평탄하기보다 굴곡이 많은 수입니다."},"29":{"grade":"길","name":"성공격(成功格)","desc":"지혜와 재물운이 함께 따라 노력한 만큼 성과가 크게 돌아오는 수입니다."},"30":{"grade":"반길반흉","name":"부몽격(浮夢格)","desc":"한 번은 크게 얻고 한 번은 크게 잃는, 부침이 뚜렷한 수입니다."},"31":{"grade":"길","name":"융성격(隆盛格)","desc":"덕과 지혜를 함께 갖춰 뭇사람의 신망을 얻으며 크게 번창하는 수입니다."},"32":{"grade":"길","name":"순풍격(順風格)","desc":"뜻밖의 후원과 기회가 따라 순조롭게 뜻을 이루는 요행의 수입니다."},"33":{"grade":"길","name":"승천격(昇天格)","desc":"강한 기운이 하늘로 뻗치듯 크게 발복하는 왕성한 수입니다."},"34":{"grade":"흉","name":"파괴격(破壞格)","desc":"공들인 일이 뜻밖의 사고나 변고로 무너지기 쉬운 수입니다."},"35":{"grade":"길","name":"태평격(泰平格)","desc":"온화하고 차분한 기운으로 큰 풍파 없이 평온하게 살아가는 수입니다."},"36":{"grade":"흉","name":"실의격(失意格)","desc":"의협심은 강하나 뜻대로 풀리지 않아 마음고생이 잦은 수입니다."},"37":{"grade":"길","name":"인덕격(仁德格)","desc":"성실함과 신의로 주변의 도움을 얻어 뜻을 이루는 수입니다."},"38":{"grade":"길","name":"복덕격(福德格)","desc":"큰 성공보다는 꾸준한 재능으로 이름을 얻는 온건한 수입니다."},"39":{"grade":"길","name":"장성격(將星格)","desc":"어려움을 극복하는 힘이 강해 마침내 권위와 안정을 함께 얻는 수입니다."},"40":{"grade":"흉","name":"무상격(無常格)","desc":"재주는 있으나 한 곳에 머물지 못해 성패가 자주 엇갈리는 수입니다."},"41":{"grade":"길","name":"고명격(高名格)","desc":"덕과 재능을 겸비해 순리대로 나아가면 이름을 크게 떨치는 수입니다."},"42":{"grade":"흉","name":"고행격(苦行格)","desc":"재주가 여러 갈래라 한 우물을 파지 못하면 이루는 것이 적은 수입니다."},"43":{"grade":"흉","name":"미혹격(迷惑格)","desc":"겉은 화려해도 속은 흔들리기 쉬워 마음을 다잡아야 하는 수입니다."},"44":{"grade":"흉","name":"마장격(魔障格)","desc":"뜻밖의 곡절이 겹치기 쉬워 신중한 처신이 필요한 수입니다."},"45":{"grade":"길","name":"대지격(大志格)","desc":"큰 뜻을 세우고 순리대로 밀고 나가면 크게 형통하는 수입니다."},"46":{"grade":"흉","name":"부지격(不知格)","desc":"기초가 약해 뜻한 일에 비해 결실이 더디게 오는 수입니다."},"47":{"grade":"길","name":"출세격(出世格)","desc":"주변의 도움과 기회가 맞아떨어져 순조롭게 뜻을 펼치는 수입니다."},"48":{"grade":"길","name":"유덕격(有德格)","desc":"지모와 덕망을 함께 갖춰 사람들에게 존경받으며 이름을 남기는 수입니다."},"49":{"grade":"반길반흉","name":"변화격(變化格)","desc":"길흉이 크게 갈리는 전환점의 수로, 스스로의 선택에 따라 판이 달라집니다."},"50":{"grade":"흉","name":"상반격(相半格)","desc":"한 번 크게 이룬 뒤 점차 기울어 갈수록 형편이 어려워지는 수입니다."},"51":{"grade":"반길반흉","name":"길흉격(吉凶格)","desc":"기복이 크고 행운과 불운이 번갈아 찾아오는 굴곡의 수입니다."},"52":{"grade":"길","name":"승룡격(昇龍格)","desc":"통찰력과 선견지명이 뛰어나 기회를 놓치지 않고 크게 도약하는 수입니다."},"53":{"grade":"반길반흉","name":"내허격(內虛格)","desc":"겉으로는 무탈해 보여도 속으로는 근심이 쌓이기 쉬운 수입니다."},"54":{"grade":"흉","name":"패망격(敗亡格)","desc":"뜻밖의 실패가 거듭되기 쉬워 매사에 조심이 필요한 수입니다."},"55":{"grade":"반길반흉","name":"외길격(外吉格)","desc":"겉으로 보이는 것과 실제 형편이 달라, 인내가 필요한 수입니다."},"56":{"grade":"흉","name":"부족격(不足格)","desc":"뜻은 크나 힘이 따르지 못해 중도에 지치기 쉬운 수입니다."},"57":{"grade":"길","name":"봉시격(逢時格)","desc":"한때 어려움이 있어도 때를 만나면 크게 일어서는 수입니다."},"58":{"grade":"반길반흉","name":"선흉후길격(先凶後吉格)","desc":"초반의 고생을 견뎌내면 후반에는 안정과 결실이 따르는 수입니다."},"59":{"grade":"흉","name":"부진격(不振格)","desc":"의지가 흔들려 매사에 힘을 내기 어려운 수입니다."},"60":{"grade":"흉","name":"무상격2(無常格)","desc":"기준 없이 흔들리는 형세라 안정된 기반을 다지기 어려운 수입니다."},"61":{"grade":"길","name":"영화격(榮華格)","desc":"재능과 지위가 두루 갖춰져 명예와 실리를 함께 얻는 수입니다."},"62":{"grade":"흉","name":"고독격(孤獨格)","desc":"기운이 쇠하여 주변과 멀어지기 쉬운, 외로움이 따르는 수입니다."},"63":{"grade":"길","name":"발전격2(發展格)","desc":"매사가 순리대로 풀려 무리 없이 발전해가는 수입니다."},"64":{"grade":"흉","name":"침체격(沈滯格)","desc":"공들인 일이 뜻대로 풀리지 않아 침체되기 쉬운 수입니다."},"65":{"grade":"길","name":"완성격(完成格)","desc":"기초가 튼튼하여 시작한 일을 끝까지 무탈하게 마무리하는 수입니다."},"66":{"grade":"흉","name":"우매격(愚昧格)","desc":"안팎으로 뜻이 어긋나 다툼과 불화가 잦기 쉬운 수입니다."},"67":{"grade":"길","name":"천복격(天福格)","desc":"하는 일마다 때를 잘 만나 큰 무리 없이 이루어가는 복된 수입니다."},"68":{"grade":"길","name":"흥가격(興家格)","desc":"사려 깊고 신중한 처신으로 집안을 일으키고 신망을 얻는 수입니다."},"69":{"grade":"흉","name":"동요격(動搖格)","desc":"기반이 흔들려 마음을 놓기 어려운, 불안정이 계속되는 수입니다."},"70":{"grade":"흉","name":"공허격2(空虛格)","desc":"뜻한 바를 이루기 어렵고 허탈함이 자주 찾아오는 수입니다."},"71":{"grade":"길","name":"견실격(堅實格)","desc":"꾸준함이 밑거름이 되어 더디더라도 확실하게 결실을 맺는 수입니다."},"72":{"grade":"반길반흉","name":"상반격2(相半格)","desc":"한때의 영화와 한때의 어려움이 함께 따르는, 길흉이 팽팽한 수입니다."},"73":{"grade":"길","name":"평길격(平吉格)","desc":"크게 화려하진 않아도 무탈하고 평안하게 이어가는 수입니다."},"74":{"grade":"흉","name":"우매격2(愚昧格)","desc":"뜻은 있어도 실행이 따르지 못해 결실이 더딘 수입니다."},"75":{"grade":"길","name":"신중격(愼重格)","desc":"서두르지 않고 신중하게 나아가면 무난하게 뜻을 이루는 수입니다."},"76":{"grade":"흉","name":"괴렬격(壞裂格)","desc":"쌓아온 것이 흩어지기 쉬워 유지와 관리에 마음을 써야 하는 수입니다."},"77":{"grade":"길","name":"전후격(前後格)","desc":"초반의 노력이 후반의 안정으로 이어지는, 무난히 형통하는 수입니다."},"78":{"grade":"반길반흉","name":"선길격(先吉格)","desc":"중년 이전에는 순조롭다가 말년으로 갈수록 기운이 잦아드는 수입니다."},"79":{"grade":"흉","name":"종극격(終極格)","desc":"애써도 결실이 가벼워 힘만 소진되기 쉬운, 기력이 달리는 수입니다."},"80":{"grade":"흉","name":"종결격(終結格)","desc":"매사가 끝을 맺는 기운이라 새 일을 벌이기보다 정리가 어울리는 수입니다."},"81":{"grade":"길","name":"환원격(還元格)","desc":"극에 달한 수가 다시 1로 돌아가듯, 소생과 창조의 기운이 되살아나는 대길수입니다."}};
+const SURNAME_HOEKSU = {"金":8,"李":7,"朴":6,"崔":11,"鄭":19,"姜":9,"趙":14,"尹":4,"張":11,"林":8,"韓":17,"吳":7,"徐":10,"申":5,"權":22,"黃":12,"安":6,"宋":7,"全":6,"洪":10,"柳":9,"高":10,"文":4,"梁":11,"孫":10,"裵":14,"白":5,"許":11,"南":9,"沈":8,"盧":16,"河":9,"郭":15,"成":7,"車":7,"朱":6,"禹":9,"具":8,"閔":12,"羅":20,"陳":11,"池":6,"嚴":20,"蔡":15,"元":4,"千":3,"方":4,"孔":4,"康":11,"玄":5,"咸":9,"邊":22,"廉":13,"呂":7,"秋":9,"都":16,"蘇":22,"石":5,"宣":9,"薛":19,"馬":10,"吉":6,"延":7,"魏":18,"表":9,"明":8,"奇":8,"潘":16,"王":4,"琴":13};
+const NAME_HANJA = {"木":{"hoeksu":4,"ohang":"목","pop":2,"meaning":"나무 목 — 자라나는 생명력","en":"Tree — growing vitality","kr":"목"},"東":{"hoeksu":8,"ohang":"목","pop":3,"meaning":"동녘 동 — 떠오르는 해, 시작","en":"East — rising sun, new beginnings","kr":"동"},"杰":{"hoeksu":8,"ohang":"목","pop":4,"meaning":"뛰어날 걸 — 걸출한 인재","en":"Outstanding, heroic","kr":"걸"},"根":{"hoeksu":10,"ohang":"목","pop":3,"meaning":"뿌리 근 — 굳건한 기반","en":"Root — a firm foundation","kr":"근"},"桂":{"hoeksu":10,"ohang":"목","pop":3,"meaning":"계수나무 계 — 고귀함의 상징","en":"Cassia tree — nobility","kr":"계"},"植":{"hoeksu":12,"ohang":"목","pop":3,"meaning":"심을 식 — 뜻을 심고 키움","en":"To plant — sowing intention","kr":"식"},"榮":{"hoeksu":14,"ohang":"목","pop":4,"meaning":"영화 영 — 번영과 영예","en":"Glory, flourishing","kr":"영"},"橋":{"hoeksu":16,"ohang":"목","pop":2,"meaning":"다리 교 — 잇고 연결하는 힘","en":"Bridge — connection","kr":"교"},"松":{"hoeksu":8,"ohang":"목","pop":4,"meaning":"소나무 송 — 변치 않는 절개","en":"Pine — unwavering integrity","kr":"송"},"梅":{"hoeksu":11,"ohang":"목","pop":3,"meaning":"매화 매 — 추위 속에 피는 강인함","en":"Plum blossom — resilience","kr":"매"},"柱":{"hoeksu":9,"ohang":"목","pop":4,"meaning":"기둥 주 — 집안을 떠받치는 힘","en":"Pillar — the family's support","kr":"주"},"楨":{"hoeksu":13,"ohang":"목","pop":3,"meaning":"광나무 정 — 곧고 바른 기둥","en":"A sturdy, upright tree","kr":"정"},"梧":{"hoeksu":11,"ohang":"목","pop":3,"meaning":"오동나무 오 — 귀한 나무, 봉황이 깃듦","en":"Paulownia — where phoenixes rest","kr":"오"},"林":{"hoeksu":8,"ohang":"목","pop":3,"meaning":"수풀 림 — 무성하고 풍요로움","en":"Forest — abundance","kr":"림"},"柳":{"hoeksu":9,"ohang":"목","pop":3,"meaning":"버들 류 — 유연하고 부드러움","en":"Willow — grace and flexibility","kr":"류"},"梓":{"hoeksu":11,"ohang":"목","pop":4,"meaning":"가래나무 재 — 자손이 번성함","en":"Catalpa — flourishing descendants","kr":"재"},"薇":{"hoeksu":19,"ohang":"목","pop":3,"meaning":"장미 미 — 우아하고 화사함","en":"Rose — elegant beauty","kr":"미"},"芽":{"hoeksu":8,"ohang":"목","pop":3,"meaning":"싹 아 — 새롭게 돋아나는 생명","en":"Sprout — new life emerging","kr":"아"},"苑":{"hoeksu":9,"ohang":"목","pop":4,"meaning":"동산 원 — 아름답게 가꾼 정원","en":"Garden — a cultivated beauty","kr":"원"},"菊":{"hoeksu":12,"ohang":"목","pop":2,"meaning":"국화 국 — 늦가을에도 지지 않는 절개","en":"Chrysanthemum — integrity through hardship","kr":"국"},"蘭":{"hoeksu":21,"ohang":"목","pop":3,"meaning":"난초 란 — 고결하고 은은한 향기","en":"Orchid — noble, quiet fragrance","kr":"란"},"楓":{"hoeksu":13,"ohang":"목","pop":3,"meaning":"단풍나무 풍 — 화려하게 물드는 성숙","en":"Maple — mature, vivid beauty","kr":"풍"},"檀":{"hoeksu":17,"ohang":"목","pop":3,"meaning":"박달나무 단 — 굳세고 신성한 기운","en":"Sandalwood — sacred strength","kr":"단"},"槿":{"hoeksu":15,"ohang":"목","pop":3,"meaning":"무궁화 근 — 끊임없이 피어나는 끈기","en":"Rose of Sharon — ceaseless blooming","kr":"근"},"旭":{"hoeksu":6,"ohang":"화","pop":4,"meaning":"아침해 욱 — 힘차게 떠오르는 기운","en":"Morning sun — vigorous energy","kr":"욱"},"炫":{"hoeksu":9,"ohang":"화","pop":4,"meaning":"밝을 현 — 환하게 빛남","en":"Bright, dazzling","kr":"현"},"煥":{"hoeksu":13,"ohang":"화","pop":4,"meaning":"빛날 환 — 눈부시게 환한 기운","en":"Radiant, brilliant","kr":"환"},"熙":{"hoeksu":13,"ohang":"화","pop":4,"meaning":"빛날 희 — 밝고 화락함","en":"Bright and joyful","kr":"희"},"燦":{"hoeksu":17,"ohang":"화","pop":4,"meaning":"빛날 찬 — 찬란하게 빛남","en":"Sparkling, splendid","kr":"찬"},"炅":{"hoeksu":8,"ohang":"화","pop":3,"meaning":"빛날 경 — 해처럼 밝음","en":"Bright as the sun","kr":"경"},"烈":{"hoeksu":10,"ohang":"화","pop":3,"meaning":"매울 렬 — 강직하고 뜨거운 의지","en":"Fervent, ardent will","kr":"렬"},"煐":{"hoeksu":13,"ohang":"화","pop":3,"meaning":"빛날 영 — 은은하게 빛남","en":"Softly radiant","kr":"영"},"炳":{"hoeksu":9,"ohang":"화","pop":3,"meaning":"밝을 병 — 뚜렷하고 환함","en":"Clear and bright","kr":"병"},"赫":{"hoeksu":14,"ohang":"화","pop":4,"meaning":"빛날 혁 — 밝고 강렬하게 빛남","en":"Blazing, vivid brilliance","kr":"혁"},"彩":{"hoeksu":11,"ohang":"화","pop":5,"meaning":"채색 채 — 다채롭고 화사함","en":"Colorful, vibrant","kr":"채"},"怜":{"hoeksu":9,"ohang":"화","pop":4,"meaning":"영리할 령 — 총명하고 슬기로움","en":"Clever and quick-witted","kr":"령"},"夏":{"hoeksu":10,"ohang":"화","pop":3,"meaning":"여름 하 — 활기차고 뜨거운 생동감","en":"Summer — lively energy","kr":"하"},"曜":{"hoeksu":18,"ohang":"화","pop":3,"meaning":"빛날 요 — 해와 별처럼 빛남","en":"Radiant like sun and stars","kr":"요"},"晶":{"hoeksu":12,"ohang":"화","pop":4,"meaning":"수정 정 — 맑고 투명하게 빛남","en":"Crystal — clear brilliance","kr":"정"},"映":{"hoeksu":9,"ohang":"화","pop":4,"meaning":"비칠 영 — 은은하게 비추어 드러남","en":"To shine, reflect softly","kr":"영"},"昀":{"hoeksu":8,"ohang":"화","pop":3,"meaning":"햇빛 윤 — 따스하게 비추는 볕","en":"Warm sunlight","kr":"윤"},"彤":{"hoeksu":7,"ohang":"화","pop":3,"meaning":"붉을 동 — 밝고 생기 있는 붉은빛","en":"Vivid red — lively spirit","kr":"동"},"旦":{"hoeksu":5,"ohang":"화","pop":2,"meaning":"아침 단 — 새로운 하루의 시작","en":"Dawn — a fresh start","kr":"단"},"旻":{"hoeksu":8,"ohang":"화","pop":4,"meaning":"하늘 민 — 가을 하늘처럼 드높음","en":"Autumn sky — lofty and vast","kr":"민"},"民":{"hoeksu":5,"ohang":"화","pop":5,"meaning":"백성 민 — 두루 아우르는 넉넉함","en":"People — warm inclusiveness","kr":"민"},"道":{"hoeksu":16,"ohang":"화","pop":3,"meaning":"길 도 — 바른 길을 걸어감","en":"The Way — walking rightly","kr":"도"},"德":{"hoeksu":15,"ohang":"화","pop":4,"meaning":"덕 덕 — 두터운 인품","en":"Virtue — deep character","kr":"덕"},"俊":{"hoeksu":9,"ohang":"화","pop":5,"meaning":"준걸 준 — 뛰어난 인물","en":"Outstanding talent","kr":"준"},"翊":{"hoeksu":11,"ohang":"화","pop":3,"meaning":"도울 익 — 곁에서 돕고 지지함","en":"To assist, support","kr":"익"},"顯":{"hoeksu":23,"ohang":"화","pop":3,"meaning":"나타날 현 — 크게 드러나고 알려짐","en":"To reveal, become renowned","kr":"현"},"多":{"hoeksu":6,"ohang":"화","pop":4,"meaning":"많을 다 — 풍성함과 넉넉함","en":"Abundant, plentiful","kr":"다"},"恩":{"hoeksu":10,"ohang":"화","pop":5,"meaning":"은혜 은 — 베풀고 감사하는 마음","en":"Grace, gratitude","kr":"은"},"山":{"hoeksu":3,"ohang":"토","pop":2,"meaning":"뫼 산 — 굳건하고 흔들리지 않음","en":"Mountain — unshakable","kr":"산"},"培":{"hoeksu":11,"ohang":"토","pop":3,"meaning":"북돋을 배 — 정성으로 키워냄","en":"To nurture with care","kr":"배"},"堅":{"hoeksu":11,"ohang":"토","pop":3,"meaning":"굳을 견 — 흔들리지 않는 심지","en":"Firm, unwavering resolve","kr":"견"},"基":{"hoeksu":11,"ohang":"토","pop":4,"meaning":"터 기 — 든든한 기초","en":"Foundation — a solid base","kr":"기"},"城":{"hoeksu":10,"ohang":"토","pop":3,"meaning":"성 성 — 굳게 지키는 힘","en":"Fortress — steadfast protection","kr":"성"},"均":{"hoeksu":7,"ohang":"토","pop":3,"meaning":"고를 균 — 치우침 없는 균형","en":"Balanced, even","kr":"균"},"垣":{"hoeksu":9,"ohang":"토","pop":2,"meaning":"담 원 — 든든하게 감싸는 울타리","en":"Wall — a warm embrace","kr":"원"},"娟":{"hoeksu":10,"ohang":"토","pop":4,"meaning":"예쁠 연 — 곱고 아름다움","en":"Graceful and pretty","kr":"연"},"妍":{"hoeksu":9,"ohang":"토","pop":5,"meaning":"고울 연 — 단아하고 고움","en":"Elegant beauty","kr":"연"},"允":{"hoeksu":4,"ohang":"토","pop":5,"meaning":"진실로 윤 — 미더움과 진실됨","en":"Sincere, trustworthy","kr":"윤"},"延":{"hoeksu":7,"ohang":"토","pop":4,"meaning":"늘일 연 — 길게 뻗어가는 복","en":"To extend — lasting fortune","kr":"연"},"希":{"hoeksu":7,"ohang":"토","pop":5,"meaning":"바랄 희 — 밝은 희망","en":"Hope, wish","kr":"희"},"娜":{"hoeksu":10,"ohang":"토","pop":4,"meaning":"아리따울 나 — 부드럽고 아름다움","en":"Graceful and lovely","kr":"나"},"宇":{"hoeksu":6,"ohang":"토","pop":5,"meaning":"집 우 — 넓은 뜻과 기개","en":"Cosmos — broad ambition","kr":"우"},"度":{"hoeksu":9,"ohang":"토","pop":3,"meaning":"법도 도 — 그릇이 크고 반듯함","en":"Measure — a generous character","kr":"도"},"岷":{"hoeksu":8,"ohang":"토","pop":2,"meaning":"산이름 민 — 우뚝한 산처럼 든든함","en":"A steadfast mountain","kr":"민"},"圭":{"hoeksu":6,"ohang":"토","pop":3,"meaning":"홀 규 — 반듯하고 귀한 신표","en":"A jade tablet — dignity","kr":"규"},"垠":{"hoeksu":9,"ohang":"토","pop":2,"meaning":"지경 은 — 넓은 땅, 포용력","en":"Vast land — embracing","kr":"은"},"峻":{"hoeksu":10,"ohang":"토","pop":4,"meaning":"높을 준 — 우뚝하고 뛰어남","en":"Towering, exceptional","kr":"준"},"美":{"hoeksu":9,"ohang":"토","pop":5,"meaning":"아름다울 미 — 곱고 아름다움","en":"Beautiful","kr":"미"},"仁":{"hoeksu":4,"ohang":"토","pop":5,"meaning":"어질 인 — 어질고 따뜻한 마음","en":"Benevolence, warm-hearted kindness","kr":"인"},"義":{"hoeksu":13,"ohang":"토","pop":3,"meaning":"옳을 의 — 의롭고 곧은 뜻","en":"Righteousness, integrity","kr":"의"},"禮":{"hoeksu":18,"ohang":"토","pop":4,"meaning":"예도 예 — 예의 바르고 단정함","en":"Courtesy, propriety","kr":"예"},"安":{"hoeksu":6,"ohang":"토","pop":5,"meaning":"편안 안 — 평온하고 안락함","en":"Peace, comfort","kr":"안"},"銀":{"hoeksu":14,"ohang":"금","pop":3,"meaning":"은 은 — 맑고 귀한 가치","en":"Silver — pure value","kr":"은"},"鈺":{"hoeksu":13,"ohang":"금","pop":3,"meaning":"보배 옥 — 귀한 보물","en":"A precious treasure","kr":"옥"},"鎭":{"hoeksu":18,"ohang":"금","pop":3,"meaning":"진압할 진 — 무게 있게 다스림","en":"To settle, bring weight and calm","kr":"진"},"錫":{"hoeksu":16,"ohang":"금","pop":2,"meaning":"주석 석 — 단단하고 귀함","en":"Tin — solid and precious","kr":"석"},"鍾":{"hoeksu":17,"ohang":"금","pop":3,"meaning":"쇠북 종 — 울림이 크고 깊음","en":"Bronze bell — deep resonance","kr":"종"},"鉉":{"hoeksu":13,"ohang":"금","pop":3,"meaning":"솥귀 현 — 중심을 잡는 역할","en":"The handle that holds balance","kr":"현"},"書":{"hoeksu":10,"ohang":"금","pop":5,"meaning":"글 서 — 배움과 지혜","en":"Book — learning and wisdom","kr":"서"},"現":{"hoeksu":11,"ohang":"금","pop":3,"meaning":"나타날 현 — 뚜렷하게 드러남","en":"To appear, become clear","kr":"현"},"承":{"hoeksu":8,"ohang":"금","pop":5,"meaning":"이을 승 — 뜻을 이어받아 계승함","en":"To inherit, carry forward","kr":"승"},"碩":{"hoeksu":14,"ohang":"금","pop":4,"meaning":"클 석 — 크고 훌륭함","en":"Great, accomplished","kr":"석"},"秀":{"hoeksu":7,"ohang":"금","pop":5,"meaning":"빼어날 수 — 뛰어나고 출중함","en":"Outstanding, excellent","kr":"수"},"淑":{"hoeksu":12,"ohang":"금","pop":3,"meaning":"맑을 숙 — 맑고 단아함","en":"Gentle and refined","kr":"숙"},"瑞":{"hoeksu":13,"ohang":"금","pop":5,"meaning":"상서로울 서 — 길하고 복된 조짐","en":"Auspicious omen","kr":"서"},"珊":{"hoeksu":9,"ohang":"금","pop":3,"meaning":"산호 산 — 귀하고 아름다운 빛","en":"Coral — rare beauty","kr":"산"},"珠":{"hoeksu":10,"ohang":"금","pop":4,"meaning":"구슬 주 — 맑고 둥근 귀함","en":"Pearl — round and precious","kr":"주"},"瑄":{"hoeksu":13,"ohang":"금","pop":3,"meaning":"도리옥 선 — 귀하고 정갈한 옥","en":"A fine ceremonial jade","kr":"선"},"眞":{"hoeksu":10,"ohang":"금","pop":5,"meaning":"참 진 — 참되고 진실함","en":"True, genuine","kr":"진"},"善":{"hoeksu":12,"ohang":"금","pop":5,"meaning":"착할 선 — 어질고 착한 성품","en":"Good, kind-hearted","kr":"선"},"正":{"hoeksu":5,"ohang":"금","pop":4,"meaning":"바를 정 — 곧고 바른 마음","en":"Righteous, upright","kr":"정"},"智":{"hoeksu":12,"ohang":"금","pop":5,"meaning":"지혜 지 — 슬기롭고 총명함","en":"Wisdom, intelligence","kr":"지"},"信":{"hoeksu":9,"ohang":"금","pop":5,"meaning":"믿을 신 — 믿음직하고 신실함","en":"Trust, sincerity","kr":"신"},"壽":{"hoeksu":14,"ohang":"금","pop":2,"meaning":"목숨 수 — 오래도록 이어지는 명","en":"Longevity","kr":"수"},"琳":{"hoeksu":13,"ohang":"금","pop":4,"meaning":"옥 림 — 맑고 귀한 옥빛","en":"Fine jade — precious brilliance","kr":"림"},"洙":{"hoeksu":10,"ohang":"수","pop":3,"meaning":"물가 수 — 맑고 깊은 지혜","en":"Riverside — deep wisdom","kr":"수"},"泰":{"hoeksu":10,"ohang":"수","pop":4,"meaning":"클 태 — 크고 편안한 기운","en":"Grand, at ease","kr":"태"},"淵":{"hoeksu":12,"ohang":"수","pop":3,"meaning":"못 연 — 깊고 고요한 학식","en":"A deep pool — profound learning","kr":"연"},"潤":{"hoeksu":15,"ohang":"수","pop":5,"meaning":"윤택할 윤 — 풍요롭고 부드러움","en":"Moist, enriching","kr":"윤"},"洪":{"hoeksu":10,"ohang":"수","pop":3,"meaning":"넓을 홍 — 크고 넓은 포부","en":"Vast, expansive ambition","kr":"홍"},"湖":{"hoeksu":13,"ohang":"수","pop":2,"meaning":"호수 호 — 잔잔하고 깊은 품","en":"Lake — calm depth","kr":"호"},"泫":{"hoeksu":9,"ohang":"수","pop":3,"meaning":"이슬빛날 현 — 맑게 빛나는 지혜","en":"Glistening dew — clear wisdom","kr":"현"},"洋":{"hoeksu":9,"ohang":"수","pop":3,"meaning":"큰바다 양 — 넓고 큰 포부","en":"Ocean — a broad vision","kr":"양"},"汎":{"hoeksu":6,"ohang":"수","pop":2,"meaning":"뜰 범 — 자유롭게 흘러가는 여유","en":"Floating freely","kr":"범"},"沃":{"hoeksu":7,"ohang":"수","pop":2,"meaning":"기름질 옥 — 풍요롭고 비옥함","en":"Fertile, abundant","kr":"옥"},"沼":{"hoeksu":8,"ohang":"수","pop":2,"meaning":"못 소 — 맑고 잔잔한 마음","en":"A calm pond","kr":"소"},"波":{"hoeksu":8,"ohang":"수","pop":2,"meaning":"물결 파 — 생동감 있게 일렁이는 기운","en":"Wave — lively motion","kr":"파"},"和":{"hoeksu":8,"ohang":"수","pop":4,"meaning":"화할 화 — 조화롭고 평온함","en":"Harmony, peace","kr":"화"},"平":{"hoeksu":5,"ohang":"수","pop":3,"meaning":"평평할 평 — 안정되고 평탄함","en":"Even, stable","kr":"평"},"福":{"hoeksu":14,"ohang":"수","pop":3,"meaning":"복 복 — 넉넉한 복","en":"Blessing, good fortune","kr":"복"},"杓":{"hoeksu":7,"ohang":"목","pop":2,"meaning":"자루 표 — 중심을 잡는 역할","en":"A ladle — steady and central","kr":"표"},"潭":{"hoeksu":16,"ohang":"수","pop":3,"meaning":"못 담 — 깊고 그윽함","en":"A deep pool — quiet depth","kr":"담"},"潾":{"hoeksu":16,"ohang":"수","pop":2,"meaning":"맑을 린 — 물처럼 맑음","en":"Clear as flowing water","kr":"린"},"芝":{"hoeksu":10,"ohang":"목","pop":4,"meaning":"지초 지 — 향기롭고 고운 자태","en":"Fragrant herb — refined grace","kr":"지"},"康":{"hoeksu":11,"ohang":"목","pop":4,"meaning":"편안 강 — 건강하고 평안함","en":"Health, well-being","kr":"강"},"華":{"hoeksu":14,"ohang":"목","pop":3,"meaning":"빛날 화 — 화려하고 아름다움","en":"Splendid, magnificent","kr":"화"},"勳":{"hoeksu":16,"ohang":"토","pop":4,"meaning":"공 훈 — 큰 공적과 업적","en":"Merit, great achievement","kr":"훈"},"桓":{"hoeksu":10,"ohang":"목","pop":4,"meaning":"굳셀 환 — 씩씩하고 늠름함","en":"Strong and dignified","kr":"환"},"楊":{"hoeksu":13,"ohang":"목","pop":3,"meaning":"버들 양 — 부드럽고 낭창함","en":"Willow — supple grace","kr":"양"},"森":{"hoeksu":12,"ohang":"목","pop":3,"meaning":"수풀 삼 — 무성하고 풍성함","en":"Lush forest — abundance","kr":"삼"},"材":{"hoeksu":7,"ohang":"목","pop":3,"meaning":"재목 재 — 쓰임이 큰 인재","en":"Timber — useful talent","kr":"재"},"相":{"hoeksu":9,"ohang":"목","pop":4,"meaning":"서로 상 — 함께 어우러지는 조화","en":"Mutual — harmony together","kr":"상"},"采":{"hoeksu":8,"ohang":"목","pop":3,"meaning":"캘 채 — 좋은 것을 찾아 거둠","en":"To gather what is good","kr":"채"},"橙":{"hoeksu":16,"ohang":"목","pop":2,"meaning":"귤 등 — 밝고 상큼한 기운","en":"Orange — a bright, fresh energy","kr":"등"},"苗":{"hoeksu":9,"ohang":"목","pop":2,"meaning":"모 묘 — 갓 돋아난 새싹","en":"Sprout — new potential","kr":"묘"},"葉":{"hoeksu":13,"ohang":"목","pop":3,"meaning":"잎 엽 — 무성하게 뻗어가는 생명","en":"Leaf — thriving growth","kr":"엽"},"栢":{"hoeksu":10,"ohang":"목","pop":3,"meaning":"측백나무 백 — 늘 푸른 절개","en":"Cypress — evergreen integrity","kr":"백"},"昇":{"hoeksu":8,"ohang":"화","pop":5,"meaning":"오를 승 — 힘차게 위로 올라감","en":"To rise, ascend","kr":"승"},"昶":{"hoeksu":9,"ohang":"화","pop":4,"meaning":"해길 창 — 볕이 길게 이어지는 여유","en":"Long, bright days","kr":"창"},"晃":{"hoeksu":10,"ohang":"화","pop":3,"meaning":"밝을 황 — 환하고 뚜렷함","en":"Bright and clear","kr":"황"},"曦":{"hoeksu":20,"ohang":"화","pop":4,"meaning":"햇빛 희 — 눈부신 아침 햇살","en":"Radiant morning sunlight","kr":"희"},"昕":{"hoeksu":8,"ohang":"화","pop":3,"meaning":"밝을 흔 — 동틀 무렵의 밝음","en":"Dawn's early brightness","kr":"흔"},"晟":{"hoeksu":10,"ohang":"화","pop":5,"meaning":"밝을 성 — 왕성하고 밝게 성함","en":"Thriving brightness","kr":"성"},"炯":{"hoeksu":9,"ohang":"화","pop":3,"meaning":"빛날 형 — 또렷하고 형형하게 빛남","en":"Vivid, glowing light","kr":"형"},"昱":{"hoeksu":9,"ohang":"화","pop":5,"meaning":"빛날 욱 — 날마다 새롭게 빛남","en":"Ever-new radiance","kr":"욱"},"曙":{"hoeksu":18,"ohang":"화","pop":2,"meaning":"새벽 서 — 밝아오는 새벽의 기운","en":"The break of dawn","kr":"서"},"煌":{"hoeksu":13,"ohang":"화","pop":3,"meaning":"빛날 황 — 눈부시게 환한 빛","en":"Dazzling brilliance","kr":"황"},"煇":{"hoeksu":13,"ohang":"화","pop":2,"meaning":"빛날 휘 — 은은하게 퍼지는 빛","en":"A gentle spreading light","kr":"휘"},"彬":{"hoeksu":11,"ohang":"화","pop":4,"meaning":"빛날 빈 — 문채와 바탕이 조화로움","en":"Refined and cultured","kr":"빈"},"址":{"hoeksu":7,"ohang":"토","pop":2,"meaning":"터 지 — 굳건히 자리 잡은 기반","en":"Site — a firm foundation","kr":"지"},"域":{"hoeksu":11,"ohang":"토","pop":2,"meaning":"지경 역 — 넓게 아우르는 영역","en":"A broad domain","kr":"역"},"佳":{"hoeksu":8,"ohang":"토","pop":5,"meaning":"아름다울 가 — 곱고 훌륭함","en":"Fine, beautiful","kr":"가"},"垚":{"hoeksu":9,"ohang":"토","pop":1,"meaning":"(참고용, 실사용 드묾)","en":"(rare, reference only)","kr":"요"},"圻":{"hoeksu":7,"ohang":"토","pop":2,"meaning":"경기 기 — 든든한 터전","en":"A well-kept homeland","kr":"기"},"堉":{"hoeksu":11,"ohang":"토","pop":3,"meaning":"기름진땅 육 — 비옥하고 풍요로운 터","en":"Fertile ground — abundance","kr":"육"},"在":{"hoeksu":6,"ohang":"토","pop":4,"meaning":"있을 재 — 굳건히 존재함, 든든함","en":"To exist steadily, be present","kr":"재"},"坤":{"hoeksu":8,"ohang":"토","pop":3,"meaning":"땅 곤 — 만물을 품는 대지의 덕","en":"Earth — nurturing and embracing","kr":"곤"},"境":{"hoeksu":14,"ohang":"토","pop":2,"meaning":"지경 경 — 넓게 펼쳐진 세계","en":"A wide-spanning world","kr":"경"},"鎬":{"hoeksu":18,"ohang":"금","pop":4,"meaning":"호경 호 — 밝고 빛나는 도읍","en":"Bright, resplendent capital","kr":"호"},"鏞":{"hoeksu":19,"ohang":"금","pop":3,"meaning":"쇠북 용 — 크고 웅장한 울림","en":"A great bronze bell","kr":"용"},"鈴":{"hoeksu":13,"ohang":"금","pop":2,"meaning":"방울 령 — 맑고 청아한 소리","en":"Bell — a clear, pure sound","kr":"령"},"錦":{"hoeksu":16,"ohang":"금","pop":3,"meaning":"비단 금 — 곱고 화려함","en":"Brocade — fine and elegant","kr":"금"},"貞":{"hoeksu":9,"ohang":"금","pop":4,"meaning":"곧을 정 — 곧고 절개 있는 마음","en":"Upright, principled","kr":"정"},"財":{"hoeksu":10,"ohang":"금","pop":2,"meaning":"재물 재 — 풍족한 재화","en":"Wealth, resources","kr":"재"},"珉":{"hoeksu":9,"ohang":"금","pop":4,"meaning":"옥돌 민 — 옥처럼 맑고 단단함","en":"Jade-like stone — clear strength","kr":"민"},"鎰":{"hoeksu":18,"ohang":"금","pop":2,"meaning":"무게이름 일 — 묵직한 무게감과 가치","en":"A weighty, valuable measure","kr":"일"},"銓":{"hoeksu":14,"ohang":"금","pop":2,"meaning":"저울 전 — 공정하게 헤아림","en":"To weigh fairly","kr":"전"},"錠":{"hoeksu":16,"ohang":"금","pop":2,"meaning":"제기이름 정 — 단정하고 반듯함","en":"A ceremonial vessel — dignity","kr":"정"},"江":{"hoeksu":6,"ohang":"수","pop":4,"meaning":"강 강 — 크고 넓게 흐르는 기운","en":"River — flowing broadly","kr":"강"},"泉":{"hoeksu":9,"ohang":"수","pop":3,"meaning":"샘 천 — 끊임없이 솟아나는 근원","en":"Spring — an endless source","kr":"천"},"淳":{"hoeksu":11,"ohang":"수","pop":4,"meaning":"순박할 순 — 꾸밈없고 순수함","en":"Pure, unaffected","kr":"순"},"澈":{"hoeksu":15,"ohang":"수","pop":5,"meaning":"맑을 철 — 속까지 맑고 투명함","en":"Crystal clear, through and through","kr":"철"},"涵":{"hoeksu":11,"ohang":"수","pop":3,"meaning":"젖을 함 — 은은하게 스며드는 깊이","en":"To be gently steeped in depth","kr":"함"},"沙":{"hoeksu":7,"ohang":"수","pop":2,"meaning":"모래 사 — 자유롭고 소탈한 기운","en":"Sand — free-spirited ease","kr":"사"},"津":{"hoeksu":9,"ohang":"수","pop":3,"meaning":"나루 진 — 오가는 이들을 잇는 자리","en":"A ferry crossing — connecting others","kr":"진"},"淇":{"hoeksu":11,"ohang":"수","pop":3,"meaning":"물이름 기 — 맑게 흐르는 강물","en":"A clear flowing river","kr":"기"},"潔":{"hoeksu":15,"ohang":"수","pop":3,"meaning":"맑을 결 — 깨끗하고 결백함","en":"Clean, pure","kr":"결"},"泳":{"hoeksu":8,"ohang":"수","pop":4,"meaning":"헤엄칠 영 — 자유롭게 나아가는 힘","en":"To swim — moving forward freely","kr":"영"},"沿":{"hoeksu":8,"ohang":"수","pop":2,"meaning":"물따라갈 연 — 순리를 따라 나아감","en":"To follow the flow naturally","kr":"연"},"浩":{"hoeksu":10,"ohang":"수","pop":4,"meaning":"넓을 호 — 크고 넓은 기상","en":"Vast, expansive spirit","kr":"호"},"太":{"hoeksu":4,"ohang":"수","pop":5,"meaning":"클 태 — 크고 넉넉한 기운","en":"Great, grand","kr":"태"},"雅":{"hoeksu":12,"ohang":"토","pop":5,"meaning":"우아할 아 — 단아하고 고상함","en":"Elegant, refined","kr":"아"},"裕":{"hoeksu":12,"ohang":"금","pop":4,"meaning":"넉넉할 유 — 여유롭고 풍족함","en":"Abundant, at ease","kr":"유"},"娥":{"hoeksu":10,"ohang":"토","pop":3,"meaning":"예쁠 아 — 곱고 아리따움","en":"Lovely and graceful","kr":"아"},"妙":{"hoeksu":7,"ohang":"토","pop":3,"meaning":"묘할 묘 — 오묘하고 신비로운 매력","en":"Subtle, wondrous charm","kr":"묘"},"珍":{"hoeksu":9,"ohang":"금","pop":4,"meaning":"보배 진 — 귀하고 소중함","en":"Precious, rare","kr":"진"},"蓮":{"hoeksu":15,"ohang":"목","pop":3,"meaning":"연꽃 연 — 진흙 속에서도 맑게 피어남","en":"Lotus — pure beauty rising above mud","kr":"연"},"敏":{"hoeksu":11,"ohang":"수","pop":5,"meaning":"민첩할 민 — 재빠르고 총명함","en":"Quick-witted, sharp","kr":"민"},"賢":{"hoeksu":15,"ohang":"금","pop":4,"meaning":"어질 현 — 어질고 지혜로움","en":"Wise and virtuous","kr":"현"},"誠":{"hoeksu":14,"ohang":"금","pop":4,"meaning":"정성 성 — 참되고 정성스러움","en":"Sincerity, genuine devotion","kr":"성"},"京":{"hoeksu":8,"ohang":"토","pop":2,"meaning":"서울 경 — 크고 중심이 되는 자리","en":"Capital — a central, great place","kr":"경"},"敦":{"hoeksu":12,"ohang":"금","pop":2,"meaning":"도타울 돈 — 인정이 두텁고 후함","en":"Warm-hearted generosity","kr":"돈"},"湜":{"hoeksu":13,"ohang":"수","pop":2,"meaning":"물맑을 식 — 바닥까지 맑게 비침","en":"Clear to the very bottom","kr":"식"},"妸":{"hoeksu":8,"ohang":"토","pop":1,"meaning":"(참고용, 실사용 드묾)","en":"(rare, reference only)","kr":"아"},"娉":{"hoeksu":10,"ohang":"토","pop":2,"meaning":"장가들 빙 — 정중하게 맺어지는 인연","en":"A graceful, respectful union","kr":"빙"},"宙":{"hoeksu":8,"ohang":"토","pop":4,"meaning":"집 주 — 넓은 우주와 같은 큰 뜻","en":"Cosmos — vast, boundless vision","kr":"주"},"昭":{"hoeksu":9,"ohang":"화","pop":4,"meaning":"밝을 소 — 밝고 또렷하게 드러남","en":"Clear and bright","kr":"소"},"翰":{"hoeksu":16,"ohang":"화","pop":3,"meaning":"편지 한 — 학식과 문채가 뛰어남","en":"Refined literary talent","kr":"한"},"祐":{"hoeksu":10,"ohang":"금","pop":4,"meaning":"도울 우 — 하늘이 돕는 복","en":"Blessed, divinely helped","kr":"우"},"祉":{"hoeksu":9,"ohang":"금","pop":3,"meaning":"복 지 — 하늘이 내리는 복","en":"Heaven-given blessing","kr":"지"},"娴":{"hoeksu":15,"ohang":"토","pop":1,"meaning":"(참고용, 실사용 드묾)","en":"(rare, reference only)","kr":"한"},"叡":{"hoeksu":16,"ohang":"토","pop":3,"meaning":"밝을 예 — 슬기롭고 통찰력 있음","en":"Insightful, wise","kr":"예"},"俐":{"hoeksu":9,"ohang":"화","pop":3,"meaning":"영리할 리 — 똑똑하고 야무짐","en":"Sharp and clever","kr":"리"},"娆":{"hoeksu":9,"ohang":"토","pop":1,"meaning":"(참고용, 실사용 드묾)","en":"(rare, reference only)","kr":"요"},"軒":{"hoeksu":10,"ohang":"화","pop":3,"meaning":"집 헌 — 높고 시원스러운 기상","en":"A lofty, spacious bearing","kr":"헌"}};
+const SURNAME_EN = {"金":{"kr":"김","rr":"Kim","meaning_en":"Gold / Metal"},"李":{"kr":"이","rr":"Lee","meaning_en":"Plum tree"},"朴":{"kr":"박","rr":"Park","meaning_en":"Gourd / Simple"},"崔":{"kr":"최","rr":"Choi","meaning_en":"Lofty, high"},"鄭":{"kr":"정","rr":"Jung","meaning_en":"A historic state name"},"姜":{"kr":"강","rr":"Kang","meaning_en":"Ginger; a clan name"},"趙":{"kr":"조","rr":"Cho","meaning_en":"A historic state name"},"尹":{"kr":"윤","rr":"Yoon","meaning_en":"To govern, guide"},"張":{"kr":"장","rr":"Jang","meaning_en":"To stretch, expand"},"林":{"kr":"임","rr":"Lim","meaning_en":"Forest"},"韓":{"kr":"한","rr":"Han","meaning_en":"Korea itself"},"吳":{"kr":"오","rr":"Oh","meaning_en":"A historic state name"},"徐":{"kr":"서","rr":"Seo","meaning_en":"Slow, calm"},"申":{"kr":"신","rr":"Shin","meaning_en":"To state, declare"},"權":{"kr":"권","rr":"Kwon","meaning_en":"Authority, power"},"黃":{"kr":"황","rr":"Hwang","meaning_en":"Yellow, imperial"},"安":{"kr":"안","rr":"Ahn","meaning_en":"Peace"},"宋":{"kr":"송","rr":"Song","meaning_en":"A historic dynasty name"},"全":{"kr":"전","rr":"Jeon","meaning_en":"Whole, complete"},"洪":{"kr":"홍","rr":"Hong","meaning_en":"Vast, abundant"},"柳":{"kr":"류","rr":"Ryu","meaning_en":"Willow tree"},"高":{"kr":"고","rr":"Ko","meaning_en":"High, tall"},"文":{"kr":"문","rr":"Moon","meaning_en":"Literature, writing"},"梁":{"kr":"양","rr":"Yang","meaning_en":"Bridge, beam"},"許":{"kr":"허","rr":"Heo","meaning_en":"To permit, allow"}};
+
+/* ══ 초성 → 오행 (소리) ══ */
+const CHO_LIST = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+const JUNG_LIST = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
+const JONG_LIST = ['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+
+const CHO_OHANG = {
+  "ㄱ":"목","ㅋ":"목","ㄴ":"화","ㄷ":"화","ㄹ":"화","ㅌ":"화",
+  "ㅇ":"토","ㅎ":"토","ㅅ":"금","ㅈ":"금","ㅊ":"금","ㅁ":"수","ㅂ":"수","ㅍ":"수"
+};
+const OHANG_SANGSAENG = {"목":"화","화":"토","토":"금","금":"수","수":"목"};
+const OHANG_SANGGEUK = {"목":"토","토":"수","수":"화","화":"금","금":"목"};
+
+/* ══ 로마자 표기 (Revised Romanization 근사) ══ */
+const RR_CHO = ['g','kk','n','d','tt','r','m','b','pp','s','ss','','j','jj','ch','k','t','p','h'];
+const RR_JUNG = ['a','ae','ya','yae','eo','e','yeo','ye','o','wa','wae','oe','yo','u','wo','we','wi','yu','eu','ui','i'];
+const RR_JONG = ['','k','k','k','n','n','n','t','l','k','l','l','l','l','p','l','m','p','p','t','t','ng','t','t','k','t','p','h'];
+
+function decompose(syl){
+  const code = syl.charCodeAt(0) - 0xAC00;
+  if(code < 0 || code > 11171) return null;
+  const cho = Math.floor(code / (21*28));
+  const jung = Math.floor((code % (21*28)) / 28);
+  const jong = code % 28;
+  return {cho, jung, jong};
+}
+function getCho(syl){
+  const d = decompose(syl);
+  if(!d) return null;
+  const c = CHO_LIST[d.cho];
+  const dbl = {"ㄲ":"ㄱ","ㄸ":"ㄷ","ㅃ":"ㅂ","ㅆ":"ㅅ","ㅉ":"ㅈ"};
+  return dbl[c] || c;
+}
+function romanize(str){
+  let out = "";
+  for(const ch of str){
+    const d = decompose(ch);
+    if(!d){ out += ch; continue; }
+    out += RR_CHO[d.cho] + RR_JUNG[d.jung] + RR_JONG[d.jong];
+  }
+  return out.charAt(0).toUpperCase() + out.slice(1);
+}
+
+function nameSoundOhang(given2){
+  const chos = [...given2].map(getCho);
+  const ohangs = chos.map(c => CHO_OHANG[c] || "?");
+  if(ohangs.length < 2) return {ohangs, relation:"N/A"};
+  const [a,b] = ohangs;
+  let relation;
+  if(OHANG_SANGSAENG[a] === b) relation = "sangsaeng";       // 상생
+  else if(OHANG_SANGGEUK[a] === b || OHANG_SANGGEUK[b] === a) relation = "sanggeuk"; // 상극
+  else if(a === b) relation = "bihwa";                        // 비화
+  else relation = "neutral";
+  return {ohangs, relation};
+}
+
+/* ══ 사격(원형이정) 계산 ══ */
+function sagyeok(seongH, jungH, haH){
+  const wongyeok = jungH + haH;
+  const hyeonggyeok = seongH + jungH;
+  const igyeok = seongH + haH;
+  const jeonggyeok = seongH + jungH + haH;
+  function lookup(n){
+    const m = ((n - 1) % 81) + 1;
+    return {num:n, mod:m, ...SURI81[m]};
+  }
+  return {
+    won: {...lookup(wongyeok), period:"Early life (~20s)"},
+    hyeong: {...lookup(hyeonggyeok), period:"Youth (20s-30s)"},
+    i: {...lookup(igyeok), period:"Midlife (40s-50s)"},
+    jeong: {...lookup(jeonggyeok), period:"Overall / later life"},
+  };
+}
+
+/* ══ 이름 후보 생성 ══ */
+function generateNames(seongHanja, targetOhang, minPop, topN){
+  minPop = minPop || 3;
+  topN = topN || 5;
+  const s = SURNAME_HOEKSU[seongHanja];
+  if(!s) return {error:"surname not found"};
+
+  const pool = Object.entries(NAME_HANJA).filter(([k,v]) => v.pop >= minPop);
+  const candidates = [];
+  for(const [jungHj, jungInfo] of pool){
+    for(const [haHj, haInfo] of pool){
+      if(jungHj === haHj) continue;
+      const j = jungInfo.hoeksu, h = haInfo.hoeksu;
+      const result = sagyeok(s, j, h);
+      const gilCount = Object.values(result).filter(v => v.grade === "길").length;
+      let score = gilCount * 10;
+      score += (jungInfo.pop + haInfo.pop);
+      if(targetOhang){
+        if(jungInfo.ohang === targetOhang) score += 5;
+        if(haInfo.ohang === targetOhang) score += 5;
+      }
+      candidates.push({jungHj, haHj, hoeksu:`${j}+${h}`, gilCount, score, jungInfo, haInfo, sagyeok:result});
+    }
+  }
+  candidates.sort((a,b) => b.score - a.score);
+  const diverse = [];
+  const seen = {};
+  for(const c of candidates){
+    const cnt = seen[c.jungHj] || 0;
+    if(cnt >= 2) continue;
+    seen[c.jungHj] = cnt + 1;
+    diverse.push(c);
+    if(diverse.length >= topN) break;
+  }
+  return diverse;
+}
+
+
+/* ══ UI 상호작용 ══ */
+const VIBES = [
+  {ohang:"화", ic:"🔥", lbl:"Bright & Passionate", sub:"Fire"},
+  {ohang:"목", ic:"🌳", lbl:"Growing & Kind",       sub:"Wood"},
+  {ohang:"토", ic:"⛰️", lbl:"Steady & Trustworthy", sub:"Earth"},
+  {ohang:"금", ic:"⚜️", lbl:"Noble & Accomplished", sub:"Metal"},
+  {ohang:"수", ic:"💧", lbl:"Wise & Flowing",        sub:"Water"},
+];
+
+let selectedVibe = null;
+
+function initSurnameSelect(){
+  const sel = document.getElementById("surnameSel");
+  const entries = Object.entries(SURNAME_EN);
+  sel.innerHTML = entries.map(([hj, info]) =>
+    `<option value="${hj}">${info.kr} ${hj} (${info.rr})</option>`
+  ).join("");
+  updateSurnameDesc();
+  sel.addEventListener("change", updateSurnameDesc);
+}
+function updateSurnameDesc(){
+  const sel = document.getElementById("surnameSel");
+  const info = SURNAME_EN[sel.value];
+  document.getElementById("surnameDesc").textContent = info ? `Meaning: ${info.meaning_en}` : "";
+}
+
+function initVibeGrid(){
+  const grid = document.getElementById("vibeGrid");
+  grid.innerHTML = VIBES.map((v,i) =>
+    `<div class="vibe-opt" data-ohang="${v.ohang}" data-idx="${i}">
+       <span class="ic">${v.ic}</span><span class="lbl">${v.lbl}</span><span class="sub">${v.sub}</span>
+     </div>`
+  ).join("");
+  grid.querySelectorAll(".vibe-opt").forEach(el => {
+    el.addEventListener("click", () => {
+      grid.querySelectorAll(".vibe-opt").forEach(x => x.classList.remove("sel"));
+      el.classList.add("sel");
+      selectedVibe = el.dataset.ohang;
+    });
+  });
+}
+
+function gradeLabel(grade){
+  if(grade === "길") return "Auspicious";
+  if(grade === "흉") return "Caution";
+  return "Mixed";
+}
+
+function renderResults(seongHj, cands){
+  const box = document.getElementById("results");
+  if(!cands.length){
+    box.innerHTML = `<p style="text-align:center;color:#8A7A5E;">No strong matches found — try a different quality.</p>`;
+    return;
+  }
+  const seongInfo = SURNAME_EN[seongHj];
+  box.innerHTML = cands.map((c, i) => {
+    const hangul = seongInfo.kr + c.jungInfo.kr + c.haInfo.kr;
+    const hanja = seongHj + c.jungHj + c.haHj;
+    const roman = seongInfo.rr + " " + romanize(c.jungInfo.kr + c.haInfo.kr);
+    const sound = nameSoundOhang(c.jungInfo.kr + c.haInfo.kr);
+    const soundTxt = {sangsaeng:"harmonious sound flow", sanggeuk:"contrasting sound energy", bihwa:"doubled, strong energy", neutral:"balanced sound"}[sound.relation];
+    return `<div class="result-card">
+      <span class="rank-badge">#${i+1}</span>
+      <div class="rname-hangul">${hangul} <span class="rname-hanja">${hanja}</span></div>
+      <div class="rname-roman">${roman}</div>
+      <div class="rmeaning"><b>${c.jungInfo.kr}</b> ${c.jungInfo.en} &nbsp;·&nbsp; <b>${c.haInfo.kr}</b> ${c.haInfo.en}</div>
+      <div class="rmeaning" style="margin-top:.3rem;">Sound quality: ${soundTxt}</div>
+      <div class="rgrade">✓ ${c.gilCount}/4 auspicious readings (Suri-seongmyeonghak)</div>
+    </div>`;
+  }).join("");
+  box.scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+document.getElementById("genBtn").addEventListener("click", () => {
+  const btn = document.getElementById("genBtn");
+  const seongHj = document.getElementById("surnameSel").value;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Calculating...';
+  setTimeout(() => {
+    const cands = generateNames(seongHj, selectedVibe, 3, 5);
+    renderResults(seongHj, Array.isArray(cands) ? cands : []);
+    btn.disabled = false;
+    btn.textContent = "✨ Generate Another Set";
+  }, 400);
+});
+
+initSurnameSelect();
+initVibeGrid();
+
+</script>
+<script src="//t1.kakaocdn.net/kas/static/ba.min.js" async></script>
+</body>
+</html>
