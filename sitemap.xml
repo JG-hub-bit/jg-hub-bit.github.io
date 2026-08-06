@@ -100,4 +100,52 @@
   <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=9</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=10</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://kfortunestory.com/result.html?type=today&amp;z=11</loc><lastmod>2026-07-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url>
+    <loc>https://kfortunestory.com/column.html</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kfortunestory.com/glossary.html</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kfortunestory.com/column/col-2026-byeongo.html</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kfortunestory.com/column/col-saju-vs-astrology.html</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kfortunestory.com/column/col-tojeong-history.html</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kfortunestory.com/column/col-sonnobneun-nal.html</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kfortunestory.com/column/col-ohaeng.html</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kfortunestory.com/column/col-seongmyeonghak-history.html</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
