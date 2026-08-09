@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="K-Fortune">
 <meta name="description" content="절기 기반 정밀 명식으로 보는 한국 전통 운세. 사주·토정비결·궁합·꿈해몽.">
-<link rel="canonical" href="https://kfortunestory.com/result.html">
+<link rel="canonical" id="canonicalTag" href="https://kfortunestory.com/result.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="K-Fortune Story">
 <meta property="og:title" content="K-Fortune Story · 한국 전통 운세">
@@ -620,6 +620,15 @@ const type = new URLSearchParams(location.search).get("type") || localStorage.ge
     let m = document.querySelector('meta[name="description"]');
     if(!m){ m = document.createElement("meta"); m.setAttribute("name","description"); document.head.appendChild(m); }
     m.setAttribute("content", desc);
+  }
+  /* canonical 태그도 실제 type(&z) 쿼리스트링을 포함한 URL로 갱신
+     — 안 그러면 구글이 sitemap의 result.html?type=X 들을 전부 result.html(파라미터 없음)의
+     "대체 페이지"로 취급해 색인에서 제외하는 문제가 생김 */
+  const canon = document.getElementById("canonicalTag");
+  if(canon && type){
+    let canonUrl = "https://kfortunestory.com/result.html?type=" + encodeURIComponent(type);
+    if(type === "today" && zParam !== null) canonUrl += "&z=" + encodeURIComponent(zParam);
+    canon.setAttribute("href", canonUrl);
   }
 })();
 let P  = JSON.parse(localStorage.getItem("kf_p_main") || "null");
@@ -1623,6 +1632,42 @@ else if(P){
     const mo = dt.getUTCMonth()+1, dd = dt.getUTCDate();
     return K ? (mo + "/" + dd) : (mo + "/" + dd);
   }
+
+  /* 월간 정밀 점수 — 용신·희신·기신 매칭(기본) + 일지·연지 합충 + 현재 대운 반영
+     기존엔 용신/희신 매칭 딱 하나로만 별점을 매겨서, 다른 사람이라도 용신·희신이 같으면
+     12달 별점이 통째로 똑같이 나오는 문제가 있었음. 개인 사주 요소를 더 반영해서 다양성 확보. */
+  const YUKHAP_M = [[0,1],[2,11],[3,10],[4,9],[5,8],[6,7]];
+  const SAMHAP_M = [[0,4,8],[2,6,10],[1,5,9],[3,7,11]];
+  function hapChungScore(b1, b2, wYuk, wSam, wChung){
+    if(YUKHAP_M.some(p=>(p[0]===b1&&p[1]===b2)||(p[0]===b2&&p[1]===b1))) return wYuk;
+    if(SAMHAP_M.some(g=>g.includes(b1)&&g.includes(b2)&&b1!==b2)) return wSam;
+    if(Math.abs(b1-b2)===6) return -wChung;
+    return 0;
+  }
+  const DT2 = daeunTable(S, A, P.gender, curAge);
+  const curDaeun = (DT2.nowIdx >= 0) ? DT2.D.list[DT2.nowIdx] : null;
+  function monthScore(Ws, Wb){
+    let score = 50;
+    const e1 = S_ELEM[Ws], e2 = B_ELEM[Wb];
+    if(e1 === A.yong || e2 === A.yong) score += 30;
+    else if(e1 === A.hui || e2 === A.hui) score += 15;
+    else if(e1 === A.de || e2 === A.de) score -= 20;
+    score += hapChungScore(Wb, S.dB, 14, 10, 16);      /* 일지(본인) 기준 */
+    score += hapChungScore(Wb, S.yB, 7, 5, 9);          /* 연지(태어난 해) 기준 */
+    if(curDaeun){
+      if(S_ELEM[curDaeun.s] === e1) score += 6;         /* 현재 대운과 같은 오행이면 가점 */
+      score += hapChungScore(Wb, curDaeun.b, 5, 3, 6);  /* 대운 지지와의 합충 */
+    }
+    return score;
+  }
+  function scoreToStar(sc){
+    if(sc >= 85) return 5;
+    if(sc >= 65) return 4;
+    if(sc >= 45) return 3;
+    if(sc >= 25) return 2;
+    return 1;
+  }
+
   let rows = "";
   for(let i=0; i<12; i++){
     const st = termMin(TYPE_YEAR, i);
@@ -1634,13 +1679,14 @@ else if(P){
     const mb = (i + 1) % 12;
     const W = wolun(TYPE_YEAR, mb);
     const ss = sipsin(S.dS, S_ELEM[W.s], W.s % 2 === 0);
-    const mlv = luckLevel(A, S_ELEM[W.s], B_ELEM[W.b]);
+    const mlv = luckLevel(A, S_ELEM[W.s], B_ELEM[W.b]);   /* 태그·해설문 선택용(기존 그대로) */
     const tag = mlv === 0 ? "<span class='tagY'>" + LBL.yongsin + "</span>" : (mlv === 1 ? "<span class='tagH'>" + LBL.huisin + "</span>" : "");
     const grp = SS_GROUP[ss];
     const startDt = new Date(Date.UTC(TYPE_YEAR, 0, 1) + st*60000);
     const mNum = startDt.getUTCMonth();                       /* 0~11 */
     const vIdx = (i + grp) % 3;                               /* 같은 십신이라도 달마다 다른 문장 */
-    const mStar = mlv === 0 ? 5 : (mlv === 1 ? 4 : (mlv === 2 ? 3 : 2));
+    const mScore = monthScore(W.s, W.b);                      /* 정밀 점수 (합충+대운 반영) */
+    const mStar = scoreToStar(mScore);
     const mCol = mStar >= 4 ? "#3FA57A" : (mStar === 3 ? "#8F887B" : "#C97A2B");
     rows += '<div class="age-row"><div class="ag">' + fmtMD(TYPE_YEAR, st) + '<br><span style="font-size:.78em;opacity:.75">~' + enLabel + '</span>'
           + '<br><span class="mstar" style="color:' + mCol + '">' + "★".repeat(mStar) + '<span class="gc-empty">' + "★".repeat(5-mStar) + '</span></span></div>'
