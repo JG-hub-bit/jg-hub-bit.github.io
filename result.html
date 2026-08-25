@@ -584,6 +584,8 @@ footer p{
 <script>
 /* ════════ 공용 ════════ */
 const LANG = (function(){
+  const qsLang = new URLSearchParams(location.search).get("lang");
+  if(qsLang === "kr" || qsLang === "en") return qsLang;
   const s = localStorage.getItem("kf_lang");
   if(s === "kr" || s === "en") return s;
   const ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "en"];
@@ -631,8 +633,24 @@ const type = new URLSearchParams(location.search).get("type") || localStorage.ge
     canon.setAttribute("href", canonUrl);
   }
 })();
-let P  = JSON.parse(localStorage.getItem("kf_p_main") || "null");
-let P2 = JSON.parse(localStorage.getItem("kf_p_sub") || "null");
+/* URL 파라미터 우선 (Cloudflare Worker/신규 input.html 흐름), 없으면 localStorage 폴백 (구버전 호환) */
+const _qs = new URLSearchParams(location.search);
+function personFromQS(suffix){
+  const bdate = _qs.get("bdate"+suffix);
+  if(!bdate) return null;
+  return {
+    name: _qs.get("name"+suffix) || "",
+    gender: _qs.get("gender"+suffix) || "M",
+    bdate: bdate,
+    btime: _qs.get("btime"+suffix) || "0",
+    etime: _qs.get("etime"+suffix) || "",
+    region: _qs.get("region"+suffix) || "seoul",
+  };
+}
+let P  = personFromQS("") || JSON.parse(localStorage.getItem("kf_p_main") || "null");
+let P2 = personFromQS("2") || JSON.parse(localStorage.getItem("kf_p_sub") || "null");
+const _dreamFromQS = _qs.get("dream");
+if(_dreamFromQS) localStorage.setItem("kf_dream", _dreamFromQS);
 /* 입력 정보가 없으면(신규 방문·검색엔진 크롤러 등) 예시 데이터로 실제 결과를 보여준다.
    빈 화면 대신 진짜 콘텐츠를 노출해 페이지 가치를 확보하기 위함. */
 const isSample = !P;

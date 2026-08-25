@@ -700,10 +700,15 @@ if(type === "today"){
 
 /* ══════════ 실행 / 초기화 ══════════ */
 function run(){
+  const qs = new URLSearchParams();
+  qs.set("type", type);
+  qs.set("lang", (localStorage.getItem("kf_lang") === "en") ? "en" : "kr");
+
   if(cfg.dream){
     const txt = document.getElementById("dreamText").value.trim();
     if(!txt){ alert(T.needDream); return; }
     localStorage.setItem("kf_dream", txt);
+    qs.set("dream", txt);
   }else{
     for(const p of cfg.persons){
       const bd = document.getElementById(p.key+"_bdate").value;
@@ -718,21 +723,34 @@ function run(){
         if(prov && REGIONS[prov] && REGIONS[prov].cities.length===1) return REGIONS[prov].cities[0].k;
         return "";
       };
-      localStorage.setItem("kf_p_"+p.key, JSON.stringify({
+      const pdata = {
         name:get(p.key+"_name"), gender:rad(p.key+"_gender"),
         bdate:bd, cal:rad(p.key+"_cal"),
         btime:get(p.key+"_btime"), etime:get(p.key+"_etime"), region:regionVal(p.key)
-      }));
+      };
+      localStorage.setItem("kf_p_"+p.key, JSON.stringify(pdata));
+      /* URL 파라미터로도 함께 전달 (Cloudflare Worker가 이걸 읽어 서버에서 계산함) */
+      const suffix = (p.key === "main") ? "" : "2";
+      qs.set("name"+suffix, pdata.name);
+      qs.set("gender"+suffix, pdata.gender);
+      qs.set("bdate"+suffix, pdata.bdate);
+      qs.set("btime"+suffix, pdata.btime);
+      qs.set("etime"+suffix, pdata.etime);
+      qs.set("region"+suffix, pdata.region);
     }
   }
   if(type === "today"){
     const td = document.getElementById("main_tdate");
     const rg = document.querySelector('input[name="main_trange"]:checked');
-    localStorage.setItem("kf_today_date", (td && td.value) ? td.value : "");
-    localStorage.setItem("kf_today_range", rg ? rg.value : "day");
+    const tdv = (td && td.value) ? td.value : "";
+    const rgv = rg ? rg.value : "day";
+    localStorage.setItem("kf_today_date", tdv);
+    localStorage.setItem("kf_today_range", rgv);
+    if(tdv) qs.set("todayDate", tdv);
+    qs.set("todayRange", rgv);
   }
   localStorage.setItem("kf_selected", type);
-  location.href = "result.html?type=" + type;   /* TEMP: AdSense 승인 전까지 게이트 우회. 승인 후 "ad.html?type="로 원복 */
+  location.href = "result.html?" + qs.toString();   /* TEMP: AdSense 승인 전까지 게이트 우회. 승인 후 "ad.html?"로 원복 */
 }
 function resetForm(){
   document.querySelectorAll("#formArea input[type=text], #formArea input[type=date], #formArea textarea").forEach(el=>el.value="");
