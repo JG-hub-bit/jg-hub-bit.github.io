@@ -689,6 +689,15 @@ footer p{
         <text x="32" y="41" text-anchor="middle" font-family="serif" font-size="22" fill="#2E6B5E">吉</text>
       </svg>
     </a>
+
+    <a class="menu-btn" href="daily.html" style="text-decoration:none;">
+      <span class="mtext"><span class="name" data-i18n="m10name">매일 운세 칼럼</span><span class="desc" data-i18n="m10desc">오늘의 기운, 매일 아침 업데이트</span></span>
+      <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="#E8A93D"/>
+        <circle cx="32" cy="32" r="24" fill="#F6F0E3"/>
+        <text x="32" y="41" text-anchor="middle" font-family="serif" font-size="22" fill="#8A4A34">日</text>
+      </svg>
+    </a>
   </div>
 
   <div class="zodiac-sec" id="zodiacSec"></div>
@@ -703,6 +712,12 @@ footer p{
   <div class="faq-sec" id="faqSec">
     <h2 class="faq-title" id="faqTitle"></h2>
     <div class="faq-list" id="faqList"></div>
+  </div>
+
+  <div style="margin:2rem 0 0; padding:1.4rem; background:#FFF6E4; border:1.3px solid var(--gold-line); border-radius:16px; text-align:center;">
+    <p style="font-family:'Gowun Batang',serif; font-size:1rem; color:var(--seokganju); margin-bottom:.5rem;">📮 오늘의 기운, 매일 아침 받아보세요</p>
+    <p style="font-size:.85rem; color:#6B6152; margin-bottom:1rem;">그날의 간지와 띠별 운세를 담은 짧은 칼럼을 매일 무료로 보내드립니다.</p>
+    <a href="daily.html" style="display:inline-block; background:linear-gradient(135deg,var(--jinsa),var(--seokganju)); color:#FFF7EA; font-family:'Gowun Batang',serif; font-weight:700; font-size:.9rem; padding:.7rem 1.4rem; border-radius:12px; text-decoration:none;">오늘의 칼럼 보고 구독하기 →</a>
   </div>
 
   <div style="margin:2rem 0 1rem; padding-top:1.4rem; border-top:1px dashed var(--gold-line); text-align:center;">
@@ -753,6 +768,7 @@ const I18N = {
     m7name:"한국이름 짓기", m7desc:"외국인을 위한 정통 작명",
     m8name:"작명·개명 상담", m8desc:"수리성명학으로 짓는 이름",
     m9name:"손없는 날", m9desc:"이사·개업·결혼 길일 확인",
+    m10name:"매일 운세 칼럼", m10desc:"오늘의 기운, 매일 아침 업데이트",
     footer:"K-Fortune Story · 한국 전통 운세 이야기",
     fA:"서비스 소개", fP:"개인정보처리방침", fT:"이용약관",
     toastSoon:"2단계에서 입력 화면이 연결됩니다 🙂",
@@ -790,6 +806,7 @@ const I18N = {
     m7name:"Get a Korean Name", m7desc:"Authentic naming for foreigners",
     m8name:"Naming Consultation", m8desc:"Traditional Korean naming (KR)",
     m9name:"Lucky Moving Days", m9desc:"Auspicious dates calendar (KR)",
+    m10name:"Daily Column", m10desc:"Fresh fortune insight every morning (KR)",
     footer:"K-Fortune Story · Korean Traditional Fortune Telling",
     fA:"About", fP:"Privacy Policy", fT:"Terms",
     toastSoon:"Input screen coming in Step 2 🙂",
