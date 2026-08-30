@@ -750,7 +750,7 @@ function run(){
     qs.set("todayRange", rgv);
   }
   localStorage.setItem("kf_selected", type);
-  location.href = "result.html?" + qs.toString();   /* TEMP: AdSense 승인 전까지 게이트 우회. 승인 후 "ad.html?"로 원복 */
+  showWaitScreenThenGo("result.html?" + qs.toString(), 10);   /* TEMP: AdSense 승인 전까지 게이트 우회. 승인 후 "ad.html?"로 원복 */
 }
 function resetForm(){
   document.querySelectorAll("#formArea input[type=text], #formArea input[type=date], #formArea textarea").forEach(el=>el.value="");
@@ -779,6 +779,52 @@ document.getElementById("btnReset").addEventListener("click", resetForm);
 <script>
 if("serviceWorker" in navigator){
   window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
+</script>
+
+<!-- 결과 이동 전 대기 화면 (광고 노출용) -->
+<div id="waitModal" style="display:none; position:fixed; inset:0; background:rgba(43,38,32,.92); z-index:9999; align-items:center; justify-content:center; flex-direction:column; padding:1.5rem;">
+  <div style="background:#FFFDF7; border:1.5px solid #C9A85C; border-radius:20px; padding:1.8rem 1.5rem; max-width:360px; width:100%; text-align:center;">
+    <p id="waitTitle" style="font-family:'Gowun Batang',serif; font-size:1.05rem; color:#8A4A34; margin-bottom:.4rem;"></p>
+    <p id="waitSub" style="font-size:.82rem; color:#8A7A5E; margin-bottom:1.1rem;"></p>
+    <div style="min-height:250px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem;">
+      <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-IOTGVNMt8Z3Y4HWp" data-ad-width="300" data-ad-height="250"></ins>
+    </div>
+    <div style="background:#EEE6D6; border-radius:8px; height:8px; overflow:hidden; margin-bottom:.6rem;">
+      <div id="waitBar" style="background:linear-gradient(135deg,#C23B22,#8A4A34); height:100%; width:0%; transition:width 1s linear;"></div>
+    </div>
+    <p id="waitCount" style="font-size:.8rem; color:#8A7A5E;"></p>
+  </div>
+</div>
+
+<script src="//t1.kakaocdn.net/kas/static/ba.min.js" async></script>
+<script>
+const WAIT_LABELS = {
+  kr: { title:"운세를 계산하고 있어요", sub:"잠시만 기다려주시면 결과로 이동합니다", countFmt: n => n + "초 후 결과 확인" },
+  en: { title:"Calculating your fortune", sub:"You'll be redirected in a moment", countFmt: n => "Redirecting in " + n + "s" },
+};
+function showWaitScreenThenGo(targetUrl, seconds){
+  seconds = seconds || 10;
+  const lang = (localStorage.getItem("kf_lang") === "en") ? "en" : "kr";
+  const L = WAIT_LABELS[lang];
+  const modal = document.getElementById("waitModal");
+  document.getElementById("waitTitle").textContent = L.title;
+  document.getElementById("waitSub").textContent = L.sub;
+  const bar = document.getElementById("waitBar");
+  const countEl = document.getElementById("waitCount");
+  modal.style.display = "flex";
+  let remain = seconds;
+  countEl.textContent = L.countFmt(remain);
+  bar.style.width = "3%";
+  setTimeout(() => { bar.style.width = "100%"; }, 50); /* 트랜지션 트리거 */
+  const timer = setInterval(() => {
+    remain -= 1;
+    countEl.textContent = L.countFmt(Math.max(remain,0));
+    if(remain <= 0){
+      clearInterval(timer);
+      location.href = targetUrl;
+    }
+  }, 1000);
 }
 </script>
 </body>
