@@ -6,7 +6,6 @@
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0D0C11">
 <title>K-Fortune Story | 정보 입력</title>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2795871274635118" crossorigin="anonymous"></script>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -752,7 +751,7 @@ function run(){
     qs.set("todayRange", rgv);
   }
   localStorage.setItem("kf_selected", type);
-  showWaitScreenThenGo("result.html?" + qs.toString(), 10);   /* TEMP: AdSense 승인 전까지 게이트 우회. 승인 후 "ad.html?"로 원복 */
+  showWaitScreenThenGo("result.html?" + qs.toString(), 10);   /* 대기 화면(10초) 후 바로 결과로. AdSense 미사용(2026-10-03 결정)이라 ad.html 광고 게이트는 쓰지 않음 */
 }
 function resetForm(){
   document.querySelectorAll("#formArea input[type=text], #formArea input[type=date], #formArea textarea").forEach(el=>el.value="");
