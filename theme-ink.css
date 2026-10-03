@@ -158,3 +158,21 @@ main > .subtitle{max-width:34ch; margin-left:auto; margin-right:auto}
 .ohrow .v{color:var(--ink-mute) !important}
 /* 공유 아이콘: 브랜드 색이 보이도록 밝은 원 */
 .sb-icons a, .sb-icons button{background:var(--ink-fg) !important; border-color:transparent !important}
+
+/* ── 작명·한국이름·매일칼럼 페이지 부품 ── */
+.topband{height:clamp(90px,18vw,150px) !important; position:relative; overflow:hidden; background:transparent !important;
+  margin-bottom:calc(-1 * clamp(30px,6vw,60px))}
+.topband::before{content:""; position:absolute; inset:-60% -20% -10% -20%; filter:blur(56px); opacity:.55;
+  background:radial-gradient(closest-side at 18% 55%, var(--ob-jade), transparent),radial-gradient(closest-side at 46% 35%, var(--ob-red), transparent),
+  radial-gradient(closest-side at 74% 55%, var(--ob-gold), transparent),radial-gradient(closest-side at 60% 85%, var(--ob-blue), transparent)}
+.homelink{border-radius:999px !important; padding:.45rem 1rem !important; font-family:var(--f-body) !important; font-size:.88rem !important; position:relative; z-index:1}
+.tabs{background:rgba(255,255,255,.05) !important}
+.tab-btn{color:var(--ink-mute) !important; font-family:var(--f-body) !important}
+.tab-btn.active{background:rgba(255,255,255,.1) !important; color:var(--ink-fg) !important}
+.vibe-opt, .hj-opt{background:rgba(255,255,255,.04) !important; border:1px solid var(--ink-line) !important; color:var(--ink-fg) !important}
+.vibe-opt.sel, .hj-opt.sel{background:rgba(238,106,79,.16) !important; border-color:var(--jinsa) !important; box-shadow:none !important}
+.sub-card{background:linear-gradient(135deg, rgba(232,181,77,.12), rgba(255,255,255,.03)) !important; border:1px solid var(--ink-line) !important}
+.sub-card h3, .sub-card .t{color:var(--ink-fg) !important; font-family:var(--f-display) !important; font-weight:400 !important}
+.sub-card button, .btn-gen, .gen-btn{background:var(--ink-fg) !important; color:var(--ink-bg) !important; font-family:var(--f-body) !important; font-weight:600 !important}
+.cc-title, .card h2, .result-card h2, .info-card h2, .month-title, .term-word{color:var(--ink-fg) !important; font-family:var(--f-display) !important; font-weight:400 !important}
+.rmeaning b{color:var(--ob-gold) !important}
