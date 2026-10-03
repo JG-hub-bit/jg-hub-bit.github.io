@@ -1,5 +1,5 @@
 /* K-Fortune Story — Service Worker */
-const VER = "kf-v1";
+const VER = "kf-v2";   /* 2026-10-03 Ink Night 개편: 옛 캐시 비우기 */
 const ASSETS = ["./icon-192.png", "./icon-512.png", "./icon-180.png", "./icon-32.png", "./manifest.json"];
 
 self.addEventListener("install", e => {
@@ -21,9 +21,10 @@ self.addEventListener("fetch", e => {
                 .catch(() => caches.match(req).then(r => r || caches.match("./index.html")))
     );
   }else{
-    /* 정적 자원: 캐시 우선 */
-    e.respondWith(caches.match(req).then(r => r || fetch(req).then(res => {
-      const c = res.clone(); caches.open(VER).then(x => x.put(req, c)); return res;
+    /* 정적 자원: 캐시를 먼저 보여주고 뒤에서 새로 받아 갱신 (테마 CSS를 고쳐도 다음 방문엔 반영) */
+    e.respondWith(caches.open(VER).then(cache => cache.match(req).then(hit => {
+      const net = fetch(req).then(res => { if(res.ok) cache.put(req, res.clone()); return res; }).catch(() => hit);
+      return hit || net;
     })));
   }
 });
