@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#F6F0E3">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0D0C11">
 <title>손없는 날 캘린더 | 이사·개업·결혼 길일 확인 | K-Fortune Story</title>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2795871274635118" crossorigin="anonymous"></script>
 <link rel="manifest" href="manifest.json">
@@ -32,14 +32,14 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{font-size:16px}
 body{background:var(--hanji); color:var(--meok); font-family:'Noto Sans KR',sans-serif; line-height:1.6;}
-@media (prefers-color-scheme: dark){ body{background:#1A1712; color:#EDE6D6;} }
+@media all{ body{background:#1A1712; color:#EDE6D6;} }
 .topband{background:var(--noeurok); height:10px;}
 header{padding:2.2rem 1.4rem 1.2rem; text-align:center; max-width:640px; margin:0 auto;}
 .homelink{display:inline-block; margin-bottom:1rem; font-family:'Gowun Batang',serif; font-size:.95rem; color:var(--seokganju); text-decoration:none; border-bottom:1px solid var(--gold-line); padding-bottom:2px;}
 .eyebrow{font-size:.82rem; letter-spacing:.05em; color:var(--seokganju); margin-bottom:.5rem;}
 h1{font-family:'Song Myung',serif; font-size:clamp(1.5rem,6vw,2.1rem); font-weight:400; margin-bottom:.6rem;}
 .subtitle{font-size:.9rem; color:#5A5245; max-width:480px; margin:0 auto;}
-@media (prefers-color-scheme: dark){ .subtitle{color:#C9BFA9;} }
+@media all{ .subtitle{color:#C9BFA9;} }
 main{max-width:640px; margin:0 auto; padding:1rem 1.2rem 3rem;}
 
 .legend{display:flex; gap:1.2rem; justify-content:center; margin-bottom:1.4rem; font-size:.78rem; flex-wrap:wrap;}
@@ -50,24 +50,24 @@ main{max-width:640px; margin:0 auto; padding:1rem 1.2rem 3rem;}
 
 .month-block{margin-bottom:1.8rem;}
 .month-title{font-family:'Gowun Batang',serif; font-size:1.05rem; color:var(--seokganju); margin-bottom:.7rem; padding-bottom:.4rem; border-bottom:1.5px solid var(--gold-line);}
-@media (prefers-color-scheme: dark){ .month-title{color:#D8A374;} }
+@media all{ .month-title{color:#D8A374;} }
 .day-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:.4rem;}
 .day-cell{aspect-ratio:1; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:.72rem; border:1.3px solid transparent; padding:.2rem;}
 .day-cell .dnum{font-weight:700; font-size:.85rem;}
 .day-cell.free{background:rgba(46,107,94,.14); border-color:var(--noeurok);}
-@media (prefers-color-scheme: dark){ .day-cell.free{background:rgba(46,107,94,.3);} }
+@media all{ .day-cell.free{background:rgba(46,107,94,.3);} }
 .day-cell.free .dnum{color:var(--noeurok-deep);}
-@media (prefers-color-scheme: dark){ .day-cell.free .dnum{color:#8FD9C4;} }
+@media all{ .day-cell.free .dnum{color:#8FD9C4;} }
 .day-cell .dir{font-size:.62rem; color:#8A7A5E; margin-top:1px;}
 .day-cell.today{outline:2px solid var(--jinsa); outline-offset:1px;}
 .wk-head{font-size:.68rem; text-align:center; color:#8A7A5E; font-weight:700; padding-bottom:.2rem;}
 
 .info-card{background:#FFFDF7; border:1.3px solid var(--gold-line); border-radius:16px; padding:1.3rem; margin-bottom:1.6rem;}
-@media (prefers-color-scheme: dark){ .info-card{background:#241F1A; border-color:#6E5F3E;} }
+@media all{ .info-card{background:#241F1A; border-color:#6E5F3E;} }
 .info-card h2{font-family:'Gowun Batang',serif; font-size:1rem; color:var(--seokganju); margin-bottom:.6rem;}
-@media (prefers-color-scheme: dark){ .info-card h2{color:#D8A374;} }
+@media all{ .info-card h2{color:#D8A374;} }
 .info-card p{font-size:.85rem; color:#5A5245; margin-bottom:.5rem;}
-@media (prefers-color-scheme: dark){ .info-card p{color:#C9BFA9;} }
+@media all{ .info-card p{color:#C9BFA9;} }
 
 .next-free{background:linear-gradient(135deg,var(--jinsa),var(--seokganju)); color:#FFF7EA; border-radius:16px; padding:1.3rem; text-align:center; margin-bottom:1.6rem;}
 .next-free .lbl{font-size:.8rem; opacity:.9; margin-bottom:.3rem;}
@@ -79,6 +79,8 @@ main{max-width:640px; margin:0 auto; padding:1rem 1.2rem 3rem;}
 footer{text-align:center; padding:1.4rem; font-size:.78rem; color:#8A7A5E;}
 footer a{color:#8A7A5E;}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme-ink.css">
 </head>
 <body>
 <div class="topband"></div>

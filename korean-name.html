@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#F6F0E3">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0D0C11">
 <title>Get Your Korean Name | K-Fortune Story</title>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2795871274635118" crossorigin="anonymous"></script>
 <link rel="manifest" href="manifest.json">
@@ -33,7 +33,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{font-size:16px}
 body{background:var(--hanji); color:var(--meok); font-family:'Noto Sans KR',sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased;}
-@media (prefers-color-scheme: dark){
+@media all{
   body{background:#1A1712; color:#EDE6D6;}
 }
 .topband{background:var(--noeurok); height:10px;}
@@ -43,25 +43,25 @@ header{padding:2.2rem 1.4rem 1.4rem; text-align:center; max-width:640px; margin:
 h1{font-family:'Song Myung',serif; font-size:clamp(1.6rem,6vw,2.3rem); font-weight:400; color:var(--meok); margin-bottom:.7rem;}
 h1 .accent{color:var(--jinsa);}
 .subtitle{font-family:'Noto Sans KR',sans-serif; font-size:.95rem; color:#5A5245; max-width:480px; margin:0 auto;}
-@media (prefers-color-scheme: dark){
+@media all{
   .subtitle{color:#C9BFA9;}
   h1{color:#EDE6D6;}
 }
 main{max-width:640px; margin:0 auto; padding:1rem 1.4rem 3rem;}
 
 .card{background:#FFFDF7; border:1.3px solid var(--gold-line); border-radius:16px; padding:1.4rem; margin-bottom:1.3rem;}
-@media (prefers-color-scheme: dark){ .card{background:#241F1A; border-color:#6E5F3E;} }
+@media all{ .card{background:#241F1A; border-color:#6E5F3E;} }
 .card h2{font-family:'Gowun Batang',serif; font-size:1.05rem; color:var(--seokganju); margin-bottom:.9rem;}
-@media (prefers-color-scheme: dark){ .card h2{color:#D8A374;} }
+@media all{ .card h2{color:#D8A374;} }
 
 label{display:block; font-size:.85rem; font-weight:700; color:var(--meok); margin-bottom:.4rem;}
-@media (prefers-color-scheme: dark){ label{color:#EDE6D6;} }
+@media all{ label{color:#EDE6D6;} }
 select, input[type=text]{width:100%; padding:.7rem .85rem; border:1.3px solid var(--gold-line); border-radius:10px; font-size:.95rem; font-family:'Noto Sans KR',sans-serif; background:#FFFDF7; color:var(--meok); margin-bottom:1rem;}
-@media (prefers-color-scheme: dark){ select,input[type=text]{background:#1A1712; color:#EDE6D6; border-color:#6E5F3E;} }
+@media all{ select,input[type=text]{background:#1A1712; color:#EDE6D6; border-color:#6E5F3E;} }
 
 .vibe-grid{display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin-bottom:1rem;}
 .vibe-opt{border:1.5px solid var(--gold-line); border-radius:12px; padding:.75rem .6rem; text-align:center; cursor:pointer; transition:all .15s; background:#FFFDF7;}
-@media (prefers-color-scheme: dark){ .vibe-opt{background:#1A1712;} }
+@media all{ .vibe-opt{background:#1A1712;} }
 .vibe-opt.sel{border-color:var(--jinsa); background:rgba(194,59,34,.08); box-shadow:0 0 0 1.5px var(--jinsa) inset;}
 .vibe-opt .ic{font-size:1.4rem; display:block; margin-bottom:.3rem;}
 .vibe-opt .lbl{font-size:.78rem; font-weight:700; display:block;}
@@ -71,18 +71,18 @@ select, input[type=text]{width:100%; padding:.7rem .85rem; border:1.3px solid va
 .gen-btn:disabled{opacity:.55;}
 
 .result-card{background:#FFFDF7; border:1.5px solid var(--gold-line); border-radius:16px; padding:1.3rem; margin-bottom:1rem; position:relative;}
-@media (prefers-color-scheme: dark){ .result-card{background:#241F1A; border-color:#6E5F3E;} }
+@media all{ .result-card{background:#241F1A; border-color:#6E5F3E;} }
 .rank-badge{position:absolute; top:-10px; left:16px; background:var(--hwang); color:#3A2E12; font-size:.72rem; font-weight:700; padding:.2rem .6rem; border-radius:8px;}
 .rname-hangul{font-family:'Song Myung',serif; font-size:1.7rem; color:var(--jinsa); margin:.5rem 0 .1rem;}
 .rname-roman{font-family:'Noto Sans KR',sans-serif; font-size:1rem; color:var(--meok); font-weight:700;}
-@media (prefers-color-scheme: dark){ .rname-roman{color:#EDE6D6;} }
+@media all{ .rname-roman{color:#EDE6D6;} }
 .rname-hanja{font-family:serif; font-size:1rem; color:#8A7A5E; margin-left:.4rem;}
 .rmeaning{font-size:.85rem; color:#5A5245; margin-top:.6rem; line-height:1.55;}
-@media (prefers-color-scheme: dark){ .rmeaning{color:#C9BFA9;} }
+@media all{ .rmeaning{color:#C9BFA9;} }
 .rmeaning b{color:var(--seokganju);}
-@media (prefers-color-scheme: dark){ .rmeaning b{color:#D8A374;} }
+@media all{ .rmeaning b{color:#D8A374;} }
 .rgrade{display:inline-flex; align-items:center; gap:.3rem; margin-top:.7rem; font-size:.78rem; background:rgba(46,107,94,.1); color:var(--noeurok-deep); padding:.35rem .7rem; border-radius:20px; font-weight:700;}
-@media (prefers-color-scheme: dark){ .rgrade{background:rgba(46,107,94,.25); color:#8FD9C4;} }
+@media all{ .rgrade{background:rgba(46,107,94,.25); color:#8FD9C4;} }
 
 .ad-slot{margin:1.5rem 0; min-height:100px; display:flex; align-items:center; justify-content:center;}
 .intro-note{font-size:.82rem; color:#8A7A5E; text-align:center; margin:1rem 0 1.6rem; line-height:1.6;}
@@ -91,6 +91,8 @@ footer a{color:#8A7A5E;}
 .spinner{display:inline-block; width:16px; height:16px; border:2px solid rgba(255,255,255,.4); border-top-color:#FFF7EA; border-radius:50%; animation:spin .7s linear infinite; margin-right:.4rem; vertical-align:-3px;}
 @keyframes spin{to{transform:rotate(360deg);}}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme-ink.css">
 </head>
 <body>
 <div class="topband"></div>

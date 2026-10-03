@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#F6F0E3">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0D0C11">
 <meta name="naver-site-verification" content="fa790be521d04dc3b4dbfdb968d3635ea8e6cd8e" />
 <title>K-Fortune Story | 사주·토정비결·2026 신년운세·오늘의 운세 무료보기</title>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2795871274635118" crossorigin="anonymous"></script>
@@ -355,7 +355,7 @@ footer p{
 
 <style>
 /* ══ 다크모드 대응: 강제/자동 다크모드 기기에서 자동 적용 ══ */
-@media (prefers-color-scheme: dark){
+@media all{
   :root{ color-scheme:light dark; }
   body{ background:#221D16 !important; color:#EFE6D0; }
   h1, .menu-btn .name, .sum-card .line{ color:#F0E7D4 !important; }
@@ -426,6 +426,8 @@ footer p{
   "inLanguage":["ko","en"]
 }
 </script>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme-ink.css">
 </head>
 <body>
 
@@ -563,141 +565,31 @@ footer p{
     <span class="sb-div"></span>
     <div class="sb-icons" id="sbIcons"></div>
   </div>
-  <p class="eyebrow" data-i18n="eyebrow">사주 · 토정비결 · 오늘의 운세</p>
-  <h1><span data-i18n="title1">운명의 문이 </span><span class="accent" data-i18n="title2">열립니다</span></h1>
+  <p class="eyebrow" data-i18n="eyebrow">한국식 운세, 쉽게 풀다</p>
+  <h1><span data-i18n="title1">나의 탄생 코드, </span><span class="accent" data-i18n="title2">한국식으로.</span></h1>
   <p class="subtitle" data-i18n="subtitle">
-    500년을 이어온 한국 전통 운세의 지혜.<br>
-    토정비결부터 꿈해몽까지, 당신의 이야기를 풀어드립니다.
+    사주는 2,000년을 이어온 한국의 탄생 차트예요.<br>별자리보다 훨씬 나다운 이야기를 무료로 확인하세요.
   </p>
 
 
   <div class="today-bar" id="todayBar"></div>
   <div class="myday" id="myDay"></div>
 
-  <h2 class="menu-title" data-i18n="menuTitle">보고 싶은 운세를 선택하세요</h2>
+  <h2 class="menu-title" data-i18n="menuTitle">무엇이 궁금하세요?</h2>
 
   <div class="menu-grid">
-    <button class="menu-btn menu-btn--featured" onclick="goFortune('newyear')">
-      <span class="mbadge" data-i18n="badgePopular">인기</span>
-      <span class="mtext"><span class="name" data-i18n="m2">신년운세</span><span class="desc" data-i18n="m2d">올해의 전체 흐름</span></span>
-      <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#C23B22"/>
-        <circle cx="32" cy="32" r="24" fill="#F6F0E3"/>
-        <path d="M32 15 a17 17 0 0 1 0 34 a10 17 0 0 0 0 -34Z" fill="#C23B22"/>
-        <path d="M32 15 a17 17 0 0 0 0 34 a10 17 0 0 1 0 -34Z" fill="#2C4E8A"/>
-      </svg>
-    </button>
-
-    <button class="menu-btn menu-btn--featured" onclick="goFortune('today')">
-      <span class="mbadge" data-i18n="badgeDaily">매일 업데이트</span>
-      <span class="mtext"><span class="name" data-i18n="m3">오늘의 운세</span><span class="desc" data-i18n="m3d">일진으로 보는 하루</span></span>
-      <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#E8A93D"/>
-        <circle cx="32" cy="32" r="24" fill="#F6F0E3"/>
-        <circle cx="32" cy="32" r="10" fill="#E8A93D"/>
-        <g stroke="#C23B22" stroke-width="3" stroke-linecap="round">
-          <line x1="32" y1="14" x2="32" y2="20"/><line x1="32" y1="44" x2="32" y2="50"/>
-          <line x1="14" y1="32" x2="20" y2="32"/><line x1="44" y1="32" x2="50" y2="32"/>
-        </g>
-      </svg>
-    </button>
-
-    <button class="menu-btn" onclick="goFortune('saju')">
-      <span class="mtext"><span class="name" data-i18n="m4">사주팔자</span><span class="desc" data-i18n="m4d">타고난 운명의 뼈대</span></span>
-      <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#2E6B5E"/>
-        <rect x="14" y="14" width="36" height="36" rx="4" fill="#F6F0E3"/>
-        <g stroke="#2E6B5E" stroke-width="2.4">
-          <line x1="32" y1="16" x2="32" y2="48"/>
-          <line x1="16" y1="32" x2="48" y2="32"/>
-        </g>
-        <g fill="#C23B22">
-          <circle cx="24" cy="24" r="4"/><circle cx="40" cy="40" r="4"/>
-        </g>
-        <g fill="#2C4E8A">
-          <circle cx="40" cy="24" r="4"/><circle cx="24" cy="40" r="4"/>
-        </g>
-      </svg>
-    </button>
-
-    <button class="menu-btn" onclick="goFortune('tojeong')">
-      <span class="mtext"><span class="name" data-i18n="m1">토정비결</span><span class="desc" data-i18n="m1d">한 해의 길흉화복</span></span>
-      <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#2C4E8A"/>
-        <circle cx="32" cy="32" r="24" fill="#F6F0E3"/>
-        <g stroke="#2B2620" stroke-width="3.4" stroke-linecap="round">
-          <line x1="20" y1="24" x2="44" y2="24"/>
-          <line x1="20" y1="32" x2="29" y2="32"/><line x1="35" y1="32" x2="44" y2="32"/>
-          <line x1="20" y1="40" x2="44" y2="40"/>
-        </g>
-      </svg>
-    </button>
-
-    <button class="menu-btn" onclick="goFortune('nextyear')">
-      <span class="mtext"><span class="name" data-i18n="m7">2027년 운세</span><span class="desc" data-i18n="m7d">내년의 기운을 미리 준비하기</span></span>
-      <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#7A4FA0"/>
-        <circle cx="32" cy="32" r="24" fill="#F6F0E3"/>
-        <path d="M32 17 L36 28 L47 28 L38 35 L42 46 L32 39 L22 46 L26 35 L17 28 L28 28 Z" fill="#7A4FA0"/>
-      </svg>
-    </button>
-
-    <button class="menu-btn" onclick="goFortune('gunghap')">
-      <span class="mtext"><span class="name" data-i18n="m5">궁합</span><span class="desc" data-i18n="m5d">두 사람의 인연</span></span>
-      <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#B8506B"/>
-        <circle cx="32" cy="32" r="24" fill="#F6F0E3"/>
-        <circle cx="25" cy="32" r="10" fill="none" stroke="#C23B22" stroke-width="3.4"/>
-        <circle cx="39" cy="32" r="10" fill="none" stroke="#2C4E8A" stroke-width="3.4"/>
-      </svg>
-    </button>
-
-    <button class="menu-btn" onclick="goFortune('dream')">
-      <span class="mtext"><span class="name" data-i18n="m6">꿈해몽</span><span class="desc" data-i18n="m6d">꿈이 전하는 메시지</span></span>
-      <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#3E3A6B"/>
-        <circle cx="32" cy="32" r="24" fill="#F6F0E3"/>
-        <path d="M38 20 a13 13 0 1 0 6 24 a12 12 0 0 1 -6 -24Z" fill="#E8A93D"/>
-        <circle cx="42" cy="24" r="2.2" fill="#3E3A6B"/>
-        <circle cx="47" cy="30" r="1.6" fill="#3E3A6B"/>
-      </svg>
-    </button>
-
-    <a class="menu-btn" href="korean-name.html" style="text-decoration:none;">
-      <span class="mtext"><span class="name" data-i18n="m7name">한국이름 짓기</span><span class="desc" data-i18n="m7desc">외국인을 위한 정통 작명</span></span>
-      <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#8A4A34"/>
-        <circle cx="32" cy="32" r="24" fill="#F6F0E3"/>
-        <text x="32" y="41" text-anchor="middle" font-family="serif" font-size="26" fill="#C23B22">名</text>
-      </svg>
-    </a>
-
-    <a class="menu-btn" href="jakmyeong.html" style="text-decoration:none;">
-      <span class="mtext"><span class="name" data-i18n="m8name">작명·개명 상담</span><span class="desc" data-i18n="m8desc">수리성명학으로 짓는 이름</span></span>
-      <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#2E6B5E"/>
-        <circle cx="32" cy="32" r="24" fill="#F6F0E3"/>
-        <text x="32" y="41" text-anchor="middle" font-family="serif" font-size="24" fill="#8A4A34">姓</text>
-      </svg>
-    </a>
-
-    <a class="menu-btn" href="taekil.html" style="text-decoration:none;">
-      <span class="mtext"><span class="name" data-i18n="m9name">손없는 날</span><span class="desc" data-i18n="m9desc">이사·개업·결혼 길일 확인</span></span>
-      <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#C23B22"/>
-        <circle cx="32" cy="32" r="24" fill="#F6F0E3"/>
-        <text x="32" y="41" text-anchor="middle" font-family="serif" font-size="22" fill="#2E6B5E">吉</text>
-      </svg>
-    </a>
-
-    <a class="menu-btn" href="daily.html" style="text-decoration:none;">
-      <span class="mtext"><span class="name" data-i18n="m10name">매일 운세 칼럼</span><span class="desc" data-i18n="m10desc">오늘의 기운, 매일 아침 업데이트</span></span>
-      <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#E8A93D"/>
-        <circle cx="32" cy="32" r="24" fill="#F6F0E3"/>
-        <text x="32" y="41" text-anchor="middle" font-family="serif" font-size="22" fill="#8A4A34">日</text>
-      </svg>
-    </a>
+    <button class="menu-btn menu-btn--hero" onclick="goFortune('saju')" style="--dot:var(--ob-blue)"><span class="mbadge" data-i18n="badgeNew">NEW</span><span class="mtext"><span class="name" data-i18n="m4">내 사주 카드</span><span class="desc" data-i18n="m4d">나는 푸른 호랑이일까, 붉은 말일까? 한국식 탄생 캐릭터 찾기</span></span></button>
+    <button class="menu-btn" onclick="goFortune('today')" style="--dot:var(--ob-gold)"><span class="mbadge" data-i18n="badgeDaily">매일</span><span class="mtext"><span class="name" data-i18n="m3">오늘의 운세</span><span class="desc" data-i18n="m3d">오늘 해볼 것과 행운 컬러</span></span></button>
+    <button class="menu-btn" onclick="goFortune('gunghap')" style="--dot:var(--ob-red)"><span class="mtext"><span class="name" data-i18n="m5">궁합</span><span class="desc" data-i18n="m5d">나 × 썸, 친구, 최애</span></span></button>
+    <button class="menu-btn" onclick="goFortune('newyear')" style="--dot:var(--ob-pink)"><span class="mtext"><span class="name" data-i18n="m2">2026년 운세</span><span class="desc" data-i18n="m2d">올해 나의 흐름과 달마다 테마</span></span></button>
+    <a class="menu-btn" href="korean-name.html"  style="--dot:var(--ob-jade)"><span class="mtext"><span class="name" data-i18n="m7name">한국 이름 짓기</span><span class="desc" data-i18n="m7desc">뜻이 담긴 나만의 한국 이름</span></span></a>
+    <button class="menu-btn" onclick="goFortune('dream')" style="--dot:#8B7BD8"><span class="mtext"><span class="name" data-i18n="m6">꿈해몽</span><span class="desc" data-i18n="m6d">돼지꿈 꿨어요? 축하해요</span></span></button>
+    <a class="menu-btn" href="taekil.html"  style="--dot:var(--ob-blue)"><span class="mtext"><span class="name" data-i18n="m9name">좋은 날 고르기</span><span class="desc" data-i18n="m9desc">이사하고 시작하기 좋은 날</span></span></a>
+    <h3 class="menu-sub" data-i18n="menuClassic">클래식 (한국어)</h3>
+    <button class="menu-btn menu-btn--classic" onclick="goFortune('tojeong')" style="--dot:var(--ink-mute)"><span class="mtext"><span class="name" data-i18n="m1">토정비결</span><span class="desc" data-i18n="m1d">한 해를 시 한 줄로 보는 전통 비결</span></span></button>
+    <button class="menu-btn menu-btn--classic" onclick="goFortune('nextyear')" style="--dot:var(--ink-mute)"><span class="mtext"><span class="name" data-i18n="m7">2027년 미리보기</span><span class="desc" data-i18n="m7d">내년을 앞서 준비하기</span></span></button>
+    <a class="menu-btn menu-btn--classic" href="jakmyeong.html"  style="--dot:var(--ink-mute)"><span class="mtext"><span class="name" data-i18n="m8name">작명·개명</span><span class="desc" data-i18n="m8desc">수리성명학으로 짓는 이름</span></span></a>
+    <a class="menu-btn menu-btn--classic" href="daily.html"  style="--dot:var(--ink-mute)"><span class="mtext"><span class="name" data-i18n="m10name">매일 운세 칼럼</span><span class="desc" data-i18n="m10desc">매일 아침 업데이트</span></span></a>
   </div>
 
   <div class="zodiac-sec" id="zodiacSec"></div>
@@ -714,16 +606,15 @@ footer p{
     <div class="faq-list" id="faqList"></div>
   </div>
 
-  <div style="margin:2rem 0 0; padding:1.4rem; background:#FFF6E4; border:1.3px solid var(--gold-line); border-radius:16px; text-align:center;">
-    <p style="font-family:'Gowun Batang',serif; font-size:1rem; color:var(--seokganju); margin-bottom:.5rem;">📮 오늘의 기운, 매일 아침 받아보세요</p>
-    <p style="font-size:.85rem; color:#6B6152; margin-bottom:1rem;">그날의 간지와 띠별 운세를 담은 짧은 칼럼을 매일 무료로 보내드립니다.</p>
-    <a href="daily.html" style="display:inline-block; background:linear-gradient(135deg,var(--jinsa),var(--seokganju)); color:#FFF7EA; font-family:'Gowun Batang',serif; font-weight:700; font-size:.9rem; padding:.7rem 1.4rem; border-radius:12px; text-decoration:none;">오늘의 칼럼 보고 구독하기 →</a>
+  <div class="ink-box">
+    <p class="t">오늘의 기운, 매일 아침 받아보세요</p>
+    <p class="s">그날의 기운과 띠별 운세를 담은 짧은 칼럼을 매일 무료로 보내드려요.</p>
+    <a href="daily.html">오늘의 칼럼 보고 구독하기 →</a>
   </div>
-
-  <div style="margin:2rem 0 1rem; padding-top:1.4rem; border-top:1px dashed var(--gold-line); text-align:center;">
-    <p style="font-family:'Gowun Batang',serif; font-size:.98rem; color:var(--seokganju); margin-bottom:.6rem;">더 읽어보기</p>
-    <p style="font-size:.85rem; color:#8A7A5E; margin-bottom:1rem;">사주·토정비결·오행·성명학의 역사가 궁금하다면</p>
-    <a href="column.html" style="display:inline-block; background:var(--jinsa); color:#FFF7EA; font-family:'Gowun Batang',serif; font-weight:700; font-size:.9rem; padding:.7rem 1.4rem; border-radius:12px; text-decoration:none;">칼럼 읽으러 가기 →</a>
+  <div class="ink-box">
+    <p class="t">더 읽어보기</p>
+    <p class="s">사주, 토정비결, 오행, 성명학의 역사가 궁금하다면</p>
+    <a href="column.html">칼럼 읽으러 가기 →</a>
   </div>
 </main>
 
@@ -749,26 +640,26 @@ footer p{
 const YR = new Date().getFullYear();
 const I18N = {
   kr: {
-    eyebrow: "사주 · 토정비결 · 오늘의 운세",
-    badgePopular:"인기", badgeDaily:"매일 업데이트",
+    eyebrow: "한국식 운세, 쉽게 풀다",
+    badgeNew:"NEW", menuClassic:"클래식 (한국어)", badgePopular:"인기", badgeDaily:"매일",
     shareLabel:"공유하기",
     shareTitle:"K-Fortune Story · 한국 전통 운세", shareText:"사주 · 토정비결 · 궁합 · 꿈해몽\nkfortunestory.com",
     shareDone:"공유되었습니다",
-    title1: "운명의 문이 ", title2: "열립니다",
-    subtitle: "사주 · 토정비결 · 궁합 · 꿈해몽 · 2026년 신년운세까지.<br>500년을 이어온 한국 전통 운세를 무료로 확인하세요.",
+    title1: "나의 탄생 코드, ", title2: "한국식으로.",
+    subtitle: "사주는 2,000년을 이어온 한국의 탄생 차트예요.<br>별자리보다 훨씬 나다운 이야기를 무료로 확인하세요.",
     visitorPre: "당신은 오늘 ", visitorPost: " 번째 방문자입니다",
-    menuTitle: "보고 싶은 운세를 선택하세요",
-    m2:YR+"년 신년운세", m2d:"종합운·별점·월별 흐름까지 한눈에",
-    m3:"오늘의 운세", m3d:"오늘의 일진과 개운 포인트",
-    m4:"내 인생, 운의 흐름", m4d:"타고난 그릇과 대운의 큰 줄기",
-    m1:"토정비결", m1d:"괘로 뽑아 보는 한 해의 길흉",
-    m7:(YR+1)+"년 신년운세 미리보기", m7d:"내년을 앞서 준비하는 사람들을 위해",
-    m5:"궁합", m5d:"두 사람의 인연, 몇 점일까",
-    m6:"꿈해몽", m6d:"간밤의 꿈이 남긴 신호",
-    m7name:"한국이름 짓기", m7desc:"외국인을 위한 정통 작명",
-    m8name:"작명·개명 상담", m8desc:"수리성명학으로 짓는 이름",
-    m9name:"손없는 날", m9desc:"이사·개업·결혼 길일 확인",
-    m10name:"매일 운세 칼럼", m10desc:"오늘의 기운, 매일 아침 업데이트",
+    menuTitle: "무엇이 궁금하세요?",
+    m2:YR+"년 운세", m2d:"올해 나의 흐름과 달마다 테마",
+    m3:"오늘의 운세", m3d:"오늘 해볼 것과 행운 컬러",
+    m4:"내 사주 카드", m4d:"나는 푸른 호랑이일까, 붉은 말일까? 한국식 탄생 캐릭터 찾기",
+    m1:"토정비결", m1d:"한 해를 시 한 줄로 보는 전통 비결",
+    m7:(YR+1)+"년 미리보기", m7d:"내년을 앞서 준비하기",
+    m5:"궁합", m5d:"나 × 썸, 친구, 최애",
+    m6:"꿈해몽", m6d:"돼지꿈 꿨어요? 축하해요",
+    m7name:"한국 이름 짓기", m7desc:"뜻이 담긴 나만의 한국 이름",
+    m8name:"작명·개명", m8desc:"수리성명학으로 짓는 이름",
+    m9name:"좋은 날 고르기", m9desc:"이사하고 시작하기 좋은 날",
+    m10name:"매일 운세 칼럼", m10desc:"매일 아침 업데이트",
     footer:"K-Fortune Story · 한국 전통 운세 이야기",
     fA:"서비스 소개", fP:"개인정보처리방침", fT:"이용약관",
     toastSoon:"2단계에서 입력 화면이 연결됩니다 🙂",
@@ -787,26 +678,26 @@ const I18N = {
     s_gen2:"<b>‘홈 화면에 추가’</b> 또는 <b>‘앱 설치’</b>를 누릅니다"
   },
   en: {
-    eyebrow: "Korean Traditional Fortune",
-    badgePopular:"Popular", badgeDaily:"Updated Daily",
+    eyebrow: "Korean fortune, decoded",
+    badgeNew:"New", menuClassic:"Classic (Korean)", badgePopular:"Popular", badgeDaily:"Daily",
     shareLabel:"Share",
     shareTitle:"K-Fortune Story · Korean Fortune Telling", shareText:"Saju · Tojeong · Compatibility\nkfortunestory.com",
     shareDone:"Shared",
-    title1: "The Gate of Destiny ", title2: "Opens",
-    subtitle: "Five centuries of Korean fortune-telling wisdom.<br>From Tojeong Bigyeol to dream reading — discover your story.",
+    title1: "Your birth code, ", title2: "the Korean way.",
+    subtitle: "Saju is Korea's 2,000-year-old birth chart.<br>More personal than your star sign, and way more fun.",
     visitorPre: "You are today's visitor No. ", visitorPost: "",
-    menuTitle: "Choose your reading",
-    m2:"What's coming in "+YR+"?", m2d:"Yearly report · overview to month-by-month",
-    m3:"How's my day?", m3d:"Daily horoscope · Korean Iljin",
-    m4:"Who am I, really?", m4d:"Saju · Korea's birth chart, read from your birth hour",
-    m1:"Draw this year's poem", m1d:"Tojeong Bigyeol · a 500-year-old New Year ritual",
-    m7:"A preview of "+(YR+1), m7d:"Next year's energy, prepared early",
-    m5:"Do we match?", m5d:"Korean synastry · zodiac & five elements",
-    m6:"What did my dream mean?", m6d:"Traditional Korean dream reading",
-    m7name:"Get a Korean Name", m7desc:"Authentic naming for foreigners",
-    m8name:"Naming Consultation", m8desc:"Traditional Korean naming (KR)",
-    m9name:"Lucky Moving Days", m9desc:"Auspicious dates calendar (KR)",
-    m10name:"Daily Column", m10desc:"Fresh fortune insight every morning (KR)",
+    menuTitle: "What do you want to know?",
+    m2:"Your "+YR, m2d:"Your year, month by month",
+    m3:"Today", m3d:"What to try and your lucky color",
+    m4:"Your Saju Card", m4d:"Are you a Blue Tiger or a Red Horse? Find your Korean birth character.",
+    m1:"Tojeong Bigyeol", m1d:"Korea's classic year-in-a-poem reading",
+    m7:(YR+1)+" Preview", m7d:"Get a head start on next year",
+    m5:"Match", m5d:"You × your crush, friend, or bias",
+    m6:"Dreams", m6d:"Pig dream? Lucky you.",
+    m7name:"Korean Name", m7desc:"Get a Korean name with meaning",
+    m8name:"Name Consulting", m8desc:"Korean name numerology",
+    m9name:"Ask a Day", m9desc:"Lucky days to move or start something",
+    m10name:"Daily Column", m10desc:"Fresh every morning",
     footer:"K-Fortune Story · Korean Traditional Fortune Telling",
     fA:"About", fP:"Privacy Policy", fT:"Terms",
     toastSoon:"Input screen coming in Step 2 🙂",
