@@ -579,12 +579,15 @@ footer p{
   <div class="menu-grid">
     <button class="menu-btn menu-btn--hero" onclick="goFortune('saju')" style="--dot:var(--ob-blue)"><span class="mbadge" data-i18n="badgeNew">NEW</span><span class="mtext"><span class="name" data-i18n="m4">내 사주 카드</span><span class="desc" data-i18n="m4d">나는 푸른 호랑이일까, 붉은 말일까? 한국식 탄생 캐릭터 찾기</span></span></button>
     <button class="menu-btn" onclick="goFortune('today')" style="--dot:var(--ob-gold)"><span class="mbadge" data-i18n="badgeDaily">매일</span><span class="mtext"><span class="name" data-i18n="m3">오늘의 운세</span><span class="desc" data-i18n="m3d">오늘 해볼 것과 행운 컬러</span></span></button>
+    <button class="menu-btn" onclick="goFortune('love')" style="--dot:var(--ob-pink)"><span class="mtext"><span class="name" data-i18n="mLove">연애 운세</span><span class="desc" data-i18n="mLoveD">지금 연락해도 될까?</span></span></button>
     <button class="menu-btn" onclick="goFortune('gunghap')" style="--dot:var(--ob-red)"><span class="mtext"><span class="name" data-i18n="m5">궁합</span><span class="desc" data-i18n="m5d">나 × 썸, 친구, 최애</span></span></button>
     <button class="menu-btn" onclick="goFortune('newyear')" style="--dot:var(--ob-pink)"><span class="mtext"><span class="name" data-i18n="m2">2026년 운세</span><span class="desc" data-i18n="m2d">올해 나의 흐름과 달마다 테마</span></span></button>
     <a class="menu-btn" href="korean-name.html"  style="--dot:var(--ob-jade)"><span class="mtext"><span class="name" data-i18n="m7name">한국 이름 짓기</span><span class="desc" data-i18n="m7desc">뜻이 담긴 나만의 한국 이름</span></span></a>
     <button class="menu-btn" onclick="goFortune('dream')" style="--dot:#8B7BD8"><span class="mtext"><span class="name" data-i18n="m6">꿈해몽</span><span class="desc" data-i18n="m6d">돼지꿈 꿨어요? 축하해요</span></span></button>
-    <a class="menu-btn" href="taekil.html"  style="--dot:var(--ob-blue)"><span class="mtext"><span class="name" data-i18n="m9name">좋은 날 고르기</span><span class="desc" data-i18n="m9desc">이사하고 시작하기 좋은 날</span></span></a>
+    <button class="menu-btn" onclick="goFortune('askday')" style="--dot:var(--ob-blue)"><span class="mtext"><span class="name" data-i18n="m9name">좋은 날 고르기</span><span class="desc" data-i18n="m9desc">고백·데이트·면접하기 좋은 날</span></span></button>
+    <button class="menu-btn" onclick="goCard()" style="--dot:#8B7BD8"><span class="mbadge" data-i18n="badgeNew">NEW</span><span class="mtext"><span class="name" data-i18n="mCard">오늘의 한 장</span><span class="desc" data-i18n="mCardD">하루 한 장, 사주 카드 뽑기</span></span></button>
     <h3 class="menu-sub" data-i18n="menuClassic">클래식 (한국어)</h3>
+    <a class="menu-btn menu-btn--classic" href="taekil.html"  style="--dot:var(--ink-mute)"><span class="mtext"><span class="name" data-i18n="mTaekil">손없는 날</span><span class="desc" data-i18n="mTaekilD">이사·개업 길일 달력</span></span></a>
     <button class="menu-btn menu-btn--classic" onclick="goFortune('tojeong')" style="--dot:var(--ink-mute)"><span class="mtext"><span class="name" data-i18n="m1">토정비결</span><span class="desc" data-i18n="m1d">한 해를 시 한 줄로 보는 전통 비결</span></span></button>
     <button class="menu-btn menu-btn--classic" onclick="goFortune('nextyear')" style="--dot:var(--ink-mute)"><span class="mtext"><span class="name" data-i18n="m7">2027년 미리보기</span><span class="desc" data-i18n="m7d">내년을 앞서 준비하기</span></span></button>
     <a class="menu-btn menu-btn--classic" href="jakmyeong.html"  style="--dot:var(--ink-mute)"><span class="mtext"><span class="name" data-i18n="m8name">작명·개명</span><span class="desc" data-i18n="m8desc">수리성명학으로 짓는 이름</span></span></a>
@@ -640,7 +643,7 @@ const YR = new Date().getFullYear();
 const I18N = {
   kr: {
     eyebrow: "한국식 운세, 쉽게 풀다",
-    badgeNew:"NEW", menuClassic:"클래식 (한국어)", badgePopular:"인기", badgeDaily:"매일",
+    badgeNew:"NEW", menuClassic:"클래식 (한국어)", mLove:"연애 운세", mLoveD:"지금 연락해도 될까?", mCard:"오늘의 한 장", mCardD:"하루 한 장, 사주 카드 뽑기", mTaekil:"손없는 날", mTaekilD:"이사·개업 길일 달력", badgePopular:"인기", badgeDaily:"매일",
     shareLabel:"공유하기",
     shareTitle:"K-Fortune Story · 한국 전통 운세", shareText:"사주 · 토정비결 · 궁합 · 꿈해몽\nkfortunestory.com",
     shareDone:"공유되었습니다",
@@ -657,7 +660,7 @@ const I18N = {
     m6:"꿈해몽", m6d:"돼지꿈 꿨어요? 축하해요",
     m7name:"한국 이름 짓기", m7desc:"뜻이 담긴 나만의 한국 이름",
     m8name:"작명·개명", m8desc:"수리성명학으로 짓는 이름",
-    m9name:"좋은 날 고르기", m9desc:"이사하고 시작하기 좋은 날",
+    m9name:"좋은 날 고르기", m9desc:"고백·데이트·면접하기 좋은 날",
     m10name:"매일 운세 칼럼", m10desc:"매일 아침 업데이트",
     footer:"K-Fortune Story · 한국 전통 운세 이야기",
     fA:"서비스 소개", fP:"개인정보처리방침", fT:"이용약관",
@@ -678,7 +681,7 @@ const I18N = {
   },
   en: {
     eyebrow: "Korean fortune, decoded",
-    badgeNew:"New", menuClassic:"Classic (Korean)", badgePopular:"Popular", badgeDaily:"Daily",
+    badgeNew:"New", menuClassic:"Classic (Korean)", mLove:"Love", mLoveD:"Should I text them?", mCard:"Card of the Day", mCardD:"Draw your Saju card", mTaekil:"Moving-Day Calendar", mTaekilD:"Traditional lucky days to move", badgePopular:"Popular", badgeDaily:"Daily",
     shareLabel:"Share",
     shareTitle:"K-Fortune Story · Korean Fortune Telling", shareText:"Saju · Tojeong · Compatibility\nkfortunestory.com",
     shareDone:"Shared",
@@ -695,7 +698,7 @@ const I18N = {
     m6:"Dreams", m6d:"Pig dream? Lucky you.",
     m7name:"Korean Name", m7desc:"Get a Korean name with meaning",
     m8name:"Name Consulting", m8desc:"Korean name numerology",
-    m9name:"Ask a Day", m9desc:"Lucky days to move or start something",
+    m9name:"Ask a Day", m9desc:"Best day to confess, date, or interview",
     m10name:"Daily Column", m10desc:"Fresh every morning",
     footer:"K-Fortune Story · Korean Traditional Fortune Telling",
     fA:"About", fP:"Privacy Policy", fT:"Terms",
@@ -740,6 +743,9 @@ function setLang(lang){
   if(typeof renderFAQ === "function") renderFAQ();
 }
 
+function goCard(){
+  location.href = "result.html?type=card&lang=" + (localStorage.getItem("kf_lang") === "en" ? "en" : "kr");
+}
 function goFortune(type){
   localStorage.setItem("kf_selected", type);
   location.href = "input.html?type=" + type;

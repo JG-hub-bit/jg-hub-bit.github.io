@@ -496,14 +496,17 @@ footer p{
 const T = {
   kr: {
     home:"⌂ 처음으로",
-    types:{tojeong:"토정비결", newyear:"2026년 신년운세", nextyear:"2027년 신년운세 미리보기", today:"오늘의 운세", saju:"내 인생, 운의 흐름", gunghap:"궁합", dream:"꿈해몽"},
+    partnerOpt:"상대 정보 (선택)", lqLabel:"무엇이 궁금하세요?", evLabel:"어떤 일정인가요?",
+    loveQs:{text:"지금 연락해도 될까?", date:"이번 데이트 어떨까?", confess:"고백해도 될까?", ex:"전 연인, 다시 연락해도 될까?", single:"새 인연은 언제 올까?"},
+    events:{confess:"고백", firstdate:"첫 데이트", exam:"시험·면접", move:"이사·새 방", start:"새로 시작하기 (운동·공부·사이드 프로젝트)"},
+    types:{love:"연애 운세", askday:"좋은 날 고르기", card:"오늘의 한 장", tojeong:"토정비결", newyear:"2026년 신년운세", nextyear:"2027년 신년운세 미리보기", today:"오늘의 운세", saju:"내 인생, 운의 흐름", gunghap:"궁합", dream:"꿈해몽"},
     sub:"아래 정보를 입력해 주세요",
     me:"나의 정보", partner:"상대방 정보",
     name:"이름", namePh:"이름 (선택)",
     tdate:"어느 날짜의 운세를 보시겠어요?", trange:"보기 방식",
     rDay:"그 날 하루만", rWeek:"그 날이 속한 한 주 (월~일)",
     gender:"성별", male:"남성", female:"여성",
-    bdate:"생년월일", cal:"양력/음력", solar:"양력", lunar:"음력",
+    bdate:"생년월일", cal:"양력/음력", solar:"양력", lunar:"음력", leap:"음력(윤달)",
     btime:"태어난 시간 (12지시)", etime:"정확한 출생 시각 (선택 · 알면 훨씬 정밀해집니다)",
     region:"태어난 지역", regionHelp:"진태양시 보정에 사용됩니다",
     provNone:"모름 / 선택 안 함", cityDefault:"시·군·구 선택", etimeHelp:"입력하시면 진태양시로 보정해 시주를 정확히 계산합니다",
@@ -515,14 +518,17 @@ const T = {
   },
   en: {
     home:"⌂ Home",
-    types:{tojeong:"Tojeong Bigyeol", newyear:"2026 Fortune", nextyear:"2027 Fortune", today:"Today's Fortune", saju:"Saju (Four Pillars)", gunghap:"Compatibility", dream:"Dream Reading"},
+    partnerOpt:"Their Details (optional)", lqLabel:"What do you want to know?", evLabel:"What's the plan?",
+    loveQs:{text:"Should I text them?", date:"How will our date go?", confess:"Should I confess?", ex:"Should I reach out to my ex?", single:"When will I meet someone?"},
+    events:{confess:"Confess your feelings", firstdate:"First date", exam:"Exam or interview", move:"Moving", start:"Starting something new"},
+    types:{love:"Love", askday:"Ask a Day", card:"Card of the Day", tojeong:"Tojeong Bigyeol", newyear:"2026 Fortune", nextyear:"2027 Fortune", today:"Today's Fortune", saju:"Saju (Four Pillars)", gunghap:"Compatibility", dream:"Dream Reading"},
     sub:"Please enter your details below",
     me:"Your Details", partner:"Partner's Details",
     name:"Name", namePh:"Name (optional)",
     tdate:"Which day would you like to read?", trange:"Reading scope",
     rDay:"That single day", rWeek:"The whole week (Mon–Sun)",
     gender:"Gender", male:"Male", female:"Female",
-    bdate:"Date of Birth", cal:"Calendar", solar:"Solar", lunar:"Lunar",
+    bdate:"Date of Birth", cal:"Calendar", solar:"Solar", lunar:"Lunar", leap:"Lunar (leap month)",
     btime:"Time of Birth (2-hour block)", etime:"Exact birth time (optional · far more precise)",
     region:"Birthplace", regionHelp:"Used for true solar time correction",
     provNone:"Unknown / Skip", cityDefault:"Select city", etimeHelp:"If given, your Hour Pillar is calculated from true solar time",
@@ -551,7 +557,11 @@ const CFG = {
   saju:    {persons:[ {key:"main", fields:["name","gender","bdate","cal","btime","etime","region"]} ]},
   gunghap: {persons:[ {key:"main", fields:["name","gender","bdate","cal","btime"]},
                       {key:"sub",  fields:["name","gender","bdate","cal","btime"]} ]},
-  dream:   {dream:true}
+  dream:   {dream:true},
+  love:    {persons:[ {key:"main", fields:["lq","name","gender","bdate","cal","btime","etime","region"]},
+                      {key:"sub", optional:true, fields:["name","bdate","cal"]} ]},
+  askday:  {persons:[ {key:"main", fields:["ev","name","gender","bdate","cal","btime","etime","region"]} ]},
+  card:    {persons:[ {key:"main", fields:["name","bdate","cal"]} ]}
 };
 const cfg = CFG[type] || CFG.tojeong;
 
@@ -575,10 +585,18 @@ function fieldHTML(p, f){
   if(f === "cal")
     return '<div class="field"><label>'+T.cal+'</label><div class="radiorow" data-group="'+id+'">'
       +'<label><input type="radio" name="'+id+'" value="solar" checked><span>'+T.solar+'</span></label>'
-      +'<label><input type="radio" name="'+id+'" value="lunar"><span>'+T.lunar+'</span></label></div></div>';
+      +'<label><input type="radio" name="'+id+'" value="lunar"><span>'+T.lunar+'</span></label>'
+      +'<label><input type="radio" name="'+id+'" value="leap"><span>'+T.leap+'</span></label></div></div>';
   if(f === "btime"){
     let opts = T.times.map((t,i)=>'<option value="'+i+'">'+t+'</option>').join("");
     return '<div class="field"><label for="'+id+'">'+T.btime+'</label><select id="'+id+'">'+opts+'</select></div>';
+  }
+  if(f === "lq" || f === "ev"){
+    const opts = T[f === "lq" ? "loveQs" : "events"];
+    const cur = params.get(f) || Object.keys(opts)[0];
+    return '<div class="field"><label>'+T[f === "lq" ? "lqLabel" : "evLabel"]+'</label><div class="radiorow col" data-group="'+id+'">'
+      + Object.keys(opts).map(k=>'<label><input type="radio" name="'+id+'" value="'+k+'"'+(k===cur?' checked':'')+'><span>'+opts[k]+'</span></label>').join("")
+      + '</div></div>';
   }
   if(f === "tdate")
     return '<div class="field"><label for="'+id+'">'+T.tdate+'</label><input type="date" id="'+id+'"></div>';
@@ -608,7 +626,7 @@ if(cfg.dream){
 }else{
   cfg.persons.forEach(p=>{
     formHTML += '<div class="person-block">';
-    if(cfg.persons.length > 1) formHTML += '<h3>'+(p.key==="main"?T.me:T.partner)+'</h3>';
+    if(cfg.persons.length > 1) formHTML += '<h3>'+(p.key==="main"?T.me:(p.optional?T.partnerOpt:T.partner))+'</h3>';
     p.fields.forEach(f=>{ formHTML += fieldHTML(p.key, f); });
     formHTML += '</div>';
   });
@@ -713,6 +731,7 @@ function run(){
   }else{
     for(const p of cfg.persons){
       const bd = document.getElementById(p.key+"_bdate").value;
+      if(!bd && p.optional) continue;   /* 선택 항목(상대 생일)은 비워도 됨 */
       if(!bd){ alert(T.needBdate); return; }
       const get = id => (document.getElementById(id)||{}).value || "";
       const rad = n => (document.querySelector('input[name="'+n+'"]:checked')||{}).value || "";
@@ -735,11 +754,13 @@ function run(){
       qs.set("name"+suffix, pdata.name);
       qs.set("gender"+suffix, pdata.gender);
       qs.set("bdate"+suffix, pdata.bdate);
+      qs.set("cal"+suffix, pdata.cal || "solar");
       qs.set("btime"+suffix, pdata.btime);
       qs.set("etime"+suffix, pdata.etime);
       qs.set("region"+suffix, pdata.region);
     }
   }
+  ["lq","ev"].forEach(f=>{ const c = document.querySelector('input[name="main_'+f+'"]:checked'); if(c) qs.set(f, c.value); });
   if(type === "today"){
     const td = document.getElementById("main_tdate");
     const rg = document.querySelector('input[name="main_trange"]:checked');
