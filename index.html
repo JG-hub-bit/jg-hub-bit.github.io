@@ -555,6 +555,7 @@ footer p{
     <button id="btnKR" class="active" onclick="setLang('kr')">한국어</button>
     <button id="btnEN" onclick="setLang('en')">EN</button>
   </div>
+  <a class="people-link" id="peopleLink" href="account.html" data-i18n="myPeople">내 사람들</a>
 </div>
 
 <!-- ══════════ 본문 ══════════ -->
@@ -571,6 +572,7 @@ footer p{
   </p>
 
 
+  <a class="glow-banner" id="glowBanner" href="account.html" hidden></a>
   <div class="today-bar" id="todayBar"></div>
   <div class="myday" id="myDay"></div>
 
@@ -643,7 +645,7 @@ const YR = new Date().getFullYear();
 const I18N = {
   kr: {
     eyebrow: "한국식 운세, 쉽게 풀다",
-    badgeNew:"NEW", menuClassic:"클래식 (한국어)", mLove:"연애 운세", mLoveD:"지금 연락해도 될까?", mCard:"오늘의 한 장", mCardD:"하루 한 장, 사주 카드 뽑기", mTaekil:"손없는 날", mTaekilD:"이사·개업 길일 달력", badgePopular:"인기", badgeDaily:"매일",
+    badgeNew:"NEW", menuClassic:"클래식 (한국어)", myPeople:"내 사람들", glow:n=>"오늘 "+n+"의 운이 반짝여요 ✨ 먼저 연락해볼까요?", glowMe:"오늘 나의 운이 최고예요 ✨", mLove:"연애 운세", mLoveD:"지금 연락해도 될까?", mCard:"오늘의 한 장", mCardD:"하루 한 장, 사주 카드 뽑기", mTaekil:"손없는 날", mTaekilD:"이사·개업 길일 달력", badgePopular:"인기", badgeDaily:"매일",
     shareLabel:"공유하기",
     shareTitle:"K-Fortune Story · 한국 전통 운세", shareText:"사주 · 토정비결 · 궁합 · 꿈해몽\nkfortunestory.com",
     shareDone:"공유되었습니다",
@@ -681,7 +683,7 @@ const I18N = {
   },
   en: {
     eyebrow: "Korean fortune, decoded",
-    badgeNew:"New", menuClassic:"Classic (Korean)", mLove:"Love", mLoveD:"Should I text them?", mCard:"Card of the Day", mCardD:"Draw your Saju card", mTaekil:"Moving-Day Calendar", mTaekilD:"Traditional lucky days to move", badgePopular:"Popular", badgeDaily:"Daily",
+    badgeNew:"New", menuClassic:"Classic (Korean)", myPeople:"My People", glow:n=>n+"'s luck is glowing today ✨ Send them a message?", glowMe:"Your luck is glowing today ✨", mLove:"Love", mLoveD:"Should I text them?", mCard:"Card of the Day", mCardD:"Draw your Saju card", mTaekil:"Moving-Day Calendar", mTaekilD:"Traditional lucky days to move", badgePopular:"Popular", badgeDaily:"Daily",
     shareLabel:"Share",
     shareTitle:"K-Fortune Story · Korean Fortune Telling", shareText:"Saju · Tojeong · Compatibility\nkfortunestory.com",
     shareDone:"Shared",
@@ -743,6 +745,20 @@ function setLang(lang){
   if(typeof renderFAQ === "function") renderFAQ();
 }
 
+async function loadGlow(){
+  try{
+    const r = await fetch("/api/highlights?lang=" + (localStorage.getItem("kf_lang") === "en" ? "en" : "kr"), {credentials:"same-origin"});
+    if(!r.ok) return;
+    const d = await r.json();
+    const L = I18N[localStorage.getItem("kf_lang") === "en" ? "en" : "kr"];
+    const best = (d.people || []).filter(x => x.stars >= 4).sort((a,b) => (b.rel !== "me") - (a.rel !== "me") || b.stars - a.stars)[0];
+    if(!best) return;
+    const el = document.getElementById("glowBanner");
+    el.textContent = best.rel === "me" ? L.glowMe : L.glow(best.nick);
+    el.hidden = false;
+  }catch(e){}
+}
+loadGlow();
 function goCard(){
   location.href = "result.html?type=card&lang=" + (localStorage.getItem("kf_lang") === "en" ? "en" : "kr");
 }

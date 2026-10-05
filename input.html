@@ -496,7 +496,7 @@ footer p{
 const T = {
   kr: {
     home:"⌂ 처음으로",
-    partnerOpt:"상대 정보 (선택)", lqLabel:"무엇이 궁금하세요?", evLabel:"어떤 일정인가요?",
+    partnerOpt:"상대 정보 (선택)", pickSaved:"저장된 사람 불러오기", lqLabel:"무엇이 궁금하세요?", evLabel:"어떤 일정인가요?",
     loveQs:{text:"지금 연락해도 될까?", date:"이번 데이트 어떨까?", confess:"고백해도 될까?", ex:"전 연인, 다시 연락해도 될까?", single:"새 인연은 언제 올까?"},
     events:{confess:"고백", firstdate:"첫 데이트", exam:"시험·면접", move:"이사·새 방", start:"새로 시작하기 (운동·공부·사이드 프로젝트)"},
     types:{love:"연애 운세", askday:"좋은 날 고르기", card:"오늘의 한 장", tojeong:"토정비결", newyear:"2026년 신년운세", nextyear:"2027년 신년운세 미리보기", today:"오늘의 운세", saju:"내 인생, 운의 흐름", gunghap:"궁합", dream:"꿈해몽"},
@@ -518,7 +518,7 @@ const T = {
   },
   en: {
     home:"⌂ Home",
-    partnerOpt:"Their Details (optional)", lqLabel:"What do you want to know?", evLabel:"What's the plan?",
+    partnerOpt:"Their Details (optional)", pickSaved:"Use a saved person", lqLabel:"What do you want to know?", evLabel:"What's the plan?",
     loveQs:{text:"Should I text them?", date:"How will our date go?", confess:"Should I confess?", ex:"Should I reach out to my ex?", single:"When will I meet someone?"},
     events:{confess:"Confess your feelings", firstdate:"First date", exam:"Exam or interview", move:"Moving", start:"Starting something new"},
     types:{love:"Love", askday:"Ask a Day", card:"Card of the Day", tojeong:"Tojeong Bigyeol", newyear:"2026 Fortune", nextyear:"2027 Fortune", today:"Today's Fortune", saju:"Saju (Four Pillars)", gunghap:"Compatibility", dream:"Dream Reading"},
@@ -753,6 +753,37 @@ if(type === "today"){
     if(inp){ inp.checked = true; inp.dispatchEvent(new Event("change")); }
   }
 }
+
+/* ══════════ 로그인했으면 저장된 사람 불러오기 ══════════ */
+function fillPerson(pkey, p){
+  const set = (id, v) => { const el = document.getElementById(pkey+"_"+id); if(el && v !== undefined) el.value = v; };
+  const rad = (n, v) => { const i = document.querySelector('input[name="'+pkey+'_'+n+'"][value="'+v+'"]'); if(i){ i.checked = true; i.dispatchEvent(new Event("change")); } };
+  set("name", p.nick); set("bdate", p.bdate); set("btime", p.btime || "0"); set("etime", p.etime || "");
+  if(p.gender) rad("gender", p.gender); rad("cal", p.cal || "solar");
+  const cs = document.getElementById(pkey+"_region_country");
+  if(cs){
+    worldReady.then(()=>{
+      cs.value = p.country || "KR"; showCountry(pkey);
+      if(p.country && p.country !== "KR" && WORLD && WORLD[p.country]){
+        const i = WORLD[p.country].findIndex(c => p.bplace && p.bplace.indexOf(c[0] + ",") === 0);
+        fillWorldCities(pkey, i < 0 ? 0 : i);
+      }
+    });
+  }
+}
+if(!cfg.dream) fetch("/api/me", {credentials:"same-origin"}).then(r => r.ok ? r.json() : null).then(me => {
+  if(!me || !me.people || !me.people.length) return;
+  cfg.persons.forEach((p, pi) => {
+    const block = document.querySelectorAll("#formArea .person-block")[pi];
+    if(!block) return;
+    const sel = document.createElement("select");
+    sel.className = "saved-pick";
+    sel.innerHTML = '<option value="">'+T.pickSaved+'</option>' + me.people.map((x,i)=>'<option value="'+i+'">'+x.nick.replace(/</g,"")+'</option>').join("");
+    sel.onchange = () => { if(sel.value !== "") fillPerson(p.key, me.people[+sel.value]); };
+    block.insertBefore(sel, block.firstChild.nextSibling && block.firstChild.tagName === "H3" ? block.firstChild.nextSibling : block.firstChild);
+    if(pi === 0 && !localStorage.getItem("kf_p_main")){ sel.value = "0"; fillPerson(p.key, me.people[0]); }
+  });
+}).catch(e => console.warn("saved people:", e));
 
 /* ══════════ 실행 / 초기화 ══════════ */
 function run(){

@@ -176,3 +176,12 @@ main > .subtitle{max-width:34ch; margin-left:auto; margin-right:auto}
 .sub-card button, .btn-gen, .gen-btn{background:var(--ink-fg) !important; color:var(--ink-bg) !important; font-family:var(--f-body) !important; font-weight:600 !important}
 .cc-title, .card h2, .result-card h2, .info-card h2, .month-title, .term-word{color:var(--ink-fg) !important; font-family:var(--f-display) !important; font-weight:400 !important}
 .rmeaning b{color:var(--ob-gold) !important}
+
+/* ── 내 사람들 링크·오늘 반짝이는 사람 배너·저장된 사람 불러오기 ── */
+.topbar{display:flex; align-items:center; gap:.5rem}
+.people-link{font:600 .8rem var(--f-body); color:var(--ink-fg); text-decoration:none; padding:.4rem .85rem; border-radius:999px;
+  background:rgba(255,255,255,.06); border:1px solid var(--ink-line)}
+.glow-banner{display:block; margin:0 auto 1rem; max-width:620px; padding:.85rem 1rem; border-radius:14px; text-decoration:none;
+  color:var(--ink-fg); font-weight:600; background:linear-gradient(120deg, rgba(232,181,77,.2), rgba(227,138,160,.14)); border:1px solid rgba(232,181,77,.4)}
+.saved-pick{width:100%; margin:.2rem 0 .8rem}
+.glow-banner[hidden]{display:none !important}
