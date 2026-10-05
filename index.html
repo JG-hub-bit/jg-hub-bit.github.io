@@ -814,13 +814,14 @@ function renderToday(){
   const jiHanja = _SH[ij.si]+_BH[ij.bi], jiKr = _SK[ij.si]+_BK[ij.bi];
   const termTxt = tOn ? ('<span class="term">'+(K?"오늘 "+tName+" · 절기":tName+" today")+'</span>')
                       : ('<span class="term">'+tName+" D-"+tD+'</span>');
-  const stemMean = K ? _TXT.STEM_MEAN[ij.si].kr : _TXT.STEM_MEAN[ij.si].en;
+  const _STEM_NEW = [{"kr":"갑 · 쭉 뻗은 큰 나무. 시작하기 좋은 기운","en":"Tall-tree energy. Great for starting things."},{"kr":"을 · 바람에 휘는 풀과 덩굴. 유연하게 돌아가면 풀리는 기운","en":"Vine energy. Flexible beats forceful."},{"kr":"병 · 쨍한 한낮의 해. 보여주고 드러내기 좋은 기운","en":"Midday-sun energy. Time to shine."},{"kr":"정 · 은은한 촛불. 디테일과 마무리에 강한 기운","en":"Candlelight energy. Perfect for details."},{"kr":"무 · 큰 산. 중심을 잡고 버티기 좋은 기운","en":"Mountain energy. Stay steady."},{"kr":"기 · 촉촉한 밭. 키우고 다지기 좋은 기운","en":"Garden-soil energy. Nurture what you've started."},{"kr":"경 · 단단한 바위와 쇠. 결단하고 밀어붙이는 기운","en":"Steel energy. Decide and go."},{"kr":"신 · 반짝이는 보석. 정리하고 다듬기 좋은 기운","en":"Gemstone energy. Polish and organize."},{"kr":"임 · 넓은 바다. 크게 보고 넓게 연결되는 기운","en":"Ocean energy. Think big, connect wide."},{"kr":"계 · 이슬비. 조용히 준비하기 좋은 기운","en":"Drizzle energy. Quiet prep pays off."}];   /* 결과 페이지 voice.js V_STEM 과 같은 문장 */
+  const stemMean = K ? _STEM_NEW[ij.si].kr : _STEM_NEW[ij.si].en;
   let jeolMean = "";
   if(tOn && _TXT.JEOL[tName]) jeolMean = K ? _TXT.JEOL[tName].kr : _TXT.JEOL[tName].en;
   document.getElementById("todayBar").innerHTML =
     '<div class="tb-line">'
     +'<span>'+dateStr+'</span><span class="dot">·</span>'
-    +'<span class="ji">'+jiHanja+' '+jiKr+(K?"일":"")+'</span><span class="dot">·</span>'
+    +'<span class="ji">'+jiKr+(K?"일":"")+'</span><span class="dot">·</span>'
     +termTxt+'</div>'
     +'<div class="tb-mean">'+stemMean+(jeolMean ? " "+jeolMean : "")+'</div>';
 

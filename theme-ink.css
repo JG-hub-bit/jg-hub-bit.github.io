@@ -185,3 +185,6 @@ main > .subtitle{max-width:34ch; margin-left:auto; margin-right:auto}
   color:var(--ink-fg); font-weight:600; background:linear-gradient(120deg, rgba(232,181,77,.2), rgba(227,138,160,.14)); border:1px solid rgba(232,181,77,.4)}
 .saved-pick{width:100%; margin:.2rem 0 .8rem}
 .glow-banner[hidden]{display:none !important}
+/* 좁은 화면: 언어 전환과 '내 사람들'이 한 줄에 안 들어가면 줄바꿈 (오른쪽은 백호 자리) */
+.topbar{flex-wrap:wrap; max-width:calc(100vw - 150px)}
+html:lang(ko) body, [lang="ko"] h1, .sec p, .v-row p, h1, h2, .sc-vibe, .sc-why{word-break:keep-all; overflow-wrap:anywhere}
