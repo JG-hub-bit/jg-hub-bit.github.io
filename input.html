@@ -508,7 +508,7 @@ const T = {
     gender:"성별", male:"남성", female:"여성",
     bdate:"생년월일", cal:"양력/음력", solar:"양력", lunar:"음력", leap:"음력(윤달)",
     btime:"태어난 시간 (12지시)", etime:"정확한 출생 시각 (선택 · 알면 훨씬 정밀해집니다)",
-    region:"태어난 지역", regionHelp:"진태양시 보정에 사용됩니다",
+    region:"태어난 지역", regionHelp:"진태양시 보정에 사용됩니다", geoCredit:"도시 데이터 GeoNames(CC BY 4.0)",
     provNone:"모름 / 선택 안 함", cityDefault:"시·군·구 선택", etimeHelp:"입력하시면 진태양시로 보정해 시주를 정확히 계산합니다",
     dreamLabel:"꾼 꿈의 내용", dreamPh:"꿈에서 본 장면, 등장한 사람·동물·사물 등을 자유롭게 적어주세요",
     run:"운세 보기", reset:"초기화",
@@ -530,7 +530,7 @@ const T = {
     gender:"Gender", male:"Male", female:"Female",
     bdate:"Date of Birth", cal:"Calendar", solar:"Solar", lunar:"Lunar", leap:"Lunar (leap month)",
     btime:"Time of Birth (2-hour block)", etime:"Exact birth time (optional · far more precise)",
-    region:"Birthplace", regionHelp:"Used for true solar time correction",
+    region:"Birthplace", regionHelp:"Used for true solar time correction", geoCredit:"City data: GeoNames (CC BY 4.0)",
     provNone:"Unknown / Skip", cityDefault:"Select city", etimeHelp:"If given, your Hour Pillar is calculated from true solar time",
     dreamLabel:"Describe Your Dream", dreamPh:"Describe scenes, people, animals or objects that appeared in your dream",
     run:"Reveal My Fortune", reset:"Reset",
@@ -611,10 +611,12 @@ function fieldHTML(p, f){
     const lang = ["kr","en"].includes(localStorage.getItem("kf_lang")) ? localStorage.getItem("kf_lang") : "kr";
     let provOpts = '<option value="">'+T.provNone+'</option>';
     Object.keys(REGIONS).forEach(pk => { provOpts += '<option value="'+pk+'">'+(lang==="kr"?REGIONS[pk].kr:REGIONS[pk].en)+'</option>'; });
-    return '<div class="field"><label for="'+id+'">'+T.region+'</label>'
-      +'<div class="region-2"><select id="'+id+'_prov" class="region-prov">'+provOpts+'</select>'
+    return '<div class="field"><label for="'+id+'_country">'+T.region+'</label>'
+      +'<select id="'+id+'_country" class="region-country"><option value="KR">'+countryName("KR")+'</option></select>'
+      +'<div class="region-2" id="'+id+'_kr"><select id="'+id+'_prov" class="region-prov">'+provOpts+'</select>'
       +'<select id="'+id+'_city" class="region-city" style="display:none"></select></div>'
-      +'<div class="fhelp">'+T.regionHelp+'</div></div>';
+      +'<div class="region-2" id="'+id+'_abroad" style="display:none"><select id="'+id+'_wcity" class="region-wcity"></select></div>'
+      +'<div class="fhelp">'+T.regionHelp+' · '+T.geoCredit+'</div></div>';
   }
   return "";
 }
@@ -644,6 +646,35 @@ document.querySelectorAll(".radiorow").forEach(row=>{
     });
   });
 });
+
+/* ══════════ 출생 국가 (해외는 주요 도시의 경도·시간대로 진태양시 계산) ══════════ */
+function uiLang(){ return localStorage.getItem("kf_lang") === "en" ? "en" : "ko"; }
+function countryName(cc){ try{ return new Intl.DisplayNames([uiLang()], {type:"region"}).of(cc); }catch(e){ return cc; } }
+let WORLD = null;
+function fillWorldCities(pkey, cityIdx){
+  const cc = document.getElementById(pkey+"_region_country").value;
+  const sel = document.getElementById(pkey+"_region_wcity");
+  const list = (WORLD && WORLD[cc]) || [];
+  sel.innerHTML = list.map((c,i)=>'<option value="'+i+'">'+c[0]+'</option>').join("");
+  if(cityIdx !== undefined && cityIdx !== null) sel.value = String(cityIdx);
+}
+function showCountry(pkey){
+  const cc = document.getElementById(pkey+"_region_country").value;
+  document.getElementById(pkey+"_region_kr").style.display = cc === "KR" ? "" : "none";
+  document.getElementById(pkey+"_region_abroad").style.display = cc === "KR" ? "none" : "";
+  if(cc !== "KR") fillWorldCities(pkey);
+}
+document.querySelectorAll(".region-country").forEach(sel=>{
+  const pkey = sel.id.replace("_region_country","");
+  sel.addEventListener("change", ()=>showCountry(pkey));
+});
+const worldReady = document.querySelector(".region-country") ? fetch("cities.json").then(r=>r.json()).then(d=>{
+  WORLD = d;
+  const names = Object.keys(d).map(cc=>[cc, countryName(cc)]).sort((a,b)=>a[1].localeCompare(b[1], uiLang()));
+  document.querySelectorAll(".region-country").forEach(sel=>{
+    sel.innerHTML = '<option value="KR">'+countryName("KR")+'</option>' + names.map(n=>'<option value="'+n[0]+'">'+n[1]+'</option>').join("");
+  });
+}).catch(()=>{}) : Promise.resolve();
 
 /* ══════════ 지역 2단계 (시도 → 시군구) ══════════ */
 function fillCities(pkey, cityKey){
@@ -701,6 +732,12 @@ function loadProfile(pkey){
   }
 }
 if(!cfg.dream) cfg.persons.forEach(p=>loadProfile(p.key));
+worldReady.then(()=>{ if(!cfg.dream) cfg.persons.forEach(p=>{
+  const d = JSON.parse(localStorage.getItem("kf_p_" + p.key) || "null");
+  const sel = document.getElementById(p.key+"_region_country");
+  if(!d || !sel || !d.country || d.country === "KR") return;
+  sel.value = d.country; showCountry(p.key); fillWorldCities(p.key, d.wcity);
+}); });
 
 /* 오늘의 운세: 날짜 기본값 = 오늘 */
 if(type === "today"){
@@ -743,10 +780,14 @@ function run(){
         if(prov && REGIONS[prov] && REGIONS[prov].cities.length===1) return REGIONS[prov].cities[0].k;
         return "";
       };
+      const country = get(p.key+"_region_country") || "KR";
+      const wi = get(p.key+"_region_wcity");
+      const wc = (country !== "KR" && WORLD && WORLD[country]) ? WORLD[country][+wi || 0] : null;
       const pdata = {
         name:get(p.key+"_name"), gender:rad(p.key+"_gender"),
         bdate:bd, cal:rad(p.key+"_cal"),
-        btime:get(p.key+"_btime"), etime:get(p.key+"_etime"), region:regionVal(p.key)
+        btime:get(p.key+"_btime"), etime:get(p.key+"_etime"), region: wc ? "" : regionVal(p.key),
+        country: country, wcity: wc ? (+wi || 0) : null
       };
       localStorage.setItem("kf_p_"+p.key, JSON.stringify(pdata));
       /* URL 파라미터로도 함께 전달 (Cloudflare Worker가 이걸 읽어 서버에서 계산함) */
@@ -758,6 +799,7 @@ function run(){
       qs.set("btime"+suffix, pdata.btime);
       qs.set("etime"+suffix, pdata.etime);
       qs.set("region"+suffix, pdata.region);
+      if(wc){ qs.set("blon"+suffix, wc[1]); qs.set("btz"+suffix, wc[2]); qs.set("bplace"+suffix, wc[0] + ", " + country); }
     }
   }
   ["lq","ev"].forEach(f=>{ const c = document.querySelector('input[name="main_'+f+'"]:checked'); if(c) qs.set(f, c.value); });
